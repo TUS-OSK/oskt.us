@@ -1,0 +1,30 @@
+machine:
+  timezone: UTC
+  node:
+    version: 7.6.0
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+    GIT_REPO: "git@github.com:TUS-OSK/oskt.us.git"
+    GIT_NAME: "CircleCI"
+    GIT_EMAIL: "pnlybubbles+circleci@gmail.com"
+
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - sh -x ./ci.sh
+
+general:
+  branches:
+    only:
+      - master
+
+test:
+  override:
+    - yarn test
