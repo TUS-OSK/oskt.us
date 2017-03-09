@@ -1,0 +1,9 @@
+:host {
+  background-color: #9f9;
+  display: flex;
+
+  & a {
+    font-size: 20px;
+    color: color(#f99 alpha(-10%));
+  }
+}
