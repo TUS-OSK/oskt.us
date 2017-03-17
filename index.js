@@ -1,13 +1,19 @@
 const choo = require('choo');
+const css = require('sheetify');
 const app = choo({
   hash: true,
 });
 
+css('normalize.css');
+css('./view/global.css');
+
 app.model({
-  state: { title: 'No title' },
+  state: {
+    load: false,
+  },
   reducers: {
-    update(state, data) {
-      return { title: data };
+    load() {
+      return { load: true };
     },
   },
 });

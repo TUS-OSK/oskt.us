@@ -1,0 +1,20 @@
+{
+  "extends": "stylelint-config-primer",
+  "plugins": [
+    "stylelint-order",
+    "stylelint-csstree-validator"
+  ],
+  "rules": {
+    "declaration-block-properties-order": null,
+    "media-feature-no-missing-punctuation": null,
+    "no-unsupported-browser-features": null,
+    "rule-nested-empty-line-before": null,
+    "rule-non-nested-empty-line-before": null,
+    "scss/selector-no-redundant-nesting-selector": null,
+    "rule-empty-line-before": ["always-multi-line", {
+      "except": ["first-nested"]
+    }],
+    "order/order": ["custom-properties", "declarations", "rules", "at-rules"],
+    "csstree/validator": true
+  }
+}

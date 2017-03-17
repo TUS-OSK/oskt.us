@@ -1,8 +1,27 @@
-:host {
-  background-color: #f99;
+:root {
+  --bg-color: #222;
+}
 
-  & a {
-    font-size: 20px;
-    color: #9f9;
+:host {
+  background-color: var(--bg-color);
+  height: 100%;
+
+  & .horizontal-bar {
+    height: 10px;
+    background-color: #fff;
+
+    &.animate {
+      animation: horizontal-bar 2s ease 0s 1 normal none running;
+    }
+  }
+}
+
+@keyframes horizontal-bar {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
   }
 }

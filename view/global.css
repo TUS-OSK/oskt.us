@@ -1,0 +1,9 @@
+/* stylelint-disable selector-no-type */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* stylelint-enable selector-no-type */
