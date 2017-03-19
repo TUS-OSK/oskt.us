@@ -30,7 +30,8 @@
     "stylelint-config-primer": "^1.4.0",
     "stylelint-csstree-validator": "^1.1.1",
     "stylelint-order": "^0.4.1",
-    "uglifyify": "^3.0.4"
+    "uglifyify": "^3.0.4",
+    "yo-yoify": "^3.5.0"
   },
   "dependencies": {
     "choo": "^4.1.0",
@@ -63,6 +64,7 @@
           ]
         }
       ],
+      "yo-yoify",
       "babelify"
     ]
   }

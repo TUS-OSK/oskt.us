@@ -2451,7 +2451,7 @@ hyperscript-attribute-to-property@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hyperscript-attribute-to-property/-/hyperscript-attribute-to-property-1.0.0.tgz#825308d49bb8e2957923f731981bcc811cad7aff"
 
-hyperx@^2.0.2:
+hyperx@^2.0.2, hyperx@^2.0.3:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/hyperx/-/hyperx-2.0.5.tgz#fedef890d7203f36339b243b27d38e3a424225ab"
   dependencies:
@@ -5401,3 +5401,12 @@ yo-yo@^1.2.2:
   dependencies:
     bel "^4.0.0"
     morphdom "^2.1.0"
+
+yo-yoify@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/yo-yoify/-/yo-yoify-3.5.0.tgz#b8469e94affdb87dbb61adfb24a8e0ce30c59351"
+  dependencies:
+    falafel "^1.2.0"
+    hyperx "^2.0.3"
+    on-load "^3.2.0"
+    through2 "^2.0.1"

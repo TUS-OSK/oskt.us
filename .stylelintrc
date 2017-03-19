@@ -15,6 +15,9 @@
       "except": ["first-nested"]
     }],
     "order/order": ["custom-properties", "declarations", "rules", "at-rules"],
-    "csstree/validator": true
+    "csstree/validator": true,
+    "string-quotes": "single",
+    "max-nesting-depth": null,
+    "selector-max-specificity": "0,5,0"
   }
 }
