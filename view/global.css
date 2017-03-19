@@ -7,3 +7,13 @@ body {
 }
 
 /* stylelint-enable selector-no-type */
+
+@font-face {
+  font-family: acre;
+  src: url('assets/acre-medium.otf');
+}
+
+@font-face {
+  font-family: quasimoda;
+  src: url('assets/quasimoda-light.otf');
+}
