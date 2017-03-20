@@ -28,7 +28,14 @@ module.exports = function mainView (state, prev, send) {
             <div class="circ fourth"></div>
           </div>
         </div>
-        <div class="cover"></div>
+        <div class="cover">
+          <div class="names">
+            <div class="name first">応用</div>
+            <div class="name second">数学</div>
+            <div class="name third">研究部</div>
+            <div class="name fourth">東京理科大学</div>
+          </div>
+        </div>
       </div>
     </main>
   `;

@@ -3,6 +3,7 @@
   --swift: cubic-bezier(0.7, 0, 0.1, 1);
   --bounce: cubic-bezier(0.78, 0, 0.6, 1.91);
   --continue: cubic-bezier(1, 0, 0, 1);
+  --flip: cubic-bezier(1, -0.12, 0.44, 1.65);
   --parens-space: 110px;
   --typo-width: 160px;
   --t-reveal: 0.7s;
@@ -11,6 +12,8 @@
   --t-typo: calc(var(--t-reveal) + var(--t-parens));
   --t-circ: 0.4s;
   --t-circ-cover: 0.8s;
+  --t-cover: calc(var(--t-typo) + var(--t-circ) * 2.3 + var(--t-circ-cover) * 0.5);
+  --t-flip: 0.6s;
 }
 
 :host {
@@ -120,10 +123,40 @@
   }
 
   & .cover {
+    position: relative;
     height: 100%;
     width: 100%;
     background-color: #fff;
     opacity: 0;
+  }
+
+  & .names {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    letter-spacing: 7px;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    perspective: 200px;
+
+    & .name {
+      margin-bottom: 2px;
+      transform-origin: 50% 0;
+
+      &.third {
+        margin-bottom: 4px;
+      }
+
+      &.fourth {
+        font-weight: normal;
+        font-size: 20px;
+        margin-bottom: 0;
+        color: rgba(0, 0, 0, 0.4);
+      }
+    }
   }
 
   & .base.anim {
@@ -162,7 +195,25 @@
     }
 
     & .cover {
-      animation: fade calc(var(--t-circ-cover) * 0.5) var(--swift) calc(var(--t-typo) + var(--t-circ) * 2.3 + var(--t-circ-cover) * 0.5) 1 normal both running;
+      animation: fade calc(var(--t-circ-cover) * 0.5) var(--swift) var(--t-cover) 1 normal both running;
+    }
+
+    & .name {
+      &.first {
+        animation: flip var(--t-flip) var(--flip) var(--t-cover) 1 normal both running;
+      }
+
+      &.second {
+        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip) * 0.5) 1 normal both running;
+      }
+
+      &.third {
+        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip) * 1.0) 1 normal both running;
+      }
+
+      &.fourth {
+        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip) * 1.5) 1 normal both running;
+      }
     }
   }
 }
@@ -269,6 +320,18 @@
   }
 
   100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotateX(0deg);
     opacity: 1;
   }
 }
