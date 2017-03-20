@@ -1,6 +1,7 @@
 :root {
   --bg-color: #222;
   --swift: cubic-bezier(0.7, 0, 0.1, 1);
+  --cubic-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   --bounce: cubic-bezier(0.78, 0, 0.6, 1.91);
   --continue: cubic-bezier(1, 0, 0, 1);
   --flip: cubic-bezier(1, -0.12, 0.44, 1.65);
@@ -13,7 +14,11 @@
   --t-circ: 0.4s;
   --t-circ-cover: 0.8s;
   --t-cover: calc(var(--t-typo) + var(--t-circ) * 2.3 + var(--t-circ-cover) * 0.5);
-  --t-flip: 0.6s;
+  --t-flip: 0.8s;
+  --t-around: calc(var(--t-cover) + var(--t-flip) * 1.5);
+  --t-twitching: 1s;
+  --t-slide: 1s;
+  --t-pic: 3s;
 }
 
 :host {
@@ -45,7 +50,6 @@
     justify-content: space-between;
     font-size: 60px;
     color: #fff;
-    font-family: quasimoda;
   }
 
   & .bar {
@@ -124,6 +128,7 @@
 
   & .cover {
     position: relative;
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
     background-color: #fff;
@@ -137,17 +142,18 @@
     font-size: 30px;
     color: rgba(0, 0, 0, 0.7);
     font-weight: bold;
-    letter-spacing: 7px;
+    letter-spacing: 5px;
     transform: translate(-50%, -50%);
-    transform-style: preserve-3d;
     perspective: 200px;
+    padding: 40px;
+    background-color: color(#fff alpha(-10%));
 
     & .name {
-      margin-bottom: 2px;
+      margin-bottom: 0;
       transform-origin: 50% 0;
 
       &.third {
-        margin-bottom: 4px;
+        margin-bottom: 1px;
       }
 
       &.fourth {
@@ -155,8 +161,61 @@
         font-size: 20px;
         margin-bottom: 0;
         color: rgba(0, 0, 0, 0.4);
+        letter-spacing: 3px;
       }
     }
+  }
+
+  & .arrow {
+    position: absolute;
+    border-right: solid 1px rgba(0, 0, 0, 0.4);
+    border-bottom: solid 1px rgba(0, 0, 0, 0.4);
+    transform: rotate(45deg);
+    width: 40px;
+    height: 40px;
+    bottom: 40px;
+    left: 50%;
+  }
+
+  & .menu {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    & .list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 400px;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    & .item {
+      margin-bottom: 5px;
+    }
+
+    & :any-link {
+      text-decoration: none;
+      padding-bottom: 2px;
+      color: rgba(0, 0, 0, 0.4);
+      border-bottom: solid 1px rgba(0, 0, 0, 0.4);
+      font-size: 15px;
+    }
+  }
+
+  & .pic {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    background-image: url('assets/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 50%;
   }
 
   & .base.anim {
@@ -208,12 +267,28 @@
       }
 
       &.third {
-        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip) * 1.0) 1 normal both running;
+        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip)) 1 normal both running;
       }
 
       &.fourth {
         animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip) * 1.5) 1 normal both running;
       }
+    }
+
+    & .arrow {
+      animation:
+        slide-arrow var(--t-slide) var(--swift) var(--t-around) 1 normal both running;
+        /* twitching var(--t-twitching) calc(var(--t-around) + var(--t-slide)) infinite alternate none running; */
+    }
+
+    & .menu {
+      animation: slide-menu var(--t-slide) var(--swift) var(--t-around) 1 normal both running;
+    }
+
+    & .pic {
+      animation:
+        fade var(--t-pic) var(--swift) var(--t-around) 1 normal both running,
+        pic calc(var(--t-pic) * 0.9) var(--cubic-out) var(--t-around) 1 normal both running;
     }
   }
 }
@@ -333,5 +408,55 @@
   100% {
     transform: rotateX(0deg);
     opacity: 1;
+  }
+}
+
+@keyframes twitching {
+  0% {
+    bottom: 50px;
+    animation-timing-function: ease-in;
+  }
+
+  50% {
+    bottom: 45px;
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    bottom: 50px;
+  }
+}
+
+@keyframes slide-arrow {
+  0% {
+    opacity: 0;
+    bottom: -30px;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 50px;
+  }
+}
+
+@keyframes slide-menu {
+  0% {
+    opacity: 0;
+    top: -20px;
+  }
+
+  100% {
+    opacity: 1;
+    top: 11%;
+  }
+}
+
+@keyframes pic {
+  0% {
+    height: 30%;
+  }
+
+  100% {
+    height: 50%;
   }
 }
