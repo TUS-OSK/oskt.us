@@ -5,6 +5,7 @@ const app = choo({
 });
 
 css('normalize.css');
+css('./view/fonts.css');
 css('./view/global.css');
 
 app.model({
