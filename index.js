@@ -21,7 +21,6 @@ app.model({
 
 app.router([
   ['/', require('./view/index')],
-  ['/about', require('./view/about')],
 ]);
 
 const tree = app.start();

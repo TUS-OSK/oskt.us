@@ -18,6 +18,7 @@
     "csstree/validator": true,
     "string-quotes": "single",
     "max-nesting-depth": null,
-    "selector-max-specificity": "0,5,0"
+    "selector-max-specificity": "0,5,0",
+    "declaration-property-value-blacklist": null
   }
 }
