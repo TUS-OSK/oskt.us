@@ -189,7 +189,7 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-autoprefixer@^6.0.0, autoprefixer@^6.0.2, autoprefixer@^6.3.1, autoprefixer@^6.7.3:
+autoprefixer@^6.0.0, autoprefixer@^6.0.2, autoprefixer@^6.3.1:
   version "6.7.6"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-6.7.6.tgz#00f05656c7ef73de9d2fd9b4668f6ef6905a855a"
   dependencies:
@@ -1434,16 +1434,7 @@ css-tree@1.0.0-alpha16:
   dependencies:
     source-map "^0.5.3"
 
-cssnano-cli@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/cssnano-cli/-/cssnano-cli-1.0.5.tgz#98c619b327d90acacb42302bc0c84f592e2801f5"
-  dependencies:
-    cssnano "^3.0.0"
-    minimist "^1.2.0"
-    read-file-stdin "^0.2.0"
-    write-file-stdout "0.0.2"
-
-cssnano@^3.0.0:
+cssnano@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/cssnano/-/cssnano-3.10.0.tgz#4f38f6cea2b9b17fa01490f23f1dc68ea65c1c38"
   dependencies:
@@ -3826,7 +3817,7 @@ read-all-stream@^3.0.0:
     pinkie-promise "^2.0.0"
     readable-stream "^2.0.0"
 
-read-file-stdin@^0.2.0, read-file-stdin@^0.2.1:
+read-file-stdin@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/read-file-stdin/-/read-file-stdin-0.2.1.tgz#25eccff3a153b6809afacb23ee15387db9e0ee61"
   dependencies:
