@@ -132,9 +132,7 @@
     }
 
     & .pic {
-      animation:
-        fade var(--t-pic) var(--swift) var(--t-around) 1 normal both running,
-        pic calc(var(--t-pic) * 0.9) var(--cubic-out) var(--t-around) 1 normal both running;
+      animation: fade var(--t-pic) var(--swift) var(--t-around) 1 normal both running, pic calc(var(--t-pic) * 0.9) var(--cubic-out) var(--t-around) 1 normal both running;
     }
   }
 }

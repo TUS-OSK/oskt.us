@@ -1,24 +1,26 @@
 {
-  "extends": "stylelint-config-primer",
+  "extends": "stylelint-config-standard",
   "plugins": [
-    "stylelint-order",
     "stylelint-csstree-validator"
   ],
   "rules": {
-    "declaration-block-properties-order": null,
-    "media-feature-no-missing-punctuation": null,
-    "no-unsupported-browser-features": null,
-    "rule-nested-empty-line-before": null,
-    "rule-non-nested-empty-line-before": null,
-    "scss/selector-no-redundant-nesting-selector": null,
-    "rule-empty-line-before": ["always-multi-line", {
-      "except": ["first-nested"]
-    }],
-    "order/order": ["custom-properties", "declarations", "rules", "at-rules"],
     "csstree/validator": true,
+    "font-family-name-quotes": "always-where-recommended",
+    "function-url-quotes": "always",
+    "selector-attribute-quotes": "always",
     "string-quotes": "single",
-    "max-nesting-depth": null,
+    "at-rule-no-vendor-prefix": true,
+    "media-feature-name-no-vendor-prefix": true,
+    "property-no-vendor-prefix": true,
+    "selector-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "selector-max-compound-selectors": 3,
     "selector-max-specificity": "0,5,0",
-    "declaration-property-value-blacklist": null
+    "at-rule-no-unknown": true,
+    "color-named": "never",
+    "declaration-no-important": true,
+    "selector-no-id": true,
+    "selector-no-qualifying-type": true,
+    "function-url-data-uris": "never"
   }
 }
