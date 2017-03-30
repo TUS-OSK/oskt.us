@@ -12,7 +12,7 @@
     "fmt": "standard --fix"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.2.1",
+    "babel-preset-env": "^1.2.2",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "budo": "^9.4.7",
@@ -20,23 +20,23 @@
     "cssnano": "^3.10.0",
     "del-cli": "^0.2.1",
     "exorcist": "^0.4.0",
-    "postcss-cssnext": "^2.9.0",
-    "sheetify": "^6.0.1",
+    "postcss-cssnext": "^2.10.0",
     "sheetify-postcss": "^1.1.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
     "stylelint-csstree-validator": "^1.1.1",
     "uglifyify": "^3.0.4",
-    "yo-yoify": "^3.5.0"
+    "yo-yoify": "^3.7.0"
   },
   "dependencies": {
     "choo": "^4.1.0",
-    "normalize.css": "^5.0.0"
+    "normalize.css": "^6.0.0",
+    "scopedify": "^1.0.1"
   },
   "browserify": {
     "transform": [
       [
-        "sheetify/transform",
+        "scopedify/transform",
         {
           "use": [
             [

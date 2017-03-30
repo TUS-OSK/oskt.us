@@ -1,4 +1,4 @@
-:host {
+.root {
   display: flex;
 
   & a {

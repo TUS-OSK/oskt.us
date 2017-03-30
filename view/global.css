@@ -1,10 +1,6 @@
-/* stylelint-disable selector-no-type */
-
-html,
-body {
+:root,
+:root body {
   height: 100%;
   margin: 0;
   font-family: quasimoda;
 }
-
-/* stylelint-enable selector-no-type */

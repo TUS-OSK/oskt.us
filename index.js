@@ -1,5 +1,5 @@
 const choo = require('choo')
-const css = require('sheetify')
+const css = require('scopedify')
 const app = choo({
   hash: true
 })

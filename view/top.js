@@ -1,11 +1,11 @@
 const html = require('choo/html')
-const css = require('sheetify')
+const css = require('scopedify')
 
-const prefix = css('./top.css')
+const scope = css('./top.css')
 
 module.exports = function topView (state, prev, send) {
-  return html`
-    <section class=${prefix}>
+  return scope(html`
+    <section class="root">
       <div class="base ${state.load ? 'anim' : ''}">
         <nav class="menu">
           <ul class="list">
@@ -25,5 +25,5 @@ module.exports = function topView (state, prev, send) {
         <div class="arrow"></div>
       </div>
     </section>
-  `
+  `)
 }

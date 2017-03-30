@@ -1,12 +1,12 @@
 const html = require('choo/html')
-const css = require('sheetify')
+const css = require('scopedify')
 
-const prefix = css('./about.css')
+const scope = css('./about.css')
 
 module.exports = function aboutView (state, prev, send) {
-  return html`
-    <section class=${prefix}>
+  return scope(html`
+    <section class="root">
       <div class="text">OSK</div>
     </section>
-  `
+  `)
 }
