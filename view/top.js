@@ -1,7 +1,7 @@
-const html = require('choo/html');
-const css = require('sheetify');
+const html = require('choo/html')
+const css = require('sheetify')
 
-const prefix = css('./top.css');
+const prefix = css('./top.css')
 
 module.exports = function topView (state, prev, send) {
   return html`
@@ -25,5 +25,5 @@ module.exports = function topView (state, prev, send) {
         <div class="arrow"></div>
       </div>
     </section>
-  `;
-};
+  `
+}

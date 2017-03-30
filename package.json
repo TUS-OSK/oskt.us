@@ -9,8 +9,8 @@
     "build": "browserify -g uglifyify index.js -v -p [ css-extract -o ./public/index.css ] -o ./public/index.js",
     "postbuild": "cssnano --sourcemap ./public/index.css ./public/index.css",
     "clean": "del ./public/index.js ./public/index.css",
-    "lint": "stylelint view/**/*.css",
-    "test": "echo 'Ya! No test, but all OK!!!'"
+    "test": "standard && stylelint view/**/*.css",
+    "fmt": "standard --fix"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.3",
@@ -21,7 +21,6 @@
     "css-extract": "^1.2.0",
     "cssnano-cli": "^1.0.5",
     "del-cli": "^0.2.1",
-    "eslint": "^3.17.1",
     "exorcist": "^0.4.0",
     "postcss-cssnext": "^2.9.0",
     "sheetify": "^6.0.1",

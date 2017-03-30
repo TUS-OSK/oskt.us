@@ -1,27 +1,27 @@
-const choo = require('choo');
-const css = require('sheetify');
+const choo = require('choo')
+const css = require('sheetify')
 const app = choo({
-  hash: true,
-});
+  hash: true
+})
 
-css('normalize.css');
-css('./view/fonts.css');
-css('./view/global.css');
+css('normalize.css')
+css('./view/fonts.css')
+css('./view/global.css')
 
 app.model({
   state: {
-    load: false,
+    load: false
   },
   reducers: {
-    load() {
-      return { load: true };
-    },
-  },
-});
+    load () {
+      return { load: true }
+    }
+  }
+})
 
 app.router([
-  ['/', require('./view/index')],
-]);
+  ['/', require('./view/index')]
+])
 
-const tree = app.start();
-document.body.appendChild(tree);
+const tree = app.start()
+document.body.appendChild(tree)

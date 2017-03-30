@@ -1,9 +1,9 @@
-const html = require('choo/html');
-const css = require('sheetify');
-const topView = require('./top');
-const aboutView = require('./about');
+const html = require('choo/html')
+const css = require('sheetify')
+const topView = require('./top')
+const aboutView = require('./about')
 
-const prefix = css('./index.css');
+const prefix = css('./index.css')
 
 module.exports = function mainView (state, prev, send) {
   return html`
@@ -11,5 +11,5 @@ module.exports = function mainView (state, prev, send) {
       ${topView(...arguments)}
       ${aboutView(...arguments)}
     </main>
-  `;
-};
+  `
+}
