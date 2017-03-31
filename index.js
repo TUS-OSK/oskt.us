@@ -1,27 +1,22 @@
 const choo = require('choo')
 const css = require('scopedify')
-const app = choo({
-  hash: true
-})
 
 css('normalize.css')
 css('./view/fonts.css')
 css('./view/global.css')
 
-app.model({
-  state: {
-    load: false
-  },
-  reducers: {
-    load () {
-      return { load: true }
-    }
-  }
+const app = choo({
+  hash: true
 })
 
-app.router([
-  ['/', require('./view/index')]
-])
+app.use(loader)
+app.route('/', require('./view/index'))
+app.mount('body')
 
-const tree = app.start()
-document.body.appendChild(tree)
+function loader (state, emitter) {
+  state.load = false
+  emitter.on('load', () => {
+    state.load = true
+    emitter.emit('render')
+  })
+}

@@ -583,9 +583,9 @@ babel-plugin-transform-strict-mode@^6.22.0:
     babel-runtime "^6.22.0"
     babel-types "^6.22.0"
 
-babel-preset-env@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.2.2.tgz#1dbc4d7f8a575691d301f45fa9b2f9698b1e3b92"
+babel-preset-env@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.3.2.tgz#08eabd2bf810c3678069f7e052323419f1448749"
   dependencies:
     babel-plugin-check-es2015-constants "^6.22.0"
     babel-plugin-syntax-trailing-function-commas "^6.22.0"
@@ -615,7 +615,6 @@ babel-preset-env@^1.2.2:
     babel-plugin-transform-exponentiation-operator "^6.22.0"
     babel-plugin-transform-regenerator "^6.22.0"
     browserslist "^1.4.0"
-    electron-to-chromium "^1.2.6"
     invariant "^2.2.2"
 
 babel-register@^6.24.0:
@@ -693,13 +692,6 @@ balanced-match@^0.4.0, balanced-match@^0.4.1, balanced-match@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
 
-barracks@^9.1.0:
-  version "9.3.2"
-  resolved "https://registry.yarnpkg.com/barracks/-/barracks-9.3.2.tgz#a260c443e93bbb238eba343ef58c2007a9979375"
-  dependencies:
-    nanotick "^1.1.2"
-    xtend "^4.0.1"
-
 base64-js@^1.0.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
@@ -710,7 +702,7 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bel@^4.0.0:
+bel@^4.5.1:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/bel/-/bel-4.6.0.tgz#3ade16e236ab2204d8d1c66eac4bd573793ac999"
   dependencies:
@@ -1134,17 +1126,17 @@ chokidar@^1.0.0, chokidar@^1.0.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
-choo@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/choo/-/choo-4.1.0.tgz#b87ac580f410e9c45577b640788625970ff25dd1"
+choo@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/choo/-/choo-5.1.3.tgz#efa66875e4eb9d6329407187d233c798ed9e09c3"
   dependencies:
-    barracks "^9.1.0"
-    document-ready "~1.0.2"
-    global "^4.3.0"
-    nanoraf "^2.1.1"
-    sheet-router "^4.0.1"
-    xtend "^4.0.1"
-    yo-yo "^1.2.2"
+    bel "^4.5.1"
+    document-ready "^2.0.1"
+    nanobus "^3.0.0"
+    nanomorph "^4.0.0"
+    nanomount "^1.0.0"
+    nanoraf "^3.0.0"
+    nanorouter "^2.0.0"
 
 cipher-base@^1.0.0, cipher-base@^1.0.1:
   version "1.0.3"
@@ -1634,11 +1626,9 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-document-ready@~1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/document-ready/-/document-ready-1.0.3.tgz#eed81e09b37a687c5e6d02b3f0e5706276e82727"
-  dependencies:
-    global "~4.3.0"
+document-ready@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/document-ready/-/document-ready-2.0.1.tgz#3e3bf31d3235b94e232e7b2c5fa1a634e873bae4"
 
 doiuse@^2.4.1:
   version "2.6.0"
@@ -1697,7 +1687,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.2.6, electron-to-chromium@^1.2.7:
+electron-to-chromium@^1.2.7:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.2.tgz#b8ce5c93b308db0e92f6d0435c46ddec8f6363ab"
 
@@ -2067,7 +2057,7 @@ glob@^7.0.3, glob@^7.0.5, glob@^7.1.0:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-global@^4.3.0, global@~4.3.0:
+global@^4.3.0:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/global/-/global-4.3.1.tgz#5f757908c7cbabce54f386ae440e11e26b7916df"
   dependencies:
@@ -2884,10 +2874,6 @@ mold-source-map@~0.4.0:
     convert-source-map "^1.1.0"
     through "~2.2.7"
 
-morphdom@^2.1.0:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/morphdom/-/morphdom-2.3.2.tgz#6a71001f55e518f06b42e0e1f1084feaf8da2024"
-
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -2909,15 +2895,29 @@ nan@^2.3.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.1.tgz#d5b01691253326a97a2bbee9e61c55d8d60351e2"
 
-nanoraf@^2.1.1:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/nanoraf/-/nanoraf-2.1.3.tgz#e11df398c59b3a65f4e10ea1b6b95a3a21350718"
-  dependencies:
-    global "^4.3.0"
+nanobus@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/nanobus/-/nanobus-3.0.0.tgz#1436257ab89dbe50bbcf95cfa9a411965453c80c"
 
-nanotick@^1.1.2:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/nanotick/-/nanotick-1.1.6.tgz#8d581b706f2fd79223fb58217461264b9d64b4c9"
+nanomorph@^4.0.0:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/nanomorph/-/nanomorph-4.0.2.tgz#d473234306806b58a0bdc268899c2ea9895c2dbe"
+
+nanomount@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/nanomount/-/nanomount-1.0.1.tgz#da6e4c446f046a20d5a87bfc3a6152be29890d35"
+  dependencies:
+    nanomorph "^4.0.0"
+
+nanoraf@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/nanoraf/-/nanoraf-3.0.1.tgz#ab9fb9c257b9adcc71d82982cb58d8fa3503764a"
+
+nanorouter@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/nanorouter/-/nanorouter-2.0.0.tgz#f67cd8950a8fff792a6004e2cc189054ed60d57b"
+  dependencies:
+    wayfarer "^6.5.0"
 
 nave@~0.5.1:
   version "0.5.3"
@@ -4210,14 +4210,6 @@ shasum@^1.0.0:
     json-stable-stringify "~0.0.0"
     sha.js "~2.4.4"
 
-sheet-router@^4.0.1:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/sheet-router/-/sheet-router-4.2.3.tgz#c587779e0e252112e7f63e4fd873a568bee5fc62"
-  dependencies:
-    global "^4.3.0"
-    wayfarer "^6.2.1"
-    xtend "^4.0.1"
-
 sheetify-postcss@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/sheetify-postcss/-/sheetify-postcss-1.1.0.tgz#0217326bcd0a81accdf3e9832fdc2a751737db23"
@@ -4919,7 +4911,7 @@ watchify@^3.3.1:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
-wayfarer@^6.2.1:
+wayfarer@^6.5.0:
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/wayfarer/-/wayfarer-6.5.0.tgz#341ed6155459bf238de6c4a8c993a98f462beee7"
   dependencies:
@@ -5013,13 +5005,6 @@ yargs@^3.5.4, yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
-
-yo-yo@^1.2.2:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/yo-yo/-/yo-yo-1.4.0.tgz#c3291e512bb4743f9eb514b9b6dbb264757e3257"
-  dependencies:
-    bel "^4.0.0"
-    morphdom "^2.1.0"
 
 yo-yoify@^3.7.0:
   version "3.7.0"

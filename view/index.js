@@ -5,11 +5,11 @@ const aboutView = require('./about')
 
 const scope = css('./index.css')
 
-module.exports = function mainView (state, prev, send) {
+module.exports = function mainView (state, emit) {
   return scope(html`
-    <main class="root" onload=${send.bind(null, 'load')}>
+    <body class="root" onload=${emit.bind(null, 'load')}>
       ${topView(...arguments)}
       ${aboutView(...arguments)}
-    </main>
+    </body>
   `)
 }

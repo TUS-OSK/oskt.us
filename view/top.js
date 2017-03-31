@@ -3,7 +3,7 @@ const css = require('scopedify')
 
 const scope = css('./top.css')
 
-module.exports = function topView (state, prev, send) {
+module.exports = function topView (state, emit) {
   return scope(html`
     <section class="root">
       <div class="base ${state.load ? 'anim' : ''}">
