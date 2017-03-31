@@ -2,12 +2,9 @@ const choo = require('choo')
 const css = require('scopedify')
 
 css('normalize.css')
-css('./view/fonts.css')
-css('./view/global.css')
+require('./view/partials')
 
-const app = choo({
-  hash: true
-})
+const app = choo()
 
 app.use(loader)
 app.route('/', require('./view/index'))

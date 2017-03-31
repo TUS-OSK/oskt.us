@@ -1,0 +1,24 @@
+a {
+  --primary-color: #bbb;
+  --secondary-color: #333;
+
+  font-size: 13px;
+  padding: 5px 20px 4px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+  transition-property: background-color, color, opacity;
+  transition-duration: 0.5s;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
+}

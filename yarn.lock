@@ -3281,7 +3281,7 @@ postcss-attribute-case-insensitive@^1.0.1:
     postcss "^5.1.1"
     postcss-selector-parser "^2.2.0"
 
-postcss-bind-attr@^1.0.0:
+postcss-bind-attr@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/postcss-bind-attr/-/postcss-bind-attr-1.0.1.tgz#6215c3c0ad22887256f25ac28dc3885d9efba9eb"
   dependencies:
@@ -4128,15 +4128,15 @@ sax@~1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
 
-scopedify@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/scopedify/-/scopedify-1.0.1.tgz#818a8ce1c75fadf884a108e387ba9aefa2d52c16"
+scopedify@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/scopedify/-/scopedify-1.1.0.tgz#e7293b5acfd1233af3b20df471587f35c1242f52"
   dependencies:
     falafel "^1.2.0"
     insert-css "^2.0.0"
     map-limit "0.0.1"
     postcss "^5.0.10"
-    postcss-bind-attr "^1.0.0"
+    postcss-bind-attr "^1.0.1"
     resolve "^1.1.7"
     stack-trace "0.0.9"
     static-eval "^1.1.0"

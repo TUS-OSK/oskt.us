@@ -1,7 +1,7 @@
 const html = require('choo/html')
 const css = require('scopedify')
 
-const scope = css('./top.css')
+const scope = css('./top')
 
 module.exports = function topView (state, emit) {
   return scope(html`

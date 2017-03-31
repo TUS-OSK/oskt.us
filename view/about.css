@@ -1,7 +1,25 @@
 .root {
-  display: flex;
+  --bg-color: #333;
+  --font-color: #bbb;
 
-  & a {
-    font-size: 20px;
+  & .text {
+    font-size: 40vw;
+    color: var(--bg-color);
+    margin-left: -30px;
+    height: 0.8em;
+  }
+
+  & .content {
+    background-color: var(--bg-color);
+    padding: 40px 60px;
+    color: var(--font-color);
+    font-size: 16px;
+    line-height: 1.6em;
+  }
+
+  & .button {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 0;
   }
 }
