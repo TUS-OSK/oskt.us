@@ -2,3 +2,14 @@
   font-family: quasimoda;
   src: url('assets/quasimoda-light.otf');
 }
+
+@font-face {
+  font-family: novecentosans;
+  src: url('assets/Novecentosanswide-Book.otf');
+}
+
+@font-face {
+  font-family: novecentosans;
+  src: url('assets/Novecentosanswide-Bold.otf');
+  font-weight: bold;
+}

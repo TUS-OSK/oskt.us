@@ -1,7 +1,9 @@
 const html = require('choo/html')
 const css = require('scopedify')
+
 const topView = require('./top')
 const aboutView = require('./about')
+const scheduleView = require('./schedule')
 
 const scope = css('./index.css')
 
@@ -10,6 +12,7 @@ module.exports = function mainView (state, emit) {
     <body class="root" onload=${emit.bind(null, 'load')}>
       ${topView(...arguments)}
       ${aboutView(...arguments)}
+      ${scheduleView(...arguments)}
     </body>
   `)
 }
