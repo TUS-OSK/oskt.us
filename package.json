@@ -7,7 +7,7 @@
   "scripts": {
     "start": "budo index.js -P -l -d ./public -- -v -d -p [ css-extract -o ./public/index.css ]",
     "build": "browserify -g uglifyify index.js -v -p [ css-extract -o ./public/index.css ] -o ./public/index.js",
-    "clean": "del ./public/index.js ./public/index.css",
+    "clean": "del ./public/* !./public/index.html",
     "test": "standard && stylelint view/**/*.css",
     "fmt": "standard --fix"
   },
@@ -21,6 +21,7 @@
     "del-cli": "^0.2.1",
     "exorcist": "^0.4.0",
     "postcss-cssnext": "^2.10.0",
+    "postcss-url": "^6.0.0",
     "sheetify-postcss": "^1.1.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "choo": "^5.1.3",
+    "font-awesome": "^4.7.0",
     "normalize.css": "^6.0.0",
     "postcss-import": "^9.1.0",
     "scopedify": "^1.1.0"
@@ -44,6 +46,14 @@
               "sheetify-postcss",
               {
                 "plugins": [
+                  [
+                    "postcss-url",
+                    {
+                      "url": "copy",
+                      "assetsPath": "assets",
+                      "useHash": true
+                    }
+                  ],
                   "postcss-import",
                   [
                     "postcss-cssnext",
@@ -54,6 +64,7 @@
                     }
                   ]
                 ],
+                "to": "public/index.css",
                 "map": {
                   "inline": true
                 }

@@ -1,0 +1,42 @@
+@import './partials/variables';
+@import './partials/layout';
+
+:root {
+  --primary-color: #333;
+  --dark-base-color: color(var(--base-color) lightness(-30%));
+  --secondary-color: #bbb;
+  --dark-sub-color: color(var(--sub-color) lightness(-30%));
+}
+
+.root {
+  @apply --section;
+
+  display: flex;
+
+  & .box {
+    flex: 1;
+    text-align: center;
+  }
+
+  & .location {
+    background-color: var(--base-color);
+    color: var(--dark-base-color);
+  }
+
+  & .contact {
+    background-color: var(--sub-color);
+    color: var(--dark-sub-color);
+  }
+
+  & .title {
+    @apply --section-title;
+
+    font-family: novecentosans;
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  & .content {
+    @apply --section-content;
+  }
+}

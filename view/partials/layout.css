@@ -1,0 +1,16 @@
+:root {
+  --section-margin: 70px;
+
+  --section: {
+    margin-bottom: var(--section-margin);
+  };
+
+  --section-title: {
+    margin-top: var(--section-margin);
+    margin-bottom: 40px;
+  };
+
+  --section-content: {
+    margin-bottom: var(--section-margin);
+  };
+}

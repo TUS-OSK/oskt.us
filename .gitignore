@@ -75,7 +75,5 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-/public/index.js
-/public/index.js.map
-/public/index.css
-/public/index.css.map
+/public/*
+!/public/index.html

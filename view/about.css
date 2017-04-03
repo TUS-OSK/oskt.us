@@ -1,4 +1,6 @@
 .root {
+  @apply --section;
+
   --bg-color: #333;
   --font-color: #bbb;
 
@@ -10,8 +12,10 @@
   }
 
   & .content {
+    @apply --section-content;
+
     background-color: var(--bg-color);
-    padding: 40px 60px;
+    padding: 70px 60px;
     color: var(--font-color);
     font-size: 16px;
     line-height: 1.6em;

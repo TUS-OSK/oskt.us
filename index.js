@@ -2,6 +2,7 @@ const choo = require('choo')
 const css = require('scopedify')
 
 css('normalize.css')
+css('font-awesome')
 require('./view/partials')
 
 const app = choo()

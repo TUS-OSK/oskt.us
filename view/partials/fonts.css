@@ -1,15 +1,15 @@
 @font-face {
   font-family: quasimoda;
-  src: url('assets/quasimoda-light.otf');
+  src: url('../assets/fonts/quasimoda-light.otf');
 }
 
 @font-face {
   font-family: novecentosans;
-  src: url('assets/Novecentosanswide-Book.otf');
+  src: url('../assets/fonts/Novecentosanswide-Book.otf');
 }
 
 @font-face {
   font-family: novecentosans;
-  src: url('assets/Novecentosanswide-Bold.otf');
+  src: url('../assets/fonts/Novecentosanswide-Bold.otf');
   font-weight: bold;
 }

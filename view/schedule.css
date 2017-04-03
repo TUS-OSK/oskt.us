@@ -1,4 +1,5 @@
 @import './partials/variables';
+@import './partials/layout';
 
 :root {
   --primary-color: #333;
@@ -11,13 +12,20 @@
 }
 
 .root {
+  @apply --section;
+
   & .title {
+    @apply --section-title;
+
     font-family: novecentosans;
     font-weight: bold;
     text-align: center;
-    padding: 70px 0;
     font-size: 25px;
     color: var(--primary-color);
+  }
+
+  & .content {
+    @apply --section-content;
   }
 
   & .timeline {
