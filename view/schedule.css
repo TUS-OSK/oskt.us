@@ -3,8 +3,6 @@
 @import './partials/easing';
 
 :root {
-  --primary-color: #333;
-  --secondary-color: #bbb;
   --grid: 40px;
   --margin: 5px;
   --grid-border: 1px;

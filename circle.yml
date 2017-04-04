@@ -18,7 +18,7 @@ deployment:
   production:
     branch: master
     commands:
-      - sh -x ./ci.sh
+      - sh -x ./task/ci.sh
 
 general:
   branches:

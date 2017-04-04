@@ -1,7 +1,7 @@
 const html = require('choo/html')
 const css = require('scopedify')
-const comp = require('../../utils/comp')
-const compact = require('../../utils/compact')
+const comp = require('../../util/comp')
+const compact = require('../../util/compact')
 const scope = css('./button')
 
 module.exports = function (opt) {

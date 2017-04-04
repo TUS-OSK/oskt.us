@@ -1,0 +1,6 @@
+.root {
+  & strong {
+    font-weight: bold;
+    font-family: novecentosans;
+  }
+}

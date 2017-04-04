@@ -7,14 +7,7 @@ require('./view/partials')
 
 const app = choo()
 
-app.use(loader)
+app.use(require('./src/reducer/loader'))
+app.use(require('./src/reducer/page'))
 app.route('/', require('./view/index'))
 app.mount('body')
-
-function loader (state, emitter) {
-  state.load = false
-  emitter.on('load', () => {
-    state.load = true
-    emitter.emit('render')
-  })
-}

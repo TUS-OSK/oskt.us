@@ -1,6 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
-const CONST = require('./misc/contants')
+const CONST = require('../src/constants')
 
 const scope = css('./top')
 

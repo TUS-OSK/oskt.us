@@ -1,0 +1,22 @@
+@import './partials/layout';
+@import './partials/variables';
+
+.root {
+  @apply --section-wrap;
+
+  background-color: #eee;
+  color: #555;
+  text-align: center;
+
+  & > * {
+    @apply --section;
+  }
+
+  & .title {
+    @apply --section-title;
+
+    font-size: 25px;
+    font-weight: bold;
+    font-family: novecentosans;
+  }
+}
