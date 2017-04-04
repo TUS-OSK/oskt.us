@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
+const CONST = require('./misc/contants')
 
 const scope = css('./access')
 
@@ -14,6 +15,7 @@ module.exports = function accessView (state, emit) {
           </div>
           <div class="content">
             <p>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
               <span>2号館5階</span>
               <span>#2507</span>
             </p>
@@ -28,7 +30,7 @@ module.exports = function accessView (state, emit) {
           </div>
           <div class="content">
             <p>
-              <a href="https://twitter.com/tus_osk">
+              <a href=${CONST.TWITTER_URL}>
                 <i class="fa fa-twitter-square" aria-hidden="true"></i>
                 <span>tus_osk</span>
               </a>

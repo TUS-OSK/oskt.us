@@ -1,0 +1,23 @@
+@import './partials/layout';
+
+:root {
+  --primary-color: #333;
+  --secondary-color: #bbb;
+}
+
+.root {
+  @apply --section-wrap;
+
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+
+  & > * {
+    @apply --section;
+  }
+
+  & .copyright {
+    text-align: center;
+    font-size: 13px;
+    padding-top: 4px;
+  }
+}

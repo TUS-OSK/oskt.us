@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
+const CONST = require('./misc/contants')
 
 const scope = css('./top')
 
@@ -13,6 +14,7 @@ module.exports = function topView (state, emit) {
             <li class="item"><a href="#location">Location</a></li>
             <li class="item"><a href="#schedule">Schedule</a></li>
             <li class="item"><a href="#groups">Groups</a></li>
+            <li class="item"><a href=${CONST.TWITTER_URL}>Twitter</a></li>
           </ul>
         </nav>
         <div class="pic"></div>
