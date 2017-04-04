@@ -21,4 +21,9 @@
   --content: {
     margin-bottom: var(--section-margin);
   };
+
+  --body:  {
+    margin: 0;
+    height: 100%;
+  };
 }

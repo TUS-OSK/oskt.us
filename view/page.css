@@ -1,0 +1,10 @@
+@import './partials/layout';
+
+.root {
+  @apply --body;
+
+  & .menu {
+    display: flex;
+    justify-content: center;
+  }
+}

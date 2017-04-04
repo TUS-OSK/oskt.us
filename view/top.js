@@ -1,6 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
-const CONST = require('../src/constants')
+const menu = require('./components/menu')
 
 const scope = css('./top')
 
@@ -9,13 +9,7 @@ module.exports = function topView (state, emit) {
     <section class="root">
       <div class="base ${state.load ? 'anim' : ''}">
         <nav class="menu">
-          <ul class="list">
-            <li class="item"><a href="#about">About</a></li>
-            <li class="item"><a href="#location">Location</a></li>
-            <li class="item"><a href="#schedule">Schedule</a></li>
-            <li class="item"><a href="#groups">Groups</a></li>
-            <li class="item"><a href=${CONST.TWITTER_URL}>Twitter</a></li>
-          </ul>
+          ${menu(...arguments)}
         </nav>
         <div class="pic"></div>
         <div class="names">

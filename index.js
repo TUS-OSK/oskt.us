@@ -9,5 +9,8 @@ const app = choo()
 
 app.use(require('./src/reducer/loader'))
 app.use(require('./src/reducer/page'))
+
 app.route('/', require('./view/index'))
+app.route('/page/*', require('./view/page'))
+
 app.mount('body')
