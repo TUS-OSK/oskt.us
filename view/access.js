@@ -3,20 +3,38 @@ const css = require('scopedify')
 
 const scope = css('./access')
 
-module.exports = function scheduleView (state, emit) {
+module.exports = function accessView (state, emit) {
   return scope(html`
     <section class="root">
       <div class="box location">
-        <div class="title">LOCATION</div>
-        <div class="content">
-          <p>2号館5階</p>
-          <p>#2507</p>
+        <div>
+          <div class="title">
+            <i class="fa fa-compass" aria-hidden="true"></i>
+            <div class="text">LOCATION</div>
+          </div>
+          <div class="content">
+            <p>
+              <span>2号館5階</span>
+              <span>#2507</span>
+            </p>
+          </div>
         </div>
       </div>
       <div class="box contact">
-        <i class="fa fa-at" aria-hidden="true"></i>
-        <div class="title">CONTACT</div>
-        <div class="content"></div>
+        <div>
+          <div class="title">
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <div class="text">CONTACT</div>
+          </div>
+          <div class="content">
+            <p>
+              <a href="https://twitter.com/tus_osk">
+                <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                <span>tus_osk</span>
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   `)

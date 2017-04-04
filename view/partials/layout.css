@@ -1,8 +1,16 @@
 :root {
   --section-margin: 70px;
+  --padding-side: 50px;
+
+  --section-wrap: {
+    overflow: hidden;
+  };
 
   --section: {
+    margin-top: var(--section-margin);
     margin-bottom: var(--section-margin);
+    padding-left: var(--padding-side);
+    padding-right: var(--padding-side);
   };
 
   --section-title: {
@@ -10,7 +18,7 @@
     margin-bottom: 40px;
   };
 
-  --section-content: {
+  --content: {
     margin-bottom: var(--section-margin);
   };
 }

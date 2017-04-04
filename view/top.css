@@ -1,14 +1,15 @@
-.root {
-  --swift: cubic-bezier(0.7, 0, 0.1, 1);
-  --cubic-out: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --flip: cubic-bezier(1, -0.12, 0.44, 1.65);
+@import './partials/easing';
+
+:root {
   --t-cover: 0s;
   --t-flip: 0.8s;
   --t-around: calc(var(--t-cover) + var(--t-flip) * 1.5);
   --t-twitching: 1s;
   --t-slide: 1s;
   --t-pic: 3s;
+}
 
+.root {
   position: relative;
   background-color: #fff;
   height: 100%;
@@ -107,19 +108,19 @@
   & .base.anim {
     & .name {
       &.first {
-        animation: flip var(--t-flip) var(--flip) var(--t-cover) 1 normal both running;
+        animation: flip var(--t-flip) var(--bounce) var(--t-cover) 1 normal both running;
       }
 
       &.second {
-        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip) * 0.5) 1 normal both running;
+        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip) * 0.5) 1 normal both running;
       }
 
       &.third {
-        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip)) 1 normal both running;
+        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip)) 1 normal both running;
       }
 
       &.fourth {
-        animation: flip var(--t-flip) var(--flip) calc(var(--t-cover) + var(--t-flip) * 1.5) 1 normal both running;
+        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip) * 1.5) 1 normal both running;
       }
     }
 

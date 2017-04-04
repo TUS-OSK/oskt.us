@@ -9,13 +9,17 @@
 }
 
 .root {
-  @apply --section;
-
   display: flex;
 
   & .box {
+    @apply --section-wrap;
+
     flex: 1;
     text-align: center;
+
+    & > * {
+      @apply --section;
+    }
   }
 
   & .location {
@@ -34,9 +38,24 @@
     font-family: novecentosans;
     font-weight: bold;
     font-size: 25px;
+
+    & i {
+      font-size: 40px;
+    }
+
+    & .text {
+      margin-top: 5px;
+    }
   }
 
   & .content {
-    @apply --section-content;
+    & a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }

@@ -5,6 +5,7 @@ const topView = require('./top')
 const aboutView = require('./about')
 const scheduleView = require('./schedule')
 const accessView = require('./access')
+const footerView = require('./footer')
 
 const scope = css('./index.css')
 
@@ -15,6 +16,7 @@ module.exports = function mainView (state, emit) {
       ${aboutView(...arguments)}
       ${scheduleView(...arguments)}
       ${accessView(...arguments)}
+      ${footerView(...arguments)}
     </body>
   `)
 }

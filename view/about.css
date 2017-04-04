@@ -1,8 +1,14 @@
-.root {
-  @apply --section;
+@import './partials/layout';
 
+:root {
   --bg-color: #333;
   --font-color: #bbb;
+}
+
+.root {
+  & .fit {
+    @apply --section;
+  }
 
   & .text {
     font-size: 40vw;
@@ -12,13 +18,18 @@
   }
 
   & .content {
-    @apply --section-content;
+    @apply --section-wrap;
 
     background-color: var(--bg-color);
-    padding: 70px 60px;
     color: var(--font-color);
     font-size: 16px;
     line-height: 1.6em;
+
+    & > * {
+      @apply --section;
+
+      margin-bottom: 40px;
+    }
   }
 
   & .button {
