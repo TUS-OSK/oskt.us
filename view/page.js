@@ -9,13 +9,19 @@ module.exports = function pageView (state, emit) {
   return scope(html`
     <body class="root">
       <header>
+        <div class="text">
+          <a href="#">
+            <i class="fa fa-code-fork" aria-hidden="true"></i>
+            <span>OSK</span>
+          </a>
+        </div>
         <nav class="menu">
           ${menu(...arguments)}
         </nav>
       </header>
-      <div class="content">
+      <section class="content">
         ${md(state.params.wildcard)(...arguments)}
-      </div>
+      </section>
     </body>
   `)
 }
