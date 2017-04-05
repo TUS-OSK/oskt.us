@@ -3,4 +3,8 @@
     font-weight: bold;
     font-family: novecentosans;
   }
+
+  & a {
+    color: inherit;
+  }
 }

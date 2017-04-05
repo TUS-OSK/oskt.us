@@ -20,7 +20,7 @@ module.exports = function aboutView (state, emit) {
           <p class="button">
             ${button({
               child: 'DETAIL',
-              href: '#about'
+              href: '#page/main/about'
             })(...arguments)}
           </p>
         </div>
