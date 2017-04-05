@@ -16,6 +16,9 @@ module.exports = function accessView (state, emit) {
           <div class="content">
             <p>
               <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>東京理科大学神楽坂キャンパス</span>
+            </p>
+            <p>
               <span>2号館5階</span>
               <span>#2507</span>
             </p>
@@ -31,8 +34,14 @@ module.exports = function accessView (state, emit) {
           <div class="content">
             <p>
               <a href=${CONST.TWITTER_URL}>
-                <i class="fa fa-twitter-square" aria-hidden="true"></i>
-                <span>tus_osk</span>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <span>${CONST.TWITTER_SCREEN_NAME}</span>
+              </a>
+            </p>
+            <p>
+              <a href="mailto:${CONST.MAIL}">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>${CONST.MAIL}</span>
               </a>
             </p>
           </div>
