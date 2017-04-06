@@ -8,6 +8,7 @@ yarn run build
 ls -a | grep -v -E "^(\.|\.\.|\.git|public)$" | xargs rm -rf
 mv ./public/* ./
 rm -rf ./public
+if [ ! -z ${CNAME} ]; then echo -n ${CNAME} > CNAME; fi
 git add -A
 git commit -m "update [skip ci]"
 git push -f ${GIT_REPO} gh-pages
