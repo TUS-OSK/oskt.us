@@ -29,6 +29,7 @@
     "postcss-cssnext": "^2.10.0",
     "postcss-url": "^6.0.0",
     "sheetify-postcss": "^1.1.0",
+    "standard": "^10.0.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
     "stylelint-csstree-validator": "^1.1.1",
