@@ -5,7 +5,7 @@ const menu = require('./menu')
 const scope = css('./header')
 
 module.exports = function (iconSlot) {
-  return function headerView (state, emit) {
+  return function header (state, emit) {
     return scope(html`
       <header class="root">
         <div class="text">

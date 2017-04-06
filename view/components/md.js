@@ -6,9 +6,8 @@ const comp = require('../../util/comp')
 const scope = css('./md')
 
 module.exports = function (path) {
-  return function newsView (state, emit) {
+  return function md (state, emit) {
     function load (p) {
-      console.log(p)
       if (!p || p.status === 'error') {
         emit(keys.page, path)
       }

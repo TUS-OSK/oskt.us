@@ -1,15 +1,22 @@
 const html = require('choo/html')
 const css = require('scopedify')
 const menu = require('./components/menu')
+const balloon = require('./components/balloon')
 
 const scope = css('./top')
 
 module.exports = function topView (state, emit) {
   return scope(html`
-    <section class="root">
+    <header class="root">
       <div class="base ${state.load ? 'anim' : ''}">
         <nav class="menu">
           ${menu(...arguments)}
+          ${balloon(html`
+            <a href="#page/2017/welcome">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <span>新歓情報</span>
+            </a>
+          `)(...arguments)}
         </nav>
         <div class="pic"></div>
         <div class="names">
@@ -20,6 +27,6 @@ module.exports = function topView (state, emit) {
         </div>
         <div class="arrow"></div>
       </div>
-    </section>
+    </header>
   `)
 }
