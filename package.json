@@ -27,6 +27,7 @@
     "highlight.js": "^9.10.0",
     "npm-run-all": "^4.0.2",
     "postcss-cssnext": "^2.10.0",
+    "postcss-import": "^9.1.0",
     "postcss-url": "^6.0.3",
     "sheetify-postcss": "^1.1.0",
     "standard": "^10.0.0",
@@ -41,7 +42,6 @@
     "domify": "^1.4.0",
     "font-awesome": "^4.7.0",
     "normalize.css": "^6.0.0",
-    "postcss-import": "^9.1.0",
     "scopedify": "^1.1.1"
   },
   "browserify": {
