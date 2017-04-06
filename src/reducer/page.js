@@ -5,6 +5,7 @@ module.exports = function page (state, emitter) {
   state.page = {}
 
   emitter.on(keys.page, (path) => {
+    console.log(path)
     state.page[path] = {
       status: 'loading'
     }

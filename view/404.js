@@ -8,7 +8,7 @@ module.exports = function _404View (state, emit) {
   return scope(html`
     <body class="root">
       ${header(html`
-        <i class="fa fa-code-fork" aria-hidden="true"></i>
+        <i class="fa fa-wrench" aria-hidden="true"></i>
       `)(...arguments)}
       <section class="content">
         <div class="wrap">
