@@ -6,12 +6,13 @@ OSK team site.
 
 ```
 yarn
+yarn run build
 yarn start
 ```
 
-Start a local server at `localhost:4000`.
+Start a local server at `localhost:9966`.
 
-Edit `public/index.html` `index.babel` `index.styl`.
+Edit something.
 
 ## Deployment
 
