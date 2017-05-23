@@ -3,6 +3,8 @@ const css = require('scopedify')
 const md = require('./components/md')
 const header = require('./components/header')
 
+const footerView = require('./footer')
+
 const scope = css('./page')
 
 module.exports = function pageView (state, emit) {
@@ -14,6 +16,7 @@ module.exports = function pageView (state, emit) {
       <section class="content">
         ${md(state.params.wildcard)(...arguments)}
       </section>
+      ${footerView(...arguments)}
     </body>
   `)
 }

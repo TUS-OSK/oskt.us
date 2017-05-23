@@ -3,6 +3,8 @@ const css = require('scopedify')
 const CONST = require('../src/constants')
 const header = require('./components/header')
 
+const footerView = require('./footer')
+
 const scope = css('./contact')
 
 module.exports = function contactView (state, emit) {
@@ -27,6 +29,7 @@ module.exports = function contactView (state, emit) {
           <a href="mailto:${CONST.MAIL}">${CONST.MAIL}</a>
         </p>
       </section>
+      ${footerView(...arguments)}
     </body>
   `)
 }
