@@ -78,6 +78,7 @@
     transition-duration: 0.15s;
     transition-timing-function: ease;
     cursor: pointer;
+    user-select: none;
 
     & > div {
       margin-right: 4px;
