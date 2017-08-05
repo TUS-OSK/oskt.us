@@ -1173,6 +1173,14 @@ chokidar@^1.0.0, chokidar@^1.0.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
+choo-log@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/choo-log/-/choo-log-7.2.1.tgz#b13ac22dc293cd4beef7819dc5684c00ec15aa83"
+  dependencies:
+    nanologger "^1.3.0"
+    on-idle "^3.0.2"
+    on-performance "^1.0.0"
+
 choo@^5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/choo/-/choo-5.1.4.tgz#244e0fde777b4dd07f70117992ba8edeb37fa262"
@@ -3958,6 +3966,12 @@ nanobus@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/nanobus/-/nanobus-3.0.0.tgz#1436257ab89dbe50bbcf95cfa9a411965453c80c"
 
+nanologger@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/nanologger/-/nanologger-1.3.0.tgz#05128e2432eff5d877ebd855610369fb6d8d9632"
+  dependencies:
+    xtend "^4.0.1"
+
 nanomorph@^4.0.0:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/nanomorph/-/nanomorph-4.0.2.tgz#d473234306806b58a0bdc268899c2ea9895c2dbe"
@@ -4129,11 +4143,21 @@ on-headers@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/on-headers/-/on-headers-1.0.1.tgz#928f5d0f470d49342651ea6794b0857c100693f7"
 
+on-idle@^3.0.0, on-idle@^3.0.2:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/on-idle/-/on-idle-3.1.0.tgz#5154464b0d52bb77a8bda517016c7badd9c6ad5a"
+
 on-load@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/on-load/-/on-load-3.2.0.tgz#dd3145d3a5c2faa5666920d1df674b69f0c2f66f"
   dependencies:
     global "^4.3.0"
+
+on-performance@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/on-performance/-/on-performance-1.0.1.tgz#e11724120e65a575628229a3f789b8ae3dd3e167"
+  dependencies:
+    on-idle "^3.0.0"
 
 once@^1.3.0, once@^1.3.2, once@^1.3.3:
   version "1.4.0"

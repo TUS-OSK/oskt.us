@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "choo": "^5.1.4",
+    "choo-log": "^7.2.1",
     "domify": "^1.4.0",
     "font-awesome": "^4.7.0",
     "normalize.css": "^6.0.0",

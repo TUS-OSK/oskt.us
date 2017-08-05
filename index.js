@@ -1,4 +1,5 @@
 const choo = require('choo')
+const log = require('choo-log')
 const css = require('scopedify')
 
 css('normalize.css')
@@ -6,6 +7,8 @@ css('font-awesome')
 require('./view/partials')
 
 const app = choo()
+
+app.use(log())
 
 app.use(require('./src/reducer/loader'))
 app.use(require('./src/reducer/page'))
