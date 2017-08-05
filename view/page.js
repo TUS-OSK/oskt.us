@@ -13,7 +13,7 @@ module.exports = function pageView (state, emit) {
       ${header(html`
         <i class="fa fa-code-fork" aria-hidden="true"></i>
       `)(...arguments)}
-      <section class="content">
+      <section class="content markdown-body">
         ${md(state.params.wildcard)(...arguments)}
       </section>
       ${footerView(...arguments)}

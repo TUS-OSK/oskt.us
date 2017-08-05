@@ -42,6 +42,7 @@
     "choo-log": "^7.2.1",
     "domify": "^1.4.0",
     "font-awesome": "^4.7.0",
+    "github-markdown-css": "^2.8.0",
     "normalize.css": "^6.0.0",
     "on-load": "^3.2.0",
     "scopedify": "^1.1.1"

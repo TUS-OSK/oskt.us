@@ -4,6 +4,7 @@ const css = require('scopedify')
 
 css('normalize.css')
 css('font-awesome')
+css('./node_modules/github-markdown-css/github-markdown.css')
 require('./view/partials')
 
 const app = choo()

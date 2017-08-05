@@ -18,8 +18,10 @@ module.exports = function page (state, emitter) {
           state.page[path].dom = dom
           dom.querySelectorAll('.twitter-tweet').forEach((elm) => {
             onload(elm, () => {
-              console.log(document.querySelectorAll('.twitter-tweet'))
-              window.twttr.widgets.load(document.querySelectorAll('.twitter-tweet'))
+              try {
+                window.twttr.widgets.load(document.querySelectorAll('.twitter-tweet'))
+              } catch (e) {
+              }
             }, null, _ => _)
           })
         } else {
