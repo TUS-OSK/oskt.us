@@ -1,5 +1,6 @@
 const domify = require('domify')
 const keys = require('../keys')
+const onload = require('on-load')
 
 module.exports = function page (state, emitter) {
   state.page = {}
@@ -13,7 +14,14 @@ module.exports = function page (state, emitter) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200 || xhr.status === 304) {
           state.page[path].status = 'ready'
-          state.page[path].dom = domify(xhr.responseText)
+          const dom = domify(xhr.responseText)
+          state.page[path].dom = dom
+          dom.querySelectorAll('.twitter-tweet').forEach((elm) => {
+            onload(elm, () => {
+              console.log(document.querySelectorAll('.twitter-tweet'))
+              window.twttr.widgets.load(document.querySelectorAll('.twitter-tweet'))
+            }, null, _ => _)
+          })
         } else {
           state.page[path].status = 'error'
         }
