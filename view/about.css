@@ -8,6 +8,10 @@
 .root {
   & .fit {
     @apply --section;
+
+    @media (max-width: 700px) {
+      @apply --section-small;
+    }
   }
 
   & .text {
@@ -30,6 +34,10 @@
       @apply --section;
 
       margin-bottom: 40px;
+
+      @media (max-width: 700px) {
+        @apply --section-small;
+      }
     }
   }
 

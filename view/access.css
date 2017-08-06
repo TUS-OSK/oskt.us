@@ -11,6 +11,10 @@
 .root {
   display: flex;
 
+  @media (max-width: 700px) {
+    display: block;
+  }
+
   & .box {
     @apply --section-wrap;
 
@@ -19,6 +23,10 @@
 
     & > * {
       @apply --section;
+
+      @media (max-width: 700px) {
+        @apply --section-small;
+      }
     }
   }
 
@@ -34,6 +42,10 @@
 
   & .title {
     @apply --section-title;
+
+    @media (max-width: 700px) {
+      @apply --section-title-small;
+    }
 
     font-family: novecentosans;
     font-weight: bold;

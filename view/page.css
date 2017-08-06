@@ -8,5 +8,9 @@
     @apply --section;
 
     color: var(--primary-color);
+
+    @media (max-width: 700px) {
+      @apply --section-small;
+    }
   }
 }

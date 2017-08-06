@@ -15,10 +15,18 @@
 
   & > div {
     @apply --section;
+
+    @media (max-width: 700px) {
+      @apply --section-small;
+    }
   }
 
   & .title {
     @apply --section-title;
+
+    @media (max-width: 700px) {
+      @apply --section-title-small;
+    }
 
     font-family: novecentosans;
     font-weight: bold;
@@ -30,6 +38,10 @@
   & .timeline {
     width: 50%;
     margin: 0 auto;
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
   }
 
   & .header {
@@ -79,6 +91,7 @@
     transition-timing-function: ease;
     cursor: pointer;
     user-select: none;
+    white-space: nowrap;
 
     & > div {
       margin-right: 4px;

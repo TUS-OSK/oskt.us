@@ -11,6 +11,11 @@
   color: #fff;
   z-index: 3;
 
+  @media (max-width: 700px) {
+    top: -57px;
+    right: 17px;
+  }
+
   & a {
     color: inherit;
   }

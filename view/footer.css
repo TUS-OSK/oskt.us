@@ -9,11 +9,16 @@
 
   & > * {
     @apply --section;
+
+    @media (max-width: 700px) {
+      @apply --section-small;
+    }
   }
 
   & .copyright {
     text-align: center;
     font-size: 13px;
     padding-top: 4px;
+    white-space: nowrap;
   }
 }

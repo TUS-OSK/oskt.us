@@ -7,6 +7,10 @@
   & .content {
     @apply --section;
 
+    @media (max-width: 700px) {
+      @apply --section-small;
+    }
+
     color: var(--primary-color);
     text-align: center;
 

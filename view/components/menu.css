@@ -3,6 +3,8 @@
   padding: 0;
   list-style: none;
   width: 400px;
+  padding: 10px;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-around;
 
