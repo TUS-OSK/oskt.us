@@ -2,6 +2,7 @@ const html = require('choo/html')
 const css = require('scopedify')
 const menu = require('./components/menu')
 const balloon = require('./components/balloon')
+const config = require('../config')
 
 const scope = css('./top')
 
@@ -14,7 +15,7 @@ module.exports = function topView (state, emit) {
           ${balloon(html`
             <a href="#page/2017/c92">
               <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-              <span>C92情報</span>
+              <span>${config.BALLOON}</span>
             </a>
           `)(...arguments)}
         </nav>

@@ -1,6 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
-const CONST = require('../src/constants')
+const config = require('../config')
 
 const scope = css('./access')
 
@@ -33,15 +33,15 @@ module.exports = function accessView (state, emit) {
           </div>
           <div class="content">
             <p>
-              <a href=${CONST.TWITTER_URL}>
+              <a href=${config.TWITTER_URL}>
                 <i class="fa fa-twitter" aria-hidden="true"></i>
-                <span>${CONST.TWITTER_SCREEN_NAME}</span>
+                <span>${config.TWITTER_SCREEN_NAME}</span>
               </a>
             </p>
             <p>
-              <a href="mailto:${CONST.MAIL}">
+              <a href="mailto:${config.MAIL}">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>${CONST.MAIL}</span>
+                <span>${config.MAIL}</span>
               </a>
             </p>
           </div>

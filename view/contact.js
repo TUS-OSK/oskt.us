@@ -1,6 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
-const CONST = require('../src/constants')
+const config = require('../config')
 const header = require('./components/header')
 
 const footerView = require('./footer')
@@ -19,14 +19,14 @@ module.exports = function contactView (state, emit) {
           <span>Twitter</span>
         </h1>
         <p>
-          <a href=${CONST.TWITTER_URL}>@${CONST.TWITTER_SCREEN_NAME}</a>
+          <a href=${config.TWITTER_URL}>@${config.TWITTER_SCREEN_NAME}</a>
         </p>
         <h1>
           <i class="fa fa-envelope" aria-hidden="true"></i>
           <span>Mail</span>
         </h1>
         <p>
-          <a href="mailto:${CONST.MAIL}">${CONST.MAIL}</a>
+          <a href="mailto:${config.MAIL}">${CONST.MAIL}</a>
         </p>
       </section>
       ${footerView(...arguments)}
