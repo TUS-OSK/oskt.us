@@ -19,8 +19,8 @@
     "at-rule-no-unknown": true,
     "color-named": "never",
     "declaration-no-important": true,
-    "selector-no-id": true,
+    "selector-max-id": 0,
     "selector-no-qualifying-type": true,
-    "function-url-data-uris": "never"
+    "function-url-scheme-blacklist": "data"
   }
 }

@@ -16,7 +16,7 @@ module.exports = function page (state, emitter) {
           state.page[path].status = 'ready'
           const dom = domify(xhr.responseText)
           state.page[path].dom = dom
-          dom.querySelectorAll('.twitter-tweet').forEach((elm) => {
+          Array.from(dom.querySelectorAll('.twitter-tweet')).forEach((elm) => {
             onload(elm, () => {
               try {
                 window.twttr.widgets.load(document.querySelectorAll('.twitter-tweet'))
