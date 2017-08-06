@@ -26,7 +26,7 @@ module.exports = function contactView (state, emit) {
           <span>Mail</span>
         </h1>
         <p>
-          <a href="mailto:${config.MAIL}">${CONST.MAIL}</a>
+          <a href="mailto:${config.MAIL}">${config.MAIL}</a>
         </p>
       </section>
       ${footerView(...arguments)}
