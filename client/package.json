@@ -1,0 +1,55 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "devDependencies": {
+    "babel-core": "^7.0.0-beta.3",
+    "babel-plugin-transform-class-properties": "^7.0.0-beta.3",
+    "babel-plugin-transform-decorators": "^7.0.0-beta.3",
+    "babel-preset-env": "^7.0.0-beta.3",
+    "babel-preset-react": "^7.0.0-beta.3",
+    "babel-preset-typescript": "^7.0.0-beta.3",
+    "babelify": "github:pioug/babelify#babel7",
+    "budo": "^10.0.4",
+    "eslint": "^4.9.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-typescript": "^0.8.0",
+    "typescript": "^2.5.3",
+    "typescript-eslint-parser": "^8.0.0",
+    "typescript-styled-plugin": "^0.1.0"
+  },
+  "dependencies": {
+    "@types/react": "^16.0.10",
+    "@types/react-dom": "^16.0.1",
+    "@types/react-router-dom": "^4.0.8",
+    "mobx": "^3.3.1",
+    "mobx-react": "^4.3.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
+    "styled-components": "^2.2.1"
+  },
+  "scripts": {
+    "dev": "budo index.tsx:static/index.js -lP -- --extension=ts --extension=tsx",
+    "build": "browserify --extension=ts --extension=tsx index.tsx > static/index.js",
+    "test": "eslint *.ts*"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "extensions": [
+            ".ts",
+            ".tsx"
+          ]
+        }
+      ]
+    ]
+  }
+}

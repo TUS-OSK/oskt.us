@@ -1,0 +1,30 @@
+{
+  "presets": [
+    "typescript",
+    "react",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "> 1%",
+            "not ie <= 11",
+            "not op_mini all"
+          ]
+        },
+        "exclude": [
+          "transform-regenerator"
+        ]
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-decorators",
+    [
+      "transform-class-properties",
+      {
+        "loose": true
+      }
+    ]
+  ]
+}

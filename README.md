@@ -1,25 +1,33 @@
 # oskt.us
 
-OSK team site.
+OSKのサイト
 
-## Developing
+## 開発
+
+必要な環境は初回実行時にDockerによってインストールされます
 
 ```
-yarn
-yarn run build
-yarn start
+docker-compose up
 ```
 
-Start a local server at `localhost:9966`.
+- [localhost:8080](http://localhost:8080)から提供されます
+- golang, TypeScriptのソースを監視し、自動ビルドを行います
+- [livereload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)が利用できます
+- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)が利用できます
 
-Edit something.
+### vscodeによるエディタ支援
 
-## Deployment
+vscodeを利用すると推奨パッケージがインストールできます。
 
-Edit `circle.yml` and fill in the `GIT_****` fields.
+- TypeScriptの補完
+- styled-componentsのハイライト
+- styled-componentsの補完
+- eslintによる警告
 
-Open [circleci](https://circleci.com) and build project.
+## テスト
 
-Project Settings -> Checkout SSH Keys -> Add user key
+WIP
 
-Then, rebuild.
+## デプロイ
+
+WIP

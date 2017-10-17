@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "parser": "typescript-eslint-parser",
+  "plugins": [
+    "typescript"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    // parser error
+    "react/jsx-indent": "off",
+    // known issue: https://github.com/eslint/typescript-eslint-parser/issues/77
+    "no-undef": "off",
+    "no-unused-vars": "off"//,
+    // "no-useless-constructor": "off",
+    // "space-infix-ops": "off"
+  }
+}
