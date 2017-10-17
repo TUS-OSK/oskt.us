@@ -3,6 +3,7 @@
  */
 
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import styled from '../../../styled-components'
 import config from '../../../config'
 
@@ -17,7 +18,7 @@ const Menu = styled.nav`
 const ItemWrap = styled.li`
 `
 
-const Item = styled.a`
+const Item = styled(Link)`
   text-decoration: none;
   color: rgba(0, 0, 0, 0.4);
 `
@@ -28,7 +29,7 @@ export default () => (
       {
         config.menu.map((v, i) => (
           <ItemWrap key={i}>
-            <Item href={v.path}>{v.label}</Item>
+            <Item to={v.path}>{v.label}</Item>
           </ItemWrap>
         ))
       }
