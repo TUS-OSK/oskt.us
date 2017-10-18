@@ -8,8 +8,11 @@ import { Link } from 'react-router-dom'
 
 import Menu from './menu'
 
+const Main = styled.div`
+`
+
 const Header = styled.header`
-  padding: 50px 0;
+  padding: 50px 0 70px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -37,11 +40,13 @@ type Props = {
 
 const Site: React.SFC<Props> = function Site (p) {
   return (
-    <Header className={p.className}>
-      <Logo to='/'>OSK</Logo>
-      <StyledMenu />
+    <Main>
+      <Header className={p.className}>
+        <Logo to='/'>OSK</Logo>
+        <StyledMenu />
+      </Header>
       { p.children }
-    </Header>
+    </Main>
   )
 }
 

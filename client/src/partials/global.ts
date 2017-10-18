@@ -4,9 +4,11 @@
 
 import { injectGlobal } from 'styled-components'
 
+import normalize from 'styled-normalize'
 import fontFace from './fonts'
 
 injectGlobal`
+  ${normalize}
   ${fontFace}
 
   body {

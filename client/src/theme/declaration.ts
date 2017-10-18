@@ -7,5 +7,6 @@ export default interface ThemeDeclaration {
     primary: string
     primaryInverted: string
     secondary: string
+    secondaryInverted: string
   }
 }
