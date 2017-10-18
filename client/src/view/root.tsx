@@ -14,23 +14,32 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
+import { ThemeProvider } from '../styled-components'
+import defaultTheme from '../theme/default'
 
+// レイアウト
 import Site from './common/site'
 
+// ページ
 import Index from './index'
 import NotFound from './not-found'
+
+// グローバルCSS
+import '../partials/global'
 
 export default class Root extends React.PureComponent {
   render () {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route path='/' exact component={_ => (
-            <Site><Index /></Site>
-          )} />
-          <Route path='*' component={NotFound} />
-        </Switch>
-      </BrowserRouter>
+      <ThemeProvider theme={defaultTheme}>
+        <BrowserRouter>
+          <Switch>
+            <Route path='/' exact component={_ => (
+              <Site><Index /></Site>
+            )} />
+            <Route path='*' component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
     )
   }
 }

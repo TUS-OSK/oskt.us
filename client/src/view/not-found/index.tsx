@@ -3,14 +3,27 @@
  */
 
 import * as React from 'react'
-import styled from '../../styled-components'
+import styled from 'styled-components'
 
-const Text = styled.h1`
-  color: blue;
+import Symbol from './symbol'
+
+const Main = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 `
 
-export default class Index extends React.PureComponent {
-  render () {
-    return <Text>404</Text>
-  }
+type Props = {
+  className?: string;
 }
+
+const NotFound: React.SFC<Props> = function NotFound (p) {
+  return (
+    <Main className={p.className}>
+      <Symbol />
+    </Main>
+  )
+}
+
+export default NotFound
