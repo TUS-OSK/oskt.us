@@ -4,45 +4,76 @@
 
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import styled from '../../styled-components'
+import styled, { css } from '../../styled-components'
 
-type Props = {
-  className?: string
-}
+const titleColor = 'rgba(0, 0, 0, 0.7)'
+const titleColorInversed = 'rgba(255, 255, 255, 0.7)'
+const backgroundImage = '/static/images/bg.jpg'
+const backgroundHeight = '600px'
+const backgroundWidth = '100vw'
 
 const Section = styled.section`
 `
 
-const Image = styled.div`
-  height: 600px;
-  width: 100vw;
+const backgroundBase = css`
+  height: ${backgroundHeight};
+  width: ${backgroundWidth};
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+`
+
+const Background = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url(${backgroundImage});
 
-  background-size: cover;
-  background-position: center;
-  background-image: url('/static/images/bg.jpg');
+  ${backgroundBase}
 `
 
 const Border = styled.div`
   padding: 6px;
 
-  border: solid 1px ${p => p.theme.color.secondaryInverted}
+  border: solid 1px ${titleColorInversed}
 `
-
-const burnColor = '#080808'
 
 const Text = styled.div`
   padding: 40px 48px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
 
+  overflow: hidden;
   text-align: center;
-  background-color: ${p => p.theme.color.secondaryInverted};
-  color: ${burnColor};
+  color: ${titleColor};
+
+  &::before {
+    position: absolute;
+    top: calc(100% / 2 - ${backgroundHeight} / 2);
+    left: calc(100% / 2 - ${backgroundWidth} / 2);
+
+    content: '';
+    z-index: 0;
+    filter: blur(8px);
+
+    /* https://css-tricks.com/tinted-images-multiple-backgrounds/ */
+    background:
+      linear-gradient(
+        ${titleColorInversed}, 
+        ${titleColorInversed} 
+      ),
+      url(${backgroundImage});
+
+    ${backgroundBase}
+  }
+
+  & > * {
+    z-index: 1;
+  }
 `
 
 const Name = styled.div`
@@ -50,12 +81,10 @@ const Name = styled.div`
 
   font-size: 30px;
   font-weight: bold;
-  mix-blend-mode: color-burn;
   letter-spacing: 0.2em;
 `
 
 const University = styled.div`
-  mix-blend-mode: color-burn;
   font-size: 14px;
   letter-spacing: 0.2em;
 `
@@ -63,7 +92,6 @@ const University = styled.div`
 const Description = styled.div`
   margin-bottom: 16px;
 
-  mix-blend-mode: color-burn;
   font-size: 14px;
   letter-spacing: 0.05em;
 `
@@ -72,41 +100,44 @@ const ThemanticBreak = styled.div`
   margin: 16px 0;
   width: 20px;
 
-  mix-blend-mode: color-burn;
-  border-bottom: solid 1px ${burnColor};
+  border-bottom: solid 1px ${titleColor};
 `
 
 const Button = styled(Link)`
   padding: 8px 24px;
 
-  mix-blend-mode: color-burn;
   text-decoration: none;
-  border: solid 1px ${burnColor};
-  color: ${burnColor};
+  border: solid 1px ${titleColor};
+  color: ${titleColor};
   font-size: 13px;
   border-radius: 3px;
   transition: all 0.3s;
 
   &:hover {
-    background-color: ${burnColor};
-    color: ${p => p.theme.color.secondaryInverted};
+    transform: scale(1.08);
+    background-color: ${titleColor};
+    color: ${titleColorInversed};
   }
 `
+
+type Props = {
+  className?: string
+}
 
 const Title: React.SFC<Props> = function Title (p) {
   return (
     <Section>
-      <Image>
+      <Background>
         <Border>
           <Text>
             <Name>応用数学研究部</Name>
             <University>Tokyo University of Science</University>
             <ThemanticBreak />
-            <Description>Applied Mathmatics / Computer Graphics / Abstract Algebra / Web</Description>
+            <Description>Computer Graphics / Abstract Algebra / Virtual Reality / Web</Description>
             <Button to='#'>Learn more</Button>
           </Text>
         </Border>
-      </Image>
+      </Background>
     </Section>
   )
 }

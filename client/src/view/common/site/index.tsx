@@ -12,7 +12,7 @@ const Main = styled.div`
 `
 
 const Header = styled.header`
-  padding: 50px 0 70px;
+  padding: 55px 0 70px;
   display: flex;
   justify-content: center;
   flex-direction: column;
