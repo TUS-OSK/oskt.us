@@ -16,12 +16,14 @@ const Contianer = styled.ul`
   list-style: none;
 `
 
+const menuColor = 'rgba(0, 0, 0, 0.4)'
+
 const StyledLink = styled(Link)`
   padding-bottom: 2px;
 
   text-decoration: none;
-  color: ${p => p.theme.color.secondary};
-  border-bottom: solid 1px ${p => p.theme.color.secondary};
+  color: ${menuColor};
+  border-bottom: solid 1px ${menuColor};
 `
 
 type Props = {

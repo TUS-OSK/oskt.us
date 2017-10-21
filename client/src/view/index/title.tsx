@@ -35,13 +35,13 @@ const Background = styled.div`
 `
 
 const Border = styled.div`
-  padding: 6px;
+  padding: 4px;
 
   border: solid 1px ${titleColorInversed}
 `
 
-const Text = styled.div`
-  padding: 40px 48px;
+const Container = styled.div`
+  padding: 48px 54px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -90,14 +90,14 @@ const University = styled.div`
 `
 
 const Description = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 
   font-size: 14px;
   letter-spacing: 0.05em;
 `
 
 const ThemanticBreak = styled.div`
-  margin: 16px 0;
+  margin: 20px 0;
   width: 20px;
 
   border-bottom: solid 1px ${titleColor};
@@ -129,13 +129,13 @@ const Title: React.SFC<Props> = function Title (p) {
     <Section>
       <Background>
         <Border>
-          <Text>
+          <Container>
             <Name>応用数学研究部</Name>
             <University>Tokyo University of Science</University>
             <ThemanticBreak />
             <Description>Computer Graphics / Abstract Algebra / Virtual Reality / Web</Description>
             <Button to='#'>Learn more</Button>
-          </Text>
+          </Container>
         </Border>
       </Background>
     </Section>
