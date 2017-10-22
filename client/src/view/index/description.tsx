@@ -32,7 +32,7 @@ const blockPadding = 40
 
 const Block = styled.div`
   display: flex;
-  padding: 40px ${blockPadding}px;
+  padding: 80px ${blockPadding}px;
 `
 
 const BlockRight = Block.extend`
@@ -63,7 +63,6 @@ const BlockTitle = styled.h2`
   margin-top: 0;
 
   color: ${p => p.theme.color.secondary};
-  font-family: novecentosans;
   font-weight: bold;
 `
 

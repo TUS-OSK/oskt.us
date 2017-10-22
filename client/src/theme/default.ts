@@ -10,7 +10,7 @@ const theme: ThemeDeclaration = {
     primarySub: '#444',
     primaryInverted: '#fff',
     secondary: '#eee',
-    secondarySub: '#bbb',
+    secondarySub: '#888',
     secondaryInverted: '#222'
   }
 }

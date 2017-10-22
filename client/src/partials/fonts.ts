@@ -5,19 +5,17 @@
 import { css } from 'styled-components'
 
 export default css`
+  /*
+   * LICENSE: OFL (/static/fonts/OFL.txt)
+   */
   @font-face {
-    font-family: quasimoda;
-    src: url('/static/fonts/quasimoda-light.otf');
+    font-family: muli;
+    src: url('/static/fonts/Muli-Light.ttf');
   }
 
   @font-face {
-    font-family: novecentosans;
-    src: url('/static/fonts/Novecentosanswide-Book.otf');
-  }
-
-  @font-face {
-    font-family: novecentosans;
-    src: url('/static/fonts/Novecentosanswide-Bold.otf');
+    font-family: muli;
+    src: url('/static/fonts/Muli-SemiBold.ttf');
     font-weight: bold;
   }
 `

@@ -5,7 +5,7 @@
 import styled from '../../styled-components'
 
 const Section = styled.section`
-  padding: 100px;
+  padding: 100px 15%;
   box-sizing: border-box;
 `
 
@@ -20,7 +20,7 @@ const Title = styled.h1`
 `
 
 const Content = styled.div`
-  line-height: 1.6em;
+  line-height: 1.7em;
   color: ${p => p.theme.color.primarySub};
 `
 
