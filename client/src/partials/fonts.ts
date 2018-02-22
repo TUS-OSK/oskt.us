@@ -6,16 +6,16 @@ import { css } from 'styled-components'
 
 export default css`
   /*
-   * LICENSE: OFL (/static/fonts/OFL.txt)
+   * LICENSE: OFL (/fonts/OFL.txt)
    */
   @font-face {
     font-family: muli;
-    src: url('/static/fonts/Muli-Light.ttf');
+    src: url('/fonts/Muli-Light.ttf');
   }
 
   @font-face {
     font-family: muli;
-    src: url('/static/fonts/Muli-SemiBold.ttf');
+    src: url('/fonts/Muli-SemiBold.ttf');
     font-weight: bold;
   }
 `

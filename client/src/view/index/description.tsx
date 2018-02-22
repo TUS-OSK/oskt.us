@@ -101,7 +101,7 @@ const Description: React.SFC<Props> = function Description (p) {
       <BContent>
         <BlockWrap>
           <BlockRight>
-            <BlockThumbnail src='/static/images/dummy.png' />
+            <BlockThumbnail src='/images/dummy.png' />
             <BlockDescription>
               <BlockTitle>Applied Mathmatics</BlockTitle>
               <BlockText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus earum consequatur, vitae quaerat delectus totam quos dolor libero repudiandae nesciunt provident aperiam quae! Natus ab rerum repellendus nobis beatae? Dolorem?</BlockText>
@@ -109,7 +109,7 @@ const Description: React.SFC<Props> = function Description (p) {
           </BlockRight>
           <BlockBreak />
           <BlockLeft>
-            <BlockThumbnail src='/static/images/dummy.png' />
+            <BlockThumbnail src='/images/dummy.png' />
             <BlockDescription>
               <BlockTitle>Computer Graphics</BlockTitle>
               <BlockText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus earum consequatur, vitae quaerat delectus totam quos dolor libero repudiandae nesciunt provident aperiam quae! Natus ab rerum repellendus nobis beatae? Dolorem?</BlockText>
@@ -117,7 +117,7 @@ const Description: React.SFC<Props> = function Description (p) {
           </BlockLeft>
           <BlockBreak />
           <BlockRight>
-            <BlockThumbnail src='/static/images/dummy.png' />
+            <BlockThumbnail src='/images/dummy.png' />
             <BlockDescription>
               <BlockTitle>Web Application</BlockTitle>
               <BlockText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus earum consequatur, vitae quaerat delectus totam quos dolor libero repudiandae nesciunt provident aperiam quae! Natus ab rerum repellendus nobis beatae? Dolorem?</BlockText>
@@ -125,7 +125,7 @@ const Description: React.SFC<Props> = function Description (p) {
           </BlockRight>
           <BlockBreak />
           <BlockLeft>
-            <BlockThumbnail src='/static/images/dummy.png' />
+            <BlockThumbnail src='/images/dummy.png' />
             <BlockDescription>
               <BlockTitle>Virtual Reality</BlockTitle>
               <BlockText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus earum consequatur, vitae quaerat delectus totam quos dolor libero repudiandae nesciunt provident aperiam quae! Natus ab rerum repellendus nobis beatae? Dolorem?</BlockText>

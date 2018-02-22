@@ -12,8 +12,20 @@ docker-compose up
 
 - [localhost:8080](http://localhost:8080)から提供されます
 - golang, TypeScriptのソースを監視し、自動ビルドを行います
-- [livereload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)が利用できます
 - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)が利用できます
+
+### デバッグ
+
+コンテナに入ってデバッグやパッケージの更新を行う場合
+
+```
+docker-compose exec NAME bash
+```
+
+- `NAME`
+  - `client`: フロントエンドのビルドタスク、静的ファイルの配信
+  - `api`: APIサーバー
+  - `proxy`: リバースプロキシ
 
 ### vscodeによるエディタ支援
 

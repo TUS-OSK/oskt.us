@@ -8,7 +8,7 @@ import styled, { css } from '../../styled-components'
 
 const titleColor = 'rgba(0, 0, 0, 0.7)'
 const titleColorInversed = 'rgba(255, 255, 255, 0.7)'
-const backgroundImage = '/static/images/bg.jpg'
+const backgroundImage = '/images/bg.jpg'
 const backgroundHeight = '600px'
 const backgroundWidth = '100vw'
 
