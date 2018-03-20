@@ -13,9 +13,9 @@ module.exports = function topView (state, emit) {
         <nav class="menu">
           ${menu(...arguments)}
           ${balloon(html`
-            <a href="#page/2017/c92">
+            <a href="${config.BALLOON.LINK}">
               <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-              <span>${config.BALLOON}</span>
+              <span>${config.BALLOON.LABEL}</span>
             </a>
           `)(...arguments)}
         </nav>
