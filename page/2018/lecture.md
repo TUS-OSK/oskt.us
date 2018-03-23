@@ -76,10 +76,7 @@ C/C++ は他の言語に大きな影響を与えているので、C/C++ がわ�
 * 競技プログラミングとは
   * https://www.slideshare.net/iwiwi/wakate-web-14323842
 
-<!--
-アルゴリズムとは?
-https://www.youtube.com/watch?v=Q4gTV4r0zRs
--->
+[](アルゴリズムとは? - https://www.youtube.com/watch?v=Q4gTV4r0zRs)
 
 ## Ray班
 
