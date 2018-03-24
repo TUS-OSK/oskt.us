@@ -71,12 +71,10 @@ C/C++ は他の言語に大きな影響を与えているので、C/C++ がわ�
 
 何が面白いの？と思う人も多いと思いますが、実際にやってみるととても面白いです！
 
-### 追加作成質問案
+### その他の質問
 
-* 競技プログラミングとは
-  * https://www.slideshare.net/iwiwi/wakate-web-14323842
-
-[](アルゴリズムとは? - https://www.youtube.com/watch?v=Q4gTV4r0zRs)
+* [競技プログラミングとは? (外部リンク)](https://www.slideshare.net/iwiwi/wakate-web-14323842)
+* [アルゴリズムとは? (外部リンク)](https://www.youtube.com/watch?v=Q4gTV4r0zRs)
 
 ## Ray班
 
