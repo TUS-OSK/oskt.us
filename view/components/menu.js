@@ -1,6 +1,5 @@
 const html = require('choo/html')
 const css = require('scopedify')
-const config = require('../../config')
 
 const scope = css('./menu')
 
