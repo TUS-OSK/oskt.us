@@ -11,7 +11,7 @@ module.exports = function menu (state, emit) {
       <li class="item"><a href="#page/main/schedule">Schedule</a></li>
       <li class="item"><a href="#page/main/news">News</a></li>
       <li class="item"><a href="#archive">Archive</a></li>
-      <li class="item"><a href="#page/main/#contact">Contact</a></li>
+      <li class="item"><a href="#contact">Contact</a></li>
     </ul>
   `)
 }
