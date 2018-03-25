@@ -90,7 +90,6 @@ OSKとしてコミックマーケット92に参加しました、当時の記事
 OSKとしてコミックマーケット91に参加しました。
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">コミケ出展中です！<br>西む03aで、おうすうけんの本とGrimoireステッカーを頒布中です。 <a href="https://t.co/D5stLAIHba">pic.twitter.com/D5stLAIHba</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/814281455794733056?ref_src=twsrc%5Etfw">2016年12月29日</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ### 2月
 
