@@ -30,26 +30,26 @@ module.exports = function scheduleView (state, emit) {
                 <div class="row label">3</div>
               </div>
               <div class="detail column">
-                <div class="row events big l-group">
+                <a href="#page/2018/lecture" class="row events big l-group">
                   <div class="ja">レクチャー班活動</div>
                   <div class="en">Lecture Groups</div>
-                </div>
-                <div class="row events small summer-camp">
+                </a>
+                <a href="#" class="row events small summer-camp">
                   <div class="ja">夏合宿</div>
                   <div class="en">Summer Camp</div>
-                </div>
-                <div class="row events small festival">
+                </a>
+                <a href="#" class="row events small festival">
                   <div class="ja">理大祭</div>
                   <div class="en">Festival</div>
-                </div>
-                <div class="row events big p-group">
+                </a>
+                <a href="#" class="row events big p-group">
                   <div class="ja">プロジェクト班活動</div>
                   <div class="en">Project Groups</div>
-                </div>
-                <div class="row events small winter-camp">
+                </a>
+                <a href="#" class="row events small winter-camp">
                   <div class="ja">冬合宿</div>
                   <div class="en">Winter Camp</div>
-                </div>
+                </a>
               </div>
             </div>
           </div>
