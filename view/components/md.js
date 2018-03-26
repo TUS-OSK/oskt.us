@@ -8,7 +8,7 @@ const scope = css('./md')
 module.exports = function (path) {
   return function md (state, emit) {
     function load (p) {
-      if (!p || p.status === 'error') {
+      if (!p) {
         emit(keys.page, path)
       }
       return p

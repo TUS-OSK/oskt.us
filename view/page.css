@@ -13,4 +13,13 @@
       @apply --section-small;
     }
   }
+
+  & .edit-request {
+    color: var(--secondary-color);
+    font-size: 13px;
+
+    & a {
+      color: inherit;
+    }
+  }
 }
