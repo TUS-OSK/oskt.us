@@ -98,3 +98,6 @@ ray班は他の班と違い、数理的な側面が非常に強い班です。�
 
 ray班に入って一緒にレイトレしようぜ！！！
 
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">コーネルボックス計測会 <a href="https://t.co/NSzpcHZPlY">pic.twitter.com/NSzpcHZPlY</a></p>&mdash; ぽんりぃ (@pn1y) <a href="https://twitter.com/pn1y/status/901399284280578048?ref_src=twsrc%5Etfw">2017年8月26日</a></blockquote>
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">コースティクス〜〜〜〜 <a href="https://t.co/nUHZLBowYi">pic.twitter.com/nUHZLBowYi</a></p>&mdash; ぽんりぃ (@pn1y) <a href="https://twitter.com/pn1y/status/900950639471022080?ref_src=twsrc%5Etfw">2017年8月25日</a></blockquote>
