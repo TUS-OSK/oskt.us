@@ -15,6 +15,13 @@ module.exports = function contactView (state, emit) {
       `)(...arguments)}
       <section class="content">
         <h1>
+          <i class="fa fa-home"></i>
+          <span>Clubroom</span>
+        </h1>
+        <p>
+          <span>2号館 5階 2507教室</span>
+        </p>
+        <h1>
           <i class="fa fa-twitter" aria-hidden="true"></i>
           <span>Twitter</span>
         </h1>
