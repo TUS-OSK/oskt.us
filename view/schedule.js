@@ -38,7 +38,7 @@ module.exports = function scheduleView (state, emit) {
                   <div class="ja">夏合宿</div>
                   <div class="en">Summer Camp</div>
                 </a>
-                <a href="#" class="row events small festival">
+                <a href="#page/2017/festival" class="row events small festival">
                   <div class="ja">理大祭</div>
                   <div class="en">Festival</div>
                 </a>
