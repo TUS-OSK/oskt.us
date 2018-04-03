@@ -20,7 +20,9 @@
     "color-named": "never",
     "declaration-no-important": true,
     "selector-max-id": 0,
-    "selector-no-qualifying-type": true,
+    "selector-no-qualifying-type": [true, {
+      "ignore": "attribute"
+    }],
     "function-url-scheme-blacklist": "data"
   }
 }
