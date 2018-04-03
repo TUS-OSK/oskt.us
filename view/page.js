@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
+const config = require('../config.json')
 const md = require('./components/md')
 const header = require('./components/header')
 
@@ -14,7 +15,7 @@ module.exports = function pageView (state, emit) {
   if (page) {
     const h1 = page.dom.querySelector('h1')
     const subTitle = h1 ? h1.innerText : 'Page'
-    const title = `応用数学研究部 - ${subTitle}`
+    const title = `${config.TITLE_PREFIX} - ${subTitle}`
     if (state.title !== title) emit(state.events.DOMTITLECHANGE, title)
   }
 

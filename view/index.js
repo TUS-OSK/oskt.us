@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
+const config = require('../config.json')
 const keys = require('../src/keys')
 
 const topView = require('./top')
@@ -11,7 +12,7 @@ const footerView = require('./footer')
 
 const scope = css('./index.css')
 
-const TITLE = '応用数学研究部'
+const TITLE = config.TITLE_PREFIX
 
 module.exports = function mainView (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)

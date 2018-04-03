@@ -1,10 +1,11 @@
 const html = require('choo/html')
 const css = require('scopedify')
+const config = require('../config.json')
 const header = require('./components/header')
 
 const scope = css('./404')
 
-const TITLE = '応用数学研究部 - Not Found'
+const TITLE = `${config.TITLE_PREFIX} - Not Found`
 
 module.exports = function _404View (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
