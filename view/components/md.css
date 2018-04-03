@@ -1,3 +1,5 @@
+@import '../partials/variables';
+
 .root {
   & strong {
     font-weight: bold;
@@ -7,5 +9,33 @@
   & a {
     color: inherit;
     text-decoration: underline;
+  }
+
+  & a[href$="?pretty"] {
+    border: solid 1px var(--sub-color);
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--sub-color);
+    font-weight: bold;
+    transition-property: background-color, color, opacity;
+    transition-duration: 0.5s;
+    font-size: 0.8em;
+
+    &:hover {
+      background-color: var(--sub-color);
+      color: #fff;
+    }
+
+    &:active {
+      opacity: 0.7;
+    }
+
+    &::before {
+      content: "\f105";
+      font-family: FontAwesome;
+      margin-right: 0.3em;
+      font-size: 1.2em;
+    }
   }
 }
