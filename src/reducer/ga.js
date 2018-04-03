@@ -1,3 +1,5 @@
+const config = require('../../config.json')
+
 module.exports = function ga (state, emitter) {
   state.ga = {
     afterNavigate: false
@@ -10,9 +12,9 @@ module.exports = function ga (state, emitter) {
   emitter.on(state.events.DOMTITLECHANGE, () => {
     if (state.ga.afterNavigate) {
       const path = document.location.hash.replace('#', '/')
-      global.ga('set', 'title', state.title)
-      global.ga('set', 'page', path)
-      global.ga('send', 'pageview')
+      global.gtag('config', config.GA_TRACKING_ID, {
+        page_path: path
+      })
       state.ga.afterNavigate = false
     }
   })
