@@ -758,13 +758,13 @@ beeper@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/beeper/-/beeper-1.1.1.tgz#e6d5ea8c5dad001304a70b22638447f69cb2f809"
 
-bel@^4.5.1:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/bel/-/bel-4.6.0.tgz#3ade16e236ab2204d8d1c66eac4bd573793ac999"
+bel@^5.1.3:
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/bel/-/bel-5.1.7.tgz#1aea92e028398a51a4467aba3e83295882601ca4"
   dependencies:
-    global "^4.3.0"
     hyperx "^2.3.0"
-    on-load "^3.2.0"
+    is-electron "^2.0.0"
+    pelo "^0.1.0"
 
 binary-extensions@^1.0.0:
   version "1.9.0"
@@ -1219,19 +1219,22 @@ choo-log@^7.2.1:
     on-idle "^3.0.2"
     on-performance "^1.0.0"
 
-choo@^5.6.2:
-  version "5.6.2"
-  resolved "https://registry.yarnpkg.com/choo/-/choo-5.6.2.tgz#5969fa0a2c8dd0d7b4bf6df7bd447d1e59862fe0"
+choo@^6:
+  version "6.10.3"
+  resolved "https://registry.yarnpkg.com/choo/-/choo-6.10.3.tgz#a4ba9b11350ee39e2a73af611277cc33dad83d5d"
   dependencies:
-    bel "^4.5.1"
+    bel "^5.1.3"
     document-ready "^2.0.1"
-    nanobus "^3.1.0"
-    nanohistory "^1.0.0"
-    nanohref "^1.0.0"
-    nanomorph "^4.0.0"
-    nanomount "^1.0.0"
+    nanobus "^4.2.0"
+    nanohref "^3.0.0"
+    nanolocation "^1.0.0"
+    nanomorph "^5.1.2"
+    nanoquery "^1.1.0"
     nanoraf "^3.0.0"
-    nanorouter "^2.0.0"
+    nanorouter "^3.0.1"
+    nanotiming "^7.0.0"
+    scroll-to-anchor "^1.0.0"
+    xtend "^4.0.1"
 
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
@@ -2990,9 +2993,15 @@ hyperscript-attribute-to-property@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hyperscript-attribute-to-property/-/hyperscript-attribute-to-property-1.0.0.tgz#825308d49bb8e2957923f731981bcc811cad7aff"
 
-hyperx@^2.0.3, hyperx@^2.3.0:
+hyperx@^2.0.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/hyperx/-/hyperx-2.3.0.tgz#70f473d66d4ad550ddd1c83e4be2651276bbf1e2"
+  dependencies:
+    hyperscript-attribute-to-property "^1.0.0"
+
+hyperx@^2.3.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/hyperx/-/hyperx-2.4.0.tgz#397d6815d25785fee3c9f4968cbaafc1d8b36d39"
   dependencies:
     hyperscript-attribute-to-property "^1.0.0"
 
@@ -3170,6 +3179,10 @@ is-directory@^0.3.1:
 is-dotfile@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/is-dotfile/-/is-dotfile-1.0.3.tgz#a6a2f32ffd2dfb04f5ca25ecd0f6b83cf798a1e1"
+
+is-electron@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-electron/-/is-electron-2.1.0.tgz#37dd2e9e7167efa8bafce86c0c25762bc4b851fa"
 
 is-equal-shallow@^0.1.3:
   version "0.1.3"
@@ -4050,19 +4063,24 @@ nan@^2.3.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
-nanobus@^3.1.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/nanobus/-/nanobus-3.3.0.tgz#bce5d5d435a5362c7dad7f9e90cd21959589be86"
+nanoassert@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nanoassert/-/nanoassert-1.1.0.tgz#4f3152e09540fde28c76f44b19bbcd1d5a42478d"
+
+nanobus@^4.2.0:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/nanobus/-/nanobus-4.3.3.tgz#a9635d38c687853641e2646bb2be6510cf966233"
   dependencies:
-    nanotiming "^1.0.1"
+    nanotiming "^7.2.0"
+    remove-array-items "^1.0.0"
 
-nanohistory@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/nanohistory/-/nanohistory-1.0.0.tgz#65a3d29bc5f40f6305ec67d120b8be38e95719e8"
+nanohref@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/nanohref/-/nanohref-3.0.1.tgz#3879428e4fa80b7d5484692471cfa0b4a3348f8e"
 
-nanohref@^1.0.0:
+nanolocation@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/nanohref/-/nanohref-1.0.0.tgz#12ed5ee990d98111344a04d81650d167ad264421"
+  resolved "https://registry.yarnpkg.com/nanolocation/-/nanolocation-1.0.0.tgz#15b5c7af05895d1a9f21f0d136495d994450686b"
 
 nanologger@^1.3.0:
   version "1.3.0"
@@ -4070,29 +4088,39 @@ nanologger@^1.3.0:
   dependencies:
     xtend "^4.0.1"
 
-nanomorph@^4.0.0:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/nanomorph/-/nanomorph-4.0.5.tgz#7e27cc5e28a05df0c278f53ba430f253f3ac3fac"
-
-nanomount@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/nanomount/-/nanomount-1.0.1.tgz#da6e4c446f046a20d5a87bfc3a6152be29890d35"
+nanomorph@^5.1.2:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/nanomorph/-/nanomorph-5.1.3.tgz#65b81912bb32278aaa7aacc9ccd99b4508f6a21d"
   dependencies:
-    nanomorph "^4.0.0"
+    nanoassert "^1.1.0"
+
+nanoquery@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/nanoquery/-/nanoquery-1.2.0.tgz#0e44537ac1a2717e11ee796abce605f141984982"
+  dependencies:
+    nanoassert "^1.1.0"
 
 nanoraf@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/nanoraf/-/nanoraf-3.0.1.tgz#ab9fb9c257b9adcc71d82982cb58d8fa3503764a"
 
-nanorouter@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/nanorouter/-/nanorouter-2.1.0.tgz#4fcaf96203a00898da89188b1bff5a8fc06ef4ff"
+nanorouter@^3.0.1:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/nanorouter/-/nanorouter-3.1.0.tgz#7b95c585646cf55d6116a2ac55a6c1707e12da1d"
   dependencies:
-    wayfarer "^6.5.0"
+    wayfarer "^6.6.3"
 
-nanotiming@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/nanotiming/-/nanotiming-1.0.1.tgz#13e7a2e2767967974fedfff071edd39327f44ec3"
+nanoscheduler@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/nanoscheduler/-/nanoscheduler-1.0.3.tgz#6ca027941bf3e04139ea4bab6227ea6ad803692f"
+  dependencies:
+    nanoassert "^1.1.0"
+
+nanotiming@^7.0.0, nanotiming@^7.2.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/nanotiming/-/nanotiming-7.3.0.tgz#deecef9b58ea43fc023e11c2e9ba1bacb6b2f9b8"
+  dependencies:
+    nanoscheduler "^1.0.2"
 
 natives@^1.1.0:
   version "1.1.0"
@@ -4515,6 +4543,10 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+pelo@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/pelo/-/pelo-0.1.0.tgz#54157d3bc63c10da65504d6b801f0b535584c11b"
 
 pem@^1.8.3:
   version "1.9.7"
@@ -5447,6 +5479,10 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
+remove-array-items@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/remove-array-items/-/remove-array-items-1.0.0.tgz#07bf42cb332f4cf6e85ead83b5e4e896d2326b21"
+
 remove-trailing-separator@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.0.2.tgz#69b062d978727ad14dc6b56ba4ab772fd8d70511"
@@ -5618,6 +5654,10 @@ scopedify@^1.1.1:
     style-resolve "^1.0.0"
     through2 "^2.0.0"
     xtend "^4.0.1"
+
+scroll-to-anchor@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/scroll-to-anchor/-/scroll-to-anchor-1.1.0.tgz#c99b8d2e5d95056752787ca78095ab75b520b3fd"
 
 semver-diff@^2.0.0:
   version "2.1.0"
@@ -6596,9 +6636,9 @@ watchify@^3.3.1:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
-wayfarer@^6.5.0:
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/wayfarer/-/wayfarer-6.6.2.tgz#3baadc1c4b85ef9be26ee75fac6cde9b075ae473"
+wayfarer@^6.6.3:
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/wayfarer/-/wayfarer-6.6.3.tgz#41d912e52c1e1942950f1932182305ed0e3f8f7f"
   dependencies:
     xtend "^4.0.1"
 
