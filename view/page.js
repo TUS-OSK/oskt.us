@@ -10,6 +10,14 @@ const scope = css('./page')
 module.exports = function pageView (state, emit) {
   const path = state.params.wildcard
 
+  const page = state.page[path]
+  if (page) {
+    const h1 = page.dom.querySelector('h1')
+    const subTitle = h1 ? h1.innerText : 'Page'
+    const title = `応用数学研究部 - ${subTitle}`
+    if (state.title !== title) emit(state.events.DOMTITLECHANGE, title)
+  }
+
   return scope(html`
     <body class="root">
       ${header(html`
