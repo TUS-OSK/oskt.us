@@ -102,8 +102,10 @@ ray班に入って一緒にレイトレしようぜ！！！
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">コースティクス〜〜〜〜 <a href="https://t.co/nUHZLBowYi">pic.twitter.com/nUHZLBowYi</a></p>&mdash; ぽんりぃ (@pn1y) <a href="https://twitter.com/pn1y/status/900950639471022080?ref_src=twsrc%5Etfw">2017年8月25日</a></blockquote>
 
-理大祭での展示の様子
+#### 理大祭での展示の様子
+
 ![](https://i.imgur.com/WzlDcCf.jpg)
 
-作ったレンダラーで出力した画像
+#### 作ったレンダラーで出力した画像
+
 ![](https://i.imgur.com/Vh67Yu1.png)
