@@ -3,6 +3,16 @@
 .root {
   line-height: 1.8em;
 
+  &::before {
+    content: '';
+    display: table;
+  }
+
+  &::after {
+    content: '';
+    display: table;
+  }
+
   & strong {
     font-weight: bold;
     font-family: novecentosans;
@@ -49,16 +59,21 @@
       display: block;
       position: absolute;
       padding: 8px 12px;
-      background-color: color(#000 alpha(90%));
+      background-color: rgba(0, 0, 0, 0.5);
       color: var(--secondary-color);
       max-width: 80%;
       font-size: 0.8em;
       border-radius: 2px;
-      box-shadow: 0 1px 2px color(#000 alpha(50%));
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
     }
   }
 
-  & h1, & h2, & h3, & h4, & h5, & h6 {
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
     font-family: novecentosans;
   }
 
@@ -78,8 +93,9 @@
   & h2 {
     position: relative;
     font-size: 1.6em;
-    margin-bottom: 1.2em;
+    margin-bottom: 1.4em;
     margin-top: 1.2em;
+
     --color: color(var(--base-color) alpha(50%));
 
     &::after {
@@ -89,19 +105,25 @@
       width: 100%;
       position: absolute;
       bottom: -0.5em;
-      background-image: linear-gradient(
-        -45deg,
-        #fff 25%,
-        var(--color) 25%, var(--color) 50%,
-        #fff 50%, #fff 75%,
-        var(--color) 75%, var(--color)
-      );
+      background-image:
+        linear-gradient(
+          -45deg,
+          #fff 25%,
+          var(--color) 25%,
+          var(--color) 50%,
+          #fff 50%,
+          #fff 75%,
+          var(--color) 75%,
+          var(--color)
+        );
       background-size: 8px 8px;
     }
   }
 
   & h3 {
     font-size: 1.3em;
+    margin-bottom: 0.6em;
+    margin-top: 1em;
   }
 
   & blockquote {
@@ -109,10 +131,15 @@
     border-left: 0.25em solid #dfe2e5;
     padding-left: 1em;
     margin-left: 0;
+    word-wrap: break-word;
   }
 
   & img {
     width: 500px;
     max-width: 100%;
+  }
+
+  & p {
+    margin-top: 0;
   }
 }
