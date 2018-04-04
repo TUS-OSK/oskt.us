@@ -3,6 +3,16 @@
 .root {
   line-height: 1.8em;
 
+  &::before {
+    content: '';
+    display: table;
+  }
+
+  &::after {
+    content: '';
+    display: table;
+  }
+
   & strong {
     font-weight: bold;
     font-family: novecentosans;
@@ -83,7 +93,7 @@
   & h2 {
     position: relative;
     font-size: 1.6em;
-    margin-bottom: 1.2em;
+    margin-bottom: 1.4em;
     margin-top: 1.2em;
 
     --color: color(var(--base-color) alpha(50%));
@@ -112,6 +122,8 @@
 
   & h3 {
     font-size: 1.3em;
+    margin-bottom: 0.6em;
+    margin-top: 1em;
   }
 
   & blockquote {
@@ -119,10 +131,15 @@
     border-left: 0.25em solid #dfe2e5;
     padding-left: 1em;
     margin-left: 0;
+    word-wrap: break-word;
   }
 
   & img {
     width: 500px;
     max-width: 100%;
+  }
+
+  & p {
+    margin-top: 0;
   }
 }
