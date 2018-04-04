@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const css = require('scopedify')
+const config = require('../config.json')
 const md = require('./components/md')
 const header = require('./components/header')
 
@@ -9,6 +10,14 @@ const scope = css('./page')
 
 module.exports = function pageView (state, emit) {
   const path = state.params.wildcard
+
+  const page = state.page[path]
+  if (page) {
+    const h1 = page.dom.querySelector('h1')
+    const subTitle = h1 ? h1.innerText : 'Page'
+    const title = `${config.TITLE_PREFIX} - ${subTitle}`
+    if (state.title !== title) emit(state.events.DOMTITLECHANGE, title)
+  }
 
   return scope(html`
     <body class="root">

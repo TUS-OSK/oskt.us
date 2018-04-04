@@ -7,7 +7,11 @@ const footerView = require('./footer')
 
 const scope = css('./contact')
 
+const TITLE = `${config.TITLE_PREFIX} - Contact`
+
 module.exports = function contactView (state, emit) {
+  if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
+
   return scope(html`
     <body class="root">
       ${header(html`
