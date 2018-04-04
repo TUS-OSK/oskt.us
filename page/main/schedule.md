@@ -47,7 +47,7 @@ OSKとしてコミックマーケット92に参加しました、当時の記事
 
 ### 11月
 
-理大祭がありました、応数研では各講義班が成果物の展示などを行いました、詳細は理大祭の記事にて。<!--[こちら]()。-->
+理大祭がありました、応数研では各講義班が成果物の展示などを行いました、詳細は[こちら](#page/2017/festival)。
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">CGの展示ではレンダリング画像とテストシーンで有名なコーネルボックスの模型を展示しています。 <a href="https://t.co/j8RXr2ZVUV">pic.twitter.com/j8RXr2ZVUV</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/931762074279034880?ref_src=twsrc%5Etfw">2017年11月18日</a></blockquote>
 
