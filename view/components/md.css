@@ -53,13 +53,14 @@
 
   & [tooltip] {
     background: linear-gradient(transparent 70%, color(var(--sub-color) alpha(50%)) 70%);
+    cursor: help;
 
     &:hover::after {
       content: attr(tooltip);
       display: block;
       position: absolute;
       padding: 8px 12px;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.9);
       color: var(--secondary-color);
       max-width: 80%;
       font-size: 0.8em;
@@ -79,6 +80,7 @@
 
   & h1 {
     font-size: 2.5em;
+    line-height: 1.3em;
     text-align: center;
 
     &::after {
@@ -135,7 +137,7 @@
   }
 
   & img {
-    width: 500px;
+    width: 300px;
     max-width: 100%;
   }
 
