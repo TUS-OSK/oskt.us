@@ -10,11 +10,14 @@
 - [ページ一覧(ここ)](#page/main/archive)
 - [コンタクト](#contact)
 
-## 記事一覧
+## 2017年度
 
-- 2017年度
-  - [新歓2017](#page/2017/welcome)
-  - [コミケット92](#page/2017/c92)
-- 2018年度
-  - [講義班紹介](#page/2018/lecture)
-  - [新歓2018](#page/2018/welcome)
+- [新歓](#page/2017/welcome)
+- [理大祭](#page/2017/festival)
+- [コミケット92](#page/2017/c92)
+- [プロジェクト班紹介](#page/2017/project)
+
+## 2018年度
+
+- [新歓](#page/2018/welcome)
+- [講義班紹介](#page/2018/lecture)
