@@ -5,8 +5,10 @@
 
 ### 4月
 
-新入生歓迎ガイダンスを行います、詳細は[こちら](#page/2018/welcome)。
+新入生歓迎ガイダンスを行います。
 新入生にはこのタイミングで講義班に所属してもらいます。
+
+[新歓情報](#page/2018/welcome?pretty)
 
 ### 7月
 
@@ -35,7 +37,9 @@
 
 ### 8月
 
-OSKとしてコミックマーケット92に参加しました、当時の記事は[こちら](#page/2017/c92)。
+OSKとしてコミックマーケット92に参加しました。
+
+[当時の記事](#page/2017/c92?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">東た-02b(東7ホール)にて新刊「Signed Distance Field」を頒布します<br>Ray Marching本です<br>ご興味のある方は是非いらしてください！<a href="https://twitter.com/hashtag/c92?src=hash&amp;ref_src=twsrc%5Etfw">#c92</a> <a href="https://twitter.com/hashtag/%E3%82%B3%E3%83%9F%E3%82%B192?src=hash&amp;ref_src=twsrc%5Etfw">#コミケ92</a> <a href="https://t.co/TgSeIpLY40">pic.twitter.com/TgSeIpLY40</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/895802569586495488?ref_src=twsrc%5Etfw">2017年8月11日</a></blockquote>
 
@@ -47,7 +51,9 @@ OSKとしてコミックマーケット92に参加しました、当時の記事
 
 ### 11月
 
-理大祭がありました、応数研では各講義班が成果物の展示などを行いました、詳細は[こちら](#page/2017/festival)。
+理大祭がありました、応数研では各講義班が成果物の展示などを行いました、
+
+[理大祭詳細](#page/2017/festival?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">CGの展示ではレンダリング画像とテストシーンで有名なコーネルボックスの模型を展示しています。 <a href="https://t.co/j8RXr2ZVUV">pic.twitter.com/j8RXr2ZVUV</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/931762074279034880?ref_src=twsrc%5Etfw">2017年11月18日</a></blockquote>
 
