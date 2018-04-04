@@ -38,4 +38,21 @@
       font-size: 1.2em;
     }
   }
+
+  & [tooltip] {
+    background: linear-gradient(transparent 70%, color(var(--sub-color) alpha(50%)) 70%);
+
+    &:hover::after {
+      content: attr(tooltip);
+      display: block;
+      position: absolute;
+      padding: 8px 12px;
+      background-color: color(#000 alpha(90%));
+      color: var(--secondary-color);
+      max-width: 80%;
+      font-size: 0.8em;
+      border-radius: 2px;
+      box-shadow: 0 1px 2px color(#000 alpha(50%));
+    }
+  }
 }
