@@ -39,7 +39,7 @@
 
 OSKとしてコミックマーケット92に参加しました。
 
-[当時の記事](#page/2017/c92?pretty)
+[c92詳細](#page/2017/c92?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">東た-02b(東7ホール)にて新刊「Signed Distance Field」を頒布します<br>Ray Marching本です<br>ご興味のある方は是非いらしてください！<a href="https://twitter.com/hashtag/c92?src=hash&amp;ref_src=twsrc%5Etfw">#c92</a> <a href="https://twitter.com/hashtag/%E3%82%B3%E3%83%9F%E3%82%B192?src=hash&amp;ref_src=twsrc%5Etfw">#コミケ92</a> <a href="https://t.co/TgSeIpLY40">pic.twitter.com/TgSeIpLY40</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/895802569586495488?ref_src=twsrc%5Etfw">2017年8月11日</a></blockquote>
 
