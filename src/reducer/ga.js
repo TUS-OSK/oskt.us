@@ -11,7 +11,7 @@ module.exports = function ga (state, emitter) {
 
   emitter.on(state.events.DOMTITLECHANGE, () => {
     if (state.ga.afterNavigate) {
-      const path = document.location.hash.replace('#', '/')
+      const path = document.location.hash.replace(/#/, '/').replace(/\?.*$/, '')
       global.gtag('config', config.GA_TRACKING_ID, {
         page_path: path
       })
