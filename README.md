@@ -1,6 +1,7 @@
 # oskt.us
 
 OSK team site.
+It is published <a href="https://oskt.us/" target="_blank">here</a>
 
 ## Developing
 
