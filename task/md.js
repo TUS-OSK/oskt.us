@@ -16,6 +16,6 @@ gulp.task('build', () => {
     .pipe(gulp.dest(config.dist))
 })
 
-gulp.task('watch', () => {
+gulp.task('watch', ['build'], () => {
   gulp.watch(config.src, ['build'])
 })
