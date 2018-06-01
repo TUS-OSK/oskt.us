@@ -5,9 +5,8 @@ OSK team site.
 ## Developing
 
 ```
-yarn
-yarn run build
-yarn start
+npm install
+npm start
 ```
 
 Start a local server at `localhost:9966`.

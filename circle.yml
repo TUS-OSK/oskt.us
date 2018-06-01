@@ -8,12 +8,6 @@ machine:
     GIT_NAME: "CircleCI"
     GIT_EMAIL: "pnlybubbles+circleci@gmail.com"
 
-dependencies:
-  override:
-    - yarn
-  cache_directories:
-    - ~/.cache/yarn
-
 deployment:
   production:
     branch: master
@@ -24,7 +18,3 @@ general:
   branches:
     only:
       - master
-
-test:
-  override:
-    - yarn test
