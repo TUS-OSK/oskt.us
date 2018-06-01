@@ -144,4 +144,14 @@
   & p {
     margin-top: 0;
   }
+
+  & .lang-warning {
+    display: block;
+    font-family: inherit;
+    padding: 1em 1.5em;
+    color: var(--sub-color);
+    border-left: 0.25em solid var(--sub-color);
+    background-color: color(var(--sub-color) alpha(10%));
+    word-wrap: break-word;
+  }
 }
