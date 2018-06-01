@@ -5,7 +5,7 @@
 
 a {
   font-size: 13px;
-  font-family: novecentosans;
+  font-family: novecentosans, sans-serif;
   font-weight: bold;
   padding: 5px 20px;
   background-color: var(--secondary-color);
