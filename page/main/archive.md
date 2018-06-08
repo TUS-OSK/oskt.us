@@ -21,3 +21,4 @@
 
 - [新歓](#page/2018/welcome)
 - [講義班紹介](#page/2018/lecture)
+- [活動風景](#page/2018/log-06)
