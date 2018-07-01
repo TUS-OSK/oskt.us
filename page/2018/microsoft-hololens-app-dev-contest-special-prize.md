@@ -1,0 +1,27 @@
+# 本部員がHoloLensアプリコンテストで特別賞を受賞しました
+
+本部員の [@IshiyamaTokina][twitter] さんが日本マイクロソフト株式会社主催の**Microsoft HoloLens アプリケーション開発コンテスト**にてパーソナルユースアプリ部門特別賞を受賞しました🎉
+
+コンテストではMicrosoft HoloLensというMRデバイスで動くアプリケーションの開発がターゲットとなっており、[@IshiyamaTokina][twitter] さんは「無限に遊べる立体迷路 HoloMaze」というアプリを制作されました。
+
+実際に作品が動作しているところがこちらからご覧になれます！
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">HoloLensで立体迷路を作ってみた<a href="https://twitter.com/hashtag/HoloLens?src=hash&amp;ref_src=twsrc%5Etfw">#HoloLens</a> <a href="https://t.co/hZEoj3Dmi8">pic.twitter.com/hZEoj3Dmi8</a></p>&mdash; イシヤマ@MRアプリHoloMaze (@IshiyamaTokina) <a href="https://twitter.com/IshiyamaTokina/status/884042073552244736?ref_src=twsrc%5Etfw">2017年7月9日</a></blockquote>
+
+またコンテストでのアピーリングでLightning Talkを行っている動画がこちらからご覧になれます！
+
+> Tokyo HoloLens Meetup Vol.8 4 - YouTube
+>
+> https://youtu.be/20AvXQKyGyY?t=2780
+
+その他の関連リンクはこちら
+
+> Microsoft HoloLens アプリケーション開発コンテストを開催します！ - Windows Blog for JapanWindows Blog for Japan
+>
+> [https://blogs.windows.com/japan/2018/03/30/hololens-app-contest/#iks80eZmaajgKw4f.97](https://blogs.windows.com/japan/2018/03/30/hololens-app-contest/#iks80eZmaajgKw4f.97)
+
+> Mixed Reality × de_code 2018 開催レポート - Windows Blog for JapanWindows Blog for Japan
+>
+> [https://blogs.windows.com/japan/2018/05/28/mixed-reality-in-decode2018-2/](https://blogs.windows.com/japan/2018/05/28/mixed-reality-in-decode2018-2/)
+
+[twitter]: https://twitter.com/IshiyamaTokina
