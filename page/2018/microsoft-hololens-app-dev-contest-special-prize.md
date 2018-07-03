@@ -24,4 +24,10 @@
 >
 > [https://blogs.windows.com/japan/2018/05/28/mixed-reality-in-decode2018-2/](https://blogs.windows.com/japan/2018/05/28/mixed-reality-in-decode2018-2/)
 
+ARやVRについてご興味や聞きたいことがある方はぜひ（TwitterID等で）お気軽にご連絡下さい！
+
+> イシヤマ@MRアプリHoloMaze(@IshiyamaTokina)さん | Twitter
+>
+> [https://twitter.com/IshiyamaTokina][twitter]
+
 [twitter]: https://twitter.com/IshiyamaTokina
