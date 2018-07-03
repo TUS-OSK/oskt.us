@@ -1,3 +1,5 @@
+**2018/07/01** [本部員がHoloLensアプリコンテストで特別賞を受賞しました](#page/2018/microsoft-hololens-app-dev-contest-special-prize)
+
 **2018/06/08** [2018年度の活動風景を公開しました](#page/2018/log-06)
 
 **2018/03/23** [2018年度新歓ページを公開しました](#page/2018/welcome)
