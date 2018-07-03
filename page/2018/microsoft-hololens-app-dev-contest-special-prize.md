@@ -8,7 +8,9 @@
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">HoloLensで立体迷路を作ってみた<a href="https://twitter.com/hashtag/HoloLens?src=hash&amp;ref_src=twsrc%5Etfw">#HoloLens</a> <a href="https://t.co/hZEoj3Dmi8">pic.twitter.com/hZEoj3Dmi8</a></p>&mdash; イシヤマ@MRアプリHoloMaze (@IshiyamaTokina) <a href="https://twitter.com/IshiyamaTokina/status/884042073552244736?ref_src=twsrc%5Etfw">2017年7月9日</a></blockquote>
 
-またコンテストでのアピーリングでLightning Talkを行っている動画がこちらからご覧になれます！
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">HoloLensアプリ開発コンテストでMRアプリ「Holo-Maze」が<br>パーソナルユース部門特別賞受賞しました！<br>やったー！嬉しい<br><br>直近の目標はリジェクトを潜り抜けてのストア掲載です<br>ストアリリース後ぜひ遊んで頂けると嬉しいです<a href="https://twitter.com/hashtag/HoloLens?src=hash&amp;ref_src=twsrc%5Etfw">#HoloLens</a> <a href="https://twitter.com/hashtag/decode18?src=hash&amp;ref_src=twsrc%5Etfw">#decode18</a> <a href="https://t.co/4p2GB6N9T8">pic.twitter.com/4p2GB6N9T8</a></p>&mdash; イシヤマ@MRアプリHoloMaze (@IshiyamaTokina) <a href="https://twitter.com/IshiyamaTokina/status/998906869669232640?ref_src=twsrc%5Etfw">2018年5月22日</a></blockquote>
+
+またコンテストでLightning Talkを行っている動画がこちらからご覧になれます！
 
 > Tokyo HoloLens Meetup Vol.8 4 - YouTube
 >
