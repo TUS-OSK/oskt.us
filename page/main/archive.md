@@ -23,3 +23,4 @@
 - [講義班紹介](#page/2018/lecture)
 - [活動風景](#page/2018/log-06)
 - [本部員がHoloLensアプリコンテストで特別賞を受賞しました](#page/2018/microsoft-hololens-app-dev-contest-special-prize)
+- [コミケット94](#page/2018/c94)
