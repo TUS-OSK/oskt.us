@@ -1,0 +1,26 @@
+@import './partials/layout';
+@import './partials/variables';
+
+.root {
+  @apply --body;
+
+  & .content {
+    @apply --section;
+
+    @media (max-width: 700px) {
+      @apply --section-small;
+    }
+
+    color: var(--primary-color);
+    text-align: center;
+
+    & h1 {
+      font-size: 20px;
+      margin-top: 40px;
+    }
+  }
+
+  & a {
+    color: inherit;
+  }
+}

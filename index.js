@@ -17,6 +17,7 @@ app.use(require('./src/reducer/ga'))
 
 app.route('/', require('./view/index'))
 app.route('/contact', require('./view/contact'))
+app.route('/calendar',require('./view/calendar'))
 app.route('/page/*', require('./view/page'))
 app.route('/404', require('./view/404'))
 

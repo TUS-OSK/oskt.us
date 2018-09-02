@@ -8,6 +8,7 @@ const aboutView = require('./about')
 const scheduleView = require('./schedule')
 const newsView = require('./news')
 const accessView = require('./access')
+const calendarView = require('./calendar')
 const footerView = require('./footer')
 
 const scope = css('./index.css')
@@ -24,6 +25,7 @@ module.exports = function mainView (state, emit) {
       ${scheduleView(...arguments)}
       ${newsView(...arguments)}
       ${accessView(...arguments)}
+      ${calendarView(...arguments)}
       ${footerView(...arguments)}
     </body>
   `)
