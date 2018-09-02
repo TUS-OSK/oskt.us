@@ -9,7 +9,7 @@ const scope = css('./calendar')
 
 const TITLE = `${config.TITLE_PREFIX} - Calendar`
 
-module.exports = function calendarView(state, emit) {
+module.exports = function calendarView (state, emit) {
   if (state.title !== TITLE) emit(state.events.DOMTITLECHANGE, TITLE)
 
   return scope(html`
