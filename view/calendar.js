@@ -18,27 +18,7 @@ module.exports = function calendarView(state, emit) {
         <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
       `)(...arguments)}
       <section class="content">
-        <h1>
-          <i class="fa fa-home"></i>
-          <span>Clubroom</span>
-        </h1>
-        <p>
-          <span>2号館 5階 2507教室</span>
-        </p>
-        <h1>
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-          <span>Twitter</span>
-        </h1>
-        <p>
-          <a href=${config.TWITTER_URL}>@${config.TWITTER_SCREEN_NAME}</a>
-        </p>
-        <h1>
-          <i class="fa fa-envelope" aria-hidden="true"></i>
-          <span>Mail</span>
-        </h1>
-        <p>
-          <a href="mailto:${config.MAIL}">${config.MAIL}</a>
-        </p>
+      <iframe src="https://calendar.google.com/calendar/embed?src=kagu.tus.osk%40gmail.com&ctz=Asia%2FTokyo&showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=kagu.tus.osk%40gmail.com&amp;color=%238D6F47&amp;ctz=Asia%2FTokyo&amp;hl=ja" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
       </section>
       ${footerView(...arguments)}
     </body>
