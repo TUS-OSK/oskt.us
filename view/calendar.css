@@ -23,6 +23,7 @@
     left: 0;
     margin: auto;
     display: block;
+    border: 0;
   }
 
   & .calendar-wrapper {
