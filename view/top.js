@@ -16,7 +16,7 @@ module.exports = function topView (state, emit) {
 
   return scope(html`
     <header class="root">
-      <div class="base ${state.load ? 'anim' : ''}">
+      <div class="base ${state.load ? 'anim' : 'init'}">
         <nav class="menu">
           ${menu(...arguments)}
           ${balloonElement}
