@@ -1,6 +1,9 @@
 version: 2 # use CircleCI 2.0
 jobs:
   build:
+    branches:
+      ignore:
+        -gh-pages
     working_directory: ~/work
     environment:
       GIT_REPO: git@github.com:TUS-OSK/oskt.us.git
@@ -36,6 +39,3 @@ workflows:
   build_and_test:
     jobs:
       - build
-        filters:
-          branches:
-            ignore: gh-pages
