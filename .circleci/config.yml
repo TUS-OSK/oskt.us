@@ -1,7 +1,7 @@
 version: 2 # use CircleCI 2.0
 jobs:
   build:
-    working_directory: ~/work 
+    working_directory: ~/work
     environment:
       GIT_REPO: git@github.com:TUS-OSK/oskt.us.git
     environment:
@@ -9,7 +9,7 @@ jobs:
     environment:
       GIT_EMAIL: pnlybubbles+circleci@gmail.com
     docker:
-      - image: node:7.6.0 
+      - image: node:7.6.0
     steps:
       - run:
           name: setup-environment-valuable
