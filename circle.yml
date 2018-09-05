@@ -1,0 +1,33 @@
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/work # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:4.8.2 # ...with this image as the primary container; this is where all `steps` will run
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@7'
+      - run:
+          name: setting-path
+          command: |
+            echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
+            echo 'export GIT_REPO="git@github.com:TUS-OSK/oskt.us.git"' >> ~/.bashrc
+            echo 'export GIT_NAME="CircleCI"' >> ~/.bashrc
+            echo 'export GIT_EMAIL="pnlybubbles+circleci@gmail.com"' >> ~/.bashrc
+      - run:
+          name: setup-environment-valuable
+          command: source ~/.bashrc
+      - restore_cache: # special step to restore the dependency cache 
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - run:
+          name: run-build-script
+          command: sh -x ./task/ci.sh
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
