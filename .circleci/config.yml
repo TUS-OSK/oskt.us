@@ -4,7 +4,9 @@ jobs:
     working_directory: ~/work 
     environment:
       GIT_REPO: git@github.com:TUS-OSK/oskt.us.git
+    environment:
       GIT_NAME: CircleCI
+    environment:
       GIT_EMAIL: pnlybubbles+circleci@gmail.com
     docker:
       - image: node:7.6.0 
