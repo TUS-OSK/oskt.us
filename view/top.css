@@ -12,6 +12,7 @@
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+    animation-play-state: paused
   }
 
   & .names {
@@ -32,8 +33,17 @@
       margin-bottom: 0;
       transform-origin: 50% 0;
 
+      &.first {
+        animation: flip var(--t-flip) var(--bounce) var(--t-cover) 1 normal both running;
+      }
+
+      &.second {
+        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip) * 0.5) 1 normal both running;
+      }
+
       &.third {
         margin-bottom: 1px;
+        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip)) 1 normal both running;
       }
 
       &.fourth {
@@ -42,6 +52,7 @@
         margin-bottom: 0;
         color: rgba(0, 0, 0, 0.4);
         letter-spacing: 3px;
+        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip) * 1.5) 1 normal both running;
       }
     }
   }
@@ -55,6 +66,7 @@
     height: 40px;
     bottom: 40px;
     left: 50%;
+    animation: slide-arrow var(--t-slide) var(--swift) var(--t-around) 1 normal both running;
   }
 
   & .menu {
@@ -64,6 +76,7 @@
     left: 0;
     width: 100%;
     top: 11%;
+    animation: slide-menu var(--t-slide) var(--swift) var(--t-around) 1 normal both running;
   }
 
   & .pic {
@@ -76,58 +89,11 @@
     background-position: center;
     width: 100%;
     height: 50%;
+    animation: fade var(--t-pic) var(--swift) var(--t-around) 1 normal both running, pic calc(var(--t-pic) * 0.9) var(--cubic-out) var(--t-around) 1 normal both running;
   }
 
   & .base.anim {
-    & .name {
-      &.first {
-        animation: flip var(--t-flip) var(--bounce) var(--t-cover) 1 normal both running;
-      }
-
-      &.second {
-        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip) * 0.5) 1 normal both running;
-      }
-
-      &.third {
-        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip)) 1 normal both running;
-      }
-
-      &.fourth {
-        animation: flip var(--t-flip) var(--bounce) calc(var(--t-cover) + var(--t-flip) * 1.5) 1 normal both running;
-      }
-    }
-
-    & .arrow {
-      animation: slide-arrow var(--t-slide) var(--swift) var(--t-around) 1 normal both running;
-    }
-
-    & .menu {
-      animation: slide-menu var(--t-slide) var(--swift) var(--t-around) 1 normal both running;
-    }
-
-    & .pic {
-      animation: fade var(--t-pic) var(--swift) var(--t-around) 1 normal both running, pic calc(var(--t-pic) * 0.9) var(--cubic-out) var(--t-around) 1 normal both running;
-    }
-  }
-
-  & .base.init {
-    & .name {
-      opacity: 0;
-    }
-
-    & .arrow {
-      opacity: 0;
-      bottom: -30px;
-    }
-
-    & .menu {
-      opacity: 0;
-      top: -20px;
-    }
-
-    & .pic {
-      opacity: 0;
-    }
+    animation-play-state: running
   }
 }
 
