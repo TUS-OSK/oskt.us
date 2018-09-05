@@ -29,4 +29,4 @@ jobs: # a collection of steps
             - ./node_modules
       - run:
           name: run-build-script
-          command: sh -x ./task/ci.sh
+          command: bash -x ./task/ci.sh
