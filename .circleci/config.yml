@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       ignore:
-        -gh-pages
+        - gh-pages
     working_directory: ~/work
     environment:
       GIT_REPO: git@github.com:TUS-OSK/oskt.us.git
