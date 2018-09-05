@@ -36,3 +36,5 @@ workflows:
   build_and_test:
     jobs:
       - build
+        filters:
+          ignore: gh-pages
