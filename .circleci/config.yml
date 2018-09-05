@@ -30,12 +30,3 @@ jobs:
       - run:
           name: run-build-script
           command: bash -x ./task/ci.sh
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      branches:
-        ignore:
-          - gh-pages
-      - build
