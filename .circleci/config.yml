@@ -12,23 +12,23 @@ jobs:
       - image: node:7.6.0 
     steps:
       - run:
-        name: setup-environment-valuable
-        command: echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
+          name: setup-environment-valuable
+          command: echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
       - run:
-        name: reload-bashrc
-        command: source ~/.bashrc
+          name: reload-bashrc
+          command: source ~/.bashrc
       - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
-        name: install-npm-wee
-        command: npm install
+          name: install-npm-wee
+          command: npm install
       - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - ./node_modules
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
       - run:
-        name: run-build-script
-        command: bash -x ./task/ci.sh
+          name: run-build-script
+          command: bash -x ./task/ci.sh
 
 workflows:
   version: 2
