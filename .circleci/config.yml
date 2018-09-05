@@ -11,6 +11,7 @@ jobs:
     docker:
       - image: node:7.6.0
     steps:
+      - checkout
       - run:
           name: setup-environment-valuable
           command: echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
