@@ -25,9 +25,9 @@ jobs:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
           - ./node_modules
-          - run:
-            name: run-build-script
-            command: bash -x ./task/ci.sh
+      - run:
+        name: run-build-script
+        command: bash -x ./task/ci.sh
 
 workflows:
   version: 2
