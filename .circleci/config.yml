@@ -2,19 +2,17 @@ version: 2 # use CircleCI 2.0
 jobs:
   build:
     working_directory: ~/work
-    environment:
-      GIT_REPO: git@github.com:TUS-OSK/oskt.us.git
-    environment:
-      GIT_NAME: CircleCI
-    environment:
-      GIT_EMAIL: pnlybubbles+circleci@gmail.com
     docker:
       - image: node:7.6.0
     steps:
       - checkout
       - run:
           name: setup-environment-valuable
-          command: echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
+          command: |
+            echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
+            echo 'export GIT_REPO="git@github.com:TUS-OSK/oskt.us.git"' >> ~/.bashrc
+            echo 'export GIT_NAME="CircleCI"' >> ~/.bashrc
+            echo 'export GIT_EMAIL="pnlybubbles+circleci@gmail.com"' >> ~/.bashrc
       - run:
           name: reload-bashrc
           command: source ~/.bashrc
