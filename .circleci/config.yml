@@ -1,11 +1,14 @@
 version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/work # directory where steps will run
-    docker: # run the steps with Docker
-      - image: node:7.6.0 # ...with this image as the primary container; this is where all `steps` will run
-    steps: # a collection of executable commands 
-      - checkout # special step to check out source code to working directory
+jobs:
+  build:
+    branches:
+      ignore:
+        - gh-pages
+    working_directory: ~/work 
+    docker:
+      - image: node:7.6.0 
+    steps:
+      - checkout
       - run:
           name: setup-environment-valuable
           command: |
@@ -17,12 +20,12 @@ jobs: # a collection of steps
           name: reload-bashrc
           command: |
             source ~/.bashrc
-      - restore_cache: # special step to restore the dependency cache 
+      - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-npm-wee
           command: npm install
-      - save_cache: # special step to save the dependency cache
+      - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
