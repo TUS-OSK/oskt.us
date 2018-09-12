@@ -1,3 +1,5 @@
+**2018/09/05** [OSKのカレンダーを公開しました](#calendar)
+
 **2018/08/09** [コミケット94に参加します](#page/2018/c94)
 
 **2018/07/01** [本部員がHoloLensアプリコンテストで特別賞を受賞しました](#page/2018/microsoft-hololens-app-dev-contest-special-prize)
