@@ -1,0 +1,33 @@
+version: 2 # use CircleCI 2.0
+jobs:
+  build:
+    working_directory: ~/work
+    docker:
+      - image: node:7.6.0
+    steps:
+      - checkout
+      - run:
+          name: setup-environment-valuable
+          command: |
+            echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
+            echo 'export GIT_REPO="git@github.com:TUS-OSK/oskt.us.git"' >> ~/.bashrc
+            echo 'export GIT_NAME="CircleCI"' >> ~/.bashrc
+            echo 'export GIT_EMAIL="pnlybubbles+circleci@gmail.com"' >> ~/.bashrc
+      - run:
+          name: reload-bashrc
+          command: source ~/.bashrc
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          branches:
+            ignore:
+              - gh-pages
+          name: install-npm-wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: run-build-script
+          command: bash -x ./task/ci.sh
