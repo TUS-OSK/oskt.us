@@ -26,8 +26,8 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          branches:
-            only:
-              - master
-            name: run-build-script
-            command: bash -x ./task/ci.sh
+          name: run-deploy-script
+          command: bash -x ./task/ci.sh
+          fileters:
+            branches:
+              only: master
