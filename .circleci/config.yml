@@ -20,8 +20,8 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           branches:
-            ignore:
-              - gh-pages
+            only:
+              - master
           name: install-npm-wee
           command: npm install
       - save_cache:
