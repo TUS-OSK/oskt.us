@@ -19,9 +19,6 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          branches:
-            only:
-              - master
           name: install-npm-wee
           command: npm install
       - save_cache:
@@ -29,5 +26,8 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          branches:
+            only:
+              - master
           name: run-build-script
           command: bash -x ./task/ci.sh
