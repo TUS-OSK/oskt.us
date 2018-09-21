@@ -29,5 +29,5 @@ jobs:
           branches:
             only:
               - master
-          name: run-build-script
-          command: bash -x ./task/ci.sh
+            name: run-build-script
+            command: bash -x ./task/ci.sh
