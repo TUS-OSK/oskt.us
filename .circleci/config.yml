@@ -1,6 +1,6 @@
 version: 2 # use CircleCI 2.0
 jobs:
-  build:
+  npm_test:
     working_directory: ~/work
     docker:
       - image: node:7.6.0
@@ -17,3 +17,9 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - npm_test
+
