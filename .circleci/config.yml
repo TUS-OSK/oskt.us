@@ -53,9 +53,12 @@ workflows:
   test_and_deploy:
     jobs:
       - test:
+          filters:
+            branches:
+              ignore: gh-pages
       - deploy_gh_pages:
           requires:
             - test
-          fileters:
+          filters:
             branches:
               only: master
