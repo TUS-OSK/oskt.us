@@ -1,6 +1,6 @@
 version: 2 # use CircleCI 2.0
 jobs:
-  test:
+  build:
     working_directory: ~/work
     docker:
       - image: node:7.6.0
@@ -17,11 +17,3 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-workflows:
-  versoin: 2
-  test-and-deploy:
-    jobs:
-      - test:
-          filters:
-            branches:
-              ignore: gh-pages
