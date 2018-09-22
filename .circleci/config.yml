@@ -38,13 +38,5 @@ workflows:
   versoin: 2
   test-and-deploy:
     jobs:
-      - npm_test:
-          filters:
-            branches:
-              ignore: gh-pages
-      - deploy_gh_pages:
-          requires:
-            - npm_test
-          filters:
-            branches:
-              only: master
+      - npm_test
+      - deploy_gh_pages
