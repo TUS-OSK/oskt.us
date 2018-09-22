@@ -13,7 +13,6 @@ references:
       name: install-npm-wee
       command: npm install
 
-
 version: 2 # use CircleCI 2.0
 jobs:
   test:
