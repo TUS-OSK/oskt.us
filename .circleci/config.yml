@@ -1,17 +1,3 @@
-references:
-  commands:
-    setup_environment_valuable: &setup_environment_valuable
-      name: setup-environment-valuable
-      command: |
-        echo 'export PATH="./node_modules/bin:$PATH"' >> ~/.bashrc
-        echo 'export GIT_REPO="git@github.com:TUS-OSK/oskt.us.git"' >> ~/.bashrc
-        echo 'export GIT_NAME="CircleCI"' >> ~/.bashrc
-        echo 'export GIT_EMAIL="pnlybubbles+circleci@gmail.com"' >> ~/.bashrc
-        source ~/.bashrc
-    install_npm_wee: &install_npm_wee
-      name: install-npm-wee
-      command: npm install
-
 version: 2 # use CircleCI 2.0
 jobs:
   test:
@@ -22,25 +8,11 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run: *install_npm_wee
+      - run: 
+          name: install-npm-wee
+          command: npm install
       - run:
           command: npm test
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-  deploy_gh_pages:
-    working_directory: ~/work
-    docker:
-      - image: node:7.6.0
-    steps:
-      - checkout
-      - run: *setup_environment_valuable
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run: *install_npm_wee
-      - deploy:
-          command: bash -x ./task/ci.sh
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -53,9 +25,3 @@ workflows:
           filters:
             branches:
               ignore: gh-pages
-      - deploy_gh_pages:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
