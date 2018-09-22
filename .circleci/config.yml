@@ -19,8 +19,8 @@ jobs:
             - ./node_modules
 workflows:
   versoin: 2
-  test_and_deploy:
-    tests:
+  test-and-deploy:
+    jobs:
       - test:
           filters:
             branches:
