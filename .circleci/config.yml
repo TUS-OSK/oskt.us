@@ -39,7 +39,7 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run: *seup_environment_valuable
+      - run: *setup_environment_valuable
       - run:
           name: install-npm-wee
           command: npm install
