@@ -21,9 +21,7 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: install-npm-wee
-          command: npm install
+      - run: *install_npm_wee
       - run:
           name: run-test
           command: npm test
@@ -40,9 +38,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run: *setup_environment_valuable
-      - run:
-          name: install-npm-wee
-          command: npm install
+      - run: *install_npm_wee
       - run:
           name: run-deployment
           command: bash -x ./task/ci.sh
@@ -61,3 +57,6 @@ workflows:
       - deploy_gh_pages:
           requires:
             - npm_test
+          filters:
+            branches:
+              only: master
