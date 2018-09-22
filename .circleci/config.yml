@@ -38,7 +38,13 @@ workflows:
   version: 2
   tests:
     jobs:
-      - npm_test
+      - npm_test:
+          filters:
+            branches:
+              ignore: gh_pages
       - deploy_gh_pages:
           requires:
             - npm_test
+          filters:
+            branches:
+              only: master
