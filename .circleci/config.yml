@@ -8,7 +8,6 @@ references:
         echo 'export GIT_NAME="CircleCI"' >> ~/.bashrc
         echo 'export GIT_EMAIL="pnlybubbles+circleci@gmail.com"' >> ~/.bashrc
         source ~/.bashrc
-
     install_npm_wee: &install_npm_wee
       name: install-npm-wee
       command: npm install
