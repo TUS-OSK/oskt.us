@@ -48,7 +48,7 @@ jobs:
             - ./node_modules
 workflows:
   version: 2
-  tests:
+  test-and-deploy:
     jobs:
       - npm_test:
           filters:
