@@ -1,4 +1,3 @@
-version: 2 # use CircleCI 2.0
 references:
   commands:
     setup_environment_valuable: &setup_environment_valuable
@@ -12,6 +11,8 @@ references:
     install_npm_wee: &install_npm_wee
       name: install-npm-wee
       command: npm install
+
+version: 2 # use CircleCI 2.0
 jobs:
   test:
     working_directory: ~/work
