@@ -20,7 +20,7 @@ jobs:
 workflows:
   versoin: 2
   test_and_deploy:
-    jobs:
+    tests:
       - test:
           filters:
             branches:
