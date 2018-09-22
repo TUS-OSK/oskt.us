@@ -11,7 +11,6 @@ references:
     install_npm_wee: &install_npm_wee
       name: install-npm-wee
       command: npm install
-
 version: 2 # use CircleCI 2.0
 jobs:
   test:
@@ -45,7 +44,6 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-
 workflows:
   versoin: 2
   test_and_deploy:
