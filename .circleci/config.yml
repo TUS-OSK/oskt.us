@@ -17,23 +17,23 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-    deploy_gh_pages:
-      working_directory: ~/work
-      docker:
-        - image: node:7.6.0
-      steps:
-        - checkout
-        - restore_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-        - run:
-            name: install-npm-wee
-            command: npm install
-        - run:
-            command: echo "run deployment"
-        - save_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-            paths:
-              - ./node_modules
+  deploy_gh_pages:
+    working_directory: ~/work
+    docker:
+      - image: node:7.6.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - run:
+          command: echo "run deployment"
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
 workflows:
   version: 2
   tests:
