@@ -23,7 +23,7 @@ module.exports = function contactView (state, emit) {
           <span>Clubroom</span>
         </h1>
         <p>
-          <span>2号館 5階 2507教室</span>
+          <span>神楽坂キャンパス 2号館 5階 2507教室</span>
         </p>
         <h1>
           <i class="fa fa-twitter" aria-hidden="true"></i>
