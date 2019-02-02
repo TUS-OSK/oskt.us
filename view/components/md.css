@@ -154,7 +154,7 @@
     background-color: color(var(--sub-color) alpha(10%));
     word-wrap: break-word;
   }
-  
+
   & .lang-info {
     display: block;
     font-family: inherit;
