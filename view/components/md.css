@@ -160,8 +160,8 @@
     font-family: inherit;
     padding: 1em 1.5em;
     color: var(--base-color);
-    border-left: 0.25em solid var(--sub-color);
-    background-color: color(var(--sub-color) alpha(10%));
+    border-left: 0.25em solid var(--base-color);
+    background-color: color(var(--base-color) alpha(10%));
     word-wrap: break-word;
   }
 }
