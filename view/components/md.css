@@ -1,15 +1,15 @@
-@import "../partials/variables";
+@import '../partials/variables';
 
 .root {
   line-height: 1.8em;
 
   &::before {
-    content: "";
+    content: '';
     display: table;
   }
 
   &::after {
-    content: "";
+    content: '';
     display: table;
   }
 
@@ -23,7 +23,7 @@
     text-decoration: underline;
   }
 
-  & a[href$="?pretty"] {
+  & a[href$='?pretty'] {
     border: solid 1px var(--sub-color);
     display: inline-block;
     padding: 5px 20px;
@@ -44,7 +44,7 @@
     }
 
     &::before {
-      content: "\f105";
+      content: '\f105';
       font-family: FontAwesome, sans-serif;
       margin-right: 0.3em;
       font-size: 1.2em;
@@ -52,10 +52,7 @@
   }
 
   & [tooltip] {
-    background: linear-gradient(
-      transparent 70%,
-      color(var(--sub-color) alpha(50%)) 70%
-    );
+    background: linear-gradient(transparent 70%, color(var(--sub-color) alpha(50%)) 70%);
     cursor: help;
 
     &:hover::after {
@@ -87,7 +84,7 @@
     text-align: center;
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: 40px;
       border-bottom: solid 2px var(--base-color);
@@ -104,22 +101,23 @@
     --color: color(var(--base-color) alpha(50%));
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       height: 0.1em;
       width: 100%;
       position: absolute;
       bottom: -0.5em;
-      background-image: linear-gradient(
-        -45deg,
-        #fff 25%,
-        var(--color) 25%,
-        var(--color) 50%,
-        #fff 50%,
-        #fff 75%,
-        var(--color) 75%,
-        var(--color)
-      );
+      background-image:
+        linear-gradient(
+          -45deg,
+          #fff 25%,
+          var(--color) 25%,
+          var(--color) 50%,
+          #fff 50%,
+          #fff 75%,
+          var(--color) 75%,
+          var(--color)
+        );
       background-size: 8px 8px;
     }
   }
@@ -156,7 +154,7 @@
     background-color: color(var(--sub-color) alpha(10%));
     word-wrap: break-word;
   }
-
+  
   & .lang-info {
     display: block;
     font-family: inherit;
