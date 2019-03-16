@@ -1,30 +1,76 @@
 # 年間スケジュール
 
 
-## 2018年度(予定)
+## 2019年度(予定)
 
 ### 4月
 
 新入生歓迎ガイダンスを行います。
 新入生にはこのタイミングで講義班に所属してもらいます。
 
-[新歓情報](#page/2018/welcome?pretty)
+[新歓情報](#page/2019/welcome?pretty)
 
 ### 7月
 
-前期成果発表を行います、各講義班が前期の間に学んだ事についてLT形式で軽く発表してもらいます。
+前期成果発表を行います。各講義班が前期の間に学んだ事についてLT形式で軽く発表してもらいます。
 
 ### 9月
 
-夏合宿があります、場所は山梨で2泊3日の予定です。
+夏合宿があります。2泊3日の予定です。
 
 ### 11月
 
-理大祭があります、応数研では各講義班の成果物の展示などを行う予定です。
+理大祭があります。応数研では各講義班の成果物の展示などを行う予定です。
 
 ### 2月
 
-冬合宿があります、今年度の場所はまだ未定ですが例年スキー, スノボを行なっております。
+冬合宿があります。例年スキー, スノボを行なっております。
+
+
+## 2018年度
+
+### 4月
+
+新入生歓迎ガイダンスを行いました、2018年度の講義班はlay/kyoupuro/Unity/Web/Pythonの5班でした。
+
+### 8月
+
+OSKとしてコミックマーケット94に参加しました。
+
+[c94詳細](#page/2018/c94)
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">応数研でコミケット94に参加します。ブースは8/10(金)西め29b&quot;OSK&quot;です。ぜひ遊びにきてください🙌<a href="https://t.co/HptSlFBOCP">https://t.co/HptSlFBOCP</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1027460755451301890?ref_src=twsrc%5Etfw">2018年8月9日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+### 9月
+
+9月9日〜9月11日に夏合宿がありました、参加者は25名ほどで山梨県山中湖村に行き、LT会などを行いました。
+
+### 11月
+
+理大祭がありました、応数研では各講義班が成果物の展示などを行いました、
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">Ray班の展示です！レンダリングした絵をプリントしてます。834教室でお待ちしております🙌🙌🙌 <a href="https://twitter.com/hashtag/l_ray?src=hash&amp;ref_src=twsrc%5Etfw">#l_ray</a> <a href="https://twitter.com/hashtag/%E7%90%86%E5%A4%A7%E7%A5%AD?src=hash&amp;ref_src=twsrc%5Etfw">#理大祭</a> <a href="https://t.co/dGScK2ri6C">pic.twitter.com/dGScK2ri6C</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1066151435639783424?ref_src=twsrc%5Etfw">2018年11月24日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">機械学習班です🙌レンダリング画像のノイズ除去をやってまーす！(((834教室))) <a href="https://twitter.com/hashtag/p_machinelearning?src=hash&amp;ref_src=twsrc%5Etfw">#p_machinelearning</a> <a href="https://twitter.com/hashtag/%E7%90%86%E5%A4%A7%E7%A5%AD?src=hash&amp;ref_src=twsrc%5Etfw">#理大祭</a> <a href="https://t.co/WkvNc7jgMp">pic.twitter.com/WkvNc7jgMp</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1066153255015596032?ref_src=twsrc%5Etfw">2018年11月24日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">◯亀製麺のうどんを検索できるWebアプリです🙌 Web班のこーはいくんたちが834教室で紹介してます！ココからも試せますよ→ <a href="https://t.co/H3RvrJKvAw">https://t.co/H3RvrJKvAw</a> <a href="https://twitter.com/hashtag/l_web?src=hash&amp;ref_src=twsrc%5Etfw">#l_web</a> <a href="https://twitter.com/hashtag/%E7%90%86%E5%A4%A7%E7%A5%AD?src=hash&amp;ref_src=twsrc%5Etfw">#理大祭</a> <a href="https://t.co/6KzjxP0mvp">pic.twitter.com/6KzjxP0mvp</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1066536263778369536?ref_src=twsrc%5Etfw">2018年11月25日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+### 12月
+
+OSKとしてコミックマーケット95に参加しました。
+
+[c95詳細](#page/2018/c95)
+
+### 2月
+
+2月4日～2月7日に冬合宿がありました。新潟県の妙高杉之原スキー場にて、スキー, スノボやLT会などを行いました。
+
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">こんにちはー<br>応数研は2月4日〜7日まで冬合宿に行っていました！場所は妙高杉ノ原でした☃️<br>予報では雨や雪の予報でしたが、当日は良い天気で部員はスキーやスノボを楽しみましたー！ <a href="https://t.co/UQhHh1Z9Na">pic.twitter.com/UQhHh1Z9Na</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1094859165367857153?ref_src=twsrc%5Etfw">2019年2月11日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 ## 2017年度
