@@ -1,6 +1,5 @@
 # 講義班紹介 (2019年度)
 
-# Unity
 <!-- ここから -->
 ## Unity班
 
@@ -19,16 +18,13 @@ Unityを学ぶ。
 
 
 ### アピールポイント
-初めてすぐにゲームを作れます。
-
+始めてすぐにゲームを作れます。
 
 ### 班長から一言
 どんどん参加してください！
 分からないことは，どんどん教えます。
 
 <!-- ここまで -->
-
-# Web
 
 <!-- ここから -->
 ## Web班
@@ -61,8 +57,6 @@ HTML, CSS, JavaScriptを学ぶ。
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">◯亀製麺のうどんを検索できるWebアプリです🙌 Web班のこーはいくんたちが834教室で紹介してます！ココからも試せますよ→ <a href="https://t.co/H3RvrJKvAw">https://t.co/H3RvrJKvAw</a> <a href="https://twitter.com/hashtag/l_web?src=hash&amp;ref_src=twsrc%5Etfw">#l_web</a> <a href="https://twitter.com/hashtag/%E7%90%86%E5%A4%A7%E7%A5%AD?src=hash&amp;ref_src=twsrc%5Etfw">#理大祭</a> <a href="https://t.co/6KzjxP0mvp">pic.twitter.com/6KzjxP0mvp</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1066536263778369536?ref_src=twsrc%5Etfw">2018年11月25日</a></blockquote>
 
 <!-- ここまで -->
-
-# C/C++
 <!-- ここから -->
 
 ## C/C++班
@@ -96,14 +90,11 @@ HTML, CSS, JavaScriptを学ぶ。
 
 ### 参考画像
 
-<img src="https://i.imgur.com/7E9fVom.png
-" style="width:300px">  <img src="https://i.imgur.com/BdzcBUU.png" style="width:300px">
+<img src="https://i.imgur.com/7E9fVom.png" style="width:300px">  <img src="https://i.imgur.com/BdzcBUU.png" style="width:300px">
 
 
 
 <!-- ここまで -->
-
-# Math
 <!-- ここから -->
 
 ## 数学班
@@ -130,8 +121,6 @@ HTML, CSS, JavaScriptを学ぶ。
 数学はいいぞ
 
 <!-- ここまで -->
-
-# Python
 <!-- ここから -->
 ## Python班
 
@@ -145,7 +134,7 @@ HTML, CSS, JavaScriptを学ぶ。
 プログラミングを用いるという選択肢があることを知り，かつそれを可能にする力を身に着けてもらう。
 
 ### 特色
-Pythonには良い点,悪い点が共ににありますがそれはどの言語も同じです。
+Pythonには良い点, 悪い点が共ににありますがそれはどの言語も同じです。
 Pythonには
 - 習得しやすい
 - コードが整っていてシンプルである
