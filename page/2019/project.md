@@ -18,7 +18,7 @@
 
 - CTF
     - 世界の脆弱性を見つけよう。  
-    [紹介記事](https://hackmd.io/HSx359LSRz-8UV5cBD1fWA)
+    [紹介記事](#page/2019/ctf)
 
 ## 非公式
 
