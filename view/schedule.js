@@ -42,7 +42,7 @@ module.exports = function scheduleView (state, emit) {
                   <div class="ja">理大祭</div>
                   <div class="en">Festival</div>
                 </a>
-                <a href="#page/2017/project" class="row events big p-group">
+                <a href="#page/2019/project" class="row events big p-group">
                   <div class="ja">プロジェクト班活動</div>
                   <div class="en">Project Groups</div>
                 </a>

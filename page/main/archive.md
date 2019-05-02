@@ -30,3 +30,4 @@
 
 - [新歓](#page/2019/welcome)
 - [講義班紹介](#page/2019/lecture)
+- [プロジェクト班紹介](#page/2019/project)
