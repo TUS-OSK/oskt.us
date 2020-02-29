@@ -1,14 +1,12 @@
 # 年間スケジュール
 
-
-## 2019年度(予定)
+## 2020年度(予定)
 
 ### 4月
 
 新入生歓迎ガイダンスを行います。
 新入生にはこのタイミングで講義班に所属してもらいます。
-
-[新歓情報](#page/2019/welcome?pretty)
+[新歓情報]()
 
 ### 7月
 
@@ -25,6 +23,40 @@
 ### 2月
 
 冬合宿があります。例年スキー, スノボを行なっております。
+
+
+## 2019年度
+
+### 4月
+
+新入生歓迎ガイダンスを行いました、2019年度の講義班はlay/C/C++/Unity/Web/Pythonの5班でした。
+
+### 7月
+
+前期成果発表を行いました。各講義班ごとに前期の間に学んだ事についてLT形式で発表しました。
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">みなさん、こんばんは！お久しぶりです。<br>13日(土)、応用数学研究部では前期成果発表会を行いました！<br>一年生が入部してからの3ヶ月間で学んだ内容を発表しました。<br>写真は成果発表会の様子です！ <a href="https://t.co/ji0099g9RV">pic.twitter.com/ji0099g9RV</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1150715869401497600?ref_src=twsrc%5Etfw">2019年7月15日</a></blockquote> 
+
+
+### 9月
+
+夏合宿に行きました!
+
+### 11月
+
+理大祭では、各講義班の成果物の展示などを行いました。
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">こんにちは！<br>明日からの理大祭に向けて、部員は設営準備に励んでいます。<br><br>理大祭は23,24日(土･日)の2日間開催<br>8号館4階841教室でお待ちしております🌼 <a href="https://t.co/YglmH5bp3K">pic.twitter.com/YglmH5bp3K</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1197736645505630208?ref_src=twsrc%5Etfw">November 22, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">おはようございます。<br>本日から理大祭がはじまりますね！<br>応用数学研究部は神楽坂キャンパス841教室にて展示を行っています。<br>皆さまのご来場おまちしております。<a href="https://twitter.com/hashtag/%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">#理科大</a><a href="https://twitter.com/hashtag/%E7%90%86%E5%A4%A7%E7%A5%AD?src=hash&amp;ref_src=twsrc%5Etfw">#理大祭</a> <a href="https://t.co/Yz5mU7JaXi">pic.twitter.com/Yz5mU7JaXi</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1198033345751351296?ref_src=twsrc%5Etfw">November 23, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">こんにちは！<br>今日も841教室にて展示を行っています！<br>皆さまのご来場お待ちしております！ <a href="https://t.co/10beDenVLb">pic.twitter.com/10beDenVLb</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1198437651763748869?ref_src=twsrc%5Etfw">November 24, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+### 2月
+
+冬合宿ではスキーとスノーボードを楽しみました！
+
 
 
 ## 2018年度
