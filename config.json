@@ -3,8 +3,8 @@
   "TWITTER_SCREEN_NAME": "tus_osk",
   "MAIL": "os_ken@ed.tus.ac.jp",
   "BALLOON": {
-    "LABEL": "活動内容",
-    "LINK": "#page/2020/lecture"
+    "LABEL": "部員募集中！",
+    "LINK": "#page/2020/recruitment"
   },
   "TITLE_PREFIX": "応用数学研究部",
   "GA_TRACKING_ID": "UA-116544571-1"
