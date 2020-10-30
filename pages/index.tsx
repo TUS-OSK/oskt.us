@@ -1,7 +1,5 @@
-import styled from 'styled-components'
+import Home from 'src/pages/Home'
 
-export default function Home() {
-  return <Container>Home</Container>
+export default function IndexPage() {
+  return <Home />
 }
-
-const Container = styled.div``
