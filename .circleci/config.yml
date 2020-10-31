@@ -53,7 +53,9 @@ workflows:
       - npm_test:
           filters:
             branches:
-              ignore: gh_pages
+              ignore: 
+                - gh_pages
+                - next
       - deploy_gh_pages:
           requires:
             - npm_test
