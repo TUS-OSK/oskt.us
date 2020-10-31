@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { BOUNCE, CUBIC_OUT, SWIFT } from 'src/utils/animations'
 import { fade, flip, pic } from './animations'
+import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
 
 export default function TopBanner() {
   return (
@@ -18,11 +19,6 @@ const Container = styled.div`
   height: 100%;
   overflow: hidden;
 `
-
-export const T_PIC = 3
-export const T_COVER = 0
-export const T_FLIP = 0.8
-export const T_AROUND = T_COVER + T_FLIP * 1.5
 
 const ImageWrapper = styled.div`
   position: absolute;

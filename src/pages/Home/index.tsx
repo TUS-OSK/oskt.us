@@ -1,8 +1,8 @@
 import { SWIFT } from 'src/utils/animations'
 import styled from 'styled-components'
-import { slideArrow } from './animations'
+import { slideArrow, T_AROUND, T_SLIDE } from './animations'
 import Menu from './Menu'
-import TopBanner, { T_AROUND } from './TopBanner'
+import TopBanner from './TopBanner'
 
 export default function Home() {
   return (
@@ -14,7 +14,6 @@ export default function Home() {
   )
 }
 
-const T_SLIDE = 1
 const Arrow = styled.div`
   position: absolute;
   border-right: solid 1px rgba(0, 0, 0, 0.4);

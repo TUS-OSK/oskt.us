@@ -1,29 +1,32 @@
 import { SWIFT } from 'src/utils/animations'
 import styled from 'styled-components'
-import { T_AROUND } from '../TopBanner'
 import { slideMenu } from './animations'
-import Link from 'next/link'
+import { T_AROUND, T_SLIDE } from '../animations'
+import { StyledLink } from 'src/utils/next/elements'
 
-const T_SLIDE = 1
+interface LinkItem {
+  label: string
+  href: string
+}
+
 export default function Menu() {
+  const links: LinkItem[] = [
+    { label: 'About', href: '/about' },
+    { label: 'Schedule', href: '/schedule' },
+    { label: 'News', href: '/news' },
+    { label: 'Archive', href: '/archive' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'FAQ', href: '/faq' },
+  ]
+
   return (
     <Container>
       <MenuList>
-        <li>
-          <Link href="/about">About</Link>
-        </li>
-        {/* <li class="item">
-          <a href="#page/main/schedule">Schedule</a>
-        </li>
-        <li class="item">
-          <a href="#page/main/news">News</a>
-        </li>
-        <li class="item">
-          <a href="#page/main/archive">Archive</a>
-        </li>
-        <li class="item">
-          <a href="#contact">Contact</a>
-        </li> */}
+        {links.map(({ href, label }) => (
+          <li>
+            <MenuLink href={href}>{label}</MenuLink>
+          </li>
+        ))}
       </MenuList>
     </Container>
   )
@@ -52,10 +55,9 @@ const MenuList = styled.div`
   justify-content: space-around;
 `
 
-// & :any-link {
-//   text-decoration: none;
-//   padding-bottom: 2px;
-//   color: rgba(0, 0, 0, 0.4);
-//   border-bottom: solid 1px rgba(0, 0, 0, 0.4);
-//   font-size: 15px;
-// }
+const MenuLink = styled(StyledLink)`
+  color: rgba(0, 0, 0, 0.4);
+  padding-bottom: 2px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.4);
+  font-size: 15px;
+`
