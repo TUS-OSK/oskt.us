@@ -27,10 +27,11 @@ export default function Menu() {
   )
 }
 
-const MenuList = styled.div`
+const MenuList = styled.ul`
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+  padding: 0;
 `
 
 const MenuItem = styled.li`
