@@ -1,7 +1,9 @@
-import styled from 'styled-components'
+import MarkdownBody from 'src/components/MarkdownBody'
 
-export default function About() {
-  return <Container></Container>
+interface Props {
+  body: string
 }
 
-const Container = styled.div``
+export default function About({ body }: Props) {
+  return <MarkdownBody body={body}></MarkdownBody>
+}
