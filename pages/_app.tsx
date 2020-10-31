@@ -17,6 +17,17 @@ const fontSettings = css`
     font-family: 'quasimoda';
     src: url('/fonts/quasimoda-light.otf');
   }
+
+  @font-face {
+    font-family: 'novecentosans';
+    src: url('/fonts/Novecentosanswide-Book.otf');
+  }
+
+  @font-face {
+    font-family: 'novecentosans';
+    src: url('/fonts/Novecentosanswide-Bold.otf');
+    font-weight: bold;
+  }
 `
 
 const GlobalStyle = createGlobalStyle`
