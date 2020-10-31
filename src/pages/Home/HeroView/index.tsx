@@ -24,10 +24,13 @@ export default function HeroView() {
 
 const Top = styled.div`
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 64px 24px;
+  box-sizing: border-box;
 `
 
 const MenuWrapper = styled.div`
-  opacity: 0;
   animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
 `
 
@@ -41,27 +44,25 @@ const Bottom = styled.div`
   overflow: hidden;
   display: flex;
   justify-content: center;
+  padding: 40px 24px;
 `
 
 const ARROW_SIZE = 40
-const ARROW_PADDING = 100
 
 const Arrow = styled.div`
-  position: relative;
-  z-index: 0;
-  width: ${ARROW_SIZE + ARROW_PADDING}px;
-  height: ${ARROW_SIZE + ARROW_PADDING}px;
+  width: ${ARROW_SIZE}px;
+  height: ${ARROW_SIZE}px;
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: ${slideArrow} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
   &::before {
     content: '';
     width: ${ARROW_SIZE / Math.pow(2, 0.5)}px;
     height: ${ARROW_SIZE / Math.pow(2, 0.5)}px;
-    box-sizing: border-box;
     border-right: solid 1px rgba(0, 0, 0, 0.4);
     border-bottom: solid 1px rgba(0, 0, 0, 0.4);
-    animation: ${slideArrow} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
+    transform: rotate(45deg);
   }
 `
 

@@ -17,24 +17,15 @@ export default function Menu() {
   ]
 
   return (
-    <Container>
-      <MenuList>
-        {links.map(({ href, label }) => (
-          <MenuItem>
-            <MenuLink href={href}>{label}</MenuLink>
-          </MenuItem>
-        ))}
-      </MenuList>
-    </Container>
+    <MenuList>
+      {links.map(({ href, label }) => (
+        <MenuItem>
+          <MenuLink href={href}>{label}</MenuLink>
+        </MenuItem>
+      ))}
+    </MenuList>
   )
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 64px 24px;
-  box-sizing: border-box;
-`
 
 const MenuList = styled.div`
   display: flex;
