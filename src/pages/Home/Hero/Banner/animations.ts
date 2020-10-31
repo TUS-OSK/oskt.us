@@ -23,10 +23,10 @@ export const flip = keyframes`
 
 export const pic = keyframes`
   0% {
-    height: 30%;
+    height: 80%;
   }
 
   100% {
-    height: 50%;
+    height: 100%;
   }
 `

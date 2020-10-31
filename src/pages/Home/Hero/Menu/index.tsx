@@ -23,9 +23,9 @@ export default function Menu() {
     <Container>
       <MenuList>
         {links.map(({ href, label }) => (
-          <li>
+          <MenuItem>
             <MenuLink href={href}>{label}</MenuLink>
-          </li>
+          </MenuItem>
         ))}
       </MenuList>
     </Container>
@@ -35,29 +35,30 @@ export default function Menu() {
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 11%;
-  animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
+  padding: 64px 24px;
+  box-sizing: border-box;
 `
 
 const MenuList = styled.div`
   color: black;
   margin: 0;
   list-style: none;
-  width: 400px;
-  padding: 0 10px;
   box-sizing: border-box;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 5px;
-  justify-content: space-around;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
+`
+
+const MenuItem = styled.li`
+  /* FIXME: flex gap が Safari にも対応されたら直す */
+  padding: 16px 16px 0;
 `
 
 const MenuLink = styled(StyledLink)`
+  display: inline-flex;
+  padding: 2px 0;
   color: rgba(0, 0, 0, 0.4);
-  padding-bottom: 2px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.4);
   font-size: 15px;
 `

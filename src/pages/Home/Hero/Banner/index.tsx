@@ -5,31 +5,28 @@ import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
 
 export default function TopBanner() {
   return (
-    <Container>
-      <ImageWrapper></ImageWrapper>
+    <Banner>
+      <Image></Image>
       <Names></Names>
-    </Container>
+    </Banner>
   )
 }
 
-const Container = styled.div`
+const Banner = styled.div`
   position: relative;
   z-index: 0;
-  background-color: #fff;
+  width: 100%;
   height: 100%;
-  overflow: hidden;
 `
 
-const ImageWrapper = styled.div`
+const Image = styled.div`
   position: absolute;
   top: 50%;
-  left: 0;
-  transform: translate(0, -50%);
+  transform: translateY(-50%);
   background-image: url('/images/bg.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 50%;
   animation: ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running,
     ${pic} ${T_PIC * 0.9}s ${CUBIC_OUT} ${T_AROUND}s 1 normal both running;
 `
@@ -49,15 +46,15 @@ const NamesContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 30px;
-  line-height: 38px;
+  line-height: 36px;
   color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
   font-weight: bold;
   letter-spacing: 5px;
-  transform: translate(-50%, -50%);
   perspective: 200px;
   padding: 40px;
-  background-color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
 `
 

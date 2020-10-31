@@ -3,10 +3,10 @@ import { keyframes } from 'styled-components'
 export const slideMenu = keyframes`
   0% {
     opacity: 0;
-    top: -20px;
+    transform: translateY(-100%);
   }
   100% {
     opacity: 1;
-    top: 11%;
+    transform: translateY(0);
   }
 `
