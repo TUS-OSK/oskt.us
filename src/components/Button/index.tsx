@@ -15,7 +15,7 @@ export default function Button({ href, children }: Props) {
 
 const Container = styled(StyledLink)`
   font-size: 13px;
-  font-family: novecentosans, sans-serif;
+  font-family: 'novecentosans', sans-serif;
   font-weight: bold;
   padding: 5px 20px;
   background-color: ${SECONDARY_COLOR};

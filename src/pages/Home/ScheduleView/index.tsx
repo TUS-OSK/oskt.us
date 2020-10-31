@@ -73,7 +73,7 @@ const Container = styled(Section)`
       @apply --section-title-small;
     } */
 
-    font-family: novecentosans;
+    font-family: 'novecentosans';
     font-weight: bold;
     text-align: center;
     font-size: 25px;
@@ -166,7 +166,7 @@ const Container = styled(Section)`
     &::after {
       content: 'DETAIL';
       opacity: 0;
-      font-family: novecentosans;
+      font-family: 'novecentosans';
       font-weight: bold;
       font-size: 14px;
       flex: 1;

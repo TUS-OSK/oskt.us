@@ -23,7 +23,7 @@ const Container = styled(Section)`
 
     font-size: 25px;
     font-weight: bold;
-    font-family: novecentosans;
+    font-family: 'novecentosans';
 
     /* @media (max-width: 700px) {
       @apply --section-title-small;
