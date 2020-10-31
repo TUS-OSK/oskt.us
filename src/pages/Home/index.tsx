@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import Hero from './Hero'
+import HeroView from './HeroView'
 
 export default function Home() {
   return (
     <Container>
-      <Hero></Hero>
+      <HeroView></HeroView>
     </Container>
   )
 }

@@ -4,7 +4,7 @@ import { slideArrow, T_AROUND, T_SLIDE } from './animations'
 import Menu from './Menu'
 import Banner from './Banner'
 
-export default function Hero() {
+export default function HeroView() {
   return (
     <Container>
       <Top>
