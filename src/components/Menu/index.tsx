@@ -19,7 +19,7 @@ export default function Menu() {
   return (
     <MenuList>
       {links.map(({ href, label }) => (
-        <MenuItem>
+        <MenuItem key={href}>
           <MenuLink href={href}>{label}</MenuLink>
         </MenuItem>
       ))}
