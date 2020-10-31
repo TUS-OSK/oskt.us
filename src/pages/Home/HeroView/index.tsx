@@ -1,7 +1,7 @@
+import Menu from 'src/components/Menu'
 import { SWIFT } from 'src/utils/animations'
 import styled from 'styled-components'
-import { slideArrow, T_AROUND, T_SLIDE } from './animations'
-import Menu from './Menu'
+import { slideArrow, slideMenu, T_AROUND, T_SLIDE } from './animations'
 import Banner from './Banner'
 
 export default function HeroView() {
@@ -26,7 +26,10 @@ const Top = styled.div`
   overflow: hidden;
 `
 
-const MenuWrapper = styled.div``
+const MenuWrapper = styled.div`
+  opacity: 0;
+  animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
+`
 
 const Center = styled.div`
   width: 100%;

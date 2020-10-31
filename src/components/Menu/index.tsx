@@ -1,7 +1,4 @@
-import { SWIFT } from 'src/utils/animations'
 import styled from 'styled-components'
-import { slideMenu } from './animations'
-import { T_AROUND, T_SLIDE } from '../animations'
 import { StyledLink } from 'src/utils/next/elements'
 
 interface LinkItem {
@@ -40,25 +37,23 @@ const Container = styled.div`
 `
 
 const MenuList = styled.div`
-  color: black;
-  margin: 0;
-  list-style: none;
-  box-sizing: border-box;
   display: flex;
   flex-flow: wrap;
   justify-content: center;
-  animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
 `
 
 const MenuItem = styled.li`
   /* FIXME: flex gap が Safari にも対応されたら直す */
+  list-style: none;
   padding: 16px 16px 0;
 `
+
+const LINK_COLOR = 'rgba(0, 0, 0, 0.4)'
 
 const MenuLink = styled(StyledLink)`
   display: inline-flex;
   padding: 2px 0;
-  color: rgba(0, 0, 0, 0.4);
-  border-bottom: solid 1px rgba(0, 0, 0, 0.4);
+  color: ${LINK_COLOR};
+  border-bottom: solid 1px ${LINK_COLOR};
   font-size: 15px;
 `
