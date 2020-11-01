@@ -1,26 +1,28 @@
-import { readFileSync } from 'fs'
-import matter from 'gray-matter'
-import { join } from 'path'
-import About from 'src/pages/About'
+import MainLayout from 'src/components/MainLayout'
+import MarkdownBody from 'src/components/MarkdownBody'
+import { Section } from 'src/pages/Home/elements'
+import { getPageMarkdown } from './api/markdowns'
 
 interface Props {
   body: string
 }
 
-export default function IndexPage({ body }: Props) {
-  return <About body={body} />
+export default function AboutPage({ body }: Props) {
+  return (
+    <MainLayout>
+      <Section>
+        <MarkdownBody body={body}></MarkdownBody>
+      </Section>
+    </MainLayout>
+  )
 }
 
-const dir = join(process.cwd(), '_markdowns')
-
 export async function getStaticProps() {
-  const path = join(dir, 'about.md')
-  const file = readFileSync(path, 'utf8')
-  const { content } = matter(file)
+  const { body } = getPageMarkdown('about')
 
   return {
     props: {
-      body: content,
+      body,
     },
   }
 }
