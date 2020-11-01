@@ -10,7 +10,7 @@ import { join } from 'path'
  * @returns body: 本文の文字列
  */
 
-interface MarkdownBaseMeta {
+export interface MarkdownBaseMeta {
   date?: string
 }
 
@@ -20,7 +20,7 @@ export function getPageMarkdown<T extends MarkdownBaseMeta>(slug: string) {
   const file = readFileSync(path, 'utf8')
   const { data, content } = matter(file)
   return {
-    head: data as T,
+    meta: data as T,
     body: content,
   }
 }
