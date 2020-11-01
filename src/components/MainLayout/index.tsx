@@ -9,17 +9,18 @@ interface Props {
 
 export default function MainLayout({ children }: Props) {
   return (
-    <Container>
-      <Header></Header>
-      {children}
+    <>
+      <Container>
+        <Header></Header>
+        {children}
+      </Container>
       <Footer></Footer>
-    </Container>
+    </>
   )
 }
 
 const Container = styled.div`
   display: flex;
   flex-flow: column;
-  align-content: space-between;
   min-height: 100vh;
 `
