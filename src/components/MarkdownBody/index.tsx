@@ -1,17 +1,18 @@
 import remark from 'remark'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import react from 'remark-react'
 import { ReactNode } from 'react'
 
 interface Props {
   body: string
+  centered?: boolean
 }
 
-export default function MarkdownBody({ body }: Props) {
-  return <Container>{remark().use(react).processSync(body).result as ReactNode}</Container>
+export default function MarkdownBody({ centered = false, body }: Props) {
+  return <Container centered={centered}>{remark().use(react).processSync(body).result as ReactNode}</Container>
 }
 
-const Container = styled.div`
+const Container = styled.div<{ centered: boolean }>`
   line-height: 1.8em;
 
   &::before {
@@ -143,6 +144,11 @@ const Container = styled.div`
 
   p {
     margin-top: 0;
+    ${(p) =>
+      p.centered &&
+      css`
+        text-align: center;
+      `}
   }
 
   .lang-warning {
