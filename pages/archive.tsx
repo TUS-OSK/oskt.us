@@ -1,6 +1,4 @@
-import MainLayout from 'src/components/MainLayout'
-import MarkdownBody from 'src/components/MarkdownBody'
-import { Section } from 'src/pages/Home/elements'
+import Archive from 'src/pages/Archive'
 import { getPageMarkdown } from './api/markdowns'
 
 interface Props {
@@ -8,13 +6,7 @@ interface Props {
 }
 
 export default function ArchivePage({ body }: Props) {
-  return (
-    <MainLayout>
-      <Section>
-        <MarkdownBody body={body}></MarkdownBody>
-      </Section>
-    </MainLayout>
-  )
+  return <Archive body={body}></Archive>
 }
 
 export async function getStaticProps() {
