@@ -1,5 +1,6 @@
 import { AppProps } from 'next/dist/next-server/lib/router/router'
-import { createGlobalStyle, css } from 'styled-components'
+import { fontSettings } from 'src/utils/fonts'
+import { createGlobalStyle } from 'styled-components'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,24 +12,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp
-
-const fontSettings = css`
-  @font-face {
-    font-family: 'quasimoda';
-    src: url('/fonts/quasimoda-light.otf');
-  }
-
-  @font-face {
-    font-family: 'novecentosans';
-    src: url('/fonts/Novecentosanswide-Book.otf');
-  }
-
-  @font-face {
-    font-family: 'novecentosans';
-    src: url('/fonts/Novecentosanswide-Bold.otf');
-    font-weight: bold;
-  }
-`
 
 const GlobalStyle = createGlobalStyle`
   ${fontSettings}
