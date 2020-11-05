@@ -9,3 +9,5 @@ type ExternalUrlType = keyof typeof externalUrlOrigin
 export const externalTo = (type: ExternalUrlType, path: string) => join(externalUrlOrigin[type], path)
 
 export const mailTo = (to: string) => join('mailto:', to)
+
+export const articleTo = (year: string, slug: string) => join('/', 'articles', year, slug)

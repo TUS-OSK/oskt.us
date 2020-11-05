@@ -1,6 +1,6 @@
 import { isValid } from 'date-fns'
 import News from 'src/pages/News'
-import { getPageMarkdown, getArticlesAll, MarkdownData, MarkdownMeta } from 'api/markdowns'
+import { getPageMarkdown, getArticlesAll, MarkdownMeta, ArticleMarkdownData } from 'api/markdowns'
 import { GetStaticProps } from 'next'
 
 interface Props {
@@ -14,16 +14,17 @@ function notUndefined<T>(item: T | undefined): item is T {
 }
 
 export default function NewsPage({ meta: { title }, body, articlesStr }: Props) {
-  const articles: MarkdownData[] = JSON.parse(articlesStr)
+  const articles: ArticleMarkdownData[] = JSON.parse(articlesStr)
   const filterdMetaList = articles
-    .map(({ path, meta }) => {
+    .map(({ year, slug, meta }) => {
       const { date, caption } = meta
       // NOTE: 表示するのに必要なdataとcaptionがあるものだけfilterする
       if (caption !== undefined && date !== undefined && isValid(new Date(date))) {
         // NOTE: privateがfalseな記事のみNewsで公開する
         return !meta.private
           ? {
-              path,
+              year,
+              slug,
               date: new Date(date),
               caption,
             }

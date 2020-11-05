@@ -5,9 +5,11 @@ import MarkdownBody from 'src/components/MarkdownBody'
 import { Section } from 'src/pages/Home/elements'
 import { StyledLink as StyledLink_ } from 'src/utils/next/elements'
 import styled from 'styled-components'
+import { articleTo } from 'src/utils/urls'
 
 export interface MetaItem {
-  path: string
+  year: string
+  slug: string
   date: Date
   caption: string
 }
@@ -27,10 +29,10 @@ export default function News({ title, body, metaList }: Props) {
       <MainLayout>
         <Section>
           <MarkdownBody body={body}></MarkdownBody>
-          {sortedMetaList.map(({ date, caption, path }) => (
-            <MetaItem key={path}>
+          {sortedMetaList.map(({ year, slug, date, caption }) => (
+            <MetaItem key={articleTo(year, slug)}>
               <Hiduke>{format(date, 'yyyy/MM/dd')}</Hiduke>
-              <StyledLink href={path}>{caption}</StyledLink>
+              <StyledLink href={articleTo(year, slug)}>{caption}</StyledLink>
             </MetaItem>
           ))}
         </Section>

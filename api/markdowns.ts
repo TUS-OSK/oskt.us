@@ -12,19 +12,20 @@ export interface MarkdownBaseMeta {
 export type MarkdownMeta<T = {}> = T & MarkdownBaseMeta
 
 export interface MarkdownData<T = {}> {
-  path: string
   meta: MarkdownMeta<T>
   body: string
 }
 
 const PAGES_DIR_URL = join(process.cwd(), '_pages')
 
+export const createPagePath = (slug: string) => join('/', slug)
+
 /**
  * slug名からmarkdownファイルのデータを取得する
  *
  * @param slug `[slug].md`
  *
- * @returns path: 現在のページPath
+ * @returns slug: 現在のページのSlug名
  * @returns meta: YAML形式で書かれたメタデータ
  * @returns body: 本文の文字列
  */
@@ -33,7 +34,6 @@ export function getPageMarkdown<T = {}>(slug: string): MarkdownData<T> {
   const file = readFileSync(url, 'utf8')
   const { data, content } = matter(file)
   return {
-    path: join('/', slug),
     meta: data as MarkdownMeta<T>,
     body: content,
   }
@@ -41,28 +41,50 @@ export function getPageMarkdown<T = {}>(slug: string): MarkdownData<T> {
 
 const ARTICLES_DIR_PATH = join(process.cwd(), '_articles')
 
-export function getArticleByYearAndFileName(year: string, fileName: string): MarkdownData<MarkdownBaseMeta> {
-  const url = join(ARTICLES_DIR_PATH, year, fileName)
-  const file = readFileSync(url, 'utf8')
+export const createArticlePath = (year: string, slug: string) => join('/', year, slug)
+
+export const createSlugByArticleFileName = (fileName: string) => fileName.replace(/\.md$/, '')
+
+export function getArticleFileByYearAndFileName(year: string, fileName: string) {
+  const path = join(ARTICLES_DIR_PATH, year, fileName)
+  return readFileSync(path, 'utf8')
+}
+
+export interface ArticleMarkdownData<T = {}> extends MarkdownData<T> {
+  year: string
+  slug: string
+}
+
+export function getArticleByYearAndFileName(year: string, fileName: string): ArticleMarkdownData<MarkdownBaseMeta> {
+  const file = getArticleFileByYearAndFileName(year, fileName)
   const { data, content } = matter(file)
-  const slug = fileName.replace(/\.md$/, '')
+  const slug = createSlugByArticleFileName(fileName)
   return {
-    path: join('/', year, slug),
+    year,
+    slug,
     meta: data,
     body: content,
   }
 }
 
-export function getArticlesByYear(year: string) {
+export function getArticleFileNamesByYear(year: string) {
   const path = join(ARTICLES_DIR_PATH, year)
-  const fileNames = readdirSync(path, 'utf8')
+  return readdirSync(path, 'utf8')
+}
+
+export function getArticlesByYear(year: string) {
+  const fileNames = getArticleFileNamesByYear(year)
   return fileNames.map((fileName) => getArticleByYearAndFileName(year, fileName))
 }
 
+export function getArticleYearDirNames() {
+  return readdirSync(ARTICLES_DIR_PATH, 'utf8')
+}
+
 export function getArticlesAll() {
-  const yearDirs = readdirSync(ARTICLES_DIR_PATH, 'utf8')
-  return yearDirs.reduce(
-    (prev: MarkdownData<MarkdownBaseMeta>[], yearDir) => [...prev, ...getArticlesByYear(yearDir)],
+  const yearDirNames = getArticleYearDirNames()
+  return yearDirNames.reduce(
+    (prev: MarkdownData<MarkdownBaseMeta>[], year) => [...prev, ...getArticlesByYear(year)],
     []
   )
 }
