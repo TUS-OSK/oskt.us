@@ -14,6 +14,7 @@ interface Props {
 }
 
 const ICON_HEIGHT = 20
+const TITLE_GAP = 4
 
 export default function Contact({ clubroom, twitterId, mail, body }: Props) {
   return (
@@ -21,18 +22,16 @@ export default function Contact({ clubroom, twitterId, mail, body }: Props) {
       <Section>
         <MarkdownBody centered body={body}></MarkdownBody>
         <ContactList>
-          <ContactItem icon={<HomeIcon size={ICON_HEIGHT}></HomeIcon>} label="Clubroom">
+          <ContactItem icon={<HomeIcon />} label="Clubroom">
             {clubroom}
           </ContactItem>
-          <ContactItem icon={<TwitterIcon size={ICON_HEIGHT}></TwitterIcon>} label="Twitter">
+          <ContactItem icon={<TwitterIcon />} label="Twitter">
             <ExternalLink target="_blank" rel="noopener" href={externalTo('twitter', twitterId)}>
               @{twitterId}
             </ExternalLink>
           </ContactItem>
-          <ContactItem icon={<EnvelopeIcon size={ICON_HEIGHT}></EnvelopeIcon>} label="Mail">
-            <ExternalLink target="_blank" rel="noopener" href={mailTo(mail)}>
-              {mail}
-            </ExternalLink>
+          <ContactItem icon={<EnvelopeIcon />} label="Mail">
+            <ExternalLink href={mailTo(mail)}>{mail}</ExternalLink>
           </ContactItem>
         </ContactList>
       </Section>
@@ -67,7 +66,8 @@ function ContactItem({ icon, label, children }: ContactProps) {
 const ContactTitle = styled.div`
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: ${ICON_HEIGHT}px;
+  line-height: 1;
   font-weight: bold;
   color: #333;
   text-align: center;
@@ -77,7 +77,9 @@ const ContactTitle = styled.div`
 const Icon = styled.span`
   display: inline-flex;
   vertical-align: top;
-  margin-right: 4px;
+  width: ${ICON_HEIGHT}px;
+  height: ${ICON_HEIGHT}px;
+  margin-right: ${TITLE_GAP}px;
 `
 
 const ContactContainer = styled.div`
