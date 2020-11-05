@@ -1,5 +1,5 @@
 import Contact from 'src/pages/Contact'
-import { getPageMarkdown, MarkdownBaseMeta } from './api/markdowns'
+import { getPageMarkdown, MarkdownBaseMeta } from 'api/markdowns'
 
 interface ContactMeta extends MarkdownBaseMeta {
   clubroom: string

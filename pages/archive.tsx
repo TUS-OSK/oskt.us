@@ -1,5 +1,5 @@
 import Archive from 'src/pages/Archive'
-import { getPageMarkdown } from './api/markdowns'
+import { getPageMarkdown } from 'api/markdowns'
 
 interface Props {
   body: string

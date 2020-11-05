@@ -1,5 +1,5 @@
 import Schedule from 'src/pages/Schedule'
-import { getPageMarkdown } from './api/markdowns'
+import { getPageMarkdown } from 'api/markdowns'
 
 interface Props {
   body: string

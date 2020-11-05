@@ -1,6 +1,6 @@
 import { isValid } from 'date-fns'
 import News from 'src/pages/News'
-import { getPostsAll, MarkdownBaseMeta, MarkdownData } from './api/markdowns'
+import { getPostsAll, MarkdownBaseMeta, MarkdownData } from 'api/markdowns'
 
 interface Props {
   postsStr: string
