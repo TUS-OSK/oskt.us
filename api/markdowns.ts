@@ -43,7 +43,8 @@ const ARTICLES_DIR_PATH = join(process.cwd(), '_articles')
 
 export const createArticlePath = (year: string, slug: string) => join('/', year, slug)
 
-export const createSlugByArticleFileName = (fileName: string) => fileName.replace(/\.md$/, '')
+export const convertMarkdownFileNameToSlug = (fileName: string) => fileName.replace(/\.md$/, '')
+export const convertSlugToMarkdownFileName = (slug: string) => `${slug}.md`
 
 export function getArticleFileByYearAndFileName(year: string, fileName: string) {
   const path = join(ARTICLES_DIR_PATH, year, fileName)
@@ -58,7 +59,7 @@ export interface ArticleMarkdownData<T = {}> extends MarkdownData<T> {
 export function getArticleByYearAndFileName(year: string, fileName: string): ArticleMarkdownData<MarkdownBaseMeta> {
   const file = getArticleFileByYearAndFileName(year, fileName)
   const { data, content } = matter(file)
-  const slug = createSlugByArticleFileName(fileName)
+  const slug = convertMarkdownFileNameToSlug(fileName)
   return {
     year,
     slug,

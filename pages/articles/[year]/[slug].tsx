@@ -1,22 +1,37 @@
-import { createSlugByArticleFileName, getArticleFileNamesByYear, getArticleYearDirNames } from 'api/markdowns'
+import {
+  convertMarkdownFileNameToSlug,
+  convertSlugToMarkdownFileName,
+  getArticleByYearAndFileName,
+  getArticleFileNamesByYear,
+  getArticleYearDirNames,
+} from 'api/markdowns'
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
 import Article from 'src/pages/Article'
 
-interface Props {}
-
-export default function AboutPage({}: Props) {
-  return <Article />
+interface Props {
+  body: string
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  return {
-    props: {},
-  }
+export default function AboutPage({ body }: Props) {
+  return <Article title={undefined} body={body} />
 }
 
 type Paths = {
   year?: string
   slug?: string
+}
+
+export const getStaticProps: GetStaticProps<Props, Paths> = async ({ params }) => {
+  // NOTE: [year]/[slug].tsxの中だったらparamsは全部入るはず？だと思っているけどそうじゃなかったらごめんなさい
+  // https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+  const { year, slug } = params!
+  const fileName = convertSlugToMarkdownFileName(slug!)
+  const { body } = getArticleByYearAndFileName(year!, fileName)
+  return {
+    props: {
+      body,
+    },
+  }
 }
 
 export const getStaticPaths: GetStaticPaths<Paths> = async () => {
@@ -32,7 +47,7 @@ export const getStaticPaths: GetStaticPaths<Paths> = async () => {
           ...fileNames.map((fileName) => ({
             params: {
               year,
-              slug: createSlugByArticleFileName(fileName),
+              slug: convertMarkdownFileNameToSlug(fileName),
             },
           })),
         ],
