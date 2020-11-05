@@ -1,6 +1,7 @@
 import { isValid } from 'date-fns'
 import News from 'src/pages/News'
 import { getPageMarkdown, getArticlesAll, MarkdownData, MarkdownMeta } from 'api/markdowns'
+import { GetStaticProps } from 'next'
 
 interface Props {
   meta: MarkdownMeta
@@ -34,7 +35,7 @@ export default function NewsPage({ meta: { title }, body, articlesStr }: Props) 
   return <News title={title} body={body} metaList={filterdMetaList}></News>
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const articles = getArticlesAll()
   const { meta, body } = getPageMarkdown('news')
 

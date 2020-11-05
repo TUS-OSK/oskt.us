@@ -1,5 +1,6 @@
 import Contact from 'src/pages/Contact'
 import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
+import { GetStaticProps } from 'next'
 
 interface ContactMeta {
   clubroom: string
@@ -18,7 +19,7 @@ export default function ContactPage({ meta, body }: Props) {
   return <Contact title={title} clubroom={clubroom} twitterId={twitterId} mail={mail} body={body} />
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const { meta, body } = getPageMarkdown<ContactMeta>('contact')
 
   return {
