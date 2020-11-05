@@ -39,10 +39,10 @@ export function getPageMarkdown<T = {}>(slug: string): MarkdownData<T> {
   }
 }
 
-const POSTS_DIR_URL = join(process.cwd(), '_posts')
+const ARTICLES_DIR_PATH = join(process.cwd(), '_articles')
 
-export function getPostByYearAndFileName(year: string, fileName: string): MarkdownData<MarkdownBaseMeta> {
-  const url = join(POSTS_DIR_URL, year, fileName)
+export function getArticleByYearAndFileName(year: string, fileName: string): MarkdownData<MarkdownBaseMeta> {
+  const url = join(ARTICLES_DIR_PATH, year, fileName)
   const file = readFileSync(url, 'utf8')
   const { data, content } = matter(file)
   const slug = fileName.replace(/\.md$/, '')
@@ -53,13 +53,16 @@ export function getPostByYearAndFileName(year: string, fileName: string): Markdo
   }
 }
 
-export function getPostsByYear(year: string) {
-  const path = join(POSTS_DIR_URL, year)
+export function getArticlesByYear(year: string) {
+  const path = join(ARTICLES_DIR_PATH, year)
   const fileNames = readdirSync(path, 'utf8')
-  return fileNames.map((fileName) => getPostByYearAndFileName(year, fileName))
+  return fileNames.map((fileName) => getArticleByYearAndFileName(year, fileName))
 }
 
-export function getPostsAll() {
-  const yearDirs = readdirSync(POSTS_DIR_URL, 'utf8')
-  return yearDirs.reduce((prev: MarkdownData<MarkdownBaseMeta>[], yearDir) => [...prev, ...getPostsByYear(yearDir)], [])
+export function getArticlesAll() {
+  const yearDirs = readdirSync(ARTICLES_DIR_PATH, 'utf8')
+  return yearDirs.reduce(
+    (prev: MarkdownData<MarkdownBaseMeta>[], yearDir) => [...prev, ...getArticlesByYear(yearDir)],
+    []
+  )
 }
