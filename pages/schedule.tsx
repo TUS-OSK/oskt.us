@@ -1,19 +1,21 @@
 import Schedule from 'src/pages/Schedule'
-import { getPageMarkdown } from 'api/markdowns'
+import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
 
 interface Props {
+  meta: MarkdownMeta
   body: string
 }
 
-export default function SchedulePage({ body }: Props) {
-  return <Schedule body={body}></Schedule>
+export default function SchedulePage({ meta: { title }, body }: Props) {
+  return <Schedule title={title} body={body} />
 }
 
 export async function getStaticProps() {
-  const { body } = getPageMarkdown('schedule')
+  const { meta, body } = getPageMarkdown('schedule')
 
   return {
     props: {
+      meta,
       body,
     },
   }

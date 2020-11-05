@@ -1,19 +1,21 @@
 import About from 'src/pages/About'
-import { getPageMarkdown } from 'api/markdowns'
+import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
 
 interface Props {
+  meta: MarkdownMeta
   body: string
 }
 
-export default function AboutPage({ body }: Props) {
-  return <About body={body}></About>
+export default function AboutPage({ meta: { title }, body }: Props) {
+  return <About title={title} body={body} />
 }
 
 export async function getStaticProps() {
-  const { body } = getPageMarkdown('about')
+  const { meta, body } = getPageMarkdown('about')
 
   return {
     props: {
+      meta,
       body,
     },
   }

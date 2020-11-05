@@ -1,8 +1,10 @@
 import { isValid } from 'date-fns'
 import News from 'src/pages/News'
-import { getPostsAll, MarkdownBaseMeta, MarkdownData } from 'api/markdowns'
+import { getPageMarkdown, getPostsAll, MarkdownData, MarkdownMeta } from 'api/markdowns'
 
 interface Props {
+  meta: MarkdownMeta
+  body: string
   postsStr: string
 }
 
@@ -10,8 +12,8 @@ function notUndefined<T>(item: T | undefined): item is T {
   return item !== undefined
 }
 
-export default function NewsPage({ postsStr }: Props) {
-  const posts: MarkdownData<MarkdownBaseMeta>[] = JSON.parse(postsStr)
+export default function NewsPage({ meta: { title }, body, postsStr }: Props) {
+  const posts: MarkdownData[] = JSON.parse(postsStr)
   const filterdMetaList = posts
     .map(({ path, meta }) => {
       const { date, caption } = meta
@@ -29,14 +31,17 @@ export default function NewsPage({ postsStr }: Props) {
     })
     .filter(notUndefined)
 
-  return <News metaList={filterdMetaList}></News>
+  return <News title={title} body={body} metaList={filterdMetaList}></News>
 }
 
 export async function getStaticProps() {
   const posts = getPostsAll()
+  const { meta, body } = getPageMarkdown('news')
 
   return {
     props: {
+      meta,
+      body,
       postsStr: JSON.stringify(posts),
     },
   }

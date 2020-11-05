@@ -1,21 +1,21 @@
 import Contact from 'src/pages/Contact'
-import { getPageMarkdown, MarkdownBaseMeta } from 'api/markdowns'
+import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
 
-interface ContactMeta extends MarkdownBaseMeta {
+interface ContactMeta {
   clubroom: string
   twitterId: string
   mail: string
 }
 
 interface Props {
-  meta: ContactMeta
+  meta: MarkdownMeta<ContactMeta>
   body: string
 }
 
 export default function ContactPage({ meta, body }: Props) {
-  const { clubroom, twitterId, mail } = meta
+  const { clubroom, twitterId, mail, title } = meta
 
-  return <Contact clubroom={clubroom} twitterId={twitterId} mail={mail} body={body}></Contact>
+  return <Contact title={title} clubroom={clubroom} twitterId={twitterId} mail={mail} body={body} />
 }
 
 export async function getStaticProps() {

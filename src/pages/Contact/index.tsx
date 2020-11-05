@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
 import MarkdownBody from 'src/components/MarkdownBody'
 import { Section } from 'src/pages/Home/elements'
@@ -7,6 +8,7 @@ import styled from 'styled-components'
 import { EnvelopeIcon, HomeIcon, TwitterIcon } from './icons'
 
 interface Props {
+  title?: string
   clubroom: string
   twitterId: string
   mail: string
@@ -16,26 +18,29 @@ interface Props {
 const ICON_HEIGHT = 20
 const TITLE_GAP = 4
 
-export default function Contact({ clubroom, twitterId, mail, body }: Props) {
+export default function Contact({ title, clubroom, twitterId, mail, body }: Props) {
   return (
-    <MainLayout>
-      <Section>
-        <MarkdownBody centered body={body}></MarkdownBody>
-        <ContactList>
-          <ContactItem icon={<HomeIcon />} label="Clubroom">
-            {clubroom}
-          </ContactItem>
-          <ContactItem icon={<TwitterIcon />} label="Twitter">
-            <ExternalLink target="_blank" rel="noopener" href={externalTo('twitter', twitterId)}>
-              @{twitterId}
-            </ExternalLink>
-          </ContactItem>
-          <ContactItem icon={<EnvelopeIcon />} label="Mail">
-            <ExternalLink href={mailTo(mail)}>{mail}</ExternalLink>
-          </ContactItem>
-        </ContactList>
-      </Section>
-    </MainLayout>
+    <>
+      <PageHead title={{ sub: title }}></PageHead>
+      <MainLayout>
+        <Section>
+          <MarkdownBody centered body={body}></MarkdownBody>
+          <ContactList>
+            <ContactItem icon={<HomeIcon />} label="Clubroom">
+              {clubroom}
+            </ContactItem>
+            <ContactItem icon={<TwitterIcon />} label="Twitter">
+              <ExternalLink target="_blank" rel="noopener" href={externalTo('twitter', twitterId)}>
+                @{twitterId}
+              </ExternalLink>
+            </ContactItem>
+            <ContactItem icon={<EnvelopeIcon />} label="Mail">
+              <ExternalLink href={mailTo(mail)}>{mail}</ExternalLink>
+            </ContactItem>
+          </ContactList>
+        </Section>
+      </MainLayout>
+    </>
   )
 }
 

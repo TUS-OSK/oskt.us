@@ -2,35 +2,39 @@ import { readdirSync, readFileSync } from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
 
-/**
- * slug名からmarkdownファイルのデータを取得する
- *
- * @param slug `[slug].md`
- * @returns meta: YAML形式で書かれたメタデータ
- * @returns body: 本文の文字列
- */
-
 export interface MarkdownBaseMeta {
+  title?: string
   date?: string
   caption?: string
   private?: boolean
 }
 
-export interface MarkdownData<T extends MarkdownBaseMeta> {
+export type MarkdownMeta<T = {}> = T & MarkdownBaseMeta
+
+export interface MarkdownData<T = {}> {
   path: string
-  meta: T
+  meta: MarkdownMeta<T>
   body: string
 }
 
 const PAGES_DIR_URL = join(process.cwd(), '_pages')
 
-export function getPageMarkdown<T>(slug: string): MarkdownData<T> {
+/**
+ * slug名からmarkdownファイルのデータを取得する
+ *
+ * @param slug `[slug].md`
+ *
+ * @returns path: 現在のページPath
+ * @returns meta: YAML形式で書かれたメタデータ
+ * @returns body: 本文の文字列
+ */
+export function getPageMarkdown<T = {}>(slug: string): MarkdownData<T> {
   const url = join(PAGES_DIR_URL, `${slug}.md`)
   const file = readFileSync(url, 'utf8')
   const { data, content } = matter(file)
   return {
     path: join('/', slug),
-    meta: data as T,
+    meta: data as MarkdownMeta<T>,
     body: content,
   }
 }
