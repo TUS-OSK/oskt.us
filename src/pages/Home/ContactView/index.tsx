@@ -1,5 +1,6 @@
 import { SectionTitle } from 'src/components/MainLayout/elements'
 import { EnvelopeIcon, MarkerIcon, TwitterIcon } from 'src/pages/Contact/icons'
+import { externalTo, mailTo } from 'src/utils/urls'
 import styled from 'styled-components'
 import { CommentsIcon, CompassIcon } from './icons'
 
@@ -37,13 +38,15 @@ export default function ContactView({ contactData: { clubroom, twitterId, mail }
           <IconWrapper>
             <TwitterIcon />
           </IconWrapper>
-          @{twitterId}
+          <ExternalLink target="_blank" rel="noopener" href={externalTo('twitter', twitterId)}>
+            @{twitterId}
+          </ExternalLink>
         </Item>
         <Item>
           <IconWrapper>
             <EnvelopeIcon />
           </IconWrapper>
-          {mail}
+          <ExternalLink href={mailTo(mail)}>{mail}</ExternalLink>
         </Item>
       </ContactSection>
     </Container>
@@ -96,3 +99,5 @@ const IconWrapper = styled.div`
   height: ${ITEM_HEIGHT}px;
   margin-right: 4px;
 `
+
+const ExternalLink = styled.a``
