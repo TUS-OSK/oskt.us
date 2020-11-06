@@ -100,4 +100,6 @@ const IconWrapper = styled.div`
   margin-right: 4px;
 `
 
-const ExternalLink = styled.a``
+const ExternalLink = styled.a`
+  color: #333;
+`
