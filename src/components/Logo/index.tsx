@@ -35,6 +35,12 @@ const Container = styled.span`
   line-height: 1;
   font-size: ${HEIGHT}px;
   font-weight: bold;
+  color: #333;
+  transition: 0.4s transform ease;
+
+  :hover {
+    transform: scale(1.1);
+  }
 `
 
 const Icon = styled.span`

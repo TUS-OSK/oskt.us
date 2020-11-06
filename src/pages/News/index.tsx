@@ -61,16 +61,17 @@ const MetaListContainer = styled.ul`
 
 const MetaItem = styled.li`
   list-style: none;
-  color: #333;
   margin-bottom: 24px;
 `
 
 const Hiduke = styled.time`
+  color: #333;
   font-weight: bold;
   font-family: 'novecentosans', sans-serif;
   margin-right: 8px;
 `
 
 const StyledLink = styled(StyledLink_)`
+  color: #333;
   text-decoration: underline;
 `

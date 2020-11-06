@@ -20,3 +20,7 @@ export const urlArticleMdEdit = (year: string, slug: string) =>
 export const mailTo = (to: string) => join('mailto:', to)
 
 export const articleTo = (year: string, slug: string) => join('/', 'articles', year, slug)
+
+export type PageType = 'about' | 'archive' | 'contact' | 'faq' | 'top' | 'news' | 'schedule'
+
+export const pageTo = (page: PageType) => join('/', page)

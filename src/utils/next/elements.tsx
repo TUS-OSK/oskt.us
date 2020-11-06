@@ -10,7 +10,7 @@ interface StyledLinkProps {
 
 export function StyledLink({ href, children, className }: StyledLinkProps) {
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <StyledLink_ className={className}>{children}</StyledLink_>
     </Link>
   )

@@ -40,21 +40,21 @@ export function EnvelopeIcon() {
   )
 }
 
-export function HomeIcon() {
+export function MarkerIcon() {
   return (
     <StyledSvg
       aria-hidden="true"
       focusable="false"
       data-prefix="fas"
-      data-icon="home"
-      className="svg-inline--fa fa-home fa-w-18"
+      data-icon="map-marker-alt"
+      className="svg-inline--fa fa-map-marker-alt fa-w-12"
       role="img"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 576 512"
+      viewBox="0 0 384 512"
     >
       <path
         fill="currentColor"
-        d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"
+        d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
       ></path>
     </StyledSvg>
   )

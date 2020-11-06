@@ -1,24 +1,28 @@
 import { PageHead } from 'src/components/Head'
-import styled from 'styled-components'
-import AboutView from './AboutView'
-import ContactView from './ContactView'
+import AboutView, { AboutData } from './AboutView'
+import ContactView, { ContactData } from './ContactView'
 import HeroView from './HeroView'
 import NewsView from './NewsView'
 import ScheduleView from './ScheduleView'
+import { NewsData } from './NewsView'
+import Footer from 'src/components/Footer'
 
-export default function Home() {
+interface Props {
+  newsData: NewsData
+  aboutData: AboutData
+  contactData: ContactData
+}
+
+export default function Home({ newsData, aboutData, contactData }: Props) {
   return (
     <>
       <PageHead />
-      <Container>
-        <HeroView></HeroView>
-        <AboutView></AboutView>
-        <ScheduleView></ScheduleView>
-        <NewsView></NewsView>
-        <ContactView></ContactView>
-      </Container>
+      <HeroView></HeroView>
+      <AboutView aboutData={aboutData}></AboutView>
+      <ScheduleView></ScheduleView>
+      <NewsView newsData={newsData}></NewsView>
+      <ContactView contactData={contactData}></ContactView>
+      <Footer></Footer>
     </>
   )
 }
-
-const Container = styled.div``

@@ -1,21 +1,29 @@
 import Button from 'src/components/Button'
 import styled from 'styled-components'
 import { Section } from 'src/components/MainLayout/elements'
+import { pageTo } from 'src/utils/urls'
 
-export default function AboutView() {
+export interface AboutData {
+  caption: string
+}
+
+interface Props {
+  aboutData: AboutData
+}
+
+const PRIMARY_COLOR = '#bbb'
+const SECONDARY_COLOR = '#333'
+
+export default function AboutView({ aboutData: { caption } }: Props) {
   return (
     <Container>
       <Text>OSK</Text>
       <Content>
-        <p>
-          応用数学研究部(応数研,
-          OSK)は東京理科大学一部研究会に属する部活動団体で、創部から半世紀以上たつ歴史ある団体です。
-        </p>
-        <p>
-          コンピュータを利用してプログラミングを主に、計算機科学、WEB開発、アプリケーション開発、ゲーム開発、など様々なことに挑戦しています。
-        </p>
+        {caption}
         <ButtonWrapper>
-          <Button href="#">DETAIL</Button>
+          <Button color={{ primary: PRIMARY_COLOR, secondary: SECONDARY_COLOR }} href={pageTo('about')}>
+            DETAIL
+          </Button>
         </ButtonWrapper>
       </Content>
     </Container>

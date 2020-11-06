@@ -65,7 +65,8 @@ const Container = styled.div<{ centered: boolean }>`
     color: #da6272;
     font-weight: bold;
     transition-property: background-color, color, opacity;
-    transition-duration: 0.5s;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
     font-size: 0.8em;
 
     &::before {
@@ -77,7 +78,8 @@ const Container = styled.div<{ centered: boolean }>`
       border-right: 2px solid #da6272;
       transform: translateX(-6px) rotate(45deg);
       transition-property: border-top, border-right;
-      transition-duration: 0.5s;
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
     }
 
     &:hover {

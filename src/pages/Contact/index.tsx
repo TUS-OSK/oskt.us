@@ -5,7 +5,7 @@ import MarkdownBody from 'src/components/MarkdownBody'
 import { FixedSizeContents, Section } from 'src/components/MainLayout/elements'
 import { externalTo, mailTo, urlPageMdEdit } from 'src/utils/urls'
 import styled from 'styled-components'
-import { EnvelopeIcon, HomeIcon, TwitterIcon } from './icons'
+import { EnvelopeIcon, MarkerIcon, TwitterIcon } from './icons'
 
 interface Props {
   title?: string
@@ -26,7 +26,7 @@ export default function Contact({ title, clubroom, twitterId, mail, body }: Prop
         <Section>
           <FixedSizeContents size={440}>
             <ContactList>
-              <ContactItem icon={<HomeIcon />} label="Clubroom">
+              <ContactItem icon={<MarkerIcon />} label="Clubroom">
                 {clubroom}
               </ContactItem>
               <ContactItem icon={<TwitterIcon />} label="Twitter">

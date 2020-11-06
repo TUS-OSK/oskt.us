@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { Section } from 'src/components/MainLayout/elements'
+import { Section, SectionTitle } from 'src/components/MainLayout/elements'
 
 export default function ScheduleView() {
   return (
     <Container>
-      <div className="title">SCHEDULE</div>
+      <SectionTitle>SCHEDULE</SectionTitle>
       <div className="content">
         <div className="timeline">
           <div className="header">
@@ -27,26 +27,26 @@ export default function ScheduleView() {
               <div className="row label">3</div>
             </div>
             <div className="detail column">
-              <a href="#page/2019/lecture" className="row events big l-group">
+              <span className="row events big l-group">
                 <div className="ja">レクチャー班活動</div>
                 <div className="en">Lecture Groups</div>
-              </a>
-              <a href="#page/main/schedule" className="row events small summer-camp">
+              </span>
+              <span className="row events small summer-camp">
                 <div className="ja">夏合宿</div>
                 <div className="en">Summer Camp</div>
-              </a>
-              <a href="#page/2017/festival" className="row events small festival">
+              </span>
+              <span className="row events small festival">
                 <div className="ja">理大祭</div>
                 <div className="en">Festival</div>
-              </a>
-              <a href="#page/2019/project" className="row events big p-group">
+              </span>
+              <span className="row events big p-group">
                 <div className="ja">プロジェクト班活動</div>
                 <div className="en">Project Groups</div>
-              </a>
-              <a href="#page/main/schedule" className="row events small winter-camp">
+              </span>
+              <span className="row events small winter-camp">
                 <div className="ja">冬合宿</div>
                 <div className="en">Winter Camp</div>
-              </a>
+              </span>
             </div>
           </div>
         </div>
@@ -55,30 +55,18 @@ export default function ScheduleView() {
   )
 }
 
-// :root {
-//   --grid: 40px;
-//   --margin: 5px;
-//   --grid-border: 1px;
-//   --alpha-base-color: color(var(--base-color) alpha(70%));
-//   --dark-sub-color: color(var(--sub-color) lightness(-8%));
-// }
+const GRID = 40
+const MARGIN = 5
+const GRID_BODER = 1
 
+const BASE_COLOR = '#5d639e'
+const ALPHA_BASE_COLOR = 'rgba(93, 100, 158, 0.7)'
+const SUB_COLOR = '#da6272'
+const DARK_SUB_COLOR = '#d24154'
+
+// FIXME: ちゃんとする
 const Container = styled(Section)`
   overflow: hidden;
-
-  & .title {
-    /* @apply --section-title;
-
-    @media (max-width: 700px) {
-      @apply --section-title-small;
-    } */
-
-    font-family: 'novecentosans';
-    font-weight: bold;
-    text-align: center;
-    font-size: 25px;
-    /* color: var(--primary-color); */
-  }
 
   & .timeline {
     width: 80%;
@@ -118,7 +106,7 @@ const Container = styled(Section)`
   & .label {
     font-size: 15px;
     box-sizing: border-box;
-    /* height: var(--grid); */
+    height: ${GRID}px;
     border-top: 1px solid #ddd;
     padding: 3px 5px;
   }
@@ -134,7 +122,6 @@ const Container = styled(Section)`
     transition-property: transform, box-shadow;
     transition-duration: 0.15s;
     transition-timing-function: ease;
-    cursor: pointer;
     user-select: none;
     white-space: nowrap;
     text-decoration: none;
@@ -154,13 +141,14 @@ const Container = styled(Section)`
     }
 
     &:hover {
-      /* transition-timing-function: var(--parabola); */
+      transition-timing-function: ease;
       transform: scale(1.05);
       box-shadow: 0 2px 10px 0 #0003;
 
-      &::after {
+      /* FIXME: ちゃんとする */
+      /* &::after {
         opacity: 1;
-      }
+      } */
     }
 
     &::after {
@@ -178,47 +166,47 @@ const Container = styled(Section)`
     &.big {
       width: 80%;
       left: 10%;
-      /* border-color: var(--base-color);
-      background-color: var(--alpha-base-color); */
+      border-color: ${BASE_COLOR};
+      background-color: ${ALPHA_BASE_COLOR};
       z-index: 1;
 
       &::after {
-        color: var(--base-color);
+        color: ${BASE_COLOR};
       }
     }
 
     &.small {
       width: 60%;
       left: 20%;
-      /* background-color: var(--sub-color);
-      border-color: var(--dark-sub-color); */
+      border-color: ${DARK_SUB_COLOR};
+      background-color: ${SUB_COLOR};
       z-index: 2;
 
-      /* &::after {
-        color: var(--dark-sub-color);
-      } */
+      &::after {
+        color: ${DARK_SUB_COLOR};
+      }
     }
   }
 
-  /* & .l-group {
-    height: calc(var(--grid) * 8 - var(--margin) * 2 - var(--grid-border));
-    top: calc(var(--margin) + var(--grid-border));
+  & .l-group {
+    height: ${GRID * 8 - MARGIN * 2 - GRID_BODER}px;
+    top: ${MARGIN + GRID_BODER}px;
   }
 
   & .summer-camp {
-    top: calc(var(--grid) * 4);
+    top: ${GRID * 4}px;
   }
 
   & .festival {
-    top: calc(var(--grid) * 7);
+    top: ${GRID * 7}px;
   }
 
   & .p-group {
-    height: calc(var(--grid) * 4 - var(--margin) * 2 - var(--grid-border));
-    top: calc(var(--grid) * 8 + var(--margin) + var(--grid-border));
+    height: ${GRID * 4 - MARGIN * 2 - GRID_BODER}px;
+    top: ${GRID * 8 + MARGIN + GRID_BODER}px;
   }
 
   & .winter-camp {
-    top: calc(var(--grid) * 10);
-  } */
+    top: ${GRID * 10}px;
+  }
 `
