@@ -7,8 +7,8 @@ interface Props {
   body: string
 }
 
-export default function ArchivePage({ body }: Props) {
-  return <Archive body={body} />
+export default function ArchivePage({ meta: { title }, body }: Props) {
+  return <Archive title={title} body={body} />
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {

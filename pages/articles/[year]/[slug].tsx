@@ -4,16 +4,18 @@ import {
   getArticleByYearAndFileName,
   getArticleFileNamesByYear,
   getArticleYearDirNames,
+  MarkdownMeta,
 } from 'api/markdowns'
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
 import Article from 'src/pages/Article'
 
 interface Props {
+  meta: MarkdownMeta
   body: string
 }
 
-export default function AboutPage({ body }: Props) {
-  return <Article title={undefined} body={body} />
+export default function AboutPage({ meta: { title }, body }: Props) {
+  return <Article title={title} body={body} />
 }
 
 type Paths = {
@@ -26,9 +28,10 @@ export const getStaticProps: GetStaticProps<Props, Paths> = async ({ params }) =
   // https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
   const { year, slug } = params!
   const fileName = convertSlugToMarkdownFileName(slug!)
-  const { body } = getArticleByYearAndFileName(year!, fileName)
+  const { meta, body } = getArticleByYearAndFileName(year!, fileName)
   return {
     props: {
+      meta,
       body,
     },
   }
