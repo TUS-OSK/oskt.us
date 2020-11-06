@@ -2,6 +2,7 @@ import { isValid } from 'date-fns'
 import News from 'src/pages/News'
 import { getPageMarkdown, getArticlesAll, MarkdownMeta, ArticleMarkdownData } from 'api/markdowns'
 import { GetStaticProps } from 'next'
+import { notUndefined } from 'src/utils/api'
 
 interface Props {
   meta: MarkdownMeta
@@ -9,13 +10,8 @@ interface Props {
   articlesStr: string
 }
 
-function notUndefined<T>(item: T | undefined): item is T {
-  return item !== undefined
-}
-
-export default function NewsPage({ meta: { title }, body, articlesStr }: Props) {
-  const articles: ArticleMarkdownData[] = JSON.parse(articlesStr)
-  const filterdMetaList = articles
+export function createfilterdArticleMetaList(articles: ArticleMarkdownData[]) {
+  return articles
     .map(({ year, slug, meta }) => {
       const { date, caption } = meta
       // NOTE: 表示するのに必要なdataとcaptionがあるものだけfilterする
@@ -32,8 +28,13 @@ export default function NewsPage({ meta: { title }, body, articlesStr }: Props) 
       }
     })
     .filter(notUndefined)
+}
 
-  return <News title={title} body={body} metaList={filterdMetaList}></News>
+export default function NewsPage({ meta: { title }, body, articlesStr }: Props) {
+  const articles: ArticleMarkdownData[] = JSON.parse(articlesStr)
+  const filterdArticleMetaList = createfilterdArticleMetaList(articles)
+
+  return <News title={title} body={body} metaList={filterdArticleMetaList}></News>
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {

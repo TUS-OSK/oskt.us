@@ -2,7 +2,7 @@ import Contact from 'src/pages/Contact'
 import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
 import { GetStaticProps } from 'next'
 
-interface ContactMeta {
+export interface ContactMeta {
   clubroom: string
   twitterId: string
   mail: string
