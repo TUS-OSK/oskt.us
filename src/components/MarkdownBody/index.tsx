@@ -4,13 +4,34 @@ import react from 'remark-react'
 import { ReactNode } from 'react'
 
 interface Props {
+  editRequestUrl?: string
   body: string
   centered?: boolean
 }
 
-export default function MarkdownBody({ centered = false, body }: Props) {
-  return <Container centered={centered}>{remark().use(react).processSync(body).result as ReactNode}</Container>
+export default function MarkdownBody({ editRequestUrl, centered = false, body }: Props) {
+  return (
+    <>
+      <Container centered={centered}>{remark().use(react).processSync(body).result as ReactNode}</Container>
+      {editRequestUrl && (
+        <EditRequestContainer>
+          <ExternalLink target="_blank" rel="noopener" href={editRequestUrl}>
+            このページの編集をリクエストする
+          </ExternalLink>
+        </EditRequestContainer>
+      )}
+    </>
+  )
 }
+
+const EditRequestContainer = styled.div`
+  padding: 40px 0;
+`
+
+const ExternalLink = styled.a`
+  color: #bbb;
+  font-size: 14px;
+`
 
 const Container = styled.div<{ centered: boolean }>`
   line-height: 1.8em;

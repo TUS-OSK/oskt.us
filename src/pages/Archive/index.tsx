@@ -3,6 +3,7 @@ import MainLayout from 'src/components/MainLayout'
 import MarkdownBody from 'src/components/MarkdownBody'
 import MarkdownTitle from 'src/components/MarkdownTitle'
 import { Section } from 'src/components/MainLayout/elements'
+import { urlPageMdEdit } from 'src/utils/urls'
 
 interface Props {
   title?: string
@@ -16,7 +17,7 @@ export default function Archive({ title, body }: Props) {
       <MainLayout>
         <Section>
           {title && <MarkdownTitle title={title}></MarkdownTitle>}
-          <MarkdownBody body={body}></MarkdownBody>
+          <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('archive')}></MarkdownBody>
         </Section>
       </MainLayout>
     </>

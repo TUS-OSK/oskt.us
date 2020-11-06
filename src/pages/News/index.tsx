@@ -5,7 +5,7 @@ import MarkdownBody from 'src/components/MarkdownBody'
 import { FixedSizeContents, Section } from 'src/components/MainLayout/elements'
 import { StyledLink as StyledLink_ } from 'src/utils/next/elements'
 import styled from 'styled-components'
-import { articleTo } from 'src/utils/urls'
+import { articleTo, urlPageMdEdit } from 'src/utils/urls'
 
 export interface MetaItem {
   year: string
@@ -29,13 +29,13 @@ export default function News({ title, body, metaList }: Props) {
       <MainLayout>
         <Section>
           <FixedSizeContents size={520}>
-            <MarkdownBody body={body}></MarkdownBody>
             {sortedMetaList.map(({ year, slug, date, caption }) => (
               <MetaItem key={articleTo(year, slug)}>
                 <Hiduke>{format(date, 'yyyy/MM/dd')}</Hiduke>
                 <StyledLink href={articleTo(year, slug)}>{caption}</StyledLink>
               </MetaItem>
             ))}
+            <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('archive')}></MarkdownBody>
           </FixedSizeContents>
         </Section>
       </MainLayout>

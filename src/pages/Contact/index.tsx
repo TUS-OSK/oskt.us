@@ -2,8 +2,8 @@ import { ReactNode } from 'react'
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
 import MarkdownBody from 'src/components/MarkdownBody'
-import { Section } from 'src/components/MainLayout/elements'
-import { externalTo, mailTo } from 'src/utils/urls'
+import { FixedSizeContents, Section } from 'src/components/MainLayout/elements'
+import { externalTo, mailTo, urlPageMdEdit } from 'src/utils/urls'
 import styled from 'styled-components'
 import { EnvelopeIcon, HomeIcon, TwitterIcon } from './icons'
 
@@ -24,20 +24,22 @@ export default function Contact({ title, clubroom, twitterId, mail, body }: Prop
       <PageHead title={title}></PageHead>
       <MainLayout>
         <Section>
-          <MarkdownBody centered body={body}></MarkdownBody>
-          <ContactList>
-            <ContactItem icon={<HomeIcon />} label="Clubroom">
-              {clubroom}
-            </ContactItem>
-            <ContactItem icon={<TwitterIcon />} label="Twitter">
-              <ExternalLink target="_blank" rel="noopener" href={externalTo('twitter', twitterId)}>
-                @{twitterId}
-              </ExternalLink>
-            </ContactItem>
-            <ContactItem icon={<EnvelopeIcon />} label="Mail">
-              <ExternalLink href={mailTo(mail)}>{mail}</ExternalLink>
-            </ContactItem>
-          </ContactList>
+          <FixedSizeContents size={440}>
+            <ContactList>
+              <ContactItem icon={<HomeIcon />} label="Clubroom">
+                {clubroom}
+              </ContactItem>
+              <ContactItem icon={<TwitterIcon />} label="Twitter">
+                <ExternalLink target="_blank" rel="noopener" href={externalTo('twitter', twitterId)}>
+                  @{twitterId}
+                </ExternalLink>
+              </ContactItem>
+              <ContactItem icon={<EnvelopeIcon />} label="Mail">
+                <ExternalLink href={mailTo(mail)}>{mail}</ExternalLink>
+              </ContactItem>
+            </ContactList>
+            <MarkdownBody centered body={body} editRequestUrl={urlPageMdEdit('archive')}></MarkdownBody>
+          </FixedSizeContents>
         </Section>
       </MainLayout>
     </>
@@ -88,7 +90,7 @@ const Icon = styled.span`
 `
 
 const ContactContainer = styled.div`
-  margin-top: 40px;
+  margin-bottom: 40px;
   display: flex;
   flex-flow: column;
   align-items: center;

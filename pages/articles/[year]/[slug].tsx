@@ -11,11 +11,13 @@ import Article from 'src/pages/Article'
 
 interface Props {
   meta: MarkdownMeta
+  year: string
+  slug: string
   body: string
 }
 
-export default function AboutPage({ meta: { title }, body }: Props) {
-  return <Article title={title} body={body} />
+export default function AboutPage({ meta: { title }, year, slug, body }: Props) {
+  return <Article title={title} year={year} slug={slug} body={body} />
 }
 
 type Paths = {
@@ -32,6 +34,8 @@ export const getStaticProps: GetStaticProps<Props, Paths> = async ({ params }) =
   return {
     props: {
       meta,
+      year: year!,
+      slug: slug!,
       body,
     },
   }
