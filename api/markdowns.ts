@@ -16,7 +16,7 @@ export interface MarkdownData<T = {}> {
   body: string
 }
 
-const PAGES_DIR_URL = join(process.cwd(), '_pages')
+const PAGES_DIR_URL = join(process.cwd(), '_pages', 'markdowns')
 
 export const createPagePath = (slug: string) => join('/', slug)
 
@@ -39,7 +39,7 @@ export function getPageMarkdown<T = {}>(slug: string): MarkdownData<T> {
   }
 }
 
-const ARTICLES_DIR_PATH = join(process.cwd(), '_articles')
+const ARTICLES_DIR_PATH = join(process.cwd(), '_articles', 'markdowns')
 
 export const createArticlePath = (year: string, slug: string) => join('/', year, slug)
 
