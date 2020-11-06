@@ -1,6 +1,6 @@
 import Button from 'src/components/Button'
 import styled from 'styled-components'
-import { Section } from '../elements'
+import { Section } from 'src/components/MainLayout/elements'
 
 export default function AboutView() {
   return (

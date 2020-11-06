@@ -13,3 +13,8 @@ export const Section = styled.div`
     padding: ${SECTION_PADDING_Y_SMALL}px ${SECTION_PADDING_X_SMALL}px;
   }
 `
+
+export const FixedSizeContents = styled.div<{ size: number }>`
+  margin: auto;
+  max-width: ${(p) => p.size}px;
+`

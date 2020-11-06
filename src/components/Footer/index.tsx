@@ -1,4 +1,4 @@
-import { Section } from 'src/pages/Home/elements'
+import { Section } from 'src/components/MainLayout/elements'
 import styled from 'styled-components'
 
 export default function Footer() {
