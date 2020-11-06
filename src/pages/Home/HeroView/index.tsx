@@ -2,12 +2,16 @@ import Menu from 'src/components/Menu'
 import { SWIFT } from 'src/utils/animations'
 import styled from 'styled-components'
 import { slideArrow, slideMenu, T_AROUND, T_SLIDE } from './animations'
+import Baloon, { BALOON_HEIGHT } from './Baloon'
 import Banner from './Banner'
 
 export default function HeroView() {
   return (
     <Container>
       <Top>
+        <BaloonWrapper>
+          <Baloon></Baloon>
+        </BaloonWrapper>
         <MenuWrapper>
           <Menu></Menu>
         </MenuWrapper>
@@ -22,12 +26,22 @@ export default function HeroView() {
   )
 }
 
+const BALOON_MARGIN = 40
+
 const Top = styled.div`
+  position: relative;
   overflow: hidden;
   display: flex;
-  justify-content: center;
-  padding: 64px 24px;
+  flex-flow: column;
+  padding: ${BALOON_HEIGHT + BALOON_MARGIN}px 24px;
   box-sizing: border-box;
+`
+
+const BaloonWrapper = styled.div`
+  position: absolute;
+  top: ${BALOON_MARGIN}px;
+  right: ${BALOON_MARGIN}px;
+  animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND + 0.2}s 1 normal both running;
 `
 
 const MenuWrapper = styled.div`

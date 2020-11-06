@@ -32,6 +32,7 @@ const MenuList = styled.ul`
   flex-flow: wrap;
   justify-content: center;
   padding: 0;
+  margin: 0;
 `
 
 const MenuItem = styled.li`
