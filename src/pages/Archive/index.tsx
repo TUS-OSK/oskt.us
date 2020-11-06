@@ -12,7 +12,7 @@ interface Props {
 export default function Archive({ title, body }: Props) {
   return (
     <>
-      <PageHead title={{ sub: title }}></PageHead>
+      <PageHead title={title}></PageHead>
       <MainLayout>
         <Section>
           {title && <MarkdownTitle title={title}></MarkdownTitle>}

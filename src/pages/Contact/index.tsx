@@ -21,7 +21,7 @@ const TITLE_GAP = 4
 export default function Contact({ title, clubroom, twitterId, mail, body }: Props) {
   return (
     <>
-      <PageHead title={{ sub: title }}></PageHead>
+      <PageHead title={title}></PageHead>
       <MainLayout>
         <Section>
           <MarkdownBody centered body={body}></MarkdownBody>

@@ -25,7 +25,7 @@ export default function News({ title, body, metaList }: Props) {
 
   return (
     <>
-      <PageHead title={{ sub: title }}></PageHead>
+      <PageHead title={title}></PageHead>
       <MainLayout>
         <Section>
           <MarkdownBody body={body}></MarkdownBody>
