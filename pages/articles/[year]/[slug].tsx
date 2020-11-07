@@ -16,7 +16,7 @@ interface Props {
   body: string
 }
 
-export default function AboutPage({ meta: { title }, year, slug, body }: Props) {
+export default function ArticlePage({ meta: { title }, year, slug, body }: Props) {
   return <Article title={title} year={year} slug={slug} body={body} />
 }
 
