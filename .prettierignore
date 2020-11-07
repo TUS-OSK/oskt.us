@@ -1,1 +1,2 @@
-*.md
+_articles/markdowns/**/*.md
+_pages/markdowns/**/*.md
