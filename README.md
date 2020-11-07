@@ -9,7 +9,7 @@
 
 Next.js + TypeScript + styled-components となっています。
 
-Markdown ファイルの Parser には remark が採用されています。
+Markdown ファイルの Parser には gray-matter + remark が採用されています。
 
 ## 開発環境
 
