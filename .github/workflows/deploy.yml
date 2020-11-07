@@ -17,6 +17,10 @@ jobs:
       - name: Build
         run: yarn build
 
+        # これがないとアンスコから始まるファイルが読み込まれない
+      - name: Add nojekyll
+        run: touch ./out/.nojekyll
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
