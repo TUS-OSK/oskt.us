@@ -29,7 +29,7 @@ const Container = styled.div`
 const slideBody = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(36px);
+    transform: translateY(16px);
   }
   100% {
     opacity: 1;
@@ -38,5 +38,5 @@ const slideBody = keyframes`
 `
 
 const Body = styled.div`
-  animation: ${slideBody} ${SWIFT} 0.5s 1 normal both running;
+  animation: ${slideBody} ${SWIFT} 0.2s 1 normal both running;
 `
