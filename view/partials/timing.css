@@ -1,8 +1,0 @@
-:root {
-  --t-cover: 0s;
-  --t-flip: 0.8s;
-  --t-around: calc(var(--t-cover) + var(--t-flip) * 1.5);
-  --t-twitching: 1s;
-  --t-slide: 1s;
-  --t-pic: 3s;
-}

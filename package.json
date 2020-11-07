@@ -1,93 +1,45 @@
 {
   "name": "oskt.us",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": {},
-  "license": "MIT",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "npm-run-all --parallel watch watch:md",
-    "watch": "budo index.js -P -l -d ./public -- -v -d -p [ css-extract -o ./public/index.css ]",
-    "watch:md": "gulp --gulpfile task/md.js watch --silent",
-    "build": "browserify index.js -v -p [ css-extract -o ./public/index.css ] -o ./public/index.js && gulp --gulpfile task/md.js build",
-    "clean": "rimraf './public/!(index.html)'",
-    "test": "standard && stylelint view/**/*.css",
-    "fmt": "standard --fix"
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start"
   },
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.3.2",
-    "babelify": "^8.0.0",
-    "browserify": "^16.2.2",
-    "budo": "^11.6.3",
-    "css-extract": "^1.2.0",
-    "cssnano": "^3.10.0",
-    "exorcist": "^1.0.1",
-    "gulp": "^3.9.1",
-    "gulp-markdown": "^2.0.1",
-    "gulp-rename": "^1.2.3",
-    "highlight.js": "^9.10.0",
-    "npm-run-all": "^4.1.3",
-    "postcss-cssnext": "^2.10.0",
-    "postcss-import": "^9.1.0",
-    "postcss-url": "^6.0.3",
-    "rimraf": "^2.6.2",
-    "sheetify-postcss": "^1.1.0",
-    "standard": "^10.0.3",
-    "stylelint": "^9.2.1",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-csstree-validator": "^1.1.1",
-    "uglifyify": "^5.0.2",
-    "yo-yoify": "^4.3.0"
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "semi": false
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ],
+    "plugins": [
+      [
+        "styled-components"
+      ]
+    ]
   },
   "dependencies": {
-    "choo": "^6",
-    "choo-log": "^8.0.0",
-    "domify": "^1.4.0",
-    "font-awesome": "^4.7.0",
-    "github-markdown-css": "^2.8.0",
-    "normalize.css": "^8.0.0",
-    "on-load": "^3.2.0",
-    "scopedify": "^1.1.1"
+    "date-fns": "^2.16.1",
+    "gray-matter": "^4.0.2",
+    "next": "10.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "remark": "^13.0.0",
+    "remark-react": "^8.0.0",
+    "styled-components": "^5.2.0"
   },
-  "browserify": {
-    "transform": [
-      [
-        "scopedify/transform",
-        {
-          "use": [
-            [
-              "sheetify-postcss",
-              {
-                "plugins": [
-                  [
-                    "postcss-url",
-                    {
-                      "url": "copy",
-                      "assetsPath": "assets",
-                      "useHash": true
-                    }
-                  ],
-                  "postcss-import",
-                  [
-                    "postcss-cssnext",
-                    {
-                      "browsers": [
-                        "> 1%"
-                      ]
-                    }
-                  ]
-                ],
-                "to": "public/index.css",
-                "map": {
-                  "inline": true
-                }
-              }
-            ]
-          ]
-        }
-      ],
-      "yo-yoify",
-      "babelify"
-    ]
+  "resolutions": {
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.6",
+    "@types/styled-components": "^5.1.4",
+    "babel-plugin-styled-components": "^1.11.1",
+    "typescript": "^4.0.5"
   }
 }
