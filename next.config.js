@@ -1,3 +1,3 @@
 module.exports = {
-  basePath: process.env.PUBLIC_URL,
+  basePath: '/oskt.us',
 }
