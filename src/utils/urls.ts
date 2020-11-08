@@ -7,7 +7,7 @@ const join = (...paths: string[]) => paths.join('/')
 
 type ExternalUrlType = keyof typeof externalUrlOrigin
 
-export const externalTo = (type: ExternalUrlType, path: string) => join(externalUrlOrigin[type], path)
+export const externalTo = (type: ExternalUrlType, path: string) => new URL(path, externalUrlOrigin[type]).href
 
 const REPOSITORY_PATH = 'TUS-OSK/oskt.us'
 
