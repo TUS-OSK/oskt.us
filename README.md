@@ -1,26 +1,22 @@
 # oskt.us
 
-[![OSK](https://img.shields.io/badge/OSK-%CF%81--oskt__us-5d639e.svg?style=flat-square)](https://oskt.us) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
+応用数学研究部の公式ホームページのソースコードです。
 
-OSK team site.
+[記事を編集したい場合はこちらへ](https://github.com/TUS-OSK/oskt.us/tree/master/_articles)
+[メインページを編集したい場合はこちらへ](https://github.com/TUS-OSK/oskt.us/tree/master/_pages)
 
-## Developing
+## 構成
 
+Next.js + TypeScript + styled-components となっています。
+
+Markdown ファイルの Parser には gray-matter + remark が採用されています。
+
+## 開発環境
+
+```bash
+$ yarn install && yarn dev
 ```
-npm install
-npm start
-```
 
-Start a local server at `localhost:9966`.
+## ビルド
 
-Edit something.
-
-## Deployment
-
-Edit `circle.yml` and fill in the `GIT_****` fields.
-
-Open [circleci](https://circleci.com) and build project.
-
-Project Settings -> Checkout SSH Keys -> Add user key
-
-Then, rebuild.
+master への push 時に Github Actions により yarn build が実行され、gh-pages ブランチにデプロイされます。

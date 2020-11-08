@@ -1,6 +1,0 @@
-:root {
-  --swift: cubic-bezier(0.7, 0, 0.1, 1);
-  --cubic-out: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --bounce: cubic-bezier(1, -0.12, 0.44, 1.65);
-  --parabola: cubic-bezier(0.28, 1.15, 0.81, 1.69);
-}
