@@ -1,9 +1,9 @@
+import { join } from 'path'
+
 const externalUrlOrigin = {
   twitter: 'https://twitter.com',
   github: 'https://github.com',
 }
-
-const join = (...paths: string[]) => paths.join('/')
 
 type ExternalUrlType = keyof typeof externalUrlOrigin
 
