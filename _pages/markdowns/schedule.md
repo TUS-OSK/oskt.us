@@ -72,7 +72,7 @@ title: '年間スケジュール'
 
 OSKとしてコミックマーケット94に参加しました。
 
-[c94詳細](#page/2018/c94?pretty)
+[c94詳細](../articles/2018/c94?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">応数研でコミケット94に参加します。ブースは8/10(金)西め29b&quot;OSK&quot;です。ぜひ遊びにきてください🙌<a href="https://t.co/HptSlFBOCP">https://t.co/HptSlFBOCP</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1027460755451301890?ref_src=twsrc%5Etfw">2018年8月9日</a></blockquote>
 
@@ -94,7 +94,7 @@ OSKとしてコミックマーケット94に参加しました。
 
 OSKとしてコミックマーケット95に参加しました。
 
-[c95詳細](#page/2018/c95?pretty)
+[c95詳細](../articles/2018/c95?pretty)
 
 ### 2月
 
@@ -115,7 +115,7 @@ OSKとしてコミックマーケット95に参加しました。
 
 OSKとしてコミックマーケット92に参加しました。
 
-[c92詳細](#page/2017/c92?pretty)
+[c92詳細](../articles/2017/c92?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">東た-02b(東7ホール)にて新刊「Signed Distance Field」を頒布します<br>Ray Marching本です<br>ご興味のある方は是非いらしてください！<a href="https://twitter.com/hashtag/c92?src=hash&amp;ref_src=twsrc%5Etfw">#c92</a> <a href="https://twitter.com/hashtag/%E3%82%B3%E3%83%9F%E3%82%B192?src=hash&amp;ref_src=twsrc%5Etfw">#コミケ92</a> <a href="https://t.co/TgSeIpLY40">pic.twitter.com/TgSeIpLY40</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/895802569586495488?ref_src=twsrc%5Etfw">2017年8月11日</a></blockquote>
 
@@ -129,7 +129,7 @@ OSKとしてコミックマーケット92に参加しました。
 
 理大祭がありました、応数研では各講義班が成果物の展示などを行いました、
 
-[理大祭詳細](#page/2017/festival?pretty)
+[理大祭詳細](../articles/2017/festival?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">CGの展示ではレンダリング画像とテストシーンで有名なコーネルボックスの模型を展示しています。 <a href="https://t.co/j8RXr2ZVUV">pic.twitter.com/j8RXr2ZVUV</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/931762074279034880?ref_src=twsrc%5Etfw">2017年11月18日</a></blockquote>
 
