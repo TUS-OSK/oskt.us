@@ -1,6 +1,7 @@
 ---
-title: '応用数学研究部 2020 年度新歓'
+title: 'Welcome to OSK!'
 date: '2020-11-08'
+private: true
 ---
 
 # 入部希望者または見学希望者のみなさんへ
