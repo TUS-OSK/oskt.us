@@ -17,7 +17,7 @@ export const urlPageMdEdit = (slug: string) =>
 export const urlArticleMdEdit = (year: string, slug: string) =>
   externalTo('github', join(REPOSITORY_PATH, 'edit', 'master', '_articles', 'markdowns', year, `${slug}.md`))
 
-export const mailTo = (to: string) => join('mailto:', to)
+export const mailTo = (to: string) => `mailto:${to}`
 
 export const articleTo = (year: string, slug: string) => join('/', 'articles', year, slug)
 
