@@ -2,7 +2,7 @@
 title: 'コンタクト'
 clubroom: '神楽坂キャンパス 2号館 5階 2507教室'
 twitterId: 'tus_osk'
-mail: 'os_ken@ed.tus.ac.jp'
+mail: 'kagu.tus.osk@gmail.com'
 ---
 
 <!--
