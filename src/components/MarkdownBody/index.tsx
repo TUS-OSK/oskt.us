@@ -1,7 +1,7 @@
 import remark from 'remark'
 import styled, { css } from 'styled-components'
-import react from 'remark-react'
-import { ReactNode } from 'react'
+import html from 'remark-html'
+import { useEffect } from 'react'
 
 interface Props {
   editRequestUrl?: string
@@ -9,10 +9,40 @@ interface Props {
   centered?: boolean
 }
 
+interface TwitterWidgets {
+  load: () => void
+}
+
+function useTwitterWidgets() {
+  const id = 'twitter-wjs'
+
+  // FIXME: グローバル汚染してるので　Twitter の JS API の widgets-js を使わない方法を模索したい
+  // https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
+  useEffect(() => {
+    // widgets-jsが読み込まれるとwindow.twttrができる
+    const twttr = (window as any).twttr as any
+    // もしwidgets-jsが読み込まれてたらそのままウィジェットを生成する
+    if (twttr) {
+      const twitterWidgets = twttr.widgets as TwitterWidgets
+      return twitterWidgets.load()
+    }
+
+    // widgets-jsが読み込まれてなかったらheadへscriptを投げる
+    const js = document.createElement('script') as HTMLScriptElement
+    js.id = id
+    js.src = 'https://platform.twitter.com/widgets.js'
+    js.async = true
+    document.head.appendChild(js)
+  }, [])
+}
+
 export default function MarkdownBody({ editRequestUrl, centered = false, body }: Props) {
+  const __html = remark().use(html).processSync(body).contents
+  useTwitterWidgets()
+
   return (
     <>
-      <Container centered={centered}>{remark().use(react).processSync(body).result as ReactNode}</Container>
+      <Container centered={centered} dangerouslySetInnerHTML={{ __html: __html as string }}></Container>
       {editRequestUrl && (
         <EditRequestContainer>
           <ExternalLink target="_blank" rel="noopener" href={editRequestUrl}>
