@@ -95,8 +95,9 @@ HTML, CSS, JavaScriptを学ぶ。
 
 ### 参考画像
 
-<img src="https://i.imgur.com/7E9fVom.png" style="width:300px">  <img src="https://i.imgur.com/BdzcBUU.png" style="width:300px">
+![](https://i.imgur.com/7E9fVom.png)
 
+![](https://i.imgur.com/BdzcBUU.png)
 
 <!-- ここまで -->
 <!-- ここから -->
