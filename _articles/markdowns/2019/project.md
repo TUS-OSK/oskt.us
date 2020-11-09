@@ -22,7 +22,7 @@ private: true
 
 - CTF
     - 世界の脆弱性を見つけよう。  
-    [紹介記事](#page/2019/ctf)
+    [紹介記事](/articles/2019/ctf)
 
 ## 非公式
 

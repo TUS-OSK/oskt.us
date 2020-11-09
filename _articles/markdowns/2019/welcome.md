@@ -43,4 +43,4 @@ private: true
 
 神楽坂キャンパス 2 号館 5 階 2507 教室
 
-[お問い合わせ](#contact?pretty)
+[お問い合わせ](/contact?pretty)
