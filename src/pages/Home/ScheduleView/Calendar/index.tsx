@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import SmallEvent from './SmallEvent'
+import Event from './Event'
 
 interface Props {
   start: number
-  smallEvents: { month: number; jaName: string; enName: string }[]
+  events: { month: number; jaName: string; enName: string }[]
 }
 
-export default function Calendar({ start, smallEvents }: Props) {
+export default function Calendar({ start, events }: Props) {
   return (
     <Grid>
       <Title>Month</Title>
@@ -17,8 +17,8 @@ export default function Calendar({ start, smallEvents }: Props) {
       ))}
 
       <EventArea>
-        {smallEvents.map((e, i) => (
-          <SmallEvent key={i} jaName={e.jaName} enName={e.enName} />
+        {events.map((e, i) => (
+          <Event key={i} jaName={e.jaName} enName={e.enName} />
         ))}
       </EventArea>
     </Grid>

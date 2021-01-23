@@ -10,7 +10,7 @@ export default function ScheduleView() {
         <div className="timeline">
           <Calendar
             start={4}
-            smallEvents={[
+            events={[
               {
                 month: 8,
                 jaName: '夏合宿',
