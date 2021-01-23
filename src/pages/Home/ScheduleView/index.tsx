@@ -1,33 +1,44 @@
 import styled from 'styled-components'
 import { Section, SectionTitle } from 'src/components/MainLayout/elements'
 import Calendar from './Calendar'
+import { EventCalendar, months } from 'pages/schedule'
 
-export default function ScheduleView() {
+export interface EventData {
+  name: {
+    ja: string
+    en: string
+  }
+  detail: string[]
+  top: boolean
+}
+
+export interface ScheduleData {
+  eventCalendar: EventCalendar
+}
+
+interface Props {
+  scheduleData: ScheduleData
+}
+
+const filterTop = (ec: EventCalendar) => {
+  const result: EventCalendar = {}
+  months.forEach((m) => {
+    const el = ec[m]
+    if (el === undefined) {
+      return
+    }
+    result[m] = el.filter((e) => e.top)
+  })
+  return result
+}
+
+export default function ScheduleView({ scheduleData }: Props) {
   return (
     <Container>
       <SectionTitle>SCHEDULE</SectionTitle>
       <div className="content">
         <div className="timeline">
-          <Calendar
-            start={4}
-            events={[
-              {
-                month: 8,
-                jaName: '夏合宿',
-                enName: 'Summer Camp',
-              },
-            ]}
-          />
-          <div className="detail column">
-            {/* <span className="row events big l-group">
-                <div className="ja">レクチャー班活動</div>
-                <div className="en">Lecture Groups</div>
-              </span>
-              <span className="row events big p-group">
-                <div className="ja">プロジェクト班活動</div>
-                <div className="en">Project Groups</div>
-              </span> */}
-          </div>
+          <Calendar start={4} eventCalendar={filterTop(scheduleData.eventCalendar)} />
         </div>
       </div>
     </Container>

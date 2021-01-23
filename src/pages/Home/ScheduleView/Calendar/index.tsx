@@ -1,12 +1,26 @@
+import { EventCalendar, months } from 'pages/schedule'
+import { ReactElement } from 'react'
 import styled from 'styled-components'
-import Event from './Event'
+import EventElement from './Event'
 
 interface Props {
   start: number
-  events: { month: number; jaName: string; enName: string }[]
+  eventCalendar: EventCalendar
 }
 
-export default function Calendar({ start, events }: Props) {
+const toReactElements = (ec: EventCalendar) => {
+  const results: ReactElement[] = []
+  months.forEach((m) => {
+    const events = ec[m]
+    if (events === undefined) {
+      return
+    }
+    results.push(...events.map((e, i) => <EventElement key={`${m}-${i}`} jaName={e.name.ja} enName={e.name.en} />))
+  })
+  return results
+}
+
+export default function Calendar({ start, eventCalendar }: Props) {
   return (
     <Grid>
       <Title>Month</Title>
@@ -16,11 +30,7 @@ export default function Calendar({ start, events }: Props) {
         <Month key={i} month={((i + start - 1) % 12) + 1} />
       ))}
 
-      <EventArea>
-        {events.map((e, i) => (
-          <Event key={i} jaName={e.jaName} enName={e.enName} />
-        ))}
-      </EventArea>
+      <EventArea>{toReactElements(eventCalendar)}</EventArea>
     </Grid>
   )
 }

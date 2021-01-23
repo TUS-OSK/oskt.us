@@ -4,10 +4,14 @@ import Home from 'src/pages/Home'
 import { AboutMeta } from './about'
 import { ContactMeta } from './contact'
 import { createfilterdArticleMetaList } from './news'
+import { ScheduleMeta } from './schedule'
 
 interface Props {
   aboutData: {
     meta: AboutMeta
+  }
+  scheduleData: {
+    meta: ScheduleMeta
   }
   newsData: {
     articlesStr: string
@@ -17,8 +21,15 @@ interface Props {
   }
 }
 
-export default function IndexPage({ aboutData: _aboutData, newsData: _newsData, contactData: _contactData }: Props) {
+export default function IndexPage({
+  aboutData: _aboutData,
+  scheduleData: _scheduleData,
+  newsData: _newsData,
+  contactData: _contactData,
+}: Props) {
   const { caption } = _aboutData.meta
+
+  const eventCalendar = _scheduleData.meta.eventCalendar
 
   const articles = JSON.parse(_newsData.articlesStr)
 
@@ -27,6 +38,7 @@ export default function IndexPage({ aboutData: _aboutData, newsData: _newsData, 
   return (
     <Home
       aboutData={{ caption }}
+      scheduleData={{ eventCalendar }}
       newsData={{ metaList: createfilterdArticleMetaList(articles) }}
       contactData={{ clubroom, twitterId, mail }}
     />
@@ -35,6 +47,7 @@ export default function IndexPage({ aboutData: _aboutData, newsData: _newsData, 
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const { meta: aboutMeta } = getPageMarkdown<AboutMeta>('about')
+  const { meta: scheduleMeta } = getPageMarkdown<ScheduleMeta>('schedule')
   const { meta: contactMeta } = getPageMarkdown<ContactMeta>('contact')
   const articles = getArticlesAll()
 
@@ -42,6 +55,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       aboutData: {
         meta: aboutMeta,
+      },
+      scheduleData: {
+        meta: scheduleMeta,
       },
       contactData: {
         meta: contactMeta,

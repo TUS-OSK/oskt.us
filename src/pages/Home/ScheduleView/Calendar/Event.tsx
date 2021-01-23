@@ -5,7 +5,7 @@ export interface Props {
   enName: string
 }
 
-export default function Event({ jaName, enName }: Props) {
+export default function EventElement({ jaName, enName }: Props) {
   return (
     <Container>
       <JaName>{jaName}</JaName>

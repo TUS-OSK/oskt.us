@@ -1,6 +1,15 @@
 import Schedule from 'src/pages/Schedule'
 import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
 import { GetStaticProps } from 'next'
+import { EventData } from 'src/pages/Home/ScheduleView'
+
+export const months = [...new Array(12).keys()].map((i) => i + 1)
+export type Month = typeof months[number]
+export type EventCalendar = { [m in Month]?: EventData[] }
+
+export interface ScheduleMeta {
+  eventCalendar: EventCalendar
+}
 
 interface Props {
   meta: MarkdownMeta
