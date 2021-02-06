@@ -24,22 +24,18 @@ const EnName = styled.div`
   color: #fff7;
 `
 
+// [px]
+export const EVENT_ELEMENT_HEIGHT = 54
 const Container = styled.div`
   box-sizing: border-box;
   border: 2px solid #d24154;
-  padding: 16px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease;
   user-select: none;
   white-space: nowrap;
   background-color: #da6272;
-  position: absolute;
+  height: ${EVENT_ELEMENT_HEIGHT}px;
   width: 100%;
-
-  &:hover {
-    transition-timing-function: ease;
-    transform: scale(1.05);
-    box-shadow: 0 2px 10px 0 #0003;
-  }
 `
