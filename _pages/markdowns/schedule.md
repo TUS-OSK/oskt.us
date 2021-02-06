@@ -14,6 +14,7 @@ eventCalendar:
       detail:
         - '新入生歓迎ガイダンスを行います。'
         - '新入生にはこのタイミングで講義班に所属してもらいます。'
+      top: true
     - name:
         ja: '新入生歓迎ガイダンス C'
       detail:

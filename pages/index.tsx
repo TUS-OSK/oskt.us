@@ -4,7 +4,7 @@ import Home from 'src/pages/Home'
 import { AboutMeta } from './about'
 import { ContactMeta } from './contact'
 import { createfilterdArticleMetaList } from './news'
-import { ScheduleMeta } from './schedule'
+import { ScheduleMeta, parseEventCalendar } from './schedule'
 
 interface Props {
   aboutData: {
@@ -29,7 +29,7 @@ export default function IndexPage({
 }: Props) {
   const { caption } = _aboutData.meta
 
-  const eventCalendar = _scheduleData.meta.eventCalendar
+  const eventCalendar = parseEventCalendar(_scheduleData.meta.eventCalendar)
 
   const articles = JSON.parse(_newsData.articlesStr)
 

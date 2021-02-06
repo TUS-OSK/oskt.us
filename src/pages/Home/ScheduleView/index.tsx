@@ -1,16 +1,17 @@
 import styled from 'styled-components'
 import { Section, SectionTitle } from 'src/components/MainLayout/elements'
 import Calendar from './Calendar'
-import { EventCalendar, months } from 'pages/schedule'
 
+export const months = [...new Array(12).keys()].map((i) => i + 1)
+export type Month = typeof months[number]
 export interface EventData {
   name: {
     ja: string
     en: string
   }
   detail: string[]
-  top: boolean
 }
+export type EventCalendar = { [m in Month]?: EventData[] }
 
 export interface ScheduleData {
   eventCalendar: EventCalendar
@@ -20,25 +21,14 @@ interface Props {
   scheduleData: ScheduleData
 }
 
-const filterTop = (ec: EventCalendar) => {
-  const result: EventCalendar = {}
-  months.forEach((m) => {
-    const el = ec[m]
-    if (el === undefined) {
-      return
-    }
-    result[m] = el.filter((e) => e.top)
-  })
-  return result
-}
-
 export default function ScheduleView({ scheduleData }: Props) {
+  console.log(scheduleData.eventCalendar)
   return (
     <Container>
       <SectionTitle>SCHEDULE</SectionTitle>
       <div className="content">
         <div className="timeline">
-          <Calendar start={4} eventCalendar={filterTop(scheduleData.eventCalendar)} />
+          <Calendar start={4} eventCalendar={scheduleData.eventCalendar} />
         </div>
       </div>
     </Container>

@@ -1,6 +1,6 @@
-import { EventCalendar, months } from 'pages/schedule'
 import { ReactElement } from 'react'
 import styled from 'styled-components'
+import { EventCalendar, months } from 'src/pages/Home/ScheduleView'
 import EventElement from './Event'
 
 interface Props {
