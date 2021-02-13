@@ -1,10 +1,11 @@
 import { getArticlesAll, getPageMarkdown } from 'api/markdowns'
 import { GetStaticProps } from 'next'
 import Home from 'src/pages/Home'
+import { EventCalendar } from 'src/pages/Home/ScheduleView'
 import { AboutMeta } from './about'
 import { ContactMeta } from './contact'
 import { createfilterdArticleMetaList } from './news'
-import { ScheduleMeta, parseEventCalendar } from './schedule'
+import { ScheduleMeta } from './schedule'
 
 interface Props {
   aboutData: {
@@ -29,7 +30,7 @@ export default function IndexPage({
 }: Props) {
   const { caption } = _aboutData.meta
 
-  const eventCalendar = parseEventCalendar(_scheduleData.meta.eventCalendar)
+  const eventCalendar = new EventCalendar(_scheduleData.meta.startMonth, _scheduleData.meta.eventCalendar, true)
 
   const articles = JSON.parse(_newsData.articlesStr)
 

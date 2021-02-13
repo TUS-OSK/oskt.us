@@ -1,46 +1,35 @@
 import Schedule from 'src/pages/Schedule'
 import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
 import { GetStaticProps } from 'next'
-import { EventCalendar, Month, months } from 'src/pages/Home/ScheduleView'
+import { EventCalendar, Month } from 'src/pages/Home/ScheduleView'
 
 export interface EventDataMD {
   name: {
     ja: string
     en: string
   }
-  detail: string[]
+  detail: string
   top: boolean
 }
+
 export type EventCalendarMD = { [m in Month]?: EventDataMD[] }
 
 export interface ScheduleMeta {
+  startMonth: number
   eventCalendar: EventCalendarMD
 }
 
 interface Props {
-  meta: MarkdownMeta
+  meta: MarkdownMeta<ScheduleMeta>
   body: string
 }
 
-export const parseEventCalendar = (ecmd: EventCalendarMD): EventCalendar => {
-  const ec: EventCalendar = {}
-  months.forEach((m) => {
-    const es = ecmd[m]?.filter((e) => e.top)
-    if (!es?.length) return
-    ec[m] = es.map((e) => ({
-      name: e.name,
-      detail: e.detail,
-    }))
-  })
-  return ec
-}
-
-export default function SchedulePage({ meta: { title }, body }: Props) {
-  return <Schedule title={title} body={body} />
+export default function SchedulePage({ meta: { title, startMonth, eventCalendar }, body }: Props) {
+  return <Schedule title={title} body={body} currentYearCalendar={new EventCalendar(startMonth, eventCalendar)} />
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { meta, body } = getPageMarkdown('schedule')
+  const { meta, body } = getPageMarkdown<ScheduleMeta>('schedule')
 
   return {
     props: {

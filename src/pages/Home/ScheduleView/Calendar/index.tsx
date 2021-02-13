@@ -1,19 +1,17 @@
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
-import { EventCalendar, months } from 'src/pages/Home/ScheduleView'
+import { EventCalendar, Events } from 'src/pages/Home/ScheduleView'
 import { EVENT_ELEMENT_HEIGHT } from './EventElement'
 import MonthEventElement from './MonthEventElement'
 
 interface Props {
-  start: number
   eventCalendar: EventCalendar
 }
 
-const toReactElements = (monthParser: (i: number) => number, ec: EventCalendar) => {
+const toReactElements = (months: number[], _events: Events) => {
   const results: ReactElement[] = []
-  months.forEach((i) => {
-    const m = monthParser(i)
-    const events = ec[m]
+  months.forEach((m, i) => {
+    const events = _events[m]
     if (!events) return
     results.push(
       <MonthEventElementWrapper index={i} key={`${m}`}>
@@ -26,18 +24,17 @@ const toReactElements = (monthParser: (i: number) => number, ec: EventCalendar) 
   return results
 }
 
-export default function Calendar({ start, eventCalendar }: Props) {
-  const monthParser = (i: number) => ((i + start - 1) % 12) + 1
+export default function Calendar({ eventCalendar: { months, events } }: Props) {
   return (
     <Grid>
       <Title>Month</Title>
       <Title>Activities / Events</Title>
 
-      {[...Array(12).keys()].map((i) => (
-        <Month key={i} month={monthParser(i)} />
+      {months.map((m) => (
+        <Month key={m} month={m} />
       ))}
 
-      <EventArea>{toReactElements(monthParser, eventCalendar)}</EventArea>
+      <EventArea>{toReactElements(months, events)}</EventArea>
     </Grid>
   )
 }
