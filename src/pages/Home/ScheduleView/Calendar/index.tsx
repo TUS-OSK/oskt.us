@@ -16,9 +16,11 @@ const toReactElements = (monthParser: (i: number) => number, ec: EventCalendar) 
     const events = ec[m]
     if (!events) return
     results.push(
-      <EventList index={i} key={`${m}`}>
-        <MonthEventElement events={events} />
-      </EventList>
+      <MonthEventElementWrapper index={i} key={`${m}`}>
+        <HoverActionController>
+          <MonthEventElement events={events} />
+        </HoverActionController>
+      </MonthEventElementWrapper>
     )
   })
   return results
@@ -51,10 +53,12 @@ const Title = styled.div`
   padding: 8px;
 `
 
+const ROW_HEIGHT = EVENT_ELEMENT_HEIGHT + 8 * 2
+
 const Month = styled.div<{ month: number }>`
   font-size: 16px;
   box-sizing: border-box;
-  height: ${EVENT_ELEMENT_HEIGHT}px;
+  height: ${ROW_HEIGHT}px;
   border-top: 1px solid #ddd;
   padding: 4px 6px;
   grid-column: 1/3;
@@ -71,8 +75,19 @@ const EventArea = styled.div`
   position: relative;
 `
 
-const EventList = styled.div<{ index: number }>`
+const MonthEventElementWrapper = styled.div<{ index: number }>`
   position: absolute;
+  padding: 8px;
   width: 100%;
-  transform: translateY(${(props) => EVENT_ELEMENT_HEIGHT * props.index}px);
+  box-sizing: border-box;
+  transform: translateY(${(props) => ROW_HEIGHT * props.index}px);
+`
+
+const HoverActionController = styled.div`
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transition-timing-function: ease;
+    transform: scale(1.05);
+  }
 `

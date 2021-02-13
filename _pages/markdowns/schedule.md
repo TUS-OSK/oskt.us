@@ -4,13 +4,14 @@ eventCalendar:
   5:
     - name:
         ja: '新入生歓迎ガイダンス A'
-        en: 'guidance'
+        en: 'guidance A'
       detail:
         - '新入生歓迎ガイダンスを行います。'
         - '新入生にはこのタイミングで講義班に所属してもらいます。'
       top: true
     - name:
         ja: '新入生歓迎ガイダンス B'
+        en: 'guidance B'
       detail:
         - '新入生歓迎ガイダンスを行います。'
         - '新入生にはこのタイミングで講義班に所属してもらいます。'
@@ -20,7 +21,7 @@ eventCalendar:
       detail:
         - '新入生歓迎ガイダンスを行います。'
         - '新入生にはこのタイミングで講義班に所属してもらいます。'
-  10:
+  6:
     - name:
         ja: '新入生歓迎ガイダンス D'
       detail:

@@ -9,31 +9,27 @@ export interface Props {
 
 type EventStatus = 'before' | 'shown' | 'after' | 'hidden'
 
-export default function MonthEventElement({ events }: Props) {
-  const doubledEvents = [...events, ...events]
+export default function MonthEventElement({ events: _events }: Props) {
+  // NOTE: eventsが2個の時だけafterとbeforeの区別を付けられなくなってしまうため二倍にする
+  const events = _events.length === 2 ? [..._events, ..._events] : _events
 
   const [topIndex, setTopIndex] = useState(0)
 
   useEffect(() => {
-    const t = setTimeout(() => setTopIndex((i) => (i + 1) % doubledEvents.length), 2000)
-    return () => clearTimeout(t)
+    if (1 < events.length) {
+      const t = setTimeout(() => setTopIndex((i) => (i + 1) % events.length), 2000)
+      return () => clearTimeout(t)
+    }
   })
 
-  if (events.length === 1) {
-    return (
-      <Container>
-        <EventElement jaName={events[0].name.ja} enName={events[0].name.en}></EventElement>
-      </Container>
-    )
-  }
   const getStatus = (i: number): EventStatus => {
-    if ((i - 1 + doubledEvents.length) % doubledEvents.length === topIndex) {
-      return 'before'
-    }
     if (i === topIndex) {
       return 'shown'
     }
-    if ((i + 1) % doubledEvents.length === topIndex) {
+    if ((i - 1 + events.length) % events.length === topIndex) {
+      return 'before'
+    }
+    if ((i + 1) % events.length === topIndex) {
       return 'after'
     }
     return 'hidden'
@@ -41,11 +37,14 @@ export default function MonthEventElement({ events }: Props) {
 
   return (
     <Container>
-      {doubledEvents.map((e, i) => (
-        <EventElementWrapper key={i} style={i === 0 || i === 1 ? {} : { opacity: 0 }} status={getStatus(i)}>
-          <EventElement jaName={e.name.ja} enName={e.name.en}></EventElement>
-        </EventElementWrapper>
-      ))}
+      <EventElement>
+        {events.map((e, i) => (
+          <EventText key={i} status={getStatus(i)}>
+            <JaName>{e.name.ja}</JaName>
+            <EnName>{e.name.en}</EnName>
+          </EventText>
+        ))}
+      </EventElement>
     </Container>
   )
 }
@@ -54,53 +53,51 @@ export default function MonthEventElement({ events }: Props) {
 export const EVENT_ELEMENT_HEIGHT = 64
 const Container = styled.div`
   position: relative;
-  transition: transform 0.15s ease;
-
-  &:hover {
-    transition-timing-function: ease;
-    transform: scale(1.05);
-    box-shadow: 0 2px 10px 0 #0003;
-  }
 `
 
-const eventStatusTransform: {
-  [status in EventStatus]: { angle: number; position: string; origin: string; zIndex: number; visible: boolean }
+const eventStatusStyle: {
+  [status in EventStatus]: { visibility: 'visible' | 'hidden'; opacity: number; y?: number }
 } = {
   before: {
-    angle: -90,
-    position: '',
-    origin: '',
-    zIndex: 0,
-    visible: false,
+    visibility: 'visible',
+    opacity: 0,
+    y: 16,
   },
   shown: {
-    angle: 0,
-    position: '',
-    origin: '',
-    zIndex: 2,
-    visible: true,
+    visibility: 'visible',
+    opacity: 100,
   },
   after: {
-    angle: -90,
-    position: '',
-    origin: '',
-    zIndex: 3,
-    visible: true,
+    visibility: 'hidden',
+    opacity: 0,
   },
   hidden: {
-    angle: 90,
-    position: '',
-    origin: '',
-    zIndex: 0,
-    visible: false,
+    visibility: 'hidden',
+    opacity: 0,
   },
 }
-const EventElementWrapper = styled.div<{ status: EventStatus }>`
+
+const JaName = styled.div`
+  font-size: 16px;
+  color: #fffd;
+`
+
+const EnName = styled.div`
+  font-size: 12px;
+  color: #fff7;
+`
+
+const EventText = styled.div<{ status: EventStatus }>`
   position: absolute;
-  width: 100%;
-  visibility: ${(p) => (eventStatusTransform[p.status].visible ? 'visible' : 'hidden')};
-  transform: translate3d() rotate3d(1, 0, 0, ${(p) => eventStatusTransform[p.status].angle}deg);
-  transform-origin: ${(p) => eventStatusTransform[p.status].origin};
-  transition: 1s transform linear;
-  z-index: ${(p) => eventStatusTransform[p.status].zIndex};
+  visibility: ${(p) => eventStatusStyle[p.status].visibility};
+  ${JaName} {
+    opacity: ${(p) => eventStatusStyle[p.status].opacity};
+    transform: translateY(${(p) => eventStatusStyle[p.status].y ?? 0}px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  ${EnName} {
+    opacity: ${(p) => eventStatusStyle[p.status].opacity};
+    transform: translateY(${(p) => (eventStatusStyle[p.status].y ?? 0) / 2}px);
+    transition: 0.1s opacity 0.4s, 0.1s transform 0.4s;
+  }
 `
