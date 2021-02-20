@@ -42,7 +42,10 @@ export default function MarkdownBody({ editRequestUrl, centered = false, body }:
 
   return (
     <>
-      <Container centered={centered} dangerouslySetInnerHTML={{ __html: __html as string }}></Container>
+      <MarkdownBodyContainer
+        centered={centered}
+        dangerouslySetInnerHTML={{ __html: __html as string }}
+      ></MarkdownBodyContainer>
       {editRequestUrl && (
         <EditRequestContainer>
           <ExternalLink target="_blank" rel="noopener" href={editRequestUrl}>
@@ -63,7 +66,7 @@ const ExternalLink = styled.a`
   font-size: 14px;
 `
 
-const Container = styled.div<{ centered: boolean }>`
+export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
   line-height: 1.8em;
 
   &::before {

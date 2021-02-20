@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev127": "next dev --hostname 127.0.0.1",
     "build": "next build && next export",
     "start": "next start"
   },

@@ -1,54 +1,56 @@
 import styled from 'styled-components'
 import { Section, SectionTitle } from 'src/components/MainLayout/elements'
+import Calendar from './Calendar'
+import { EventCalendarMD } from 'pages/schedule'
 
-export default function ScheduleView() {
+export const months = [...new Array(12).keys()].map((i) => i + 1)
+export type Month = typeof months[number]
+export interface EventData {
+  name: {
+    ja: string
+    en: string
+  }
+  detail: string
+}
+export type Events = { [m in Month]?: EventData[] }
+
+export class EventCalendar {
+  readonly startMonth: number
+  readonly events: Events
+
+  constructor(startMonth: number, ecmd: EventCalendarMD, filterTop: boolean = false) {
+    this.startMonth = startMonth
+    this.events = {}
+    months.forEach((m) => {
+      const es = filterTop ? ecmd[m]?.filter((e) => e.top) : ecmd[m]
+      if (!es?.length) return
+      this.events[m] = es.map((e) => ({
+        name: e.name,
+        detail: e.detail,
+      }))
+    })
+  }
+
+  get months(): Month[] {
+    return months.map((m) => ((m - 1 + this.startMonth - 1) % 12) + 1)
+  }
+}
+
+export interface ScheduleData {
+  eventCalendar: EventCalendar
+}
+
+interface Props {
+  scheduleData: ScheduleData
+}
+
+export default function ScheduleView({ scheduleData: { eventCalendar } }: Props) {
   return (
     <Container>
       <SectionTitle>SCHEDULE</SectionTitle>
       <div className="content">
         <div className="timeline">
-          <div className="header">
-            <div className="month">Month</div>
-            <div className="detail">Activities / Events</div>
-          </div>
-          <div className="table">
-            <div className="month column">
-              <div className="row label">4</div>
-              <div className="row label">5</div>
-              <div className="row label">6</div>
-              <div className="row label">7</div>
-              <div className="row label">8</div>
-              <div className="row label">9</div>
-              <div className="row label">10</div>
-              <div className="row label">11</div>
-              <div className="row label">12</div>
-              <div className="row label">1</div>
-              <div className="row label">2</div>
-              <div className="row label">3</div>
-            </div>
-            <div className="detail column">
-              <span className="row events big l-group">
-                <div className="ja">レクチャー班活動</div>
-                <div className="en">Lecture Groups</div>
-              </span>
-              <span className="row events small summer-camp">
-                <div className="ja">夏合宿</div>
-                <div className="en">Summer Camp</div>
-              </span>
-              <span className="row events small festival">
-                <div className="ja">理大祭</div>
-                <div className="en">Festival</div>
-              </span>
-              <span className="row events big p-group">
-                <div className="ja">プロジェクト班活動</div>
-                <div className="en">Project Groups</div>
-              </span>
-              <span className="row events small winter-camp">
-                <div className="ja">冬合宿</div>
-                <div className="en">Winter Camp</div>
-              </span>
-            </div>
-          </div>
+          <Calendar eventCalendar={eventCalendar} />
         </div>
       </div>
     </Container>
@@ -77,21 +79,6 @@ const Container = styled(Section)`
     }
   }
 
-  & .header {
-    display: flex;
-    text-align: center;
-    font-size: 15px;
-    height: 25px;
-
-    & .month {
-      width: 10%;
-    }
-
-    & .detail {
-      width: 80%;
-    }
-  }
-
   & .table {
     position: relative;
 
@@ -101,14 +88,6 @@ const Container = styled(Section)`
       left: 0;
       width: 100%;
     }
-  }
-
-  & .label {
-    font-size: 15px;
-    box-sizing: border-box;
-    height: ${GRID}px;
-    border-top: 1px solid #ddd;
-    padding: 3px 5px;
   }
 
   & .events {
