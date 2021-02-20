@@ -38,7 +38,7 @@ export default function MonthEventElement({ events: _events }: Props) {
   }
 
   return (
-    <Container href={`${pageTo('schedule')}#${events[topIndex].name.ja}`}>
+    <Container href={`${pageTo('schedule')}#${encodeURIComponent(events[topIndex].name.ja)}`}>
       <EventElement>
         {events.map((e, i) => (
           <EventText key={i} status={getStatus(i)}>

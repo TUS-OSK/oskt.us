@@ -33,7 +33,7 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
                     <h3>{m}月</h3>
                     {events.map((e, _) => (
                       <>
-                        <h4 id={e.name.ja}>{e.name.ja}：</h4>
+                        <h4 id={encodeURIComponent(e.name.ja)}>{e.name.ja}：</h4>
                         <p>{e.detail}</p>
                       </>
                     ))}
