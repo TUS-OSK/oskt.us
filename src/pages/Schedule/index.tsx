@@ -1,6 +1,6 @@
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
-import MarkdownBody from 'src/components/MarkdownBody'
+import MarkdownBody, { MarkdownBodyContainer } from 'src/components/MarkdownBody'
 import MarkdownTitle from 'src/components/MarkdownTitle'
 import { Section } from 'src/components/MainLayout/elements'
 import { urlPageMdEdit } from 'src/utils/urls'
@@ -21,23 +21,26 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
         <Section>
           {title && <MarkdownTitle title={title}></MarkdownTitle>}
           <CurrentYearPlan>
-            {currentYearCalendar.months.map((m) => {
-              const events = currentYearCalendar.events[m]
-              if (events === undefined) {
-                return null
-              }
-              return (
-                <Month>
-                  <MonthHeader>{m}月</MonthHeader>
-                  {events.map((e, _) => (
-                    <>
-                      <div>{e.name.ja}</div>
-                      <MonthDetail>{e.detail}</MonthDetail>
-                    </>
-                  ))}
-                </Month>
-              )
-            })}
+            <MarkdownBodyContainer centered={false}>
+              <h2>今年度</h2>
+              {currentYearCalendar.months.map((m) => {
+                const events = currentYearCalendar.events[m]
+                if (events === undefined) {
+                  return null
+                }
+                return (
+                  <>
+                    <h3>{m}月</h3>
+                    {events.map((e, _) => (
+                      <>
+                        <h4 id={e.name.ja}>{e.name.ja}：</h4>
+                        <p>{e.detail}</p>
+                      </>
+                    ))}
+                  </>
+                )
+              })}
+            </MarkdownBodyContainer>
           </CurrentYearPlan>
           <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('archive')}></MarkdownBody>
         </Section>
@@ -47,9 +50,3 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
 }
 
 const CurrentYearPlan = styled.div``
-
-const Month = styled.div``
-
-const MonthHeader = styled.div``
-
-const MonthDetail = styled.div``

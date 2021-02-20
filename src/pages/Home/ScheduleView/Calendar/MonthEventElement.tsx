@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { EventData } from '..'
 import EventElement from './EventElement'
 import { useState, useEffect } from 'react'
+import { pageTo } from 'src/utils/urls'
+import { StyledLink } from 'src/utils/next/elements'
 
 export interface Props {
   events: EventData[]
@@ -36,7 +38,7 @@ export default function MonthEventElement({ events: _events }: Props) {
   }
 
   return (
-    <Container>
+    <Container href={`${pageTo('schedule')}#${events[topIndex].name.ja}`}>
       <EventElement>
         {events.map((e, i) => (
           <EventText key={i} status={getStatus(i)}>
@@ -51,8 +53,14 @@ export default function MonthEventElement({ events: _events }: Props) {
 
 // [px]
 export const EVENT_ELEMENT_HEIGHT = 64
-const Container = styled.div`
+const Container = styled(StyledLink)`
   position: relative;
+  display: flex;
+  flex-flow: column;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const eventStatusStyle: {
