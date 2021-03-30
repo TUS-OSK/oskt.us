@@ -9,36 +9,35 @@ startMonth: 4
 #     detail(文字列): そのイベントの詳細文
 #     top(true または false): そのイベントをoskt.usトップのカレンダーに表示させるかどうか
 eventCalendar:
-  5:
+  4:
     - name:
-        ja: '新入生歓迎ガイダンス'
-        en: 'Guidance'
-      detail: '新入生にはこのタイミングで講義班に所属してもらいます。'
-      top: true
-  7:
+        ja: '新入部員の第一期募集'
+        en: 'First Recruiting'
+  6: 
     - name:
-        ja: '前期成果発表'
-        en: 'First-LT'
-      detail: '各講義班が前期の間に学んだ事についてLT形式で軽く発表してもらいます。'
-  9:
+        ja: '新入部員の第二期募集'
+        en: 'Second Recruiting'
+  8:
     - name:
-        ja: '夏合宿'
-        en: 'Summer Camp'
-      detail: '2泊3日の予定です。'
-      top: true
-  11:
-    - name:
-        ja: '理大祭'
-        en: 'Ridaisai'
-      detail: '応数研では各講義班の成果物の展示などを行う予定です。'
-      top: true
-  2:
-    - name:
-        ja: '冬合宿'
-        en: 'Winter Camp'
-      detail: '例年スキー，スノボを行なっております。'
-      top: true
+        ja: 'ハッカソン夏合宿(仮)'
+        en: 'Hackathon'
 ---
+
+## 2020年度
+
+### 4月
+
+感染症拡大の影響で、通常活動をリモートスタイルに移行しました。  
+
+### 11月
+
+オンライン上での活動の容量が手探りながら掴めてきたため、
+半年ほど停止していた新入部員の受け入れを再開しました。  
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">みなさんこんばんは🌙<br><br>応用数学研究部では昨日より、2020年度の新規入部受付を開始しました!<br>入部をご希望の際は、こちらのアカウントのDMもしくは公式HPのcontact欄記載のメールアドレスまでご連絡下さい。<a href="https://t.co/Wtvvdo2HEf">https://t.co/Wtvvdo2HEf</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1326156646200954880?ref_src=twsrc%5Etfw">November 10, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+### 3月
+Youtube Live, Discord, Zoom を用いて卒業生追い出しコンパを行いました。  
 
 ## 2019年度
 
