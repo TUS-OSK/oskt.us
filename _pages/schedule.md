@@ -1,61 +1,28 @@
----
-title: '年間スケジュール'
-# 年度が何月から始まるのか
-startMonth: 4
-# 月:
-#   - name:
-#       ja(文字列): 日本語のイベント名前
-#       en(文字列): 英語のイベントの名前(必須ではないがあった方がアニメーションがきれい)
-#     detail(文字列): そのイベントの詳細文
-#     top(true または false): そのイベントをoskt.usトップのカレンダーに表示させるかどうか
-eventCalendar:
-  4:
-    - name:
-      ja: '新入部員の第1期募集'
-      en: 'First Recruiting'
-  5: 
-    - name:
-      ja: '2021年度講義班スタート'
-      en: 'Start of Lectures'
-      detail: '今年の講義班は Unity班 / C・C++班 / Web班 / Python班 です。'
-  6: 
-    - name:
-      ja: '新入部員の第2期募集'
-      en: 'Second Recruiting'
-  7:
-    - name:
-      ja: '講義班成果発表会'
-      en: 'First LT'
-  8:
-    - name:
-      ja: 'ハッカソン夏合宿(仮)'
-      en: 'Summer Camp (Hackathon)'
-      detail: '対面での合宿の代わりにリモートでハッカソン等のイベントを予定しております。'
-  11:
-    - name:
-      ja: '企画班成果発表会'
-      en: 'Second LT'
-  2: 
-    - name:
-      ja: '冬合宿'
-      en: 'Winter Camp'
----
+# 年間スケジュール
 
-## 2020年度
+## 2020年度(予定)
 
-### 4月
+### 5月
 
-感染症拡大の影響で、通常活動をリモートスタイルに移行しました。  
+新入生歓迎ガイダンスを行います。
+新入生にはこのタイミングで講義班に所属してもらいます。
+<!-- [新歓情報]() -->
+
+### 7月
+
+前期成果発表を行います。各講義班が前期の間に学んだ事についてLT形式で軽く発表してもらいます。
+
+### 9月
+
+夏合宿があります。2泊3日の予定です。
 
 ### 11月
 
-オンライン上での活動の容量が手探りながら掴めてきたため、
-半年ほど停止していた新入部員の受け入れを再開しました。  
+理大祭があります。応数研では各講義班の成果物の展示などを行う予定です。
 
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">みなさんこんばんは🌙<br><br>応用数学研究部では昨日より、2020年度の新規入部受付を開始しました!<br>入部をご希望の際は、こちらのアカウントのDMもしくは公式HPのcontact欄記載のメールアドレスまでご連絡下さい。<a href="https://t.co/Wtvvdo2HEf">https://t.co/Wtvvdo2HEf</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1326156646200954880?ref_src=twsrc%5Etfw">November 10, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+### 2月
 
-### 3月
-Youtube Live, Discord, Zoom を用いて卒業生追い出しコンパを行いました。  
+冬合宿があります。例年スキー, スノボを行なっております。
 
 
 ## 2019年度
@@ -91,6 +58,8 @@ Youtube Live, Discord, Zoom を用いて卒業生追い出しコンパを行い�
 2月16日～2月19日に冬合宿がありました。今年は長野県のエイブル白馬五竜スキー場とHakuba47スキー場にて、スキー, スノボを楽しみました。また、宿ではLT会も行いました。
 
 
+
+
 ## 2018年度
 
 ### 4月
@@ -101,7 +70,7 @@ Youtube Live, Discord, Zoom を用いて卒業生追い出しコンパを行い�
 
 OSKとしてコミックマーケット94に参加しました。
 
-[c94詳細](../articles/2018/c94?pretty)
+[c94詳細](#page/2018/c94?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">応数研でコミケット94に参加します。ブースは8/10(金)西め29b&quot;OSK&quot;です。ぜひ遊びにきてください🙌<a href="https://t.co/HptSlFBOCP">https://t.co/HptSlFBOCP</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1027460755451301890?ref_src=twsrc%5Etfw">2018年8月9日</a></blockquote>
 
@@ -123,7 +92,7 @@ OSKとしてコミックマーケット94に参加しました。
 
 OSKとしてコミックマーケット95に参加しました。
 
-[c95詳細](../articles/2018/c95?pretty)
+[c95詳細](#page/2018/c95?pretty)
 
 ### 2月
 
@@ -144,7 +113,7 @@ OSKとしてコミックマーケット95に参加しました。
 
 OSKとしてコミックマーケット92に参加しました。
 
-[c92詳細](../articles/2017/c92?pretty)
+[c92詳細](#page/2017/c92?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">東た-02b(東7ホール)にて新刊「Signed Distance Field」を頒布します<br>Ray Marching本です<br>ご興味のある方は是非いらしてください！<a href="https://twitter.com/hashtag/c92?src=hash&amp;ref_src=twsrc%5Etfw">#c92</a> <a href="https://twitter.com/hashtag/%E3%82%B3%E3%83%9F%E3%82%B192?src=hash&amp;ref_src=twsrc%5Etfw">#コミケ92</a> <a href="https://t.co/TgSeIpLY40">pic.twitter.com/TgSeIpLY40</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/895802569586495488?ref_src=twsrc%5Etfw">2017年8月11日</a></blockquote>
 
@@ -158,7 +127,7 @@ OSKとしてコミックマーケット92に参加しました。
 
 理大祭がありました、応数研では各講義班が成果物の展示などを行いました、
 
-[理大祭詳細](../articles/2017/festival?pretty)
+[理大祭詳細](#page/2017/festival?pretty)
 
 <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">CGの展示ではレンダリング画像とテストシーンで有名なコーネルボックスの模型を展示しています。 <a href="https://t.co/j8RXr2ZVUV">pic.twitter.com/j8RXr2ZVUV</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/931762074279034880?ref_src=twsrc%5Etfw">2017年11月18日</a></blockquote>
 
