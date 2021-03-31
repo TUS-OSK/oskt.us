@@ -54,6 +54,10 @@ eventCalendar:
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">みなさんこんばんは🌙<br><br>応用数学研究部では昨日より、2020年度の新規入部受付を開始しました!<br>入部をご希望の際は、こちらのアカウントのDMもしくは公式HPのcontact欄記載のメールアドレスまでご連絡下さい。<a href="https://t.co/Wtvvdo2HEf">https://t.co/Wtvvdo2HEf</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1326156646200954880?ref_src=twsrc%5Etfw">November 10, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+### 12月
+
+後期総会の実施
+
 ### 3月
 Youtube Live, Discord, Zoom を用いて卒業生追い出しコンパを行いました。  
 
