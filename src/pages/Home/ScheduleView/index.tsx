@@ -50,48 +50,7 @@ export default function ScheduleView({ scheduleData: { eventCalendar } }: Props)
       <SectionTitle>SCHEDULE</SectionTitle>
       <div className="content">
         <div className="timeline">
-<<<<<<< HEAD
           <Calendar eventCalendar={eventCalendar} />
-=======
-          <div className="header">
-            <div className="month">Month</div>
-            <div className="detail">Activities / Events</div>
-          </div>
-          <div className="table">
-            <div className="month column">
-              <div className="row label">4</div>
-              <div className="row label">5</div>
-              <div className="row label">6</div>
-              <div className="row label">7</div>
-              <div className="row label">8</div>
-              <div className="row label">9</div>
-              <div className="row label">10</div>
-              <div className="row label">11</div>
-              <div className="row label">12</div>
-              <div className="row label">1</div>
-              <div className="row label">2</div>
-              <div className="row label">3</div>
-            </div>
-            <div className="detail column">
-              <span className="row events big l-group">
-                <div className="ja">レクチャー班活動</div>
-                <div className="en">Lecture Groups</div>
-              </span>
-              <span className="row events small summer-event">
-                <div className="ja">ハッカソン</div>
-                <div className="en">Summer Hackathon</div>
-              </span>
-              <span className="row events small festival">
-                <div className="ja">理大祭</div>
-                <div className="en">Festival</div>
-              </span>
-              <span className="row events big p-group">
-                <div className="ja">プロジェクト班活動</div>
-                <div className="en">Project Groups</div>
-              </span>
-            </div>
-          </div>
->>>>>>> 717ff08 (トップページのスケジュール更新/講義班追記)
         </div>
       </div>
     </Container>
@@ -225,6 +184,4 @@ const Container = styled(Section)`
     height: ${GRID * 6 - MARGIN * 2 - GRID_BODER}px;
     top: ${GRID * 6 + MARGIN + GRID_BODER}px;
   }
-
-
 `
