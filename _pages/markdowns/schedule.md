@@ -17,7 +17,7 @@ eventCalendar:
     - name:
       ja: '2021年度講義班スタート'
       en: 'Start of Lectures'
-      detail: '今年の講義班は Unity班 / C・C++班 / Web班 / Python班 です。'
+      detail: '今年の講義班は Unity班/Web班/C・C++班/Python班 です。'
   6: 
     - name:
       ja: '新入部員の第2期募集'
