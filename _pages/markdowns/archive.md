@@ -38,5 +38,9 @@ title: 'アーカイブ'
 
 ## 2020 年度
 
+- [新歓](articles/2020/welcome)
 - [講義班紹介](/articles/2020/lecture)
+- [p-ray班サイト](https://p-ray.oskt.us/)
+
+
 
