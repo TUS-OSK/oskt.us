@@ -22,7 +22,7 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
           {title && <MarkdownTitle title={title}></MarkdownTitle>}
           <CurrentYearPlan>
             <MarkdownBodyContainer centered={false}>
-              <h2>今年度</h2>
+              <h2>今年度（予定）</h2>
               {currentYearCalendar.months.map((m) => {
                 const events = currentYearCalendar.events[m]
                 if (events === undefined) {
@@ -33,8 +33,8 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
                     <h3>{m}月</h3>
                     {events.map((e, _) => (
                       <>
-                        <h4 id={encodeURIComponent(e.name.ja)}>{e.name.ja}：</h4>
-                        <p>{e.detail}</p>
+                        <EventTitle id={encodeURIComponent(e.name.ja)}>{e.name.ja}</EventTitle>
+                        <EventDetail>{e.detail}</EventDetail>
                       </>
                     ))}
                   </>
@@ -50,3 +50,10 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
 }
 
 const CurrentYearPlan = styled.div``
+
+const EventTitle = styled.div`
+  font-family: 'novecentosans', sans-serif;
+  font-weight: bold;
+  margin-top: 16px;
+`
+const EventDetail = styled.div``

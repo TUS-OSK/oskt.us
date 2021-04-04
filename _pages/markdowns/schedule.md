@@ -11,34 +11,34 @@ startMonth: 4
 eventCalendar:
   4:
     - name:
-      ja: '新入部員の第1期募集'
-      en: 'First Recruiting'
+        ja: '新入部員の第1期募集'
+        en: 'First Recruiting'
   5: 
     - name:
-      ja: '2021年度講義班スタート'
-      en: 'Start of Lectures'
+        ja: '2021年度講義班スタート'
+        en: 'Start of Lectures'
       detail: '今年の講義班は Unity班/Web班/C・C++班/Python班 です。'
   6: 
     - name:
-      ja: '新入部員の第2期募集'
-      en: 'Second Recruiting'
+        ja: '新入部員の第2期募集'
+        en: 'Second Recruiting'
   7:
     - name:
-      ja: '講義班成果発表会'
-      en: 'First LT'
+        ja: '講義班成果発表会'
+        en: 'First LT'
   8:
     - name:
-      ja: 'ハッカソン夏合宿(仮)'
-      en: 'Summer Camp (Hackathon)'
+        ja: 'ハッカソン夏合宿(仮)'
+        en: 'Summer Camp (Hackathon)'
       detail: '対面での合宿の代わりにリモートでハッカソン等のイベントを予定しております。'
   11:
     - name:
-      ja: '企画班成果発表会'
-      en: 'Second LT'
+        ja: '企画班成果発表会'
+        en: 'Second LT'
   2: 
     - name:
-      ja: '冬合宿'
-      en: 'Winter Camp'
+        ja: '冬合宿'
+        en: 'Winter Camp'
 ---
 
 ## 2020年度
