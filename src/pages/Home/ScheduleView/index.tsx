@@ -168,11 +168,11 @@ const Container = styled(Section)`
   }
 
   & .l-group {
-    height: ${GRID * 6 - MARGIN * 2 - GRID_BODER}px;
+    height: ${GRID * 8 - MARGIN * 2 - GRID_BODER}px;
     top: ${MARGIN + GRID_BODER}px;
   }
 
-  & .summer-event {
+  & .summer-camp {
     top: ${GRID * 4}px;
   }
 
@@ -181,7 +181,11 @@ const Container = styled(Section)`
   }
 
   & .p-group {
-    height: ${GRID * 6 - MARGIN * 2 - GRID_BODER}px;
-    top: ${GRID * 6 + MARGIN + GRID_BODER}px;
+    height: ${GRID * 4 - MARGIN * 2 - GRID_BODER}px;
+    top: ${GRID * 8 + MARGIN + GRID_BODER}px;
+  }
+
+  & .winter-camp {
+    top: ${GRID * 10}px;
   }
 `
