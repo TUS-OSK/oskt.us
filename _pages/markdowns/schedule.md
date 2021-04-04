@@ -13,6 +13,7 @@ eventCalendar:
     - name:
         ja: '新入部員の第1期募集'
         en: 'First Recruiting'
+      top: true
   5: 
     - name:
         ja: '2021年度講義班スタート'
@@ -22,23 +23,27 @@ eventCalendar:
     - name:
         ja: '新入部員の第2期募集'
         en: 'Second Recruiting'
-  7:
+      top: true
     - name:
         ja: '講義班成果発表会'
         en: 'First LT'
+      top: true
   8:
     - name:
         ja: 'ハッカソン夏合宿(仮)'
         en: 'Summer Camp (Hackathon)'
       detail: '対面での合宿の代わりにリモートでハッカソン等のイベントを予定しております。'
+      top: true
   11:
     - name:
         ja: '企画班成果発表会'
         en: 'Second LT'
+      top: true
   2: 
     - name:
         ja: '冬合宿'
         en: 'Winter Camp'
+      top: true
 ---
 
 ## 2020年度
