@@ -14,9 +14,6 @@ export interface Font {
 export const FONT_PATHS: {
   [id in string]: Font
 } = {
-  quasimoda: {
-    base: '/fonts/quasimoda-light.otf',
-  },
   novecentosans: {
     base: '/fonts/Novecentosanswide-Book.otf',
     bold: '/fonts/Novecentosanswide-Bold.otf',

@@ -32,7 +32,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="ja">
-        <Head />
+        <Head>
+          <link rel="stylesheet" href="https://use.typekit.net/diu7iey.css" />
+        </Head>
         <body>
           <Main />
           <NextScript />
