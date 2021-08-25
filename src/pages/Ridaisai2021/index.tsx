@@ -3,9 +3,11 @@ import { useEffect, useRef } from 'react'
 import Footer from 'src/components/Footer'
 import Logo from 'src/components/Logo'
 import styled, { css } from 'styled-components'
+import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
 import useBreakpoint from './breakpoint/useBreakPoint'
 import Hero, { heroSizeCss } from './Hero'
 import { NavigationDLIcon, NavigationRayIcon, NavigationTopIcon, NavigationWebIcon } from './NavigationIcons'
+import ReactionSender from './ReactionSender'
 import Section from './Section'
 import Thumbnail from './Thumbnail'
 import useGetContents from './useGetContents'
@@ -19,8 +21,6 @@ export default function Ridaisai2021() {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [openLogo] = useTopLogo(scrollerRef)
   const [contentData, , importContents] = useGetContents()
-
-  console.log(currentMode)
 
   useEffect(() => {
     void importContents()
@@ -44,53 +44,62 @@ export default function Ridaisai2021() {
           <MainContents>
             <SectionWrapper backgroundColor="black" active={false}>
               <Section title="OSKとは" description={DESCRIPTION}>
-                <blockquote className="twitter-tweet">
-                  <p lang="ja" dir="ltr">
-                    みなさんこんばんは！
-                    <br />
-                    今回、OSKの活動を画像にまとめてみました！
-                    <br />
-                    ぜひご覧ください。
-                    <br />
-                    <br />
-                    興味のある方（在学生もOK）のご連絡お待ちしております！
-                    <a href="https://twitter.com/hashtag/%E6%98%A5%E3%81%8B%E3%82%89%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
-                      #春から理科大
+                <SectionContentsAligner>
+                  <blockquote className="twitter-tweet">
+                    <p lang="ja" dir="ltr">
+                      みなさんこんばんは！
+                      <br />
+                      今回、OSKの活動を画像にまとめてみました！
+                      <br />
+                      ぜひご覧ください。
+                      <br />
+                      <br />
+                      興味のある方（在学生もOK）のご連絡お待ちしております！
+                      <a href="https://twitter.com/hashtag/%E6%98%A5%E3%81%8B%E3%82%89%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
+                        #春から理科大
+                      </a>
+                      <a href="https://twitter.com/hashtag/%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
+                        #理科大
+                      </a>
+                      <a href="https://t.co/DQZ6pqa0uA">pic.twitter.com/DQZ6pqa0uA</a>
+                    </p>
+                    &mdash; 応用数学研究部 (@tus_osk)
+                    <a href="https://twitter.com/tus_osk/status/1244586024262438912?ref_src=twsrc%5Etfw">
+                      March 30, 2020
                     </a>
-                    <a href="https://twitter.com/hashtag/%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
-                      #理科大
-                    </a>
-                    <a href="https://t.co/DQZ6pqa0uA">pic.twitter.com/DQZ6pqa0uA</a>
-                  </p>
-                  &mdash; 応用数学研究部 (@tus_osk)
-                  <a href="https://twitter.com/tus_osk/status/1244586024262438912?ref_src=twsrc%5Etfw">
-                    March 30, 2020
-                  </a>
-                </blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+                  </blockquote>
+                  <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+                </SectionContentsAligner>
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               <Section title="レイトレ" description="">
-                {contentData?.ray?.likeCount}
-                準備中
+                <SectionContentsAligner>準備中</SectionContentsAligner>
+                {contentData?.ray && <ReactionSender type="ray" likeCount={contentData.ray.likeCount}></ReactionSender>}
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               <Section title="機械学習" description="">
-                {contentData?.dl?.likeCount}
-                準備中
+                <SectionContentsAligner>準備中</SectionContentsAligner>
+                {contentData?.dl && <ReactionSender type="dl" likeCount={contentData.dl.likeCount}></ReactionSender>}
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
-              <Section title="Web" description="">
-                {contentData?.web?.likeCount}
-                <Thumbnail
-                  title="2021年度理大祭特設ページ"
-                  description="ここはWeb班によって制作されています！"
-                  src="/images/ridaisai/2021/web-1.png"
-                  url=""
-                />
+              <Section
+                title="Web"
+                description="
+                Web班ではWebサイトを制作するなどの活動をしています！
+              "
+              >
+                <SectionContentsAligner>
+                  <Thumbnail
+                    title="2021年度理大祭特設ページ"
+                    description="ここはWeb班によって制作されています！"
+                    src="/images/ridaisai/2021/web-1.png"
+                    url=""
+                  />
+                </SectionContentsAligner>
+                {contentData?.web && <ReactionSender type="web" likeCount={contentData.web.likeCount}></ReactionSender>}
               </Section>
             </SectionWrapper>
           </MainContents>
@@ -131,17 +140,22 @@ const Scroller = styled.div`
   overflow-y: auto;
 `
 
-const HEADER_HEIGHT = '80px'
+const HEADER_HEIGHT = 80
 const Header = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: ${HEADER_HEIGHT};
-  padding: 0 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  height: ${HEADER_HEIGHT}px;
+  padding: 0 40px;
+  ${MEDIA_QUERY_MOBILE} {
+    height: ${HEADER_HEIGHT - 16}px;
+    padding: 0 24px;
+  }
 `
 
 const LogoWrapper = styled.div<{ open: boolean }>`
@@ -185,7 +199,7 @@ const Navigation = styled.div`
   position: sticky;
   top: 0;
   width: 160px;
-  padding-top: ${HEADER_HEIGHT};
+  padding-top: ${HEADER_HEIGHT}px;
   box-sizing: border-box;
   display: grid;
   justify-content: center;
@@ -197,7 +211,11 @@ const Navigation = styled.div`
 const MainContents = styled.div`
   flex: 1;
   overflow: hidden;
+
   padding: 80px;
+  ${MEDIA_QUERY_MOBILE} {
+    padding: 24px;
+  }
 `
 
 const AsideContents = styled.div``
@@ -209,7 +227,17 @@ const Body = styled.div`
 `
 
 const SectionWrapper = styled.div<{ backgroundColor: string; active: boolean }>`
-  padding: 80px 0;
   transition: 0.2s background-color ease;
   background-color: ${({ backgroundColor, active }) => (active ? backgroundColor : '#FFF')};
+
+  padding: 80px 0;
+  ${MEDIA_QUERY_MOBILE} {
+    padding: 40px 0;
+  }
+`
+
+const SectionContentsAligner = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `

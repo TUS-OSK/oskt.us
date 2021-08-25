@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
+import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
 
 interface Props {
   title: string
@@ -29,19 +30,27 @@ export default function Thumbnail({ title, description, src, url }: Props) {
 }
 
 const Container = styled.div`
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-flow: column;
 `
 
 const Image = styled.img`
-  width: 400px;
-  height: 260px;
+  max-width: 400px;
   object-fit: cover;
+
+  height: 260px;
+  ${MEDIA_QUERY_MOBILE} {
+    height: 220px;
+  }
 `
 
 const titleCss = css`
-  font-size: 20px;
   font-weight: bold;
+
+  font-size: 20px;
+  ${MEDIA_QUERY_MOBILE} {
+    font-size: 16px;
+  }
 `
 
 const Title = styled.div`
@@ -52,6 +61,16 @@ const ExternalLinkTitle = styled.a`
   ${titleCss}
 `
 
-const Description = styled.div``
+const Description = styled.div`
+  font-size: 16px;
+  ${MEDIA_QUERY_MOBILE} {
+    font-size: 14px;
+  }
+`
 
-const Info = styled.div``
+const Info = styled.div`
+  margin-top: 16px;
+  ${MEDIA_QUERY_MOBILE} {
+    margin-top: 8px;
+  }
+`
