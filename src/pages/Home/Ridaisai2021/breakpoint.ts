@@ -16,7 +16,6 @@ export function useBreakpoint() {
 
   useLayoutEffect(() => {
     firstCurrentMode.current = checkCurrentMode()
-    console.log(firstCurrentMode.current)
   }, [])
 
   useEffect(() => {

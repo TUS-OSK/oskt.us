@@ -18,9 +18,7 @@ export default function Ridaisai2021() {
   const [currentMode] = useBreakpoint()
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [openLogo] = useTopLogo(scrollerRef)
-  const [contentData, busy, importContents] = useGetContents()
-
-  console.log(contentData, busy)
+  const [contentData, , importContents] = useGetContents()
 
   useEffect(() => {
     void importContents()

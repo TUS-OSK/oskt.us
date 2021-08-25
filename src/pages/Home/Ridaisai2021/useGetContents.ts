@@ -21,7 +21,6 @@ type ContentData = {
 export default function useGetContents() {
   const [busy, setBusy] = useState(false)
   const contentData = useRef<ContentData | null>(null)
-  console.log()
 
   const importContents = useCallback(async () => {
     const url = useApiUrl()
@@ -38,8 +37,6 @@ export default function useGetContents() {
         },
       })
       const contents = JSON.parse(await result.text()) as Content[]
-
-      console.log(contents)
 
       contentData.current = Object.fromEntries(
         contents
