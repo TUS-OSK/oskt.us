@@ -10,6 +10,7 @@ import { NavigationDLIcon, NavigationRayIcon, NavigationTopIcon, NavigationWebIc
 import ReactionSender from './ReactionSender'
 import Section from './Section'
 import Thumbnail from './Thumbnail'
+import { useContentNavigation } from './useContentNavigation'
 import useGetContents from './useGetContents'
 import useTopLogo from './useTopLogo'
 
@@ -21,6 +22,11 @@ export default function Ridaisai2021() {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [openLogo] = useTopLogo(scrollerRef)
   const [contentData, , importContents] = useGetContents()
+
+  const [topLink, topAnchor] = useContentNavigation('top', NavigationTopIcon)
+  const [rayLink, rayAnchor] = useContentNavigation('ray', NavigationRayIcon)
+  const [dlLink, dlAnchor] = useContentNavigation('dl', NavigationDLIcon)
+  const [webLink, webAnchor] = useContentNavigation('web', NavigationWebIcon)
 
   useEffect(() => {
     void importContents()
@@ -34,15 +40,16 @@ export default function Ridaisai2021() {
           {currentMode === 'desktop' && (
             <AsideContents>
               <Navigation>
-                <NavigationTopIcon />
-                <NavigationRayIcon />
-                <NavigationDLIcon />
-                <NavigationWebIcon />
+                {topLink}
+                {rayLink}
+                {dlLink}
+                {webLink}
               </Navigation>
             </AsideContents>
           )}
           <MainContents>
             <SectionWrapper backgroundColor="black" active={false}>
+              {topAnchor}
               <Section title="OSKとは" description={DESCRIPTION}>
                 <SectionContentsAligner>
                   <blockquote className="twitter-tweet">
@@ -73,18 +80,21 @@ export default function Ridaisai2021() {
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
+              {rayAnchor}
               <Section title="レイトレ" description="">
                 <SectionContentsAligner>準備中</SectionContentsAligner>
                 {contentData?.ray && <ReactionSender type="ray" likeCount={contentData.ray.likeCount}></ReactionSender>}
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
+              {dlAnchor}
               <Section title="機械学習" description="">
                 <SectionContentsAligner>準備中</SectionContentsAligner>
                 {contentData?.dl && <ReactionSender type="dl" likeCount={contentData.dl.likeCount}></ReactionSender>}
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
+              {webAnchor}
               <Section
                 title="Web"
                 description="
@@ -138,6 +148,7 @@ const Scroller = styled.div`
   z-index: 0;
   height: 100vh;
   overflow-y: auto;
+  scroll-behavior: smooth;
 `
 
 const HEADER_HEIGHT = 80

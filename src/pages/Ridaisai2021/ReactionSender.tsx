@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { ContentType } from './api'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
