@@ -1,5 +1,5 @@
 import { Mode } from 'fs'
-import { createContext, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createContext, ReactNode, useEffect, useRef, useState } from 'react'
 import { checkCurrentMode } from './helper'
 
 export const BreakPointContext = createContext<Mode | null>(null)
@@ -12,8 +12,9 @@ export default function BreakPointProvider({ children }: Props) {
   const firstCurrentMode = useRef<Mode | null>(null)
   const [currentMode, setCurrentMode] = useState<Mode | null>(null)
 
-  useLayoutEffect(() => {
-    firstCurrentMode.current = checkCurrentMode()
+  // NOTE: 本当はuseLayoutEffectしてrefに入れたいができないので応急処置
+  useEffect(() => {
+    setCurrentMode(checkCurrentMode())
   }, [])
 
   useEffect(() => {
