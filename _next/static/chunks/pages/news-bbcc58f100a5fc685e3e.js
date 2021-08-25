@@ -1,1 +1,0 @@
-_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[15],{NLxX:function(n,_,w){(window.__NEXT_P=window.__NEXT_P||[]).push(["/news",function(){return w("5p4b")}])}},[["NLxX",0,2,1,3,4,5]]]);
