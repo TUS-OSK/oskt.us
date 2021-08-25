@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Footer from 'src/components/Footer'
 import Logo from 'src/components/Logo'
 import styled, { css } from 'styled-components'
@@ -22,11 +22,22 @@ export default function Ridaisai2021() {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [openLogo] = useTopLogo(scrollerRef)
   const [contentData, , importContents] = useGetContents()
+  const [openMobileNavigationMenu, setMobileNavigationMenu] = useState(false)
 
   const [topLink, topAnchor] = useContentNavigation('top', NavigationTopIcon)
   const [rayLink, rayAnchor] = useContentNavigation('ray', NavigationRayIcon)
   const [dlLink, dlAnchor] = useContentNavigation('dl', NavigationDLIcon)
   const [webLink, webAnchor] = useContentNavigation('web', NavigationWebIcon)
+
+  const handleClickMobileNavigationMenu = () => setMobileNavigationMenu(true)
+
+  useEffect(() => {
+    if (openMobileNavigationMenu) {
+      const close = () => setMobileNavigationMenu(false)
+      window.addEventListener('click', close)
+      return () => window.removeEventListener('click', close)
+    }
+  })
 
   useEffect(() => {
     void importContents()
@@ -39,12 +50,12 @@ export default function Ridaisai2021() {
         <Body>
           {currentMode === 'desktop' && (
             <AsideContents>
-              <Navigation>
+              <DesktopNavigation>
                 {topLink}
                 {rayLink}
                 {dlLink}
                 {webLink}
-              </Navigation>
+              </DesktopNavigation>
             </AsideContents>
           )}
           <MainContents>
@@ -121,7 +132,7 @@ export default function Ridaisai2021() {
           </LogoWrapper>
           {currentMode === 'desktop' ? (
             <Link href="/" passHref>
-              <HomePageNavigation>
+              <DekstopHPNavigation>
                 応用数学研究部のHPへ
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -130,9 +141,49 @@ export default function Ridaisai2021() {
                     d="M14.9907 3.56116C15.7854 2.79395 17.0515 2.8162 17.8187 3.61085L29.78 16L17.8187 28.3892C17.0515 29.1838 15.7854 29.206 14.9907 28.4388C14.1961 27.6716 14.1738 26.4055 14.941 25.6108L22.289 18H4C2.89543 18 2 17.1046 2 16C2 14.8955 2.89543 14 4 14H22.2891L14.941 6.38915C14.1738 5.5945 14.1961 4.32836 14.9907 3.56116Z"
                   />
                 </svg>
-              </HomePageNavigation>
+              </DekstopHPNavigation>
             </Link>
-          ) : null}
+          ) : (
+            <MobileNavigationMenu onClick={handleClickMobileNavigationMenu}>
+              <MobileNavigationMenuIcon
+                active={openMobileNavigationMenu}
+                viewBox="0 0 52 52"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10 16C10 14.8954 10.8954 14 12 14H40C41.1046 14 42 14.8954 42 16C42 17.1046 41.1046 18 40 18H12C10.8954 18 10 17.1046 10 16ZM10 26C10 24.8954 10.8954 24 12 24H40C41.1046 24 42 24.8954 42 26C42 27.1046 41.1046 28 40 28H12C10.8954 28 10 27.1046 10 26ZM10 36C10 34.8954 10.8954 34 12 34H40C41.1046 34 42 34.8954 42 36C42 37.1046 41.1046 38 40 38H12C10.8954 38 10 37.1046 10 36Z"
+                  fill="black"
+                />
+              </MobileNavigationMenuIcon>
+              <MobileNavigation active={openMobileNavigationMenu}>
+                <Link href="/" passHref>
+                  <MobileHPNavigation>
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M14.9907 3.56116C15.7854 2.79395 17.0515 2.8162 17.8187 3.61085L29.78 16L17.8187 28.3892C17.0515 29.1838 15.7854 29.206 14.9907 28.4388C14.1961 27.6716 14.1738 26.4055 14.941 25.6108L22.289 18H4C2.89543 18 2 17.1046 2 16C2 14.8955 2.89543 14 4 14H22.2891L14.941 6.38915C14.1738 5.5945 14.1961 4.32836 14.9907 3.56116Z"
+                      />
+                    </svg>
+                    HPへ
+                  </MobileHPNavigation>
+                </Link>
+                {topLink}
+                {rayLink}
+                {dlLink}
+                {webLink}
+              </MobileNavigation>
+            </MobileNavigationMenu>
+          )}
         </Header>
       </Scroller>
     </Container>
@@ -151,7 +202,8 @@ const Scroller = styled.div`
   scroll-behavior: smooth;
 `
 
-const HEADER_HEIGHT = 80
+const DESKTOP_HEADER_HEIGHT = 80
+const MOBILE_HEADER_HEIGHT = 64
 const Header = styled.div`
   position: fixed;
   top: 0;
@@ -161,10 +213,10 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  height: ${HEADER_HEIGHT}px;
+  height: ${DESKTOP_HEADER_HEIGHT}px;
   padding: 0 40px;
   ${MEDIA_QUERY_MOBILE} {
-    height: ${HEADER_HEIGHT - 16}px;
+    height: ${MOBILE_HEADER_HEIGHT}px;
     padding: 0 24px;
   }
 `
@@ -187,7 +239,7 @@ const LogoWrapper = styled.div<{ open: boolean }>`
         `}
 `
 
-const HomePageNavigation = styled.a`
+const DekstopHPNavigation = styled.a`
   font-size: 20px;
   font-weight: bold;
   display: grid;
@@ -206,11 +258,11 @@ const HomePageNavigation = styled.a`
   }
 `
 
-const Navigation = styled.div`
+const DesktopNavigation = styled.div`
   position: sticky;
   top: 0;
   width: 160px;
-  padding-top: ${HEADER_HEIGHT}px;
+  padding-top: ${DESKTOP_HEADER_HEIGHT}px;
   box-sizing: border-box;
   display: grid;
   justify-content: center;
@@ -251,4 +303,69 @@ const SectionContentsAligner = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+`
+
+const MobileNavigationMenu = styled.div`
+  position: relative;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+
+  :hover {
+    cursor: pointer;
+  }
+`
+
+const MobileNavigationMenuIcon = styled.svg<{ active: boolean }>`
+  width: 52px;
+  height: 52px;
+
+  transform: translateY(0);
+  visibility: visible;
+  transition: 0.2s all;
+  opacity: 1;
+  ${(p) =>
+    p.active &&
+    css`
+      transform: translateY(-${MOBILE_HEADER_HEIGHT}px);
+      visibility: hidden;
+      opacity: 0;
+    `}
+`
+
+const MobileNavigation = styled.div<{ active: boolean }>`
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: max-content;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: grid;
+  gap: 24px;
+  padding: 16px 8px 16px 16px;
+  border-radius: 8px;
+
+  transform: translateY(${MOBILE_HEADER_HEIGHT}px);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s all;
+  ${(p) =>
+    p.active &&
+    css`
+      transform: translateY(0);
+      visibility: visible;
+      opacity: 1;
+    `}
+`
+
+const MobileHPNavigation = styled.a`
+  font-size: 16px;
+  font-weight: bold;
+  color: #6b76ff;
+  text-decoration: none;
+  display: grid;
+  justify-content: center;
 `
