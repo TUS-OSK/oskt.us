@@ -26,7 +26,7 @@ export type Animations<T extends TypedAnimation> = {
 }
 
 export const animationCreator = <T extends TypedAnimation>(animations: Animations<T>) => ({
-  animation: <N extends number>(number: N, animationName: keyof TypedAnimation[N]) => {
+  animation: <N extends number>(number: N, animationName: keyof T[N]) => {
     return Object.keys(animations)
       .map((key) => parseInt(key, 10) as keyof typeof animations)
       .reduce<{ duration: number; delay: number; style: FlattenSimpleInterpolation }>(

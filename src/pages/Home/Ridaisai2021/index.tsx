@@ -1,52 +1,20 @@
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
+import Footer from 'src/components/Footer'
 import Logo from 'src/components/Logo'
 import styled, { css } from 'styled-components'
 import { Hero, heroSizeCss } from './Hero'
+import { NavigationDLIcon, NavigationRayIcon, NavigationTopIcon, NavigationWebIcon } from './NavigationIcons'
 import Section from './Section'
+import Thumbnail from './Thumbnail'
+import useTopLogo from './useTopLogo'
+
+const DESCRIPTION =
+  '応用数学研究部(応数研,OSK)は東京理科大学一部研究会に属する部活動団体で、創部から半世紀以上たつ歴史ある団体です。コンピュータを利用してプログラミングを主に、計算機科学、WEB開発、アプリケーション開発、ゲーム開発、など様々なことに挑戦しています。'
 
 export default function Ridaisai2021() {
   const scrollerRef = useRef<HTMLDivElement>(null)
-  const scrollYCache = useRef<number | null>(null)
-  const [openLogo, setOpenLogo] = useState(true)
-
-  useEffect(() => {
-    const closeLogo = () => {
-      if (scrollerRef.current === null) {
-        return
-      }
-
-      const scrollY = scrollerRef.current.scrollTop
-      if (scrollerRef.current.scrollTop > window.innerHeight) {
-        return setOpenLogo(false)
-      }
-
-      if (scrollYCache.current === null) {
-        scrollYCache.current = scrollY
-        return
-      }
-
-      const threshold = 24
-      const diff = scrollY - scrollYCache.current
-      if (diff > threshold) {
-        scrollYCache.current = scrollY
-        return setOpenLogo(false)
-      }
-      if (diff < -threshold) {
-        scrollYCache.current = scrollY
-        return setOpenLogo(true)
-      }
-    }
-
-    scrollerRef.current?.addEventListener('scroll', closeLogo)
-    return () => scrollerRef.current?.removeEventListener('scroll', closeLogo)
-  }, [])
-
-  useEffect(() => {
-    if (scrollerRef.current && scrollerRef.current.scrollTop > window.innerHeight && openLogo) {
-      setOpenLogo(false)
-    }
-  }, [])
+  const [openLogo] = useTopLogo(scrollerRef)
 
   return (
     <Container>
@@ -54,21 +22,65 @@ export default function Ridaisai2021() {
         <Hero />
         <Body>
           <AsideContents>
-            <Navigation>概要</Navigation>
+            <Navigation>
+              <NavigationTopIcon />
+              <NavigationRayIcon />
+              <NavigationDLIcon />
+              <NavigationWebIcon />
+            </Navigation>
           </AsideContents>
           <MainContents>
-            <Section
-              title="概要"
-              description="
-              応用数学研究部(応数研,
-              OSK)は東京理科大学一部研究会に属する部活動団体で、創部から半世紀以上たつ歴史ある団体です。コンピュータを利用してプログラミングを主に、計算機科学、WEB
-              開発、アプリケーション開発、ゲーム開発、など様々なことに挑戦しています。
-            "
-            >
-              contents!
-            </Section>
+            <SectionWrapper backgroundColor="black" active={false}>
+              <Section title="OSKとは" description={DESCRIPTION}>
+                <blockquote className="twitter-tweet">
+                  <p lang="ja" dir="ltr">
+                    みなさんこんばんは！
+                    <br />
+                    今回、OSKの活動を画像にまとめてみました！
+                    <br />
+                    ぜひご覧ください。
+                    <br />
+                    <br />
+                    興味のある方（在学生もOK）のご連絡お待ちしております！
+                    <a href="https://twitter.com/hashtag/%E6%98%A5%E3%81%8B%E3%82%89%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
+                      #春から理科大
+                    </a>
+                    <a href="https://twitter.com/hashtag/%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
+                      #理科大
+                    </a>
+                    <a href="https://t.co/DQZ6pqa0uA">pic.twitter.com/DQZ6pqa0uA</a>
+                  </p>
+                  &mdash; 応用数学研究部 (@tus_osk)
+                  <a href="https://twitter.com/tus_osk/status/1244586024262438912?ref_src=twsrc%5Etfw">
+                    March 30, 2020
+                  </a>
+                </blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+              </Section>
+            </SectionWrapper>
+            <SectionWrapper backgroundColor="black" active={false}>
+              <Section title="レイトレ" description="">
+                準備中
+              </Section>
+            </SectionWrapper>
+            <SectionWrapper backgroundColor="black" active={false}>
+              <Section title="機械学習" description="">
+                準備中
+              </Section>
+            </SectionWrapper>
+            <SectionWrapper backgroundColor="black" active={false}>
+              <Section title="Web" description="">
+                <Thumbnail
+                  title="2021年度理大祭特設ページ"
+                  description="ここはWeb班によって制作されています！"
+                  src="/images/ridaisai/2021/web-1.png"
+                  url=""
+                />
+              </Section>
+            </SectionWrapper>
           </MainContents>
         </Body>
+        <Footer></Footer>
         <Header>
           <LogoWrapper open={openLogo}>
             <Logo />
@@ -155,18 +167,19 @@ const HomePageNavigation = styled.a`
 const Navigation = styled.div`
   position: sticky;
   top: 0;
-  width: 108px;
-  padding-top: 42px;
+  width: 160px;
+  padding-top: ${HEADER_HEIGHT};
   box-sizing: border-box;
   display: grid;
   justify-content: center;
+  align-content: start;
+  gap: 40px;
   ${heroSizeCss};
 `
 
 const MainContents = styled.div`
   flex: 1;
   overflow: hidden;
-  height: 200vh;
   padding: 80px;
 `
 
@@ -176,4 +189,10 @@ const Body = styled.div`
   position: relative;
   display: flex;
   background-color: white;
+`
+
+const SectionWrapper = styled.div<{ backgroundColor: string; active: boolean }>`
+  padding: 80px 0;
+  transition: 0.2s background-color ease;
+  background-color: ${({ backgroundColor, active }) => (active ? backgroundColor : '#FFF')};
 `

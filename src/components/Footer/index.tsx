@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export default function Footer() {
   return (
     <Container as="footer">
-      <small>Copyright (c) 2017 OSK</small>
+      <small>Copyright (c) 2021 OSK</small>
     </Container>
   )
 }
