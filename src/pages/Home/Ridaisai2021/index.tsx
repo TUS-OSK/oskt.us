@@ -1,34 +1,46 @@
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Footer from 'src/components/Footer'
 import Logo from 'src/components/Logo'
 import styled, { css } from 'styled-components'
-import { Hero, heroSizeCss } from './Hero'
+import { useBreakpoint } from './breakpoint'
+import Hero, { heroSizeCss } from './Hero'
 import { NavigationDLIcon, NavigationRayIcon, NavigationTopIcon, NavigationWebIcon } from './NavigationIcons'
 import Section from './Section'
 import Thumbnail from './Thumbnail'
+import useGetContents from './useGetContents'
 import useTopLogo from './useTopLogo'
 
 const DESCRIPTION =
   '応用数学研究部(応数研,OSK)は東京理科大学一部研究会に属する部活動団体で、創部から半世紀以上たつ歴史ある団体です。コンピュータを利用してプログラミングを主に、計算機科学、WEB開発、アプリケーション開発、ゲーム開発、など様々なことに挑戦しています。'
 
 export default function Ridaisai2021() {
+  const [currentMode] = useBreakpoint()
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [openLogo] = useTopLogo(scrollerRef)
+  const [contentData, busy, importContents] = useGetContents()
+
+  console.log(contentData, busy)
+
+  useEffect(() => {
+    void importContents()
+  }, [])
 
   return (
     <Container>
       <Scroller ref={scrollerRef}>
         <Hero />
         <Body>
-          <AsideContents>
-            <Navigation>
-              <NavigationTopIcon />
-              <NavigationRayIcon />
-              <NavigationDLIcon />
-              <NavigationWebIcon />
-            </Navigation>
-          </AsideContents>
+          {currentMode === 'desktop' && (
+            <AsideContents>
+              <Navigation>
+                <NavigationTopIcon />
+                <NavigationRayIcon />
+                <NavigationDLIcon />
+                <NavigationWebIcon />
+              </Navigation>
+            </AsideContents>
+          )}
           <MainContents>
             <SectionWrapper backgroundColor="black" active={false}>
               <Section title="OSKとは" description={DESCRIPTION}>
@@ -60,16 +72,19 @@ export default function Ridaisai2021() {
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               <Section title="レイトレ" description="">
+                {contentData?.ray?.likeCount}
                 準備中
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               <Section title="機械学習" description="">
+                {contentData?.dl?.likeCount}
                 準備中
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               <Section title="Web" description="">
+                {contentData?.web?.likeCount}
                 <Thumbnail
                   title="2021年度理大祭特設ページ"
                   description="ここはWeb班によって制作されています！"
@@ -85,18 +100,20 @@ export default function Ridaisai2021() {
           <LogoWrapper open={openLogo}>
             <Logo />
           </LogoWrapper>
-          <Link href="/" passHref>
-            <HomePageNavigation>
-              応用数学研究部のHPへ
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M14.9907 3.56116C15.7854 2.79395 17.0515 2.8162 17.8187 3.61085L29.78 16L17.8187 28.3892C17.0515 29.1838 15.7854 29.206 14.9907 28.4388C14.1961 27.6716 14.1738 26.4055 14.941 25.6108L22.289 18H4C2.89543 18 2 17.1046 2 16C2 14.8955 2.89543 14 4 14H22.2891L14.941 6.38915C14.1738 5.5945 14.1961 4.32836 14.9907 3.56116Z"
-                />
-              </svg>
-            </HomePageNavigation>
-          </Link>
+          {currentMode === 'desktop' ? (
+            <Link href="/" passHref>
+              <HomePageNavigation>
+                応用数学研究部のHPへ
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M14.9907 3.56116C15.7854 2.79395 17.0515 2.8162 17.8187 3.61085L29.78 16L17.8187 28.3892C17.0515 29.1838 15.7854 29.206 14.9907 28.4388C14.1961 27.6716 14.1738 26.4055 14.941 25.6108L22.289 18H4C2.89543 18 2 17.1046 2 16C2 14.8955 2.89543 14 4 14H22.2891L14.941 6.38915C14.1738 5.5945 14.1961 4.32836 14.9907 3.56116Z"
+                  />
+                </svg>
+              </HomePageNavigation>
+            </Link>
+          ) : null}
         </Header>
       </Scroller>
     </Container>

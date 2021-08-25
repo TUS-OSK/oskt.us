@@ -15,7 +15,7 @@ type HeroProps =
       heroHeight: number
     }
 
-export function Hero() {
+export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null)
   const [smallerWindowThanHero, setSmallerWindowThanHero] = useState<boolean | null>(null)
 
@@ -152,8 +152,8 @@ const popInBackgroundCss = css`
 const ScrollIcon = () => (
   <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M32 8V45.8125L37.7985 41.1268L40.3126 44.2379L28 54.1875V8H32Z"
       fill="black"
     />
