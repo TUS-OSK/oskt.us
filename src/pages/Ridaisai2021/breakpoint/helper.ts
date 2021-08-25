@@ -1,6 +1,6 @@
 export const BREAKPONT = 960
 
-export const MEDIA_QUERY = `@media (max-width: ${BREAKPONT}px)`
+export const MEDIA_QUERY_MOBILE = `@media (max-width: ${BREAKPONT}px)`
 
 export type Mode = 'mobile' | 'desktop'
 

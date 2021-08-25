@@ -1,6 +1,6 @@
 export default function OSKIcon() {
   return (
-    <svg width="360" height="228" viewBox="0 0 361 228" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 361 228" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M249.893 146.878H260.664L287.124 174.227L260.664 201.576H249.893L277.888 174.227L249.893 146.878Z"
         fill="#898B99"

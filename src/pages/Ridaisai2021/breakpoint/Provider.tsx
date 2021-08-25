@@ -1,6 +1,5 @@
-import { Mode } from 'fs'
 import { createContext, ReactNode, useEffect, useRef, useState } from 'react'
-import { checkCurrentMode } from './helper'
+import { checkCurrentMode, Mode } from './helper'
 
 export const BreakPointContext = createContext<Mode | null>(null)
 

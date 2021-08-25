@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import BackgroundFluid from './BackgroundFluid'
+import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
+import useBreakpoint from './breakpoint/useBreakPoint'
 import { heroAnimation, HERO_BACKGROUND_COLOR, maskAnimation } from './heroAnimation'
 import OSKIcon from './OSKIcon'
 
@@ -16,6 +18,7 @@ type HeroProps =
     }
 
 export default function Hero() {
+  const currentMode = useBreakpoint()
   const heroRef = useRef<HTMLDivElement>(null)
   const [smallerWindowThanHero, setSmallerWindowThanHero] = useState<boolean | null>(null)
 
@@ -49,9 +52,20 @@ export default function Hero() {
         ? { ready: true, smallerWindowThanHero, heroHeight: heroRef.current?.clientHeight ?? 0 }
         : { ready: false })}
     >
-      <BackgroundFluid fluidCss={popInBackgroundCss} top={-400} left={-200} size={800} />
-      <BackgroundFluid fluidCss={popInBackgroundCss} right={-100} bottom={100} size={400} />
-      <BackgroundFluid fluidCss={popInBackgroundCss} right={200} bottom={10} size={200} />
+      <BackgroundFluid
+        fluidCss={popInBackgroundCss}
+        {...(currentMode === 'desktop' ? { top: -400, left: -200, size: 800 } : { top: -200, left: -100, size: 400 })}
+      />
+      <BackgroundFluid
+        fluidCss={popInBackgroundCss}
+        {...(currentMode === 'desktop'
+          ? { right: -100, bottom: 100, size: 400 }
+          : { right: -100, bottom: 50, size: 200 })}
+      />
+      <BackgroundFluid
+        fluidCss={popInBackgroundCss}
+        {...(currentMode === 'desktop' ? { right: 200, bottom: 10, size: 200 } : { right: 40, bottom: 10, size: 100 })}
+      />
 
       <HeroIcon>
         <OSKIcon />
@@ -59,7 +73,9 @@ export default function Hero() {
       <HeroText>２０２１年度 理大祭 特設ページ</HeroText>
 
       <ScrollGuide>
-        <ScrollIcon />
+        <ScrollIconWrapper>
+          <ScrollIcon />
+        </ScrollIconWrapper>
         scroll
         <Mask />
       </ScrollGuide>
@@ -98,7 +114,12 @@ const Container = styled.div<HeroProps>`
 `
 
 const HeroIcon = styled.div`
+  width: 100%;
+  max-width: 400px;
+  padding: 0 40px;
+  box-sizing: border-box;
   transform-origin: bottom left;
+
   ${() => {
     const { style } = heroAnimation(1, 'popIcon')
     return style
@@ -106,9 +127,15 @@ const HeroIcon = styled.div`
 `
 
 const HeroText = styled.div`
+  font-weight: bold;
+
   margin-top: 16px;
   font-size: 40px;
-  font-weight: bold;
+  ${MEDIA_QUERY_MOBILE} {
+    margin-top: 16px;
+    font-size: 20px;
+  }
+
   ${() => {
     const { style } = heroAnimation(2, 'fadeInText')
     return style
@@ -121,10 +148,15 @@ const ScrollGuide = styled.div`
   z-index: 0;
   display: flex;
   align-items: center;
-  font-size: 24px;
   font-family: 'novecentosans', sans-serif;
   font-weight: bold;
   overflow: hidden;
+
+  font-size: 24px;
+  ${MEDIA_QUERY_MOBILE} {
+    font-size: 16px;
+  }
+
   ${() => {
     const { style } = heroAnimation(3, 'popUpText')
     return style
@@ -149,8 +181,17 @@ const popInBackgroundCss = css`
   }}
 `
 
+const ScrollIconWrapper = styled.div`
+  width: 60px;
+  height: 60px;
+  ${MEDIA_QUERY_MOBILE} {
+    width: 40px;
+    height: 40px;
+  }
+`
+
 const ScrollIcon = () => (
-  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
