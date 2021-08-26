@@ -4,7 +4,7 @@ import MarkdownBody, { MarkdownBodyContainer } from 'src/components/MarkdownBody
 import MarkdownTitle from 'src/components/MarkdownTitle'
 import { Section } from 'src/components/MainLayout/elements'
 import { urlPageMdEdit } from 'src/utils/urls'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { EventCalendar } from '../Home/ScheduleView'
 
 interface Props {

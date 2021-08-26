@@ -1,5 +1,5 @@
 import Button from 'src/components/Button'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { Section } from 'src/components/MainLayout/elements'
 import { pageTo } from 'src/utils/urls'
 

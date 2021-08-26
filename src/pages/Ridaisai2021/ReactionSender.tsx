@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from '@emotion/styled'
 import { ContentType } from './api'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
 import usePostLikeCount from './usePostLikeCount'
+import { css } from '@emotion/react'
 
 interface Props {
   type: ContentType

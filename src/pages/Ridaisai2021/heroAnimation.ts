@@ -1,4 +1,4 @@
-import { css, keyframes } from 'styled-components'
+import { css, keyframes } from '@emotion/react'
 import { animationCreator, AnimationFn, Animations } from 'src/utils/animations'
 
 export const HERO_BACKGROUND_COLOR = '#f9faf3'

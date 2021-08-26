@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import styled, { css } from 'styled-components'
+import styled from '@emotion/styled'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
+import { css } from '@emotion/react'
 
 interface Props {
   title: string

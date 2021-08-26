@@ -1,5 +1,4 @@
-import { css } from 'styled-components'
-import { mergeCss } from './styled-components/api'
+import { css } from '@emotion/react'
 
 export interface Font {
   base: string
@@ -36,10 +35,14 @@ const fontFace = (key: string, type: FontType) => css`
 const mapFontKeyToFontFaceCss = (key: string) => {
   const types = Object.keys(FONT_PATHS[key]) as FontType[]
   const fontFaces = types.map((type) => fontFace(key, type))
-  return mergeCss(fontFaces)
+  return css`
+    ${fontFaces}
+  `
 }
 
 export const fontSettings = () => {
   const fontFaces = Object.keys(FONT_PATHS).map((fontKey) => mapFontKeyToFontFaceCss(fontKey))
-  return mergeCss(fontFaces)
+  return css`
+    ${fontFaces}
+  `
 }

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { EventData } from '..'
 import EventElement from './EventElement'
 import { useState, useEffect } from 'react'
@@ -42,8 +42,8 @@ export default function MonthEventElement({ events: _events }: Props) {
       <EventElement>
         {events.map((e, i) => (
           <EventText key={i} status={getStatus(i)}>
-            <JaName>{e.name.ja}</JaName>
-            <EnName>{e.name.en}</EnName>
+            <JaName status={getStatus(i)}>{e.name.ja}</JaName>
+            <EnName status={getStatus(i)}>{e.name.en}</EnName>
           </EventText>
         ))}
       </EventElement>
@@ -85,27 +85,24 @@ const eventStatusStyle: {
   },
 }
 
-const JaName = styled.div`
+const JaName = styled.div<{ status: EventStatus }>`
   font-size: 16px;
   color: #fffd;
+  opacity: ${(p) => eventStatusStyle[p.status].opacity};
+  transform: translateY(${(p) => eventStatusStyle[p.status].y ?? 0}px);
+  transition: opacity 0.4s, transform 0.4s;
 `
 
-const EnName = styled.div`
+const EnName = styled.div<{ status: EventStatus }>`
   font-size: 12px;
   color: #fff7;
+
+  opacity: ${(p) => eventStatusStyle[p.status].opacity};
+  transform: translateY(${(p) => (eventStatusStyle[p.status].y ?? 0) / 2}px);
+  transition: 0.1s opacity 0.4s, 0.1s transform 0.4s;
 `
 
 const EventText = styled.div<{ status: EventStatus }>`
   position: absolute;
   visibility: ${(p) => eventStatusStyle[p.status].visibility};
-  ${JaName} {
-    opacity: ${(p) => eventStatusStyle[p.status].opacity};
-    transform: translateY(${(p) => eventStatusStyle[p.status].y ?? 0}px);
-    transition: opacity 0.4s, transform 0.4s;
-  }
-  ${EnName} {
-    opacity: ${(p) => eventStatusStyle[p.status].opacity};
-    transform: translateY(${(p) => (eventStatusStyle[p.status].y ?? 0) / 2}px);
-    transition: 0.1s opacity 0.4s, 0.1s transform 0.4s;
-  }
 `

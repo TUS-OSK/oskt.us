@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { FC, useMemo } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { ContentType } from './api'
 
 export function useContentNavigation(type: 'top' | ContentType, Icon: FC) {

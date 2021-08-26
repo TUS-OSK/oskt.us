@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { Section, SectionTitle } from 'src/components/MainLayout/elements'
 import { MetaItemProps, MetaList } from 'src/pages/News'
 import { compareDesc } from 'date-fns'

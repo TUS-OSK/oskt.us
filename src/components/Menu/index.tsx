@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { StyledLink } from 'src/utils/next/elements'
 
 interface LinkItem {

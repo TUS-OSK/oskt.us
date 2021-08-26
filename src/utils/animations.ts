@@ -1,4 +1,4 @@
-import { css, FlattenSimpleInterpolation, keyframes } from 'styled-components'
+import { css, keyframes, SerializedStyles } from '@emotion/react'
 
 // easing
 export const SWIFT = 'cubic-bezier(0.7, 0, 0.1, 1)'
@@ -9,7 +9,7 @@ export const BOUNCE = 'cubic-bezier(1, -0.12, 0.44, 1.65)'
 
 export const PARABOLA = 'cubic-bezier(0.28, 1.15, 0.81, 1.69)'
 
-export type AnimationFn = () => FlattenSimpleInterpolation[]
+export type AnimationFn = () => SerializedStyles[]
 
 type TypedAnimation = {
   [key in number]: {
@@ -29,7 +29,7 @@ export const animationCreator = <T extends TypedAnimation>(animations: Animation
   animation: <N extends number>(number: N, animationName: keyof T[N]) => {
     return Object.keys(animations)
       .map((key) => parseInt(key, 10) as keyof typeof animations)
-      .reduce<{ duration: number; delay: number; style: FlattenSimpleInterpolation }>(
+      .reduce<{ duration: number; delay: number; style: SerializedStyles }>(
         (prev, current) => {
           if (current < number) {
             const { duration, delay } = animations[current]

@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 import { SWIFT } from 'src/utils/animations'
-import styled, { keyframes } from 'styled-components'
+import styled from '@emotion/styled'
 import Footer from '../Footer'
 import Header from '../Header'
+import { keyframes } from '@emotion/react'
 
 interface Props {
   children: ReactNode

@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from '@emotion/styled'
 import BackgroundFluid from './BackgroundFluid'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
 import useBreakpoint from './breakpoint/useBreakPoint'
 import { heroAnimation, HERO_BACKGROUND_COLOR, maskAnimation } from './heroAnimation'
 import OSKIcon from './OSKIcon'
+import { css } from '@emotion/react'
 
 type HeroProps =
   | {
@@ -98,6 +99,11 @@ const Container = styled.div<HeroProps>`
   z-index: 0;
   overflow: hidden;
 
+  ${(p) => {
+    const { style } = heroAnimation(2, 'fadeInBackground')
+    return p.ready ? style : null
+  }}
+
   ${(p) =>
     p.ready &&
     css`
@@ -105,11 +111,6 @@ const Container = styled.div<HeroProps>`
       /* NOTE: Heroの大きさによってstickyの位置を少しずらすことによって, スクロールしたときにHeroの中身が全部見れるようにする */
       top: ${p.smallerWindowThanHero ? `calc(100vh - ${p.heroHeight}px)` : 0};
       z-index: -1;
-
-      ${() => {
-        const { style } = heroAnimation(2, 'fadeInBackground')
-        return style
-      }};
     `}
 `
 
@@ -173,12 +174,10 @@ const Mask = styled.div`
   ${maskAnimation}
 `
 
+const { style: popUpAndRotateBackgroundStyle } = heroAnimation(2, 'popUpAndRotateBackground')
 const popInBackgroundCss = css`
   transform-origin: center center;
-  ${() => {
-    const { style } = heroAnimation(2, 'popUpAndRotateBackground')
-    return style
-  }}
+  ${popUpAndRotateBackgroundStyle}
 `
 
 const ScrollIconWrapper = styled.div`

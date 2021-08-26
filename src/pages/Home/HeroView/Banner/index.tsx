@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { BOUNCE, CUBIC_OUT, SWIFT } from 'src/utils/animations'
 import { fade, flip, pic } from './animations'
 import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'

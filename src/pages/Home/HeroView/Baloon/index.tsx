@@ -1,5 +1,5 @@
 import { StyledLink as StyledLink_ } from 'src/utils/next/elements'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import baloon from '_configs/baloon.json'
 
 const { label: BALOON_LABEL, path: BALOON_PATH } = baloon

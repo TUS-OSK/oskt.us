@@ -1,7 +1,7 @@
 import { SectionTitle } from 'src/components/MainLayout/elements'
 import { EnvelopeIcon, MarkerIcon, TwitterIcon } from 'src/pages/Contact/icons'
 import { externalTo, mailTo } from 'src/utils/urls'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { CommentsIcon, CompassIcon } from './icons'
 
 export interface ContactData {

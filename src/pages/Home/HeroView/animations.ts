@@ -1,4 +1,4 @@
-import { keyframes } from 'styled-components'
+import { keyframes } from '@emotion/react'
 
 export const slideArrow = keyframes`
   0% {

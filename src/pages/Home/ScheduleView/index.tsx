@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { Section, SectionTitle } from 'src/components/MainLayout/elements'
 import Calendar from './Calendar'
 import { EventCalendarMD } from 'pages/schedule'

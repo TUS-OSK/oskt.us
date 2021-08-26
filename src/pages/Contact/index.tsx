@@ -4,7 +4,7 @@ import MainLayout from 'src/components/MainLayout'
 import MarkdownBody from 'src/components/MarkdownBody'
 import { FixedSizeContents, Section } from 'src/components/MainLayout/elements'
 import { externalTo, mailTo, urlPageMdEdit } from 'src/utils/urls'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { EnvelopeIcon, MarkerIcon, TwitterIcon } from './icons'
 
 interface Props {

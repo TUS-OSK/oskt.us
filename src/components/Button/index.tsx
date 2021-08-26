@@ -1,5 +1,5 @@
 import { StyledLink } from 'src/utils/next/elements'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 interface Props {
   href: string

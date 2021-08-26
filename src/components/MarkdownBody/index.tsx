@@ -1,7 +1,8 @@
 import remark from 'remark'
-import styled, { css } from 'styled-components'
+import styled from '@emotion/styled'
 import html from 'remark-html'
 import { useEffect } from 'react'
+import { css } from '@emotion/react'
 
 interface Props {
   editRequestUrl?: string
