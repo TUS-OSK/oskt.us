@@ -29,15 +29,15 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
                   return null
                 }
                 return (
-                  <>
+                  <div key={`${m}月`}>
                     <h3>{m}月</h3>
                     {events.map((e, _) => (
-                      <>
+                      <div key={encodeURIComponent(e.name.ja)}>
                         <EventTitle id={encodeURIComponent(e.name.ja)}>{e.name.ja}</EventTitle>
                         <EventDetail>{e.detail}</EventDetail>
-                      </>
+                      </div>
                     ))}
-                  </>
+                  </div>
                 )
               })}
             </MarkdownBodyContainer>

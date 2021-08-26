@@ -1,8 +1,8 @@
-import { AppProps } from 'next/dist/shared/lib/router/router'
 import { fontSettings } from 'src/utils/fonts'
 import { createGlobalStyle } from 'styled-components'
+import type { AppProps } from 'next/app'
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
@@ -10,8 +10,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
-
-export default MyApp
 
 const GlobalStyle = createGlobalStyle`
   ${fontSettings}
