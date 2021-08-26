@@ -52,8 +52,6 @@ export async function postLikeCount(contentId: ContentId, likeCount: number) {
     return
   }
 
-  console.log('hello')
-
   await fetch(URL, {
     method: 'POST',
     mode: 'no-cors',
