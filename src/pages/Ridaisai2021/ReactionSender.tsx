@@ -57,6 +57,7 @@ export default function ReactionSender({ type, likeCount }: Props) {
 const Container = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 `
 
 const LikeIcon = styled.svg<{ active: boolean }>`
