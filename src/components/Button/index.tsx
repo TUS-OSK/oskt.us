@@ -1,8 +1,9 @@
 import { StyledLink } from 'src/utils/next/elements'
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
+import { MouseEventHandler } from 'react'
 
-interface Props {
-  href: string
+type Props = {
   children: string
   // FIXME: カラーテーマを作ってもっと安全にする
   color: {
@@ -10,41 +11,83 @@ interface Props {
     secondary: string
   }
   className?: string
-}
+} & (
+  | {
+      mode: 'button'
+      onClick?: MouseEventHandler<HTMLButtonElement>
+    }
+  | {
+      mode?: 'link'
+      href: string
+    }
+)
 
-export default function Button({ color: { primary, secondary }, href, children, className }: Props) {
-  return (
-    <Container primary={primary} secondry={secondary} href={href} className={className}>
-      {children}
-    </Container>
+export default function Button(props: Props) {
+  return props.mode === 'button' ? (
+    <ButtonContainer
+      primary={props.color.primary}
+      secondry={props.color.secondary}
+      onClick={props.onClick}
+      className={props.className}
+      type="button"
+    >
+      {props.children}
+    </ButtonContainer>
+  ) : (
+    // NOTE: デフォルトはリンクになる
+    <LinkContainer
+      primary={props.color.primary}
+      secondry={props.color.secondary}
+      href={props.href}
+      className={props.className}
+    >
+      {props.children}
+    </LinkContainer>
   )
 }
 
-const Container = styled(StyledLink)<{ primary: string; secondry: string }>`
+export const baseCss = css`
   display: inline-flex;
   align-items: center;
+  padding: 5px 20px;
+
   font-size: 13px;
-  line-height: 22px;
   font-family: 'novecentosans', sans-serif;
   font-weight: bold;
-  padding: 5px 20px;
-  text-decoration: none;
-  cursor: pointer;
+  line-height: 22px;
+
   transition-property: background-color, color, opacity;
   transition-duration: 0.2s;
   transition-timing-function: ease;
+
+  cursor: pointer;
   user-select: none;
 
-  background-color: ${(p) => p.secondry};
-  color: ${(p) => p.primary};
-  border: 1px solid ${(p) => p.primary};
-
-  &:hover {
-    background-color: ${(p) => p.primary};
-    color: ${(p) => p.secondry};
-  }
-
-  &:active {
+  :active {
     opacity: 0.7;
   }
+`
+
+export const colorCss = (primary: string, secondary: string) => css`
+  background-color: ${secondary};
+  color: ${primary};
+  border: 1px solid ${primary};
+
+  :hover {
+    background-color: ${primary};
+    color: ${secondary};
+  }
+`
+
+type ColorProps = { primary: string; secondry: string }
+
+const LinkContainer = styled(StyledLink)<ColorProps>`
+  ${baseCss}
+  ${(p) => colorCss(p.primary, p.secondry)}
+  text-decoration: none;
+`
+
+const ButtonContainer = styled.button<ColorProps>`
+  ${baseCss}
+  ${(p) => colorCss(p.primary, p.secondry)}
 `
