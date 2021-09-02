@@ -102,8 +102,10 @@ const hoveredLikeIconParentCss = css`
 const LikeButton = styled.div`
   display: flex;
   width: 60px;
+  height: 60px;
   ${MEDIA_QUERY_MOBILE} {
     width: 40px;
+    height: 40px;
   }
 
   :hover {

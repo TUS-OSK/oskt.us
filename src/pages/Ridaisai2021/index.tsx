@@ -93,15 +93,45 @@ export default function Ridaisai2021() {
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               {rayAnchor}
-              <Section title="レイトレ" description="">
-                <SectionContentsAligner>準備中</SectionContentsAligner>
+              <Section
+                title="レイトレ"
+                description="
+              レイトレーシングなどを研究するRay班の成果物です！
+              "
+              >
+                <SectionContentsAligner>
+                  <Thumbnail
+                    title="Ray班の制作物1"
+                    description=""
+                    src="/images/ridaisai/2021/ray-1.png"
+                    url="https://kinakomoti-321.github.io/WebPathtracer/"
+                  />
+                </SectionContentsAligner>
                 {contentData?.ray && <ReactionSender type="ray" likeCount={contentData.ray.likeCount}></ReactionSender>}
               </Section>
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               {dlAnchor}
-              <Section title="機械学習" description="">
-                <SectionContentsAligner>準備中</SectionContentsAligner>
+              <Section
+                title="機械学習"
+                description="
+                機械学習・深層学習など、主にPythonを扱いながら研究をしているPython/DL班の成果物です！
+              "
+              >
+                <SectionContentsAligner>
+                  <Thumbnail
+                    title="Python/DL班の研究成果1"
+                    description="Pythonでモザイクアートを生成して芸術的な証明写真を作りたい！"
+                    src="/images/ridaisai/2021/dl-1.jpg"
+                    url="https://and-2353.github.io/Article2021/"
+                  />
+                  <Thumbnail
+                    title="Python/DL班の研究成果2"
+                    description="Pythonで機械学習して知らないキノコを毒死せずに食べる"
+                    src="/images/ridaisai/2021/dl-2.jpg"
+                    url="https://and-2353.github.io/Article2021/"
+                  />
+                </SectionContentsAligner>
                 {contentData?.dl && <ReactionSender type="dl" likeCount={contentData.dl.likeCount}></ReactionSender>}
               </Section>
             </SectionWrapper>
@@ -110,7 +140,7 @@ export default function Ridaisai2021() {
               <Section
                 title="Web"
                 description="
-                Web班ではWebサイトを制作するなどの活動をしています！
+                Web班というWebサイトを制作する活動などをしている班の成果物です！
               "
               >
                 <SectionContentsAligner>
@@ -302,6 +332,7 @@ const SectionWrapper = styled.div<{ backgroundColor: string; active: boolean }>`
 
 const SectionContentsAligner = styled.div`
   display: flex;
+  gap: 24px;
   justify-content: center;
   flex-wrap: wrap;
 `

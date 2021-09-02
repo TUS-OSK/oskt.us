@@ -31,6 +31,7 @@ export default function Thumbnail({ title, description, src, url }: Props) {
 }
 
 const Container = styled.div`
+  width: min-content;
   display: flex;
   flex-flow: column;
 `
