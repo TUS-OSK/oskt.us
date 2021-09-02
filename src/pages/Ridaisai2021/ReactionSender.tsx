@@ -42,7 +42,7 @@ export default function ReactionSender({ type, likeCount }: Props) {
   return (
     <>
       <Container>
-        <ModalToggle onClick={() => setIsOpen(true)}>ご意見・感想を書く</ModalToggle>
+        <ModalToggle onClick={() => setIsOpen(true)}>意見・感想を書く</ModalToggle>
         <div>
           <LikeButton onClick={handleClickLikeButton}>
             <LikeIcon active={active} viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
