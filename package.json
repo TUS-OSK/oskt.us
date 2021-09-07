@@ -25,7 +25,7 @@
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.2"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.3.0",
