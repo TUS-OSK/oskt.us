@@ -318,12 +318,3 @@ const MobileNavigation = styled.div<{ active: boolean }>`
       opacity: 1;
     `}
 `
-
-const MobileHPNavigation = styled.a`
-  font-size: 16px;
-  font-weight: bold;
-  color: #6b76ff;
-  text-decoration: none;
-  display: grid;
-  justify-content: center;
-`
