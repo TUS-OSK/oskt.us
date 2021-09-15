@@ -62,34 +62,7 @@ export default function Ridaisai2021() {
           <MainContents>
             <SectionWrapper backgroundColor="black" active={false}>
               {topAnchor}
-              <Section title="OSKとは" description={DESCRIPTION}>
-                <SectionContentsAligner>
-                  <blockquote className="twitter-tweet">
-                    <p lang="ja" dir="ltr">
-                      みなさんこんばんは！
-                      <br />
-                      今回、OSKの活動を画像にまとめてみました！
-                      <br />
-                      ぜひご覧ください。
-                      <br />
-                      <br />
-                      興味のある方（在学生もOK）のご連絡お待ちしております！
-                      <a href="https://twitter.com/hashtag/%E6%98%A5%E3%81%8B%E3%82%89%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
-                        #春から理科大
-                      </a>
-                      <a href="https://twitter.com/hashtag/%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">
-                        #理科大
-                      </a>
-                      <a href="https://t.co/DQZ6pqa0uA">pic.twitter.com/DQZ6pqa0uA</a>
-                    </p>
-                    &mdash; 応用数学研究部 (@tus_osk)
-                    <a href="https://twitter.com/tus_osk/status/1244586024262438912?ref_src=twsrc%5Etfw">
-                      March 30, 2020
-                    </a>
-                  </blockquote>
-                  <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
-                </SectionContentsAligner>
-              </Section>
+              <Section title="OSKとは" description={DESCRIPTION} />
             </SectionWrapper>
             <SectionWrapper backgroundColor="black" active={false}>
               {rayAnchor}
@@ -158,23 +131,12 @@ export default function Ridaisai2021() {
         </Body>
         <Footer></Footer>
         <Header>
-          <LogoWrapper open={openLogo}>
-            <Logo />
-          </LogoWrapper>
-          {currentMode === 'desktop' ? (
-            <Link href="/" passHref>
-              <DekstopHPNavigation>
-                応用数学研究部のHPへ
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M14.9907 3.56116C15.7854 2.79395 17.0515 2.8162 17.8187 3.61085L29.78 16L17.8187 28.3892C17.0515 29.1838 15.7854 29.206 14.9907 28.4388C14.1961 27.6716 14.1738 26.4055 14.941 25.6108L22.289 18H4C2.89543 18 2 17.1046 2 16C2 14.8955 2.89543 14 4 14H22.2891L14.941 6.38915C14.1738 5.5945 14.1961 4.32836 14.9907 3.56116Z"
-                  />
-                </svg>
-              </DekstopHPNavigation>
-            </Link>
-          ) : (
+          <Link href="/" passHref>
+            <LogoWrapper open={openLogo}>
+              <Logo />
+            </LogoWrapper>
+          </Link>
+          {currentMode === 'desktop' ? null : (
             <MobileNavigationMenu onClick={handleClickMobileNavigationMenu}>
               <MobileNavigationMenuIcon
                 active={openMobileNavigationMenu}
@@ -190,24 +152,6 @@ export default function Ridaisai2021() {
                 />
               </MobileNavigationMenuIcon>
               <MobileNavigation active={openMobileNavigationMenu}>
-                <Link href="/" passHref>
-                  <MobileHPNavigation>
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 32 32"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M14.9907 3.56116C15.7854 2.79395 17.0515 2.8162 17.8187 3.61085L29.78 16L17.8187 28.3892C17.0515 29.1838 15.7854 29.206 14.9907 28.4388C14.1961 27.6716 14.1738 26.4055 14.941 25.6108L22.289 18H4C2.89543 18 2 17.1046 2 16C2 14.8955 2.89543 14 4 14H22.2891L14.941 6.38915C14.1738 5.5945 14.1961 4.32836 14.9907 3.56116Z"
-                      />
-                    </svg>
-                    HPへ
-                  </MobileHPNavigation>
-                </Link>
                 {topLink}
                 {rayLink}
                 {dlLink}
@@ -252,7 +196,8 @@ const Header = styled.div`
   }
 `
 
-const LogoWrapper = styled.div<{ open: boolean }>`
+const LogoWrapper = styled.a<{ open: boolean }>`
+  display: flex;
   transition: all 0.2s;
   transform-origin: top center;
 
@@ -268,25 +213,6 @@ const LogoWrapper = styled.div<{ open: boolean }>`
           opacity: 0;
           transform: rotateX(-45deg);
         `}
-`
-
-const DekstopHPNavigation = styled.a`
-  font-size: 20px;
-  font-weight: bold;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 8px;
-  align-items: center;
-  padding: 4px 16px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: black;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-
-  :hover {
-    cursor: pointer;
-    transform: scale(1.05);
-  }
 `
 
 const DesktopNavigation = styled.div`
