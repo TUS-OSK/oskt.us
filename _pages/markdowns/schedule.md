@@ -21,28 +21,34 @@ eventCalendar:
       detail: '今年の講義班は Unity班/Web班/C・C++班/Python班 です。'
   6: 
     - name:
-        ja: '新入部員の第2期募集'
-        en: 'Second Recruiting'
-      top: true
-    - name:
         ja: '講義班成果発表会'
         en: 'First LT'
       top: true
   8:
     - name:
-        ja: 'ハッカソン夏合宿(仮)'
+        ja: 'ハッカソン夏合宿'
         en: 'Summer Camp (Hackathon)'
       detail: '対面での合宿の代わりにリモートでハッカソン等のイベントを予定しております。'
       top: true
+
+  9:
+    - name:
+        ja: '理大祭'
+        en: 'Ridaisai'
+      top: true
+
   11:
     - name:
-        ja: '企画班成果発表会'
-        en: 'Second LT'
+        ja: '新入部員の第2期募集'
+        en: 'Second Recruiting'
+      detail: '当初告知していた時期から延期しての募集となります。'
       top: true
-  2: 
+
+  3:
     - name:
-        ja: '冬合宿'
-        en: 'Winter Camp'
+        ja: '追いコン'
+        en: 'Farewell Party'
+        detail: 'リモートでの開催となる可能性がございます。'
       top: true
 ---
 
