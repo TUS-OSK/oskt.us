@@ -1,0 +1,28 @@
+name: Github Pages Pusher
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+        # これがないとアンスコから始まるファイルが読み込まれない
+      - name: Add nojekyll
+        run: touch ./out/.nojekyll
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
