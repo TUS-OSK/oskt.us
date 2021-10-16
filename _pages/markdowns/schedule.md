@@ -35,11 +35,12 @@ eventCalendar:
     - name:
         ja: '理大祭'
         en: 'Ridaisai'
+        detail: 'オンライン上の開催でした。'
       top: true
 
   11:
     - name:
-        ja: '新入部員の第2期募集'
+        ja: '新入部員の秋期募集'
         en: 'Second Recruiting'
       detail: '当初告知していた時期から延期しての募集となります。'
       top: true
