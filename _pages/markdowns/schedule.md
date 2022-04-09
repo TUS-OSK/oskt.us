@@ -11,15 +11,15 @@ startMonth: 4
 eventCalendar:
   4:
     - name:
-        ja: '新入部員の第1期募集'
-        en: 'First Recruiting'
+        ja: '春期新入部員募集'
+        en: 'Spring Recruiting'
       top: true
-  5: 
+  5:
     - name:
         ja: '2021年度講義班スタート'
         en: 'Start of Lectures'
-      detail: '今年の講義班は Unity班/Web班/C・C++班/Python班 です。'
-  6: 
+      detail: '今年の講義班は Unity班/C・C++班 です。'
+  6:
     - name:
         ja: '講義班成果発表会'
         en: 'First LT'
@@ -37,21 +37,41 @@ eventCalendar:
         en: 'Ridaisai'
         detail: 'オンライン上の開催でした。'
       top: true
-
-  11:
+  
+  10:
     - name:
-        ja: '新入部員の秋期募集'
-        en: 'Second Recruiting'
-      detail: '当初告知していた時期から延期しての募集となります。'
+        ja: '秋期新入部員募集'
+        en: 'Autumn Recruiting'
       top: true
 
   3:
     - name:
         ja: '追いコン'
         en: 'Farewell Party'
-        detail: 'リモートでの開催となる可能性がございます。'
       top: true
 ---
+
+## 2021年度
+
+### 4月
+
+春期の新入部員募集を行いました。
+
+### 5月
+
+2021年度講義班としてUnity班/Web班/C・C++班/Python班がスタートしました。
+
+### 9月
+
+理大祭にオンラインで参加しました。
+
+### 11月
+
+秋期の新入部員募集を行いました。
+
+### 3月
+
+Discord を用いて卒業生追い出しコンパを行いました。
 
 ## 2020年度
 
@@ -86,7 +106,6 @@ Youtube Live, Discord, Zoom を用いて卒業生追い出しコンパを行い�
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">みなさん、こんばんは！お久しぶりです。<br>13日(土)、応用数学研究部では前期成果発表会を行いました！<br>一年生が入部してからの3ヶ月間で学んだ内容を発表しました。<br>写真は成果発表会の様子です！ <a href="https://t.co/ji0099g9RV">pic.twitter.com/ji0099g9RV</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1150715869401497600?ref_src=twsrc%5Etfw">2019年7月15日</a></blockquote> 
 
-
 ### 8月
 
 8月26日〜8月28日に夏合宿がありました!参加者は20名ほどで山梨県河口湖に行き、LT会のほか花火やぶどう狩り、富士急等のレジャーも楽しみました。
@@ -100,7 +119,6 @@ Youtube Live, Discord, Zoom を用いて卒業生追い出しコンパを行い�
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">おはようございます。<br>本日から理大祭がはじまりますね！<br>応用数学研究部は神楽坂キャンパス841教室にて展示を行っています。<br>皆さまのご来場おまちしております。<a href="https://twitter.com/hashtag/%E7%90%86%E7%A7%91%E5%A4%A7?src=hash&amp;ref_src=twsrc%5Etfw">#理科大</a><a href="https://twitter.com/hashtag/%E7%90%86%E5%A4%A7%E7%A5%AD?src=hash&amp;ref_src=twsrc%5Etfw">#理大祭</a> <a href="https://t.co/Yz5mU7JaXi">pic.twitter.com/Yz5mU7JaXi</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1198033345751351296?ref_src=twsrc%5Etfw">2019年11月23日</a></blockquote> 
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">こんにちは！<br>今日も841教室にて展示を行っています！<br>皆さまのご来場お待ちしております！ <a href="https://t.co/10beDenVLb">pic.twitter.com/10beDenVLb</a></p>&mdash; 応用数学研究部 (@tus_osk) <a href="https://twitter.com/tus_osk/status/1198437651763748869?ref_src=twsrc%5Etfw">2019年11月24日</a></blockquote> 
-
 
 ### 2月
 
