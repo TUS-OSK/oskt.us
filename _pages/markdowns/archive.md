@@ -13,12 +13,24 @@ title: 'アーカイブ'
 - [コンタクト](/contact)
 - [FAQ](/faq)
 
-## 2017 年度
+## 2021 年度
 
-- [新歓](/articles/2017/welcome)
-- [理大祭](/articles/2017/festival)
-- [コミケット 92](/articles/2017/c92)
-- [プロジェクト班紹介](/articles/2017/project)
+- [春期新歓](/articles/2021/welcome)
+- [秋期新歓](/articles/2021/welcome-au)
+- [講義班紹介](/articles/2021/lecture)
+
+## 2020 年度
+
+- [新歓](/articles/2020/welcome)
+- [講義班紹介](/articles/2020/lecture)
+- [p-ray班サイト](https://p-ray.oskt.us/)
+
+## 2019 年度
+
+- [新歓](/articles/2019/welcome)
+- [講義班紹介](/articles/2019/lecture)
+- [プロジェクト班紹介](/articles/2019/project)
+- [CTF班紹介](/articles/2019/ctf)
 
 ## 2018 年度
 
@@ -29,18 +41,9 @@ title: 'アーカイブ'
 - [コミケット 94](/articles/2018/c94)
 - [コミケット 95](/articles/2018/c95)
 
-## 2019 年度
+## 2017 年度
 
-- [新歓](/articles/2019/welcome)
-- [講義班紹介](/articles/2019/lecture)
-- [プロジェクト班紹介](/articles/2019/project)
-- [CTF班紹介](/articles/2019/ctf)
-
-## 2020 年度
-
-- [新歓](articles/2020/welcome)
-- [講義班紹介](/articles/2020/lecture)
-- [p-ray班サイト](https://p-ray.oskt.us/)
-
-
-
+- [新歓](/articles/2017/welcome)
+- [理大祭](/articles/2017/festival)
+- [コミケット 92](/articles/2017/c92)
+- [プロジェクト班紹介](/articles/2017/project)
