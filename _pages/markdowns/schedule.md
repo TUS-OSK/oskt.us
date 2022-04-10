@@ -18,7 +18,7 @@ eventCalendar:
     - name:
         ja: '2021年度講義班スタート'
         en: 'Start of Lectures'
-      detail: '今年の講義班は Unity班/C・C++班 です。'
+      detail: '今年の講義班は Unity班・C/C++班 です。'
   6:
     - name:
         ja: '講義班成果発表会'
