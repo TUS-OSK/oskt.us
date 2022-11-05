@@ -38,7 +38,7 @@ eventCalendar:
         detail: 'オンライン上の開催でした。'
       top: true
   
-  10:
+  11:
     - name:
         ja: '秋期新入部員募集'
         en: 'Autumn Recruiting'
