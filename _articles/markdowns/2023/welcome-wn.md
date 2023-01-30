@@ -55,7 +55,7 @@ RayTracingを行なっています。講義形式の活動です。
 ## 入部手続き
 
 ### Googleフォームから入部申請を行う
-こちらの[Googleフォーム](https://docs.google.com/forms/d/e/1FAIpQLSckW-foPG1syia6s9uAc_ScE-lYzLcwrrFVpWIXS8KdjviVGQ)から入部申請を行ってください。
+こちらの[Googleフォーム](https://forms.gle/fGRPGtEQCzHPv8uw5)から入部申請を行ってください。
 
 ### 自動返信のメールに従って部費の振込
 口座情報などが送られてくるので振り込みをお願いします。部費は1000円です。(4月区切りなので、3/31までの分となります）
