@@ -13,6 +13,13 @@ title: 'アーカイブ'
 - [コンタクト](/contact)
 - [FAQ](/faq)
 
+## 2022 年度
+
+- [春期新歓](/articles/2022/welcome-sp)
+- [春期講義班紹介](/articles/2022/lecture-sp)
+- [秋期新歓](/articles/2022/welcome-au)
+- [秋期講義班紹介](/articles/2022/lecture-au)
+
 ## 2021 年度
 
 - [春期新歓](/articles/2021/welcome)
