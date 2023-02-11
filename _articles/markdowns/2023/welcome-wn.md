@@ -4,30 +4,6 @@ date: '2023-01-30'
 caption: '新入部員募集ページを公開しました'
 ---
 
-<!-- ちょっと無理がある -->
-<style>
-  pre {
-    display: block;
-    width: 100%;
-    height: 100%;
-    font: inherit;
-  }
-  code {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-left: 2px solid lightgray;
-    padding-left: 8px;
-    font: inherit;
-  }
-  blockquote {
-    margin: 0.5em 0;
-    transform: translateY(-0.5em);
-    border: none !important;
-    color: gray;
-  }
-</style>
-
 ## 新入部員募集概要
 
 応用数学研究部に興味をお寄せいただきありがとうございます！
