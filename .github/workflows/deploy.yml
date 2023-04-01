@@ -15,7 +15,9 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn build
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+          yarn build
 
         # これがないとアンスコから始まるファイルが読み込まれない
       - name: Add nojekyll
