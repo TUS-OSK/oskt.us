@@ -21,7 +21,7 @@ eventCalendar:
       detail: '今年度活動予定の班はLT班/Web班/CG班/Kyopro班/CTF班です。'
   6:
     - name:
-        ja: '成果発表会'
+        ja: '成果発表会（LT会）'
         en: 'First LT'
       top: true
   8:
