@@ -13,12 +13,19 @@ title: 'アーカイブ'
 - [コンタクト](/contact)
 - [FAQ](/faq)
 
+## 2023 年度
+
+- [新歓](/articles/2023/welcome-sp)
+
 ## 2022 年度
 
 - [春期新歓](/articles/2022/welcome-sp)
 - [春期講義班紹介](/articles/2022/lecture-sp)
 - [秋期新歓](/articles/2022/welcome-au)
 - [秋期講義班紹介](/articles/2022/lecture-au)
+- [応用数学研究部規約](/articles/2023/club-rules)
+- [プライバシーポリシー](/articles/2023/privacy-policy)
+- [新入部員常時受付再開](/articles/2023/welcome-wn)
 
 ## 2021 年度
 

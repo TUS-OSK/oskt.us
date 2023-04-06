@@ -11,37 +11,30 @@ startMonth: 4
 eventCalendar:
   4:
     - name:
-        ja: '春期新入部員募集'
-        en: 'Spring Recruiting'
+        ja: '新入部員募集'
+        en: 'Recruiting'
       top: true
   5:
     - name:
-        ja: '2021年度講義班スタート'
+        ja: '2023年度班活動スタート'
         en: 'Start of Lectures'
-      detail: '今年の講義班は Unity班・C/C++班 です。'
+      detail: '今年度活動予定の班はLT班/Web班/CG班/Kyopro班/CTF班です。'
   6:
     - name:
-        ja: '講義班成果発表会'
+        ja: '成果発表会（LT会）'
         en: 'First LT'
       top: true
   8:
     - name:
         ja: 'ハッカソン夏合宿'
         en: 'Summer Camp (Hackathon)'
-      detail: '対面での合宿の代わりにリモートでハッカソン等のイベントを予定しております。'
+      detail: '対面での合宿の代わりにハッカソン等のイベントを予定しております。'
       top: true
 
   9:
     - name:
         ja: '理大祭'
         en: 'Ridaisai'
-        detail: 'オンライン上の開催でした。'
-      top: true
-  
-  11:
-    - name:
-        ja: '秋期新入部員募集'
-        en: 'Autumn Recruiting'
       top: true
 
   3:
@@ -50,6 +43,24 @@ eventCalendar:
         en: 'Farewell Party'
       top: true
 ---
+
+## 2022年度
+
+### 4月
+
+春季の新入部員募集を行いました。
+
+### 5月
+
+2022年度講義班としてUnity班/C・C++班がスタートしました。
+
+### 11月
+
+秋期の新入部員募集を行いました。
+
+### 3月
+
+discordを用いて追いコンLT（ライトニングトーク）を行いました。
 
 ## 2021年度
 
