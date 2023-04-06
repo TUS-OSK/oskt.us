@@ -28,7 +28,7 @@ eventCalendar:
     - name:
         ja: 'ハッカソン夏合宿'
         en: 'Summer Camp (Hackathon)'
-      detail: '対面での合宿の代わりにリモートでハッカソン等のイベントを予定しております。'
+      detail: '対面での合宿の代わりにハッカソン等のイベントを予定しております。'
       top: true
 
   9:
