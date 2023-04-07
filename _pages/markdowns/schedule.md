@@ -18,7 +18,7 @@ eventCalendar:
     - name:
         ja: '2023年度班活動スタート'
         en: 'Start of Lectures'
-      detail: '今年度活動予定の班はLT班/Web班/CG班/Kyopro班/CTF班です。'
+      detail: '今年度活動予定の班はLT班/Web班/CG班/Kyopro班/CTF班/Python班です。'
   6:
     - name:
         ja: '成果発表会（LT会）'
