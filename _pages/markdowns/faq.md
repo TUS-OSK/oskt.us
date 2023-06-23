@@ -4,7 +4,7 @@ title: 'FAQ'
 
 [Googleフォームにて質問を受け付けております。](https://docs.google.com/forms/d/e/1FAIpQLSccU3rnKTp9TW0R-4W1nH4UyvUF_FeMVlb5Le2rMA898wkkZA/viewform)
 
-質問の回答は毎週土曜日に行っております。お手数ですが、後日改めてFAQをご確認ください。
+質問の回答は不定期で行っております。お手数ですが、後日改めてFAQをご確認ください。
 
 ## よくある質問
 - パソコンやプログラミングに関して初心者でも大丈夫でしょうか
