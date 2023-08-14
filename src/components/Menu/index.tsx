@@ -10,6 +10,7 @@ export default function Menu() {
   const links: LinkItem[] = [
     { label: 'About', href: '/about' },
     { label: 'Schedule', href: '/schedule' },
+    { label: 'Blog', href: '/blog' },
     { label: 'News', href: '/news' },
     { label: 'Archive', href: '/archive' },
     { label: 'Contact', href: '/contact' },
