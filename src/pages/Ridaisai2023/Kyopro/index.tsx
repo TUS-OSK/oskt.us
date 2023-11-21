@@ -1,70 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, memo, useEffect } from "react";
 import ReactDOM from "react-dom";
 import styled from "@emotion/styled";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import type { Quote as QuoteType } from "../types";
 import structuredClone from 'structured-clone';
-
-
-const grid = 8;
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-function Quote({ quote, index }) {
-  return (
-    <Draggable draggableId={quote.id} index={index}>
-      {provided => (
-        <QuoteItem
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-            {quote.content}
-        </QuoteItem>
-      )}
-    </Draggable>
-  );
-}
-
-const getListStyle = isDraggingOver => ({
-  width: `100%`,
-  margin: `auto`,
-  justifyContent: `space-around`,
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  display: 'flex',
-  padding: grid,
-});
-
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: 'none',
-  padding: grid * 2,
-  margin: `0 ${grid}px 0 0`,
-
-  // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'grey',
-
-  // styles we need to apply on draggables
-  ...draggableStyle,
-});
-
-const ListStyle = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  margin: auto;
-`;
-
-type NextPermutationType = {
-  ok: boolean
-  nextList : Array<number>
-}
+import { DraggableList } from './DraggableList';
 
 const nextPermutation = (input: Array<number>) : NextPermutationType => {
   // deep copy
@@ -87,118 +26,73 @@ const nextPermutation = (input: Array<number>) : NextPermutationType => {
   return {ok: false, nextList: undefined};
 }
 
-const DefaultPage = (props) => {
-  const { setPage } = props
-  return (
-    <div>
-      <button type='button' onClick={() => {console.log("hello"); setPage('quiz')}} >
-        Start
-      </button>
-    </div>
-  )
-}
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
 
-const QuizPage = (props) => {
-  const { setPage } = props
-  const initList = Array.from({ length: 15 }, (v, k) => k)
-                        .map(k => {
-                          const custom: Quote = {
-                            id: `id-${k}`,
-                            content: `${k}`
-                          };
-                          return custom;
-                        })
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
 
-  // const { ok, nextList } = nextPermutation(initList);
-  console.log(initList)
-  // console.log(nextList)
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
 
-  const [state, setState] = useState({ quotes: initList });
-
-  function onDragEnd(result) {
-    if (!result.destination) {
-      return;
-    }
-
-    if (result.destination.index === result.source.index) {
-      return;
-    }
-
-    const quotes = reorder(
-      state.quotes,
-      result.source.index,
-      result.destination.index
-    );
-
-    setState({ quotes });
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
   }
 
-  return (
-    <div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="list" direction="horizontal">
-          {(provided, snapshot)  => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-              {...provided.droppableProps}
-            >
-              {state.quotes.map((quote, index) => (
-                <Draggable key={quote.id} draggableId={quote.id} index={index}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
-                    >
-                      {quote.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
+  return array;
+}
+const Quiz = () => {
+  const [page, setPage] = useState('default');
+  const initList : Array<number> = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const shuffleList = shuffle(initList);
+  const [list, setList] = useState(shuffleList);
+  const {ok, nextList} = nextPermutation(shuffleList);
+  console.log("shuffle", shuffleList)
+  console.log("list", list)
+  console.log("nextList", nextList)
+  switch (page) {
+    case 'default':
+      return (
+        <button type='button' onClick={() => {setPage('quiz')}} >
+          Start
+        </button>
+      )
+    case 'quiz':
+      return (
+        <div>
+          <DraggableList list={list} setList={setList} />
+          <button type='button' onClick={() => {setPage('result')}} >
+            Submit
+          </button>
+        </div>
+      )
+    case 'result':
+      return (
+        <div>
+          {JSON.stringify(nextList) === JSON.stringify(list) ? 
+            "Correct"
+              : 
+            <div>
+              "Wrong"
+              "Problem"
+              {shuffleList}
+              "Answer"
+              {nextList}
+              "Your Solution"
+              {list}
             </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <button type='button' onClick={setPage('result')} >
-        Submit
-      </button>
-
-    </div>
-  );
+          }
+        </div>
+      )
+  }
 }
-
-const ResultPage = (props) => {
-  return (
-    <div>yay!</div>
-  )
-}
-
-const Center = styled.div`
-  width: 55%;
-  height: 50%;
-  min-height: 280px;
-  margin: auto;
-`
 
 export default function Kyopro() {
-  const [page, setPage] = useState('default');
-
-
-  return <QuizPage setPage={setPage}/>
-  // switch (page) {
-  //   case 'default':
-  //     return <DefaultPage setPage={setPage}/>
-  //   case 'quiz':
-  //     return <QuizPage state={state} setState={setState} setPage={setPage}/>
-  //   case 'result':
-  //     return <ResultPage state={state} setPage={setPage}/>
-  // }
+  return (
+    <div>
+      <Quiz />
+    </div>
+  )
 }
-
-
