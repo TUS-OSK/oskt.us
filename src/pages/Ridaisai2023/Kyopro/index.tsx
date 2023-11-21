@@ -1,6 +1,6 @@
 import { useState } from "react";
 import structuredClone from 'structured-clone';
-import { DraggableList } from './DraggableList';
+import { DraggableList, ListState } from './DraggableList';
 
 const nextPermutation = (input: Array<number>) => {
   // deep copy
@@ -46,7 +46,7 @@ function shuffle(array: number[]) {
 const Quiz = () => {
   const [page, setPage] = useState('default');
   const initList = shuffle(Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9]))
-  const [list, setList] = useState({
+  const [list, setList] = useState<ListState>({
     Original: initList,
     Current: initList,
   });
