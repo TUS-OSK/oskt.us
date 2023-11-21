@@ -1,11 +1,8 @@
-import React, { useState, memo, useEffect } from "react";
-import ReactDOM from "react-dom";
-import styled from "@emotion/styled";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useState } from "react";
 import structuredClone from 'structured-clone';
 import { DraggableList } from './DraggableList';
 
-const nextPermutation = (input: Array<number>) : NextPermutationType => {
+const nextPermutation = (input: Array<number>) => {
   // deep copy
   const arr = structuredClone(input)
   const n = arr.length
@@ -28,7 +25,7 @@ const nextPermutation = (input: Array<number>) : NextPermutationType => {
 
 // function shuffle(input) {
 //   let array = structuredClone(input)
-function shuffle(array) {
+function shuffle(array: number[]) {
   let currentIndex = array.length,  randomIndex;
 
   // While there remain elements to shuffle.
@@ -87,6 +84,8 @@ const Quiz = () => {
           }
         </div>
       )
+    default:
+      return null
   }
 }
 
