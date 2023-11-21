@@ -1,17 +1,20 @@
-import React, { useState, memo } from "react";
-import ReactDOM from "react-dom";
-import styled from "@emotion/styled";
-import { DragDropContext, Droppable, Draggable, DropResult, DraggingStyle, NotDraggingStyle,} from "react-beautiful-dnd";
+import React from "react";
+import { DragDropContext, Droppable, Draggable, DropResult,} from "react-beautiful-dnd";
+
+export type ListState = {
+  Original: number[]
+  Current: number[]
+}
 
 export interface Props {
-  list: any,
-  setList: (newList: any) => void; 
+  list: ListState,
+  setList: (newList: ListState) => void; 
 }
 
 export const DraggableList: React.FC<Props> = (props) => {
   const { list, setList } = props;
   const reorder = (
-    list: any,
+    list: ListState,
     startIndex: number,
     endIndex: number
   ) => {
@@ -25,12 +28,12 @@ export const DraggableList: React.FC<Props> = (props) => {
       return;
     }
     const newList = reorder(
-      list.Current,
+      list,
       result.source.index,
       result.destination.index
     );
     setList({
-      Original: lists.Original,
+      Original: list.Original,
       Current: newList,
     });
   };
