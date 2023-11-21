@@ -26,6 +26,7 @@ export default function BackgroundFluid({ fluidCss, ...props }: Props) {
     </Background>
   )
 }
+
 const Background = styled.div<BaseProps>`
   position: absolute;
   z-index: -1;

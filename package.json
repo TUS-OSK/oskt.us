@@ -22,10 +22,12 @@
     "gray-matter": "^4.0.2",
     "next": "^11.1.0",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.1",
+    "structured-clone": "^0.2.2"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.3.0",
