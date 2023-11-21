@@ -18,14 +18,16 @@ const nextPermutation = (input: Array<number>) : NextPermutationType => {
           for (let k = 0; k < len; k++) {
             [arr[i + 1 + k], arr[n - 1 - k]] = [ arr[n - 1 - k], arr[i + 1 + k], ];
           }
-          return {ok: true, nextList: arr};
+          return arr;
         }
       }
     }
   }
-  return {ok: false, nextList: undefined};
+  return undefined;
 }
 
+// function shuffle(input) {
+//   let array = structuredClone(input)
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
 
@@ -43,15 +45,14 @@ function shuffle(array) {
 
   return array;
 }
+
 const Quiz = () => {
   const [page, setPage] = useState('default');
-  const initList : Array<number> = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  const shuffleList = shuffle(initList);
-  const [list, setList] = useState(shuffleList);
-  const {ok, nextList} = nextPermutation(shuffleList);
-  console.log("shuffle", shuffleList)
-  console.log("list", list)
-  console.log("nextList", nextList)
+  const initList = shuffle(Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+  const [list, setList] = useState({
+    Original: initList,
+    Current: initList,
+  });
   switch (page) {
     case 'default':
       return (
@@ -71,17 +72,17 @@ const Quiz = () => {
     case 'result':
       return (
         <div>
-          {JSON.stringify(nextList) === JSON.stringify(list) ? 
+          {JSON.stringify(nextPermutation(list.Original)) === JSON.stringify(list.Current) ? 
             "Correct"
               : 
             <div>
               "Wrong"
               "Problem"
-              {shuffleList}
+              {list.Original}
               "Answer"
-              {nextList}
+              {nextPermutation(list.Original)}
               "Your Solution"
-              {list}
+              {list.Current}
             </div>
           }
         </div>

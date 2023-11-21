@@ -4,18 +4,18 @@ import styled from "@emotion/styled";
 import { DragDropContext, Droppable, Draggable, DropResult, DraggingStyle, NotDraggingStyle,} from "react-beautiful-dnd";
 
 export interface Props {
-  list: Array<number>
-  setList: (newList: Array<number>) => void; 
+  list: any,
+  setList: (newList: any) => void; 
 }
 
 export const DraggableList: React.FC<Props> = (props) => {
   const { list, setList } = props;
   const reorder = (
-    list: Array<number>,
+    list: any,
     startIndex: number,
     endIndex: number
   ) => {
-    const result = Array.from(list);
+    const result = Array.from(list.Current);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
     return result;
@@ -25,11 +25,14 @@ export const DraggableList: React.FC<Props> = (props) => {
       return;
     }
     const newList = reorder(
-      list,
+      list.Current,
       result.source.index,
       result.destination.index
     );
-    setList(newList);
+    setList({
+      Original: lists.Original,
+      Current: newList,
+    });
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -46,8 +49,8 @@ export const DraggableList: React.FC<Props> = (props) => {
               ...provided.droppableProps
             }}
           >
-            {list.map((elem, index) => (
-              <Draggable draggableId={elem.toString()} index={index}>
+            {list.Current.map((elem, index) => (
+              <Draggable key={elem.toString()} draggableId={elem.toString()} index={index}>
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
