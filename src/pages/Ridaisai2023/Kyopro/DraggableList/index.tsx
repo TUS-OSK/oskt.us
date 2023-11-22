@@ -44,11 +44,11 @@ export const DraggableList: React.FC<Props> = (props) => {
           <div
             ref={provided.innerRef}
             style={{
-              width: `20%`,
-              margin: `auto`,
-              background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey',
+              width: `80%`,
+              margin: `0 auto`,
               display: 'flex',
               padding: `8px`,
+              justifyContent: `center`,
               ...provided.droppableProps
             }}
           >
@@ -61,8 +61,12 @@ export const DraggableList: React.FC<Props> = (props) => {
                     {...provided.dragHandleProps}
                     style={{
                       userSelect: 'none',
-                      padding: 16,
-                      margin: `0 8px 0 0`,
+                      width: `3em`,
+                      height: `3em`,
+                      margin: `0 0.5em 0 0.5em`,
+                      display: `flex`,
+                      justifyContent: `center`,
+                      alignItems: `center`,
                       background: snapshot.isDragging ? 'lightgreen' : 'grey',
                       ...provided.draggableProps.style,
                     }}

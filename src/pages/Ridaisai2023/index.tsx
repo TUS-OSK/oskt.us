@@ -17,16 +17,53 @@ import useGetContents from './useGetContents'
 import useTopLogo from './useTopLogo'
 import { css } from '@emotion/react'
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import { PageHead } from 'src/components/Head'
 
 const Container = styled.div`
+  width: 100%;
   display: grid;
   justify-items: center;
   align-content: center;
   ${heroSizeCss}
   position: relative;
-  z-index: 0;
   overflow: hidden;
 `
+
+const MainContents = styled.div`
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+
+  padding: 80px 0;
+  ${MEDIA_QUERY_MOBILE} {
+    padding: 24px;
+  }
+`
+
+const CustomTab: ReactTabsFunctionComponent<TabProps> = ({
+  children,
+  ...otherProps
+}) => (
+  <Tab {...otherProps}>
+    <h1>{children}</h1>
+  </Tab>
+);
+
+CustomTab.tabsRole = 'Tab'; // Required field to use your custom Tab
+
+const CustomTabList: ReactTabsFunctionComponent<TabListProps> = ({
+  children,
+  ...otherProps
+}) => (
+  <TabList {...otherProps}>
+    <Center>
+    {children}
+    </Center>
+  </TabList>
+);
+
+CustomTab.tabsRole = 'Tab'; // Required field to use your custom Tab
+CustomTabList.tabsRole = 'TabList'; // Required field to use your custom Tab
 
 export default function Ridaisai2023() {
   const scrollerRef = useRef<HTMLDivElement>(null)
@@ -41,38 +78,47 @@ export default function Ridaisai2023() {
             </LogoWrapper>
           </Link>
         </Header>
-        <Tabs>
-          <TabList>
-            <Tab>Hackers' Cafe</Tab>
-            <Tab>Web班</Tab>
-            <Tab>競プロ班</Tab>
-            <Tab>CG班</Tab>
-            <Tab>レイトレーシング班</Tab>
-          </TabList>
+        <MainContents>
+          <Tabs>
+            <TabList>
+              <Tab>Hackers' Cafe</Tab>
+              <Tab>Web班</Tab>
+              <Tab>競プロ班</Tab>
+              <Tab>CG班</Tab>
+              <Tab>レイトレーシング班</Tab>
+            </TabList>
 
-          <TabPanel>
-            <HackersCafe/>
-          </TabPanel>
-          <TabPanel>
-            <h2>Under Constracitng...</h2>
-          </TabPanel>
-          <TabPanel>
-            <Kyopro />
-          </TabPanel>
-          <TabPanel>
-            <h2>Under Constracitng...</h2>
-          </TabPanel>
-          <TabPanel>
-            <h2>Under Constracitng...</h2>
-          </TabPanel>
-        </Tabs>
+            <TabPanel>
+              <h2>Under Constracitng...</h2>
+            </TabPanel>
+            <TabPanel>
+              <h2>Under Constracitng...</h2>
+            </TabPanel>
+            <TabPanel>
+              <Kyopro />
+            </TabPanel>
+            <TabPanel>
+              <h2>Under Constracitng...</h2>
+            </TabPanel>
+            <TabPanel>
+              <h2>Under Constracitng...</h2>
+            </TabPanel>
+          </Tabs>
+        </MainContents>
         <Footer></Footer>
       </Scroller>
     </Container>
   )
 }
 
+// const Scroller = styled.div`
+//   width: 100%;
+//   position: relative;
+//   scroll-behavior: smooth;
+// `
+
 const Scroller = styled.div`
+  width: 100%;
   position: relative;
   z-index: 0;
   height: 100vh;
@@ -131,15 +177,6 @@ const DesktopNavigation = styled.div`
   ${heroSizeCss};
 `
 
-const MainContents = styled.div`
-  flex: 1;
-  overflow: hidden;
-
-  padding: 80px;
-  ${MEDIA_QUERY_MOBILE} {
-    padding: 24px;
-  }
-`
 
 const AsideContents = styled.div``
 
@@ -224,6 +261,5 @@ const MobileNavigation = styled.div<{ active: boolean }>`
 
 const Center = styled.div`
   width: 100%;
-  height: 50%;
-  min-height: 280px;
+  margin: auto;
 `
