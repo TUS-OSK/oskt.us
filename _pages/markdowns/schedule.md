@@ -31,7 +31,7 @@ eventCalendar:
       detail: '対面での合宿の代わりにハッカソン等のイベントを予定しております。'
       top: true
 
-  9:
+  11:
     - name:
         ja: '理大祭'
         en: 'Ridaisai'
