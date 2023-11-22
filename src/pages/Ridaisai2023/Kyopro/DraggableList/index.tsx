@@ -14,11 +14,11 @@ export interface Props {
 export const DraggableList: React.FC<Props> = (props) => {
   const { list, setList } = props;
   const reorder = (
-    list: ListState,
+    listCurrent: number[],
     startIndex: number,
     endIndex: number
   ) => {
-    const result = Array.from(list.Current);
+    const result = Array.from(listCurrent);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
     return result;
@@ -28,7 +28,7 @@ export const DraggableList: React.FC<Props> = (props) => {
       return;
     }
     const newList = reorder(
-      list,
+      list.Current,
       result.source.index,
       result.destination.index
     );

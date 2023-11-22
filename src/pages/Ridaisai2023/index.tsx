@@ -16,6 +16,10 @@ import useTopLogo from './useTopLogo'
 import { css } from '@emotion/react'
 import Banner from './Banner'
 import Kyopro from './Kyopro'
+import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { Example } from './Graph';
+
 
 const DESCRIPTION =
   '応用数学研究部(応数研,OSK)は東京理科大学一部研究会に属する部活動団体で、創部から半世紀以上たつ歴史ある団体です。コンピュータを利用してプログラミングを主に、計算機科学、WEB開発、アプリケーション開発、ゲーム開発、など様々なことに挑戦しています。'
@@ -31,6 +35,7 @@ export default function Ridaisai2023() {
   const [rayLink, rayAnchor] = useContentNavigation('ray', NavigationRayIcon)
   const [dlLink, dlAnchor] = useContentNavigation('dl', NavigationDLIcon)
   const [webLink, webAnchor] = useContentNavigation('web', NavigationWebIcon)
+
 
   const handleClickMobileNavigationMenu = () => setMobileNavigationMenu(true)
 
@@ -53,7 +58,34 @@ export default function Ridaisai2023() {
           <Banner />
         </Center>
         <Hero />
-        <Kyopro />
+        <Tabs>
+          <TabList>
+            <Tab>Hackers' Cafe</Tab>
+            <Tab>Web班</Tab>
+            <Tab>競プロ班</Tab>
+            <Tab>CG班</Tab>
+            <Tab>レイトレーシング班</Tab>
+          </TabList>
+
+          <TabPanel>
+            <div>
+              <Example />
+              a
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <h2>Under Constracitng...</h2>
+          </TabPanel>
+          <TabPanel>
+            <Kyopro />
+          </TabPanel>
+          <TabPanel>
+            <h2>Under Constracitng...</h2>
+          </TabPanel>
+          <TabPanel>
+            <h2>Under Constracitng...</h2>
+          </TabPanel>
+        </Tabs>
         <Body>
           {currentMode === 'desktop' && (
             <AsideContents>
@@ -65,75 +97,6 @@ export default function Ridaisai2023() {
               </DesktopNavigation>
             </AsideContents>
           )}
-          <MainContents>
-            <SectionWrapper backgroundColor="black" active={false}>
-              {topAnchor}
-              <Section title="OSKとは" description={DESCRIPTION} />
-            </SectionWrapper>
-            <SectionWrapper backgroundColor="black" active={false}>
-              {rayAnchor}
-              <Section
-                title="レイトレ"
-                description="
-              レイトレーシングなどを研究するRay班の成果物です！
-              "
-              >
-                <SectionContentsAligner>
-                  <Thumbnail
-                    title="Ray班の制作物1"
-                    description="※デスクトップ版Chromeブラウザでの閲覧を推奨します"
-                    src="/images/ridaisai/2021/ray-1.png"
-                    url="https://kinakomoti-321.github.io/WebPathtracer/"
-                  />
-                </SectionContentsAligner>
-                {contentData?.ray && <ReactionSender type="ray" likeCount={contentData.ray.likeCount}></ReactionSender>}
-              </Section>
-            </SectionWrapper>
-            <SectionWrapper backgroundColor="black" active={false}>
-              {dlAnchor}
-              <Section
-                title="機械学習"
-                description="
-                機械学習・深層学習など、主にPythonを扱いながら研究をしているPython/DL班の成果物です！
-              "
-              >
-                <SectionContentsAligner>
-                  <Thumbnail
-                    title="Python/DL班の研究成果1"
-                    description="Pythonでモザイクアートを生成して芸術的な証明写真を作りたい！"
-                    src="/images/ridaisai/2021/dl-1.jpg"
-                    url="https://and-2353.github.io/Article2021/"
-                  />
-                  <Thumbnail
-                    title="Python/DL班の研究成果2"
-                    description="Pythonで機械学習して知らないキノコを毒死せずに食べる"
-                    src="/images/ridaisai/2021/dl-2.jpg"
-                    url="https://and-2353.github.io/Article2021/"
-                  />
-                </SectionContentsAligner>
-                {contentData?.dl && <ReactionSender type="dl" likeCount={contentData.dl.likeCount}></ReactionSender>}
-              </Section>
-            </SectionWrapper>
-            <SectionWrapper backgroundColor="black" active={false}>
-              {webAnchor}
-              <Section
-                title="Web"
-                description="
-                Web班というWebサイトを制作する活動などをしている班の成果物です！
-              "
-              >
-                <SectionContentsAligner>
-                  <Thumbnail
-                    title="2021年度理大祭特設ページ"
-                    description="ここはWeb班によって制作されています！"
-                    src="/images/ridaisai/2021/web-1.png"
-                    url=""
-                  />
-                </SectionContentsAligner>
-                {contentData?.web && <ReactionSender type="web" likeCount={contentData.web.likeCount}></ReactionSender>}
-              </Section>
-            </SectionWrapper>
-          </MainContents>
         </Body>
         <Footer></Footer>
         <Header>
