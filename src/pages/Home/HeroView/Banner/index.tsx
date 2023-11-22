@@ -15,7 +15,7 @@ export default function TopBanner() {
     <Banner>
       <Image></Image>
       <Names></Names>
-      <Center>理大祭まであと２日！(特設サイトに切り替わりますのでお楽しみに！)</Center>
+      <Center>理大祭まであと１日！(特設サイトに切り替わりますのでお楽しみに！)</Center>
     </Banner>
   )
 }
