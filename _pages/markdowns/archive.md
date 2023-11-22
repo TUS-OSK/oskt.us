@@ -15,7 +15,8 @@ title: 'アーカイブ'
 
 ## 2023 年度
 
-- [新歓](/articles/2023/welcome-sp)
+- [前期新歓](/articles/2023/welcome-sp)
+- [後期新歓](/articles/2023/welcome-second-semester)
 
 ## 2022 年度
 
