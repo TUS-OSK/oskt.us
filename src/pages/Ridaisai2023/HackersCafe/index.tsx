@@ -1,76 +1,70 @@
-import HackersCafe from 'src/pages/Ridaisai2023/HackersCafe';
-import Kyopro from 'src/pages/Ridaisai2023/Kyopro'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import Footer from 'src/components/Footer'
 import Logo from 'src/components/Logo'
 import styled from '@emotion/styled'
-import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
-import useBreakpoint from './breakpoint/useBreakPoint'
-import Hero, { heroSizeCss } from './Hero'
-import { NavigationDLIcon, NavigationRayIcon, NavigationTopIcon, NavigationWebIcon } from './NavigationIcons'
-import ReactionSender from './ReactionSender'
-import Section from './Section'
-import Thumbnail from './Thumbnail'
-import { useContentNavigation } from './useContentNavigation'
-import useGetContents from './useGetContents'
-import useTopLogo from './useTopLogo'
+import { MEDIA_QUERY_MOBILE } from 'src/pages/Ridaisai2023/breakpoint/helper'
+import useBreakpoint from 'src/pages/Ridaisai2023/breakpoint/useBreakPoint'
+import Hero, { heroSizeCss } from 'src/pages/Ridaisai2023/Hero'
+import { NavigationDLIcon, NavigationRayIcon, NavigationTopIcon, NavigationWebIcon } from 'src/pages/Ridaisai2023/NavigationIcons'
+import ReactionSender from 'src/pages/Ridaisai2023/ReactionSender'
+import Section from 'src/pages/Ridaisai2023/Section'
+import Thumbnail from 'src/pages/Ridaisai2023/Thumbnail'
+import { useContentNavigation } from 'src/pages/Ridaisai2023/useContentNavigation'
+import useGetContents from 'src/pages/Ridaisai2023/useGetContents'
+import useTopLogo from 'src/pages/Ridaisai2023/useTopLogo'
 import { css } from '@emotion/react'
+import Banner from 'src/pages/Ridaisai2023/Banner'
+import Kyopro from 'src/pages/Ridaisai2023/Kyopro'
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { Example } from 'src/pages/Ridaisai2023/Graph';
 
-const Container = styled.div`
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  ${heroSizeCss}
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
-`
 
-export default function Ridaisai2023() {
+const DESCRIPTION =
+  '応用数学研究部(応数研,OSK)は東京理科大学一部研究会に属する部活動団体で、創部から半世紀以上たつ歴史ある団体です。コンピュータを利用してプログラミングを主に、計算機科学、WEB開発、アプリケーション開発、ゲーム開発、など様々なことに挑戦しています。'
+
+export default function HackersCafe() {
+  const currentMode = useBreakpoint()
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [openLogo] = useTopLogo(scrollerRef)
+  const [contentData, , importContents] = useGetContents()
+  const [openMobileNavigationMenu, setMobileNavigationMenu] = useState(false)
+
+  const [topLink, topAnchor] = useContentNavigation('top', NavigationTopIcon)
+  const [rayLink, rayAnchor] = useContentNavigation('ray', NavigationRayIcon)
+  const [dlLink, dlAnchor] = useContentNavigation('dl', NavigationDLIcon)
+  const [webLink, webAnchor] = useContentNavigation('web', NavigationWebIcon)
+
+
+  const handleClickMobileNavigationMenu = () => setMobileNavigationMenu(true)
+
+  useEffect(() => {
+    if (openMobileNavigationMenu) {
+      const close = () => setMobileNavigationMenu(false)
+      window.addEventListener('click', close)
+      return () => window.removeEventListener('click', close)
+    }
+  })
+
+  useEffect(() => {
+    void importContents()
+  }, [])
+
   return (
     <Container>
       <Scroller ref={scrollerRef}>
-        <Header>
-          <Link href="/" passHref>
-            <LogoWrapper open={openLogo}>
-              <Logo />
-            </LogoWrapper>
-          </Link>
-        </Header>
-        <Tabs>
-          <TabList>
-            <Tab>Hackers' Cafe</Tab>
-            <Tab>Web班</Tab>
-            <Tab>競プロ班</Tab>
-            <Tab>CG班</Tab>
-            <Tab>レイトレーシング班</Tab>
-          </TabList>
-
-          <TabPanel>
-            <HackersCafe/>
-          </TabPanel>
-          <TabPanel>
-            <h2>Under Constracitng...</h2>
-          </TabPanel>
-          <TabPanel>
-            <Kyopro />
-          </TabPanel>
-          <TabPanel>
-            <h2>Under Constracitng...</h2>
-          </TabPanel>
-          <TabPanel>
-            <h2>Under Constracitng...</h2>
-          </TabPanel>
-        </Tabs>
-        <Footer></Footer>
+        <Body>
+          a
+        </Body>
       </Scroller>
     </Container>
   )
 }
+
+const Container = styled.div`
+  overflow: hidden;
+`
 
 const Scroller = styled.div`
   position: relative;
