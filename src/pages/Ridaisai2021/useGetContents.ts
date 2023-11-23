@@ -20,7 +20,7 @@ export default function useGetContents() {
           .map<[ContentType, ContentData[ContentType]]>((content) => [
             checkContentType(content),
             { likeCount: content.like_count },
-          ])
+          ]),
       )
     } catch {
       // FIXME: エラーしたときの対応を考える

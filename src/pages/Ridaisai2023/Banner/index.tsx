@@ -1,21 +1,12 @@
 import styled from '@emotion/styled'
 import { BOUNCE, CUBIC_OUT, SWIFT } from 'src/utils/animations'
-import { fade, flip, pic } from './animations'
-import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
-
-const Center = styled.div`
-  width: 100%;
-  height: 50%;
-  min-height: 280px;
-  text-align: center;
-`
+import { fade, flip, pic, T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
 
 export default function TopBanner() {
   return (
     <Banner>
       <Image></Image>
       <Names></Names>
-      <Center>理大祭まであと１日！(特設サイトに切り替わりますのでお楽しみに！)</Center>
     </Banner>
   )
 }
@@ -31,7 +22,7 @@ const Image = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-image: url('/images/bg.jpg');
+  background-image: url('/images/ridaisai/2023/coffee.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -75,7 +66,6 @@ const Name = styled.div`
 const First = styled(Name)`
   animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER}s 1 normal both running;
 `
-
 const Second = styled(Name)`
   animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 0.5}s 1 normal both running;
 `

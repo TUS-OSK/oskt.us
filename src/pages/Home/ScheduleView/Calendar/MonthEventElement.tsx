@@ -90,7 +90,9 @@ const JaName = styled.div<{ status: EventStatus }>`
   color: #fffd;
   opacity: ${(p) => eventStatusStyle[p.status].opacity};
   transform: translateY(${(p) => eventStatusStyle[p.status].y ?? 0}px);
-  transition: opacity 0.4s, transform 0.4s;
+  transition:
+    opacity 0.4s,
+    transform 0.4s;
 `
 
 const EnName = styled.div<{ status: EventStatus }>`
@@ -99,7 +101,9 @@ const EnName = styled.div<{ status: EventStatus }>`
 
   opacity: ${(p) => eventStatusStyle[p.status].opacity};
   transform: translateY(${(p) => (eventStatusStyle[p.status].y ?? 0) / 2}px);
-  transition: 0.1s opacity 0.4s, 0.1s transform 0.4s;
+  transition:
+    0.1s opacity 0.4s,
+    0.1s transform 0.4s;
 `
 
 const EventText = styled.div<{ status: EventStatus }>`

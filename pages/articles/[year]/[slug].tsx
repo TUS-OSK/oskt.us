@@ -60,6 +60,6 @@ export const getStaticPaths: GetStaticPaths<Paths> = async () => {
         ],
       }
     },
-    { paths: [], fallback: false }
+    { paths: [], fallback: false },
   )
 }

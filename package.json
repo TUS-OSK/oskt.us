@@ -22,14 +22,19 @@
     "gray-matter": "^4.0.2",
     "next": "^11.1.0",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
+    "react-tabs": "^4.3.0",
+    "recharts": "^2.10.1",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.1",
+    "structured-clone": "^0.2.2"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.3.0",
     "@types/node": "^14.14.6",
+    "@types/react-beautiful-dnd": "^13.1.7",
     "@types/react-modal": "^3.12.1",
     "typescript": "^4.3.5"
   }
