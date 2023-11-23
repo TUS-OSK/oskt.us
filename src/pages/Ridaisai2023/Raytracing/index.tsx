@@ -1,3 +1,4 @@
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 
 export default function Raytracing() {
@@ -15,6 +16,13 @@ export default function Raytracing() {
           理大祭では活動で制作した画像をいくつか展示しています。
         </Description>
       </DescriptionBox>
+
+      <RaytracingImages>
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray1.png" />
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray2.png" />
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray3.png" />
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray4.png" />
+      </RaytracingImages>
     </div>
   )
 }
@@ -64,11 +72,27 @@ const DescriptionBox = styled.div`
 const Description = styled.div`
   margin: 0 3%;
   font-size: 1.2em;
+  text-align: center;
 `
 
-const LoopSlide = styled.div`
-  position: relative;
-  display: flex;
-  width: 100vw;
-  overflow: hidden;
+const SlideIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
+
+const RaytracingImages = styled.div`
+  margin: 0 5%;
+  text-align: center;
+`
+
+const RaytracingImage = styled.img`
+  animation: ${SlideIn} 1.6s;
+  object-fit: contain;
+  max-width: 100%;
 `
