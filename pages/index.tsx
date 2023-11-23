@@ -1,4 +1,4 @@
-import { getArticlesAll, getPageMarkdown } from 'api/markdowns'
+// import { getArticlesAll, getPageMarkdown } from 'api/markdowns'
 import { GetStaticProps } from 'next'
 import Home from 'src/pages/Home'
 import { EventCalendar } from 'src/pages/Home/ScheduleView'
