@@ -54,23 +54,6 @@ const Title = styled.div`
   }
 `
 
-const Flex = styled.div`
-  flex-basis: 45%;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  gap: 2em;
-`
-
-const Align = styled.div`
-  width: 90%;
-  display: flex;
-  flex: 1 auto;
-  margin: auto;
-  justify-content: center;
-`
-
 const Image = styled.img`
   margin: 0 0 0 auto;
   width: 50%;
