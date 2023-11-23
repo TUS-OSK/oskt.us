@@ -1,23 +1,16 @@
-import HackersCafe from 'src/pages/Ridaisai2023/HackersCafe';
-import Kyopro from 'src/pages/Ridaisai2023/Kyopro'
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import Footer from 'src/components/Footer'
 import Logo from 'src/components/Logo'
-import styled from '@emotion/styled'
+import Kyopro from 'src/pages/Ridaisai2023/Kyopro'
+import Cg from './Cg'
+import { heroSizeCss } from './Hero'
+import Raytracing from './Raytracing'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
-import useBreakpoint from './breakpoint/useBreakPoint'
-import Hero, { heroSizeCss } from './Hero'
-import { NavigationDLIcon, NavigationRayIcon, NavigationTopIcon, NavigationWebIcon } from './NavigationIcons'
-import ReactionSender from './ReactionSender'
-import Section from './Section'
-import Thumbnail from './Thumbnail'
-import { useContentNavigation } from './useContentNavigation'
-import useGetContents from './useGetContents'
 import useTopLogo from './useTopLogo'
-import { css } from '@emotion/react'
-import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
-import { PageHead } from 'src/components/Head'
 
 const Container = styled.div`
   width: 100%;
@@ -40,30 +33,22 @@ const MainContents = styled.div`
   }
 `
 
-const CustomTab: ReactTabsFunctionComponent<TabProps> = ({
-  children,
-  ...otherProps
-}) => (
+const CustomTab: ReactTabsFunctionComponent<TabProps> = ({ children, ...otherProps }) => (
   <Tab {...otherProps}>
     <h1>{children}</h1>
   </Tab>
-);
+)
 
-CustomTab.tabsRole = 'Tab'; // Required field to use your custom Tab
+CustomTab.tabsRole = 'Tab' // Required field to use your custom Tab
 
-const CustomTabList: ReactTabsFunctionComponent<TabListProps> = ({
-  children,
-  ...otherProps
-}) => (
+const CustomTabList: ReactTabsFunctionComponent<TabListProps> = ({ children, ...otherProps }) => (
   <TabList {...otherProps}>
-    <Center>
-    {children}
-    </Center>
+    <Center>{children}</Center>
   </TabList>
-);
+)
 
-CustomTab.tabsRole = 'Tab'; // Required field to use your custom Tab
-CustomTabList.tabsRole = 'TabList'; // Required field to use your custom Tab
+CustomTab.tabsRole = 'Tab' // Required field to use your custom Tab
+CustomTabList.tabsRole = 'TabList' // Required field to use your custom Tab
 
 export default function Ridaisai2023() {
   const scrollerRef = useRef<HTMLDivElement>(null)
@@ -98,10 +83,10 @@ export default function Ridaisai2023() {
               <Kyopro />
             </TabPanel>
             <TabPanel>
-              <h2>Under Constracitng...</h2>
+              <Cg />
             </TabPanel>
             <TabPanel>
-              <h2>Under Constracitng...</h2>
+              <Raytracing />
             </TabPanel>
           </Tabs>
         </MainContents>
@@ -176,7 +161,6 @@ const DesktopNavigation = styled.div`
   gap: 40px;
   ${heroSizeCss};
 `
-
 
 const AsideContents = styled.div``
 
