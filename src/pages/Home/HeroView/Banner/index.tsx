@@ -23,7 +23,7 @@ const Image = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-image: url('/images/bg.jpg');
+  background-image: url('/images/ridaisai/2023/coffee.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;

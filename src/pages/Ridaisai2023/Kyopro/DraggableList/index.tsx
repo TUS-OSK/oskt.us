@@ -1,5 +1,6 @@
 import React from "react";
 import { DragDropContext, Droppable, Draggable, DropResult,} from "react-beautiful-dnd";
+import styled from '@emotion/styled'
 
 export type ListState = {
   Original: number[]
@@ -41,45 +42,44 @@ export const DraggableList: React.FC<Props> = (props) => {
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list" direction="horizontal">
         {(provided, snapshot) => (
-          <div
+          <List
             ref={provided.innerRef}
-            style={{
-              width: `80%`,
-              margin: `0 auto`,
-              display: 'flex',
-              padding: `8px`,
-              justifyContent: `center`,
-              ...provided.droppableProps
-            }}
           >
             {list.Current.map((elem, index) => (
               <Draggable key={elem.toString()} draggableId={elem.toString()} index={index}>
                 {(provided, snapshot) => (
-                  <div
+                  <Elem
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    style={{
-                      userSelect: 'none',
-                      width: `3em`,
-                      height: `3em`,
-                      margin: `0 0.5em 0 0.5em`,
-                      display: `flex`,
-                      justifyContent: `center`,
-                      alignItems: `center`,
-                      background: snapshot.isDragging ? 'lightgreen' : 'grey',
-                      ...provided.draggableProps.style,
-                    }}
                   >
                     {elem}
-                  </div>
+                  </Elem>
                 )}
               </Draggable>
             ))}
             {provided.placeholder}
-          </div>
+          </List>
         )}
       </Droppable>
     </DragDropContext>
   )
 };
+
+const List = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`
+
+const Elem = styled.span`
+  width: 3em;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+`

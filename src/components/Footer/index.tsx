@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 export default function Footer() {
   return (
     <Container as="footer">
-      <small>Copyright (c) 2022 OSK</small>
+      <small>Copyright (c) 2023 OSK</small>
     </Container>
   )
 }

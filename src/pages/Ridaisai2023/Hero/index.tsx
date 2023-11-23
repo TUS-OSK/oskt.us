@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import BackgroundFluid from './BackgroundFluid'
-import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
-import useBreakpoint from './breakpoint/useBreakPoint'
+import { MEDIA_QUERY_MOBILE } from '../breakpoint/helper'
+import useBreakpoint from '../breakpoint/useBreakPoint'
 import { heroAnimation, HERO_BACKGROUND_COLOR, maskAnimation } from './heroAnimation'
 import OSKIcon from './OSKIcon'
 import { css } from '@emotion/react'
@@ -18,11 +18,6 @@ type HeroProps =
       heroHeight: number
     }
 
-const Background = styled.div`
-  position: absolute;
-  background-image: url("../../../public/images/ridaisai/2023/coffee.jpg");
-`
-
 export default function Hero() {
   const currentMode = useBreakpoint()
   const heroRef = useRef<HTMLDivElement>(null)
@@ -32,24 +27,24 @@ export default function Hero() {
     setSmallerWindowThanHero(window.innerHeight < heroHeight)
   }, [])
 
-  // useEffect(() => {
-  //   if (heroRef.current) {
-  //     checkWindowHeight(heroRef.current.clientHeight)
-  //   }
-  // }, [])
-  //
-  // useEffect(() => {
-  //   if (heroRef.current) {
-  //     const resizeObserver = new ResizeObserver((entries) => {
-  //       for (let entry of entries) {
-  //         checkWindowHeight(entry.target.clientHeight)
-  //       }
-  //     })
-  //     resizeObserver.observe(heroRef.current)
-  //
-  //     return () => resizeObserver.disconnect()
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (heroRef.current) {
+      checkWindowHeight(heroRef.current.clientHeight)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (heroRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          checkWindowHeight(entry.target.clientHeight)
+        }
+      })
+      resizeObserver.observe(heroRef.current)
+
+      return () => resizeObserver.disconnect()
+    }
+  }, [])
 
   return (
     <Container
@@ -58,12 +53,25 @@ export default function Hero() {
         ? { ready: true, smallerWindowThanHero, heroHeight: heroRef.current?.clientHeight ?? 0 }
         : { ready: false })}
     >
-      <Background />
+      <BackgroundFluid
+        fluidCss={popInBackgroundCss}
+        {...(currentMode === 'desktop' ? { top: -400, left: -200, size: 800 } : { top: -200, left: -100, size: 400 })}
+      />
+      <BackgroundFluid
+        fluidCss={popInBackgroundCss}
+        {...(currentMode === 'desktop'
+          ? { right: -100, bottom: 100, size: 400 }
+          : { right: -100, bottom: 50, size: 200 })}
+      />
+      <BackgroundFluid
+        fluidCss={popInBackgroundCss}
+        {...(currentMode === 'desktop' ? { right: 200, bottom: 10, size: 200 } : { right: 40, bottom: 10, size: 100 })}
+      />
 
       <HeroIcon>
         <OSKIcon />
       </HeroIcon>
-      <HeroText>２０２３年度 理大祭 特設ページ</HeroText>
+      <HeroText>２０２１年度 理大祭 特設ページ</HeroText>
 
       <ScrollGuide>
         <ScrollIconWrapper>

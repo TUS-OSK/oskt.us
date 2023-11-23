@@ -24,9 +24,8 @@ const nextPermutation = (input: Array<number>) => {
   return undefined;
 }
 
-// function shuffle(input) {
-//   let array = structuredClone(input)
-function shuffle(array: number[]) {
+
+export function shuffle(array: number[]) {
   let currentIndex = array.length,  randomIndex;
 
   // While there remain elements to shuffle.
@@ -43,6 +42,21 @@ function shuffle(array: number[]) {
 
   return array;
 }
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+export function init(array: number[]) {
+  const n = array.length
+  const l = [3, 4, 5, 6]
+  const i = l[getRandomInt(4)]
+  const narray = shuffle(array)
+  const ret = [...narray.slice(0, n - i), ...narray.slice(n - i).sort().reverse()]
+  return ret;
+}
+
+
 const Button = styled.button`
   text-align: center;
   background-color: rgb(255, 209, 84);
@@ -56,7 +70,9 @@ const Button = styled.button`
   font-weight: bold;
   font-size: 1.2em;
   cursor: pointer;
+  margin: 0 0 2em 0;
 `;
+
 const DisplayList = (props) => {
   const { list } = props
   return (
@@ -70,96 +86,116 @@ const DisplayList = (props) => {
   )
 }
 
-const Quiz = () => {
+export default () => {
   const [page, setPage] = useState('default');
-  const initList = shuffle(Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+  const array = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9])
+  let initList = init(array)
+  if (initList === array.reverse()) {
+    initList = array
+  }
   const [list, setList] = useState<ListState>({
     Original: initList,
     Current: initList,
   });
+  const playAgain = () => {
+    let initList = init(array)
+    if (initList === array.reverse()) {
+      initList = array
+    }
+    setList({
+      Original: initList,
+      Current: initList,
+    })
+    setPage('default')
+  };
   switch (page) {
     case 'default':
       return (
-        <Button type='button' onClick={() => {setPage('quiz')}} >
-          遊ぶ
-        </Button>
+        <Flex>
+          <Title>
+            Next Permutation!
+          </Title>
+          <Description>
+            与えられた数列のnext_permutationを答えるゲームです。
+          </Description>
+          <Button type='button' onClick={() => {setPage('quiz')}} >
+            遊ぶ
+          </Button>
+        </Flex>
       )
     case 'quiz':
       return (
         <Flex>
-          <Text>
+          <Title>
             問題
-          </Text>
+          </Title>
           <DisplayList list={list.Original} />
-          <Text>
-            この配列を並び替えて回答してね
-          </Text>
+          <Title>
+            回答
+          </Title>
           <DraggableList list={list} setList={setList} />
           <Button type='button' onClick={() => {setPage('result')}} >
-            回答
+            回答する
           </Button>
         </Flex>
       )
     case 'result':
       const nextList = nextPermutation(list.Original)
-      return (
-        <Flex>
-          <Text>
-            {JSON.stringify(nextList) === JSON.stringify(list.Current) ? 
-                "正解"
-              : 
-                "不正解"
-            }
-          </Text>
-          <Text>
-            問題
-          </Text>
-          <DisplayList list={list.Original} />
-          <Text>
-            あなたの回答
-          </Text>
-          <DisplayList list={list.Current} />
-          <Text>
-            正解
-          </Text>
-          <DisplayList list={nextList} />
-          <Button type='button' onClick={() => {setPage('quiz')}} >
-            もう一度遊ぶ
-          </Button>
-        </Flex>
-      )
+      if (JSON.stringify(nextList) === JSON.stringify(list.Current)) {
+        return (
+          <Flex>
+            <Title>
+              正解！！
+            </Title>
+            <Button type='button' onClick={() => {playAgain()}} >
+              もう一度遊ぶ
+            </Button>
+          </Flex>
+        )
+      } else {
+        return (
+          <Flex>
+            <Title>
+              不正解
+            </Title>
+            <Title>
+              問題
+            </Title>
+            <DisplayList list={list.Original} />
+            <Title>
+              あなたの回答
+            </Title>
+            <DisplayList list={list.Current} />
+            <Title>
+              正解
+            </Title>
+            <DisplayList list={nextList} />
+            <Button type='button' onClick={() => {playAgain()}} >
+              もう一度遊ぶ
+            </Button>
+          </Flex>
+        )
+      }
     default:
       return null
   }
 }
 
-export default function Kyopro() {
-  return (
-    <div>
-      <Gamen>
-        <Quiz />
-      </Gamen>
-    </div>
-  )
-}
-const Play = styled.div`
-`
-
-const Text = styled.p`
-`
-
 const Flex = styled.div`
   width: 100%;
+  display: flex;
+  background: rgb(43, 135, 209);
+  color: white;
   margin: auto;
   flex-direction: column;
   align-items: center;
-  gap: 2em;
+  justify-content: space-evenly;
+  gap: 1em;
 `
 
 const List = styled.div`
   width: 100%;
   display: flex;
-  gap: 1em;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -167,11 +203,12 @@ const List = styled.div`
 
 const Elem = styled.span`
   width: 3em;
-  height: 3em;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: gray;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
 `
 
 const Gamen = styled.div`
@@ -181,4 +218,27 @@ const Gamen = styled.div`
   user-select: none;
   overflow: hidden;
   text-align: center;
+`
+
+const Description = styled.div`
+  font-family: 'Yu Gothic', sans-serif;
+  margin: 0 3%;
+  font-size: 1em;
+  text-align: left;
+`
+
+const Title = styled.div`
+  margin: 0.5em 0 0 0;
+  font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+  font-size: 2em;
+  line-height: 1.3em;
+  text-align: left;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    border-bottom: solid 2px #5d639e;
+    margin: 5px auto;
+  }
 `
