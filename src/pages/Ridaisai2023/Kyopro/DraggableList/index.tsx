@@ -33,11 +33,11 @@ export const DraggableList: React.FC<Props> = (props) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list" direction="horizontal">
-        {(provided, snapshot) => (
+        {(provided) => (
           <List ref={provided.innerRef}>
             {list.Current.map((elem, index) => (
               <Draggable key={elem.toString()} draggableId={elem.toString()} index={index}>
-                {(provided, snapshot) => (
+                {(provided) => (
                   <Elem ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                     {elem}
                   </Elem>

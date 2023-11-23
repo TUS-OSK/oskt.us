@@ -41,7 +41,7 @@ export function shuffle(array: number[]) {
   return array
 }
 
-function getRandomInt(max) {
+function getRandomInt(max: number) {
   return Math.floor(Math.random() * max)
 }
 
@@ -75,12 +75,14 @@ const Button = styled.button`
   cursor: pointer;
   margin: 0 0 2em 0;
 `
-
-const DisplayList = (props) => {
+type Props = {
+  list: number[]
+}
+const DisplayList = (props: Props) => {
   const { list } = props
   return (
     <List>
-      {list.map((elem) => (
+      {list.map((elem: number) => (
         <Elem>{elem}</Elem>
       ))}
     </List>
@@ -212,15 +214,6 @@ const Elem = styled.span`
   justify-content: center;
   border: 5px solid rgba(255, 255, 255, 0.1);
   border-radius: 5px;
-`
-
-const Gamen = styled.div`
-  background: rgb(43, 135, 209);
-  position: relative;
-  color: white;
-  user-select: none;
-  overflow: hidden;
-  text-align: center;
 `
 
 const Description = styled.div`
