@@ -11,18 +11,18 @@ export default function Raytracing() {
 
       <RayImages>
         <div>
-          <RayImage src="../../../../public/images/ridaisai/2023/Raytracing/ray1.png" />
+          <RayImage1 />
         </div>
         <div>
-          <RayImage src="../../../../public/images/ridaisai/2023/Raytracing/ray2.png" />
+          <RayImage2 />
         </div>
       </RayImages>
       <RayImages>
         <div>
-          <RayImage src="../../../../public/images/ridaisai/2023/Raytracing/ray3.png" />
+          <RayImage3 />
         </div>
         <div>
-          <RayImage src="../../../../public/images/ridaisai/2023/Raytracing/ray4.png" />
+          <RayImage4 />
         </div>
       </RayImages>
     </div>
@@ -50,6 +50,22 @@ const RayImages = styled.div`
   display: flex;
 `
 
-const RayImage = styled.img`
+const RayImage1 = styled.div`
+  background-image: url('/images/ridaisai/2023/Raytracing/ray1.png');
+  max-width: 100%;
+`
+
+const RayImage2 = styled.div`
+  background-image: url('/images/ridaisai/2023/Raytracing/ray2.png');
+  max-width: 100%;
+`
+
+const RayImage3 = styled.div`
+  background-image: url('/images/ridaisai/2023/Raytracing/ray3.png');
+  max-width: 100%;
+`
+
+const RayImage4 = styled.div`
+  background-image: url('/images/ridaisai/2023/Raytracing/ray4.png');
   max-width: 100%;
 `
