@@ -1,4 +1,4 @@
-// import { getArticlesAll, getPageMarkdown } from 'api/markdowns'
+import { getArticlesAll, getPageMarkdown } from 'api/markdowns'
 import { GetStaticProps } from 'next'
 import Home from 'src/pages/Home'
 import { EventCalendar } from 'src/pages/Home/ScheduleView'
@@ -47,10 +47,6 @@ export default function IndexPage({
 }
 
 // export const getStaticProps: GetStaticProps<Props> = async () => {
-//   const { meta: aboutMeta } = getPageMarkdown<AboutMeta>('about')
-//   const { meta: scheduleMeta } = getPageMarkdown<ScheduleMeta>('schedule')
-//   const { meta: contactMeta } = getPageMarkdown<ContactMeta>('contact')
-//   const articles = getArticlesAll()
 //
 //   return {
 //     props: {
@@ -70,10 +66,33 @@ export default function IndexPage({
 //   }
 // }
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  return {
-    redirect: {
-      permanent: false,
-      destination: '/ridaisai/2023',
+  const { meta: aboutMeta } = getPageMarkdown<AboutMeta>('about')
+  const { meta: scheduleMeta } = getPageMarkdown<ScheduleMeta>('schedule')
+  const { meta: contactMeta } = getPageMarkdown<ContactMeta>('contact')
+  const articles = getArticlesAll()
+  if (Date.now() <= Date.parse('26 Nov 2023 00:09:00 GMT')) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/ridaisai/2023',
+      }
     }
+  } else {
+    return {
+      props: {
+        aboutData: {
+          meta: aboutMeta,
+        },
+        scheduleData: {
+          meta: scheduleMeta,
+        },
+        contactData: {
+          meta: contactMeta,
+        },
+        newsData: {
+          articlesStr: JSON.stringify(articles),
+        },
+      },
+  }
   }
 }
