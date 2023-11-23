@@ -67,7 +67,7 @@ export const animationCreator = <T extends TypedAnimation>(animations: Animation
           }
           return prev
         },
-        { duration: 0, delay: 0, style: css`` }
+        { duration: 0, delay: 0, style: css`` },
       )
   },
 })

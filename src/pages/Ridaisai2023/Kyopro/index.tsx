@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react'
 import styled from '@emotion/styled'
-import structuredClone from 'structured-clone';
-import { DraggableList, ListState } from './DraggableList';
+import structuredClone from 'structured-clone'
+import { DraggableList, ListState } from './DraggableList'
 
 const nextPermutation = (input: Array<number>) => {
   // deep copy
@@ -11,40 +11,38 @@ const nextPermutation = (input: Array<number>) => {
     if (arr[i] < arr[i + 1]) {
       for (let j = n - 1; j > i; j--) {
         if (arr[j] > arr[i]) {
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-          const len = (n - (i + 1)) >> 1;
+          ;[arr[i], arr[j]] = [arr[j], arr[i]]
+          const len = (n - (i + 1)) >> 1
           for (let k = 0; k < len; k++) {
-            [arr[i + 1 + k], arr[n - 1 - k]] = [ arr[n - 1 - k], arr[i + 1 + k], ];
+            ;[arr[i + 1 + k], arr[n - 1 - k]] = [arr[n - 1 - k], arr[i + 1 + k]]
           }
-          return arr;
+          return arr
         }
       }
     }
   }
-  return undefined;
+  return undefined
 }
 
-
 export function shuffle(array: number[]) {
-  let currentIndex = array.length,  randomIndex;
+  let currentIndex = array.length,
+    randomIndex
 
   // While there remain elements to shuffle.
   while (currentIndex > 0) {
-
     // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
 
     // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
+    ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
   }
 
-  return array;
+  return array
 }
 
 function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+  return Math.floor(Math.random() * max)
 }
 
 export function init(array: number[]) {
@@ -52,10 +50,15 @@ export function init(array: number[]) {
   const l = [3, 4, 5, 6]
   const i = l[getRandomInt(4)]
   const narray = shuffle(array)
-  const ret = [...narray.slice(0, n - i), ...narray.slice(n - i).sort().reverse()]
-  return ret;
+  const ret = [
+    ...narray.slice(0, n - i),
+    ...narray
+      .slice(n - i)
+      .sort()
+      .reverse(),
+  ]
+  return ret
 }
-
 
 const Button = styled.button`
   text-align: center;
@@ -71,23 +74,21 @@ const Button = styled.button`
   font-size: 1.2em;
   cursor: pointer;
   margin: 0 0 2em 0;
-`;
+`
 
 const DisplayList = (props) => {
   const { list } = props
   return (
     <List>
       {list.map((elem) => (
-        <Elem>
-          {elem}
-        </Elem>
+        <Elem>{elem}</Elem>
       ))}
     </List>
   )
 }
 
 export default () => {
-  const [page, setPage] = useState('default');
+  const [page, setPage] = useState('default')
   const array = Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9])
   let initList = init(array)
   if (initList === array.reverse()) {
@@ -96,7 +97,7 @@ export default () => {
   const [list, setList] = useState<ListState>({
     Original: initList,
     Current: initList,
-  });
+  })
   const playAgain = () => {
     let initList = init(array)
     if (initList === array.reverse()) {
@@ -107,18 +108,19 @@ export default () => {
       Current: initList,
     })
     setPage('default')
-  };
+  }
   switch (page) {
     case 'default':
       return (
         <Flex>
-          <Title>
-            Next Permutation!
-          </Title>
-          <Description>
-            与えられた数列のnext_permutationを答えるゲームです。
-          </Description>
-          <Button type='button' onClick={() => {setPage('quiz')}} >
+          <Title>Next Permutation!</Title>
+          <Description>与えられた数列のnext_permutationを答えるゲームです。</Description>
+          <Button
+            type="button"
+            onClick={() => {
+              setPage('quiz')
+            }}
+          >
             遊ぶ
           </Button>
         </Flex>
@@ -126,15 +128,16 @@ export default () => {
     case 'quiz':
       return (
         <Flex>
-          <Title>
-            問題
-          </Title>
+          <Title>問題</Title>
           <DisplayList list={list.Original} />
-          <Title>
-            回答
-          </Title>
+          <Title>回答</Title>
           <DraggableList list={list} setList={setList} />
-          <Button type='button' onClick={() => {setPage('result')}} >
+          <Button
+            type="button"
+            onClick={() => {
+              setPage('result')
+            }}
+          >
             回答する
           </Button>
         </Flex>
@@ -144,10 +147,13 @@ export default () => {
       if (JSON.stringify(nextList) === JSON.stringify(list.Current)) {
         return (
           <Flex>
-            <Title>
-              正解！！
-            </Title>
-            <Button type='button' onClick={() => {playAgain()}} >
+            <Title>正解！！</Title>
+            <Button
+              type="button"
+              onClick={() => {
+                playAgain()
+              }}
+            >
               もう一度遊ぶ
             </Button>
           </Flex>
@@ -155,22 +161,19 @@ export default () => {
       } else {
         return (
           <Flex>
-            <Title>
-              不正解
-            </Title>
-            <Title>
-              問題
-            </Title>
+            <Title>不正解</Title>
+            <Title>問題</Title>
             <DisplayList list={list.Original} />
-            <Title>
-              あなたの回答
-            </Title>
+            <Title>あなたの回答</Title>
             <DisplayList list={list.Current} />
-            <Title>
-              正解
-            </Title>
+            <Title>正解</Title>
             <DisplayList list={nextList} />
-            <Button type='button' onClick={() => {playAgain()}} >
+            <Button
+              type="button"
+              onClick={() => {
+                playAgain()
+              }}
+            >
               もう一度遊ぶ
             </Button>
           </Flex>

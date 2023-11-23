@@ -4,7 +4,7 @@ import Calendar from './Calendar'
 import { EventCalendarMD } from 'pages/schedule'
 
 export const months = [...new Array(12).keys()].map((i) => i + 1)
-export type Month = typeof months[number]
+export type Month = (typeof months)[number]
 export interface EventData {
   name: {
     ja: string

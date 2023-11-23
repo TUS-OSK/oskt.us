@@ -1,5 +1,5 @@
-import React from "react";
-import { DragDropContext, Droppable, Draggable, DropResult,} from "react-beautiful-dnd";
+import React from 'react'
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
 import styled from '@emotion/styled'
 
 export type ListState = {
@@ -8,51 +8,37 @@ export type ListState = {
 }
 
 export interface Props {
-  list: ListState,
-  setList: (newList: ListState) => void; 
+  list: ListState
+  setList: (newList: ListState) => void
 }
 
 export const DraggableList: React.FC<Props> = (props) => {
-  const { list, setList } = props;
-  const reorder = (
-    listCurrent: number[],
-    startIndex: number,
-    endIndex: number
-  ) => {
-    const result = Array.from(listCurrent);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-  };
+  const { list, setList } = props
+  const reorder = (listCurrent: number[], startIndex: number, endIndex: number) => {
+    const result = Array.from(listCurrent)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+  }
   const onDragEnd = (result: DropResult): void => {
     if (!result.destination) {
-      return;
+      return
     }
-    const newList = reorder(
-      list.Current,
-      result.source.index,
-      result.destination.index
-    );
+    const newList = reorder(list.Current, result.source.index, result.destination.index)
     setList({
       Original: list.Original,
       Current: newList,
-    });
-  };
+    })
+  }
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list" direction="horizontal">
         {(provided, snapshot) => (
-          <List
-            ref={provided.innerRef}
-          >
+          <List ref={provided.innerRef}>
             {list.Current.map((elem, index) => (
               <Draggable key={elem.toString()} draggableId={elem.toString()} index={index}>
                 {(provided, snapshot) => (
-                  <Elem
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
+                  <Elem ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                     {elem}
                   </Elem>
                 )}
@@ -64,7 +50,7 @@ export const DraggableList: React.FC<Props> = (props) => {
       </Droppable>
     </DragDropContext>
   )
-};
+}
 
 const List = styled.div`
   width: 100%;

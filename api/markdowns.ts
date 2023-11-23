@@ -86,6 +86,6 @@ export function getArticlesAll() {
   const yearDirNames = getArticleYearDirNames()
   return yearDirNames.reduce(
     (prev: MarkdownData<MarkdownBaseMeta>[], year) => [...prev, ...getArticlesByYear(year)],
-    []
+    [],
   )
 }

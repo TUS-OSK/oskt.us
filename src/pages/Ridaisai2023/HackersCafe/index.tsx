@@ -1,35 +1,27 @@
 import { useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
-import { keyframes }from '@emotion/react'
+import { keyframes } from '@emotion/react'
 import { css } from '@emotion/react'
 
 export default function HackersCafe() {
-        // <br />
-        //   コーヒー好きがこだわった挽き目でボルカンブレンドの旨みを最大限引き出します
-        // <br />
+  // <br />
+  //   コーヒー好きがこだわった挽き目でボルカンブレンドの旨みを最大限引き出します
+  // <br />
   return (
     <MainContent>
-      <Title>
-        Hackers' Cafe
-      </Title>
+      <Title>Hackers' Cafe</Title>
       <Description>
         I部研究会応用数学研究部による２日間限定のカフェ。
         牛込神楽坂の焙煎店VOLCANオリジナルブレンドのボルカンブレンドを、一杯ずつハンドドリップで提供します。
       </Description>
       <ImageRight src="/images/ridaisai/2023/coffeeCup.jpg" />
-      <Title>
-        ボルカンブレンド
-      </Title>
+      <Title>ボルカンブレンド</Title>
       <Description>
-        ボルカンアスールを中心に4種類の豆をブレンドしています。
-        苦味甘味のバランスが絶妙です。
-        コーヒー好きの部員がおいしさを最大限引き出す挽き目を探りました。
-        アイスでもホットでも最高です。
+        ボルカンアスールを中心に4種類の豆をブレンドしています。 苦味甘味のバランスが絶妙です。
+        コーヒー好きの部員がおいしさを最大限引き出す挽き目を探りました。 アイスでもホットでも最高です。
       </Description>
       <ImageLeft src="/images/ridaisai/2023/coffee.jpg" />
-      <Title>
-        作品展示
-      </Title>
+      <Title>作品展示</Title>
       <Description>
         レイトレーシングのシェーダー、自作ゲーム、学生証による入退室システムなどの部員の制作物を展示しています。
         VR体験会、アルゴリズムクイズなどの体験型の企画もありますのでぜひ訪れてみてください。
@@ -92,6 +84,6 @@ const ImageRight = styled(Image)`
   margin: 0.2em 0 0 auto;
 `
 
-const ImageLeft= styled(Image)`
+const ImageLeft = styled(Image)`
   margin: 0.5em auto 0 0;
 `

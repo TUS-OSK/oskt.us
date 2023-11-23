@@ -411,13 +411,19 @@ export default function Ridaisai2021() {
             </AsideContents>
           )}
           <MainContents>
-            <Tabs css={css`
-              width:50%;
-            `}>
+            <Tabs
+              css={css`
+                width: 50%;
+              `}
+            >
               <TabList>
-                <Tab css={css`
-                  font-size: 10em;
-                `}>Hackers' Cafe</Tab>
+                <Tab
+                  css={css`
+                    font-size: 10em;
+                  `}
+                >
+                  Hackers' Cafe
+                </Tab>
                 <Tab>アルゴリズムクイズ by 競プロ班</Tab>
                 <Tab>CG班</Tab>
                 <Tab>レイトレーシング班</Tab>

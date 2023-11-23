@@ -19,7 +19,7 @@ const CONTENT_TYPE = {
   3: 'web',
 } as const
 
-export type ContentType = typeof CONTENT_TYPE[keyof typeof CONTENT_TYPE]
+export type ContentType = (typeof CONTENT_TYPE)[keyof typeof CONTENT_TYPE]
 
 export function checkContentType(content: Content) {
   return CONTENT_TYPE[content.id]

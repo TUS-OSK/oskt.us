@@ -12,7 +12,7 @@ export function useContentNavigation(type: 'top' | ContentType, Icon: FC) {
         </NavigationIconWrapper>
       </Link>
     ),
-    []
+    [],
   )
 
   const anchor = useMemo(() => <div id={type}></div>, [])

@@ -26,7 +26,8 @@ const Image = styled.div`
   background-size: cover;
   background-position: center;
   width: 100%;
-  animation: ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running,
+  animation:
+    ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running,
     ${pic} ${T_PIC * 0.9}s ${CUBIC_OUT} ${T_AROUND}s 1 normal both running;
 `
 
@@ -65,7 +66,8 @@ const Name = styled.div`
 const First = styled(Name)`
   animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER}s 1 normal both running;
 `
-const Second = styled(Name)` animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 0.5}s 1 normal both running;
+const Second = styled(Name)`
+  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 0.5}s 1 normal both running;
 `
 const Third = styled(Name)`
   margin-bottom: 1px;
@@ -80,4 +82,3 @@ const Forth = styled(Name)`
   letter-spacing: 3px;
   animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 1.5}s 1 normal both running;
 `
-

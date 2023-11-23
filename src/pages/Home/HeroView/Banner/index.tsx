@@ -27,7 +27,8 @@ const Image = styled.div`
   background-size: cover;
   background-position: center;
   width: 100%;
-  animation: ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running,
+  animation:
+    ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running,
     ${pic} ${T_PIC * 0.9}s ${CUBIC_OUT} ${T_AROUND}s 1 normal both running;
 `
 

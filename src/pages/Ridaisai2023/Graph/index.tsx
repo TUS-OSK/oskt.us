@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import React, { PureComponent } from 'react';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { PureComponent } from 'react'
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 const dummyData = [
   {
@@ -162,9 +162,8 @@ const dummyData = [
   {
     name: '20:00',
     amt: 2000,
-  }
-];
-
+  },
+]
 
 const Container = styled.div`
   width: 90%;
@@ -196,5 +195,5 @@ export const Example = () => {
         </BarChart>
       </ResponsiveContainer>
     </Container>
-  );
+  )
 }
