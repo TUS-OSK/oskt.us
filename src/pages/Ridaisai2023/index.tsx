@@ -8,7 +8,6 @@ import Footer from 'src/components/Footer'
 import Logo from 'src/components/Logo'
 import Kyopro from 'src/pages/Ridaisai2023/Kyopro'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
-import useBreakpoint from './breakpoint/useBreakPoint'
 import Cg from './Cg'
 import HackersCafe from './HackersCafe'
 import Hero, { heroSizeCss } from './Hero'
@@ -16,13 +15,9 @@ import Raytracing from './Raytracing'
 import useTopLogo from './useTopLogo'
 
 export default function Ridaisai2023() {
-  const currentMode = useBreakpoint()
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [openLogo] = useTopLogo(scrollerRef)
   const [openMobileNavigationMenu, setMobileNavigationMenu] = useState(false)
-
-
-  const handleClickMobileNavigationMenu = () => setMobileNavigationMenu(true)
 
   useEffect(() => {
     if (openMobileNavigationMenu) {
@@ -38,17 +33,9 @@ export default function Ridaisai2023() {
         <Hero />
         <Body>
           <MainContents>
-            <Tabs
-              css={css`
-                width: 50%;
-              `}
-            >
+            <Tabs>
               <TabList>
-                <Tab
-                  css={css`
-                    font-size: 10em;
-                  `}
-                >
+                <Tab>
                   Hackers' Cafe
                 </Tab>
                 <Tab>アルゴリズムクイズ by 競プロ班</Tab>
@@ -78,29 +65,6 @@ export default function Ridaisai2023() {
               <Logo />
             </LogoWrapper>
           </Link>
-          {currentMode === 'desktop' ? null : (
-            <MobileNavigationMenu onClick={handleClickMobileNavigationMenu}>
-              <MobileNavigationMenuIcon
-                active={openMobileNavigationMenu}
-                viewBox="0 0 52 52"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M10 16C10 14.8954 10.8954 14 12 14H40C41.1046 14 42 14.8954 42 16C42 17.1046 41.1046 18 40 18H12C10.8954 18 10 17.1046 10 16ZM10 26C10 24.8954 10.8954 24 12 24H40C41.1046 24 42 24.8954 42 26C42 27.1046 41.1046 28 40 28H12C10.8954 28 10 27.1046 10 26ZM10 36C10 34.8954 10.8954 34 12 34H40C41.1046 34 42 34.8954 42 36C42 37.1046 41.1046 38 40 38H12C10.8954 38 10 37.1046 10 36Z"
-                  fill="black"
-                />
-              </MobileNavigationMenuIcon>
-              <MobileNavigation active={openMobileNavigationMenu}>
-                {topLink}
-                {rayLink}
-                {dlLink}
-                {webLink}
-              </MobileNavigation>
-            </MobileNavigationMenu>
-          )}
         </Header>
       </Scroller>
     </Container>
