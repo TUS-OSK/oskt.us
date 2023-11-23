@@ -46,26 +46,34 @@ export default function IndexPage({
   )
 }
 
+// export const getStaticProps: GetStaticProps<Props> = async () => {
+//   const { meta: aboutMeta } = getPageMarkdown<AboutMeta>('about')
+//   const { meta: scheduleMeta } = getPageMarkdown<ScheduleMeta>('schedule')
+//   const { meta: contactMeta } = getPageMarkdown<ContactMeta>('contact')
+//   const articles = getArticlesAll()
+//
+//   return {
+//     props: {
+//       aboutData: {
+//         meta: aboutMeta,
+//       },
+//       scheduleData: {
+//         meta: scheduleMeta,
+//       },
+//       contactData: {
+//         meta: contactMeta,
+//       },
+//       newsData: {
+//         articlesStr: JSON.stringify(articles),
+//       },
+//     },
+//   }
+// }
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { meta: aboutMeta } = getPageMarkdown<AboutMeta>('about')
-  const { meta: scheduleMeta } = getPageMarkdown<ScheduleMeta>('schedule')
-  const { meta: contactMeta } = getPageMarkdown<ContactMeta>('contact')
-  const articles = getArticlesAll()
-
   return {
-    props: {
-      aboutData: {
-        meta: aboutMeta,
-      },
-      scheduleData: {
-        meta: scheduleMeta,
-      },
-      contactData: {
-        meta: contactMeta,
-      },
-      newsData: {
-        articlesStr: JSON.stringify(articles),
-      },
-    },
+    redirect: {
+      permanent: false,
+      destination: '/ridaisai/2023',
+    }
   }
 }
