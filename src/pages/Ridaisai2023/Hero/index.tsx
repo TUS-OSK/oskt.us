@@ -71,7 +71,7 @@ export default function Hero() {
       <HeroIcon>
         <OSKIcon />
       </HeroIcon>
-      <HeroText>２０２１年度 理大祭 特設ページ</HeroText>
+      <HeroText>２０２３年度 理大祭 特設ページ</HeroText>
 
       <ScrollGuide>
         <ScrollIconWrapper>

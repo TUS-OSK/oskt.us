@@ -10,7 +10,7 @@ import Kyopro from 'src/pages/Ridaisai2023/Kyopro'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
 import Cg from './Cg'
 import HackersCafe from './HackersCafe'
-import Hero, { heroSizeCss } from './Hero'
+import Hero from './Hero'
 import Raytracing from './Raytracing'
 import useTopLogo from './useTopLogo'
 
@@ -121,18 +121,6 @@ const LogoWrapper = styled.a<{ open: boolean }>`
         `}
 `
 
-const DesktopNavigation = styled.div`
-  position: sticky;
-  top: 0;
-  width: 160px;
-  padding-top: ${DESKTOP_HEADER_HEIGHT}px;
-  box-sizing: border-box;
-  display: grid;
-  justify-content: center;
-  align-content: start;
-  gap: 40px;
-  ${heroSizeCss};
-`
 
 const MainContents = styled.div`
   flex: 1;
@@ -144,84 +132,10 @@ const MainContents = styled.div`
   }
 `
 
-const AsideContents = styled.div``
 
 const Body = styled.div`
   position: relative;
   display: flex;
   background-color: white;
   align-items: center;
-`
-
-const SectionWrapper = styled.div<{ backgroundColor: string; active: boolean }>`
-  transition: 0.2s background-color ease;
-  background-color: ${({ backgroundColor, active }) => (active ? backgroundColor : '#FFF')};
-
-  padding: 80px 0;
-  ${MEDIA_QUERY_MOBILE} {
-    padding: 40px 0;
-  }
-`
-
-const SectionContentsAligner = styled.div`
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  flex-wrap: wrap;
-`
-
-const MobileNavigationMenu = styled.div`
-  position: relative;
-  z-index: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-
-  :hover {
-    cursor: pointer;
-  }
-`
-
-const MobileNavigationMenuIcon = styled.svg<{ active: boolean }>`
-  width: 52px;
-  height: 52px;
-
-  transform: translateY(0);
-  visibility: visible;
-  transition: 0.2s all;
-  opacity: 1;
-  ${(p) =>
-    p.active &&
-    css`
-      transform: translateY(-${MOBILE_HEADER_HEIGHT}px);
-      visibility: hidden;
-      opacity: 0;
-    `}
-`
-
-const MobileNavigation = styled.div<{ active: boolean }>`
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  width: max-content;
-  background-color: rgba(255, 255, 255, 0.8);
-  display: grid;
-  gap: 24px;
-  padding: 16px 8px 16px 16px;
-  border-radius: 8px;
-
-  transform: translateY(${MOBILE_HEADER_HEIGHT}px);
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.2s all;
-  ${(p) =>
-    p.active &&
-    css`
-      transform: translateY(0);
-      visibility: visible;
-      opacity: 1;
-    `}
 `
