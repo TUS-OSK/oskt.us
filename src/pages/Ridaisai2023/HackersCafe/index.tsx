@@ -1,7 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
-import { keyframes } from '@emotion/react'
-import { css } from '@emotion/react'
 
 export default function HackersCafe() {
   // <br />

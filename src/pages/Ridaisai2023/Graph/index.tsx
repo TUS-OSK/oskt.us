@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import React, { PureComponent } from 'react'
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import React from 'react'
+// import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 const dummyData = [
   {
