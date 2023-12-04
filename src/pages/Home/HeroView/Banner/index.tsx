@@ -3,13 +3,6 @@ import { BOUNCE, CUBIC_OUT, SWIFT } from 'src/utils/animations'
 import { fade, flip, pic } from './animations'
 import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
 
-const Center = styled.div`
-  width: 100%;
-  height: 50%;
-  min-height: 280px;
-  text-align: center;
-`
-
 export default function TopBanner() {
   return (
     <Banner>
