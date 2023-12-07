@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "初めての記事",
+      "author": "pres1dent",
+      "content" : "hello!"
+    },
+    {
+      "id": 2,
+      "title": "２つ目の記事だお",
+      "author": "peach2587",
+      "content" : "yahho!"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+# やることリスト
+# json-serverでとりあえずきれいな見た目にする
+- タイトル
+- アイコン
+- 日付
+- ヘッダー画像
+- 本文
+# APIを整備する
+- Paths(ids)
+- blogById
+  - Title
+  - Icon
+  - Date
+  - HeaderPhoto
+  - body
+# githubに組み込む
+(dynamodb に手動入稿)
+# portal作成(重い)
+ブログ記事をかけるようになる
