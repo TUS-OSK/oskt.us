@@ -21,7 +21,7 @@ oskt.us（公式HP）の開発や部の公式Discordのbotの開発をしてい�
 ### 競プロ班
 AtCoderの感想戦とICPCの出場をメインに活動しています。
 
-### CGCGCG班
+### CG班
 Unity及びBlenderを用いての活動を行なっています。講義・ゼミ形式の活動です。
 
 ### 低レイヤー班
