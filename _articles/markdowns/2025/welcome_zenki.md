@@ -1,8 +1,8 @@
 ---
 title: '新入部員を募集します'
-date: '2025-05-08'
+date: '2025-7-27'
 caption: '新入部員募集ページを公開しました'
-private: true
+private: false
 ---
 
 ## 新入部員募集概要
@@ -21,7 +21,7 @@ oskt.us（公式HP）の開発や部の公式Discordのbotの開発をしてい�
 ### 競プロ班
 AtCoderの感想戦とICPCの出場をメインに活動しています。
 
-### CG班
+### CGCGCG班
 Unity及びBlenderを用いての活動を行なっています。講義・ゼミ形式の活動です。
 
 ### 低レイヤー班
