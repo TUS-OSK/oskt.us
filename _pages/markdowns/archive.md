@@ -13,6 +13,9 @@ title: 'アーカイブ'
 - [コンタクト](/contact)
 - [FAQ](/faq)
 
+## 2026 年度
+- [入部・見学](/articles/2026/welcome_zenki)
+
 ## 2023 年度
 
 - [前期新歓](/articles/2023/welcome-sp)
