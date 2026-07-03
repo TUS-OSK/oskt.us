@@ -33,14 +33,15 @@ const Top = styled.div`
   overflow: hidden;
   display: flex;
   flex-flow: column;
-  padding: ${BALOON_HEIGHT + BALOON_MARGIN}px 24px;
+  padding: ${BALOON_MARGIN}px 24px;
   box-sizing: border-box;
 `
 
 const BaloonWrapper = styled.div`
-  position: absolute;
-  top: ${BALOON_MARGIN}px;
-  right: ${BALOON_MARGIN}px;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
   animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND + 0.2}s 1 normal both running;
 `
 
