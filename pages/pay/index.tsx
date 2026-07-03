@@ -218,7 +218,7 @@ export default function PayPage() {
       <MainLayout>
         <Container>
           <Title>部費のお支払い</Title>
-          <Subtitle>¥1,000 / セメスター</Subtitle>
+          <Subtitle>¥1,000 / 前期（4月〜9月）または後期（10月〜3月）</Subtitle>
 
           {authLoading ? (
             <LoadingMsg>Discordアカウントを確認中...</LoadingMsg>
