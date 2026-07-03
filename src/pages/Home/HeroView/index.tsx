@@ -2,7 +2,7 @@ import Menu from 'src/components/Menu'
 import { SWIFT } from 'src/utils/animations'
 import styled from '@emotion/styled'
 import { slideArrow, slideMenu, T_AROUND, T_SLIDE } from './animations'
-import Baloon, { BALOON_HEIGHT } from './Baloon'
+import Baloon from './Baloon'
 import Banner from './Banner'
 
 export default function HeroView() {
