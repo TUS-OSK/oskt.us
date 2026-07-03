@@ -4,14 +4,17 @@ import MainLayout from 'src/components/MainLayout'
 import styled from '@emotion/styled'
 
 const DISCORD_CLIENT_ID = '1090498074012553266'
+const DISCORD_GUILD_ID = '1088362165347549247'
 const DISCORD_REDIRECT_URI = 'https://oskt.us/pay'
+const DISCORD_INVITE = 'https://discord.gg/J8M4XF9pjT'
 const CHECKOUT_API = 'https://lzezd40iu3.execute-api.ap-northeast-1.amazonaws.com/checkout'
 
-type UserType = 'kengaku' | 'shinnyubu' | 'kizon'
+type UserType = 'shinnyubu' | 'kizon'
 
 interface DiscordUser {
   discord_id: string
   global_name: string
+  in_guild: boolean
 }
 
 const generateVerifier = (): string => {
@@ -33,7 +36,6 @@ export default function PayPage() {
   const [authLoading, setAuthLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Discord OAuth2 PKCEコールバック処理
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const code = params.get('code')
@@ -50,7 +52,7 @@ export default function PayPage() {
 
     setAuthLoading(true)
     ;(async () => {
-      // ブラウザからDiscordに直接トークン交換（PKCE: client_secretが不要）
+      // トークン交換
       const tokenRes = await fetch('https://discord.com/api/v10/oauth2/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -62,25 +64,29 @@ export default function PayPage() {
           code_verifier: verifier,
         }).toString(),
       })
-
       if (!tokenRes.ok) {
-        const err = await tokenRes.text()
-        console.error('token exchange error', err)
         setError('Discordログインに失敗しました。もう一度お試しください。')
         setAuthLoading(false)
         return
       }
-
       const token = await tokenRes.json()
 
+      // ユーザー情報
       const userRes = await fetch('https://discord.com/api/v10/users/@me', {
         headers: { Authorization: `Bearer ${token.access_token}` },
       })
       const user = await userRes.json()
 
+      // サーバー参加チェック
+      const memberRes = await fetch(
+        `https://discord.com/api/v10/users/@me/guilds/${DISCORD_GUILD_ID}/member`,
+        { headers: { Authorization: `Bearer ${token.access_token}` } }
+      )
+
       setDiscordUser({
         discord_id: user.id,
         global_name: user.global_name || user.username,
+        in_guild: memberRes.ok,
       })
       setAuthLoading(false)
     })().catch(e => {
@@ -99,7 +105,7 @@ export default function PayPage() {
     url.searchParams.set('client_id', DISCORD_CLIENT_ID)
     url.searchParams.set('redirect_uri', DISCORD_REDIRECT_URI)
     url.searchParams.set('response_type', 'code')
-    url.searchParams.set('scope', 'identify')
+    url.searchParams.set('scope', 'identify guilds.members.read')
     url.searchParams.set('code_challenge', challenge)
     url.searchParams.set('code_challenge_method', 'S256')
     window.location.href = url.toString()
@@ -150,6 +156,24 @@ export default function PayPage() {
               </DiscordButton>
               {error && <ErrorMsg>{error}</ErrorMsg>}
             </LoginSection>
+          ) : !discordUser.in_guild ? (
+            <NotInGuild>
+              <NotInGuildIcon>⚠️</NotInGuildIcon>
+              <NotInGuildTitle>まずDiscordサーバーに参加してください</NotInGuildTitle>
+              <NotInGuildDesc>
+                部費の支払いはサーバー参加後に行えます。<br />
+                参加後、このページに戻ってもう一度ログインしてください。
+              </NotInGuildDesc>
+              <InviteButton href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer">
+                <DiscordIcon viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </DiscordIcon>
+                Discordサーバーに参加する
+              </InviteButton>
+              <RetryLink type="button" onClick={() => setDiscordUser(null)}>
+                参加済みの場合は再度ログイン
+              </RetryLink>
+            </NotInGuild>
           ) : (
             <Form onSubmit={handleSubmit}>
               <UserBadge>
@@ -162,7 +186,6 @@ export default function PayPage() {
                 <Label>あなたの状況</Label>
                 <RadioGroup>
                   {([
-                    ['kengaku', '見学中（まだ部員でない）'],
                     ['shinnyubu', '新入部員（今学期から入部）'],
                     ['kizon', '既存部員（更新）'],
                   ] as [UserType, string][]).map(([v, label]) => (
@@ -230,7 +253,39 @@ const DiscordButton = styled.button`
   cursor: pointer;
   &:hover { background: #4752c4; }
 `
-const DiscordIcon = styled.svg`width: 22px; height: 22px;`
+const DiscordIcon = styled.svg`width: 22px; height: 22px; flex-shrink: 0;`
+const NotInGuild = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 0;
+  text-align: center;
+`
+const NotInGuildIcon = styled.div`font-size: 2.4rem;`
+const NotInGuildTitle = styled.h2`font-size: 1.2rem; font-weight: bold;`
+const NotInGuildDesc = styled.p`color: #555; line-height: 1.7;`
+const InviteButton = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #5865F2;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  &:hover { background: #4752c4; }
+`
+const RetryLink = styled.button`
+  background: none;
+  border: none;
+  color: #5865F2;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+`
 const UserBadge = styled.div`
   display: flex;
   align-items: center;
@@ -239,7 +294,6 @@ const UserBadge = styled.div`
   background: #f0fdf4;
   border: 1px solid #86efac;
   border-radius: 8px;
-  margin-bottom: 8px;
 `
 const BadgeCheck = styled.span`color: #16a34a; font-weight: bold;`
 const BadgeName = styled.span`font-weight: bold; flex: 1;`
