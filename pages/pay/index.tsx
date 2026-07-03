@@ -5,7 +5,6 @@ import styled from '@emotion/styled'
 
 const DISCORD_CLIENT_ID = '1090498074012553266'
 const DISCORD_REDIRECT_URI = 'https://oskt.us/pay'
-const DISCORD_AUTH_API = 'https://lzezd40iu3.execute-api.ap-northeast-1.amazonaws.com/discord-auth'
 const CHECKOUT_API = 'https://lzezd40iu3.execute-api.ap-northeast-1.amazonaws.com/checkout'
 
 type UserType = 'kengaku' | 'shinnyubu' | 'kizon'
@@ -15,6 +14,18 @@ interface DiscordUser {
   global_name: string
 }
 
+const generateVerifier = (): string => {
+  const buf = new Uint8Array(32)
+  crypto.getRandomValues(buf)
+  return btoa(String.fromCharCode(...buf)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
+}
+
+const generateChallenge = async (verifier: string): Promise<string> => {
+  const data = new TextEncoder().encode(verifier)
+  const hash = await crypto.subtle.digest('SHA-256', data)
+  return btoa(String.fromCharCode(...new Uint8Array(hash))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
+}
+
 export default function PayPage() {
   const [discordUser, setDiscordUser] = useState<DiscordUser | null>(null)
   const [userType, setUserType] = useState<UserType>('shinnyubu')
@@ -22,39 +33,75 @@ export default function PayPage() {
   const [authLoading, setAuthLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Discord OAuth2 コールバック処理
+  // Discord OAuth2 PKCEコールバック処理
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const code = params.get('code')
     if (!code) return
 
-    // URLからcodeを消す（リロード対策）
+    const verifier = sessionStorage.getItem('discord_pkce_verifier')
+    sessionStorage.removeItem('discord_pkce_verifier')
     window.history.replaceState({}, '', '/pay')
 
+    if (!verifier) {
+      setError('認証セッションが失効しました。もう一度お試しください。')
+      return
+    }
+
     setAuthLoading(true)
-    fetch(DISCORD_AUTH_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code }),
-    })
-      .then(r => r.json())
-      .then(data => {
-        if (data.discord_id) {
-          setDiscordUser({ discord_id: data.discord_id, global_name: data.global_name })
-        } else {
-          setError('Discordログインに失敗しました。もう一度お試しください。')
-        }
+    ;(async () => {
+      // ブラウザからDiscordに直接トークン交換（PKCE: client_secretが不要）
+      const tokenRes = await fetch('https://discord.com/api/v10/oauth2/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          client_id: DISCORD_CLIENT_ID,
+          grant_type: 'authorization_code',
+          code,
+          redirect_uri: DISCORD_REDIRECT_URI,
+          code_verifier: verifier,
+        }).toString(),
       })
-      .catch(() => setError('通信エラーが発生しました'))
-      .finally(() => setAuthLoading(false))
+
+      if (!tokenRes.ok) {
+        const err = await tokenRes.text()
+        console.error('token exchange error', err)
+        setError('Discordログインに失敗しました。もう一度お試しください。')
+        setAuthLoading(false)
+        return
+      }
+
+      const token = await tokenRes.json()
+
+      const userRes = await fetch('https://discord.com/api/v10/users/@me', {
+        headers: { Authorization: `Bearer ${token.access_token}` },
+      })
+      const user = await userRes.json()
+
+      setDiscordUser({
+        discord_id: user.id,
+        global_name: user.global_name || user.username,
+      })
+      setAuthLoading(false)
+    })().catch(e => {
+      console.error(e)
+      setError('通信エラーが発生しました')
+      setAuthLoading(false)
+    })
   }, [])
 
-  const handleDiscordLogin = () => {
+  const handleDiscordLogin = async () => {
+    const verifier = generateVerifier()
+    const challenge = await generateChallenge(verifier)
+    sessionStorage.setItem('discord_pkce_verifier', verifier)
+
     const url = new URL('https://discord.com/oauth2/authorize')
     url.searchParams.set('client_id', DISCORD_CLIENT_ID)
     url.searchParams.set('redirect_uri', DISCORD_REDIRECT_URI)
     url.searchParams.set('response_type', 'code')
     url.searchParams.set('scope', 'identify')
+    url.searchParams.set('code_challenge', challenge)
+    url.searchParams.set('code_challenge_method', 'S256')
     window.location.href = url.toString()
   }
 
@@ -101,6 +148,7 @@ export default function PayPage() {
                 </DiscordIcon>
                 Discordでログイン
               </DiscordButton>
+              {error && <ErrorMsg>{error}</ErrorMsg>}
             </LoginSection>
           ) : (
             <Form onSubmit={handleSubmit}>
@@ -139,8 +187,6 @@ export default function PayPage() {
               </SubmitButton>
             </Form>
           )}
-
-          {!authLoading && !discordUser && error && <ErrorMsg>{error}</ErrorMsg>}
         </Container>
       </MainLayout>
     </>
