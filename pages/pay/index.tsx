@@ -147,13 +147,35 @@ export default function PayPage() {
             <LoadingMsg>Discordアカウントを確認中...</LoadingMsg>
           ) : !discordUser ? (
             <LoginSection>
-              <LoginDesc>支払いにはDiscordアカウントの確認が必要です</LoginDesc>
-              <DiscordButton type="button" onClick={handleDiscordLogin}>
-                <DiscordIcon viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
-                </DiscordIcon>
-                Discordでログイン
-              </DiscordButton>
+              <Step>
+                <StepNum>1</StepNum>
+                <StepBody>
+                  <StepLabel>Discordサーバーに参加する</StepLabel>
+                  <StepDesc>まだ参加していない場合は先にこちらから</StepDesc>
+                  <InviteButton href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer">
+                    <DiscordIcon viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                    </DiscordIcon>
+                    サーバーに参加する
+                  </InviteButton>
+                </StepBody>
+              </Step>
+
+              <StepDivider />
+
+              <Step>
+                <StepNum>2</StepNum>
+                <StepBody>
+                  <StepLabel>Discordでログインして支払いへ</StepLabel>
+                  <StepDesc>参加済みの方はこちらから</StepDesc>
+                  <DiscordButton type="button" onClick={handleDiscordLogin}>
+                    <DiscordIcon viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                    </DiscordIcon>
+                    Discordでログイン
+                  </DiscordButton>
+                </StepBody>
+              </Step>
               {error && <ErrorMsg>{error}</ErrorMsg>}
             </LoginSection>
           ) : !discordUser.in_guild ? (
@@ -234,11 +256,41 @@ const LoadingMsg = styled.p`color: #888;`
 const LoginSection = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding: 40px 0;
+  gap: 24px;
+  padding: 8px 0;
 `
-const LoginDesc = styled.p`color: #555;`
+const Step = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+`
+const StepNum = styled.div`
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #5865F2;
+  color: white;
+  font-weight: bold;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+`
+const StepBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+`
+const StepLabel = styled.div`font-weight: bold;`
+const StepDesc = styled.div`font-size: 0.85rem; color: #888;`
+const StepDivider = styled.div`
+  border-left: 2px dashed #ddd;
+  height: 16px;
+  margin-left: 13px;
+`
 const DiscordButton = styled.button`
   display: flex;
   align-items: center;
