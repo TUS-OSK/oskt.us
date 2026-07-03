@@ -1,4 +1,5 @@
 {
   "label": "入会はこちらから！",
-  "path": "/pay"
+  "path": "/pay",
+  "enabled": false
 }
