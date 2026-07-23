@@ -202,6 +202,8 @@ export default function PayPage() {
       if (data.url) {
         localStorage.removeItem(PROFILE_STORAGE_KEY)
         window.location.href = data.url
+      } else if (res.status === 409 && data.error === 'already_paid_this_semester') {
+        setError('今学期の部費はすでにお支払い済みです。')
       } else {
         setError('エラーが発生しました: ' + JSON.stringify(data))
       }
