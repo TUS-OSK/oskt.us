@@ -66,6 +66,8 @@ export default function PayPage() {
   const [loading, setLoading] = useState(false)
   const [authLoading, setAuthLoading] = useState(false)
   const [error, setError] = useState('')
+  const [alreadyPaid, setAlreadyPaid] = useState<boolean | null>(null)
+  const [updateSuccess, setUpdateSuccess] = useState(false)
 
   // localStorage から復元
   useEffect(() => {
@@ -131,6 +133,21 @@ export default function PayPage() {
       setAuthLoading(false)
     })
   }, [])
+
+  // ログイン確定後、フォームを出す前に「今学期は払い済みか」を確認する。
+  // 払い済みなら決済ボタンではなく情報更新ボタンに切り替えるため、フォーム表示前に判定する。
+  useEffect(() => {
+    if (!discordUser || !discordUser.in_guild) return
+    setAlreadyPaid(null)
+    fetch(CHECKOUT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ discord_id: discordUser.discord_id, check_only: true }),
+    })
+      .then(res => res.json())
+      .then(data => setAlreadyPaid(!!data.already_paid))
+      .catch(() => setAlreadyPaid(false))
+  }, [discordUser])
 
   const set = (key: keyof Profile) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const v = e.target.value as never
@@ -203,7 +220,15 @@ export default function PayPage() {
         localStorage.removeItem(PROFILE_STORAGE_KEY)
         window.location.href = data.url
       } else if (res.status === 409 && data.error === 'already_paid_this_semester') {
-        setError('今学期の部費はすでにお支払い済みです。')
+        if (alreadyPaid) {
+          // 事前チェックの時点で払い済みと分かっていた＝最初から情報更新のみが目的だったケース。
+          // 409はプロフィール保存が完了した後に返るエラーなので、ここでは失敗ではなく成功として扱う。
+          localStorage.removeItem(PROFILE_STORAGE_KEY)
+          setUpdateSuccess(true)
+        } else {
+          // 事前チェック後、別タブ等で支払いが完了した等のレースケース
+          setError('今学期の部費はすでにお支払い済みです。会員情報は更新されました。')
+        }
       } else {
         setError('エラーが発生しました: ' + JSON.stringify(data))
       }
@@ -216,11 +241,11 @@ export default function PayPage() {
 
   return (
     <>
-      <PageHead title="部費のお支払い" />
+      <PageHead title={alreadyPaid ? '会員情報の更新' : '部費のお支払い'} />
       <MainLayout>
         <Container>
-          <Title>部費のお支払い</Title>
-          <Subtitle>¥1,000 / 半期</Subtitle>
+          <Title>{alreadyPaid ? '会員情報の更新' : '部費のお支払い'}</Title>
+          <Subtitle>{alreadyPaid ? '今学期分のお支払いは確認済みです。情報の更新のみ行えます。' : '¥1,000 / 半期'}</Subtitle>
 
           {authLoading ? (
             <LoadingMsg>Discordアカウントを確認中...</LoadingMsg>
@@ -273,6 +298,14 @@ export default function PayPage() {
                 参加済みの場合は再度ログイン
               </RetryLink>
             </NotInGuild>
+          ) : updateSuccess ? (
+            <SuccessSection>
+              <SuccessIcon>✓</SuccessIcon>
+              <SuccessTitle>会員情報を更新しました</SuccessTitle>
+              <SuccessDesc>今学期分のお支払いはすでに確認済みです。ご協力ありがとうございました。</SuccessDesc>
+            </SuccessSection>
+          ) : alreadyPaid === null ? (
+            <LoadingMsg>お支払い状況を確認中...</LoadingMsg>
           ) : (
             <Form onSubmit={handleSubmit}>
               <UserBadge>
@@ -281,19 +314,23 @@ export default function PayPage() {
                 <BadgeChange type="button" onClick={() => setDiscordUser(null)}>変更</BadgeChange>
               </UserBadge>
 
-              <SectionTitle>あなたの状況</SectionTitle>
-              <RadioGroup>
-                {([
-                  ['shinnyubu', '新入部員（今学期から入部）'],
-                  ['kizon', '既存部員（更新）'],
-                ] as [UserType, string][]).map(([v, label]) => (
-                  <RadioLabel key={v}>
-                    <input type="radio" name="userType" value={v}
-                      checked={profile.userType === v} onChange={set('userType')} />
-                    {label}
-                  </RadioLabel>
-                ))}
-              </RadioGroup>
+              {!alreadyPaid && (
+                <>
+                  <SectionTitle>あなたの状況</SectionTitle>
+                  <RadioGroup>
+                    {([
+                      ['shinnyubu', '新入部員（今学期から入部）'],
+                      ['kizon', '既存部員（更新）'],
+                    ] as [UserType, string][]).map(([v, label]) => (
+                      <RadioLabel key={v}>
+                        <input type="radio" name="userType" value={v}
+                          checked={profile.userType === v} onChange={set('userType')} />
+                        {label}
+                      </RadioLabel>
+                    ))}
+                  </RadioGroup>
+                </>
+              )}
 
               <SectionTitle>会員情報</SectionTitle>
               <FieldNote>入部手続きに使用します。毎学期更新してください。</FieldNote>
@@ -386,7 +423,7 @@ export default function PayPage() {
               {error && <ErrorMsg>{error}</ErrorMsg>}
 
               <SubmitButton type="submit" disabled={loading}>
-                {loading ? '処理中...' : 'お支払いへ進む →'}
+                {loading ? '処理中...' : alreadyPaid ? '情報を更新する' : 'お支払いへ進む →'}
               </SubmitButton>
             </Form>
           )}
@@ -429,6 +466,17 @@ const NotInGuild = styled.div`
 const NotInGuildIcon = styled.div`font-size: 2.4rem;`
 const NotInGuildTitle = styled.h2`font-size: 1.2rem; font-weight: bold;`
 const NotInGuildDesc = styled.p`color: #555; line-height: 1.7;`
+const SuccessSection = styled.div`
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 48px 0; text-align: center;
+`
+const SuccessIcon = styled.div`
+  width: 48px; height: 48px; border-radius: 50%; background: #16a34a;
+  color: white; font-size: 1.6rem; font-weight: bold;
+  display: flex; align-items: center; justify-content: center;
+`
+const SuccessTitle = styled.h2`font-size: 1.2rem; font-weight: bold;`
+const SuccessDesc = styled.p`color: #555; line-height: 1.7;`
 const InviteButton = styled.a`
   display: flex; align-items: center; gap: 10px;
   background: #5865F2; color: white; padding: 14px 24px;
