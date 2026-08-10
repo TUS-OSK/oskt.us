@@ -145,7 +145,17 @@ export default function PayPage() {
       body: JSON.stringify({ discord_id: discordUser.discord_id, check_only: true }),
     })
       .then(res => res.json())
-      .then(data => setAlreadyPaid(!!data.already_paid))
+      .then(data => {
+        setAlreadyPaid(!!data.already_paid)
+        // DB側の登録済みプロフィールをSSOTとして反映する（localStorageは端末ローカルの
+        // 一時キャッシュなので、値がある項目はDB側を優先して上書きする）
+        if (data.profile) {
+          setProfile(p => ({
+            ...p,
+            ...Object.fromEntries(Object.entries(data.profile).filter(([, v]) => v)),
+          }))
+        }
+      })
       .catch(() => setAlreadyPaid(false))
   }, [discordUser])
 
