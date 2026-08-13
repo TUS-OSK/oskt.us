@@ -332,10 +332,14 @@ export default function PayPage() {
               {!alreadyPaid && (
                 <>
                   <SectionTitle>あなたの状況</SectionTitle>
+                  <FieldNote>
+                    今回が初めての部費支払いなら「新入部員」、以前の学期にも部費を払ったことがあれば「既存部員」を選んでください。
+                    入部人数の記録に使うだけで、選択を間違えても部員ロールの付与や手続きには影響しません。
+                  </FieldNote>
                   <RadioGroup>
                     {([
-                      ['shinnyubu', '新入部員（今学期から入部）'],
-                      ['kizon', '既存部員（更新）'],
+                      ['shinnyubu', '新入部員（今学期が初めての部費支払い）'],
+                      ['kizon', '既存部員（以前の学期にも支払い済み）'],
                     ] as [UserType, string][]).map(([v, label]) => (
                       <RadioLabel key={v}>
                         <input type="radio" name="userType" value={v}
