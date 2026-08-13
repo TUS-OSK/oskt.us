@@ -11,7 +11,7 @@ const CHECKOUT_API = 'https://lzezd40iu3.execute-api.ap-northeast-1.amazonaws.co
 const PROFILE_STORAGE_KEY = 'osk_pay_profile'
 
 type UserType = 'shinnyubu' | 'kizon'
-type Affiliation = 'internal' | 'external'
+type Affiliation = 'tus_student' | 'tus_alumni' | 'external_student' | 'external_worker'
 
 interface DiscordUser {
   discord_id: string
@@ -44,9 +44,12 @@ const GRADE_OPTIONS = [
 const defaultProfile = (): Profile => ({
   userType: 'shinnyubu',
   name: '', furigana: '', phone: '', birthdate: '', gender: '',
-  email: '', affiliation: 'internal',
+  email: '', affiliation: 'tus_student',
   student_id: '', university: '', faculty: '', department: '', grade: '',
 })
+
+// 学部・学科・学年は「現在在学中」の人にのみ意味がある項目
+const isCurrentlyEnrolled = (a: Affiliation) => a === 'tus_student' || a === 'external_student'
 
 const generateVerifier = (): string => {
   const buf = new Uint8Array(32)
@@ -189,11 +192,13 @@ export default function PayPage() {
     if (!profile.birthdate) return '生年月日を入力してください'
     if (!profile.gender) return '性別を選択してください'
     if (!profile.email) return 'メールアドレスを入力してください'
-    if (profile.affiliation === 'internal' && !profile.student_id) return '学籍番号を入力してください'
-    if (profile.affiliation === 'external' && !profile.university) return '大学名を入力してください'
-    if (!profile.faculty) return '学部を入力してください'
-    if (!profile.department) return '学科・専攻を入力してください'
-    if (!profile.grade) return '学年を選択してください'
+    if (profile.affiliation === 'tus_student' && !profile.student_id) return '学籍番号を入力してください'
+    if (profile.affiliation === 'external_student' && !profile.university) return '大学名を入力してください'
+    if (isCurrentlyEnrolled(profile.affiliation)) {
+      if (!profile.faculty) return '学部を入力してください'
+      if (!profile.department) return '学科・専攻を入力してください'
+      if (!profile.grade) return '学年を選択してください'
+    }
     return ''
   }
 
@@ -218,11 +223,11 @@ export default function PayPage() {
           birthdate: profile.birthdate,
           gender: profile.gender,
           affiliation: profile.affiliation,
-          student_id: profile.affiliation === 'internal' ? profile.student_id : '',
-          university: profile.affiliation === 'external' ? profile.university : '',
-          faculty: profile.faculty,
-          department: profile.department,
-          grade: profile.grade,
+          student_id: profile.affiliation === 'tus_student' ? profile.student_id : '',
+          university: profile.affiliation === 'external_student' ? profile.university : '',
+          faculty: isCurrentlyEnrolled(profile.affiliation) ? profile.faculty : '',
+          department: isCurrentlyEnrolled(profile.affiliation) ? profile.department : '',
+          grade: isCurrentlyEnrolled(profile.affiliation) ? profile.grade : '',
         }),
       })
       const data = await res.json()
@@ -255,7 +260,7 @@ export default function PayPage() {
       <MainLayout>
         <Container>
           <Title>{alreadyPaid ? '会員情報の更新' : '部費のお支払い'}</Title>
-          <Subtitle>{alreadyPaid ? '今学期分のお支払いは確認済みです。情報の更新のみ行えます。' : '¥1,000 / 半期'}</Subtitle>
+          <Subtitle>{alreadyPaid ? '今学期分のお支払いは確認済みです。情報の更新のみ行えます。' : '¥1,000 / 半期（OB/OGの方は¥1,000以上の任意金額）'}</Subtitle>
 
           {authLoading ? (
             <LoadingMsg>Discordアカウントを確認中...</LoadingMsg>
@@ -387,53 +392,72 @@ export default function PayPage() {
                 <Label>所属 <Req>*</Req></Label>
                 <RadioGroup>
                   <RadioLabel>
-                    <input type="radio" name="affiliation" value="internal"
-                      checked={profile.affiliation === 'internal'} onChange={set('affiliation')} />
-                    学内（東京理科大学）
+                    <input type="radio" name="affiliation" value="tus_student"
+                      checked={profile.affiliation === 'tus_student'} onChange={set('affiliation')} />
+                    東京理科大学（在学中）
                   </RadioLabel>
                   <RadioLabel>
-                    <input type="radio" name="affiliation" value="external"
-                      checked={profile.affiliation === 'external'} onChange={set('affiliation')} />
-                    学外（他大学・社会人など）
+                    <input type="radio" name="affiliation" value="tus_alumni"
+                      checked={profile.affiliation === 'tus_alumni'} onChange={set('affiliation')} />
+                    東京理科大学（卒業生・OB/OG）
+                  </RadioLabel>
+                  <RadioLabel>
+                    <input type="radio" name="affiliation" value="external_student"
+                      checked={profile.affiliation === 'external_student'} onChange={set('affiliation')} />
+                    学外（学生）
+                  </RadioLabel>
+                  <RadioLabel>
+                    <input type="radio" name="affiliation" value="external_worker"
+                      checked={profile.affiliation === 'external_worker'} onChange={set('affiliation')} />
+                    学外（社会人）
                   </RadioLabel>
                 </RadioGroup>
               </FieldGroup>
 
-              {profile.affiliation === 'internal' ? (
+              {!alreadyPaid && profile.affiliation === 'tus_alumni' && (
+                <FieldNote>OB/OGの方は次の画面で¥1,000以上の任意の金額をご入力いただけます。</FieldNote>
+              )}
+
+              {profile.affiliation === 'tus_student' && (
                 <FieldGroup>
                   <Label>学籍番号 <Req>*</Req></Label>
                   <Input value={profile.student_id} onChange={set('student_id')} placeholder="1A000000" />
                 </FieldGroup>
-              ) : (
+              )}
+              {profile.affiliation === 'external_student' && (
                 <FieldGroup>
                   <Label>大学名 <Req>*</Req></Label>
                   <Input value={profile.university} onChange={set('university')} placeholder="○○大学" />
                 </FieldGroup>
               )}
 
-              <Row>
-                <FieldGroup>
-                  <Label>学部 <Req>*</Req></Label>
-                  <Input value={profile.faculty} onChange={set('faculty')} placeholder="理学部" />
-                </FieldGroup>
-                <FieldGroup>
-                  <Label>学科 / 専攻 <Req>*</Req></Label>
-                  <Input value={profile.department} onChange={set('department')} placeholder="数学科" />
-                </FieldGroup>
-              </Row>
+              {isCurrentlyEnrolled(profile.affiliation) && (
+                <>
+                  <Row>
+                    <FieldGroup>
+                      <Label>学部 <Req>*</Req></Label>
+                      <Input value={profile.faculty} onChange={set('faculty')} placeholder="理学部" />
+                    </FieldGroup>
+                    <FieldGroup>
+                      <Label>学科 / 専攻 <Req>*</Req></Label>
+                      <Input value={profile.department} onChange={set('department')} placeholder="数学科" />
+                    </FieldGroup>
+                  </Row>
 
-              <FieldGroup>
-                <Label>学年 <Req>*</Req></Label>
-                <Select value={profile.grade} onChange={set('grade')}>
-                  <option value="">選択してください</option>
-                  {GRADE_OPTIONS.map(g => <option key={g} value={g}>{g}</option>)}
-                </Select>
-              </FieldGroup>
+                  <FieldGroup>
+                    <Label>学年 <Req>*</Req></Label>
+                    <Select value={profile.grade} onChange={set('grade')}>
+                      <option value="">選択してください</option>
+                      {GRADE_OPTIONS.map(g => <option key={g} value={g}>{g}</option>)}
+                    </Select>
+                  </FieldGroup>
+                </>
+              )}
 
               {error && <ErrorMsg>{error}</ErrorMsg>}
 
               <SubmitButton type="submit" disabled={loading}>
-                {loading ? '処理中...' : alreadyPaid ? '情報を更新する' : 'お支払いへ進む →'}
+                {loading ? '処理中...' : alreadyPaid ? '情報を更新する' : profile.affiliation === 'tus_alumni' ? 'お支払い金額の入力へ進む →' : 'お支払いへ進む →'}
               </SubmitButton>
             </Form>
           )}
