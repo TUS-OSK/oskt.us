@@ -1,8 +1,8 @@
 ---
 title: '新入部員を募集します'
-date: '2025-05-08'
+date: '2025-07-28'
 caption: '新入部員募集ページを公開しました'
-private: true
+private: false
 ---
 
 ## 新入部員募集概要
