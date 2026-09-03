@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -23,8 +25,12 @@ jobs:
       - name: Add nojekyll
         run: touch ./out/.nojekyll
 
+        # PRプレビューと同じ gh-pages ブランチを共有するため、本番デプロイの掃除で
+        # pr-preview/ 配下を消さないよう clean-exclude で除外する（peaceiris から
+        # 移行したのはこの除外指定ができるため。それ以外の挙動は従来と同じ）。
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          branch: gh-pages
+          folder: out
+          clean-exclude: pr-preview/

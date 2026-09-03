@@ -1,0 +1,48 @@
+name: PR Preview
+
+# PRを開く/更新するたびに、そのPRの内容でビルドしたサイトを
+# https://oskt.us/pr-preview/pr-<番号>/ に公開し、URLをPRにコメントする。
+# PRを閉じると自動で削除される。本番（ルート配信）には一切影響しない。
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+# 同じPRで連続pushされた場合、古いビルドを打ち切って最新だけを反映する
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # gh-pagesへの書き込み
+      pull-requests: write   # プレビューURLのコメント投稿
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install packages
+        if: github.event.action != 'closed'
+        run: yarn install
+
+      - name: Build
+        if: github.event.action != 'closed'
+        env:
+          # サブディレクトリ配信になるので、アセットと内部リンクのパスを合わせる
+          # （未設定だと /_next/... を見に行って本番のJS/CSSを拾い、表示が壊れる）
+          PREVIEW_BASE_PATH: /pr-preview/pr-${{ github.event.number }}
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
+          yarn build
+
+      - name: Add nojekyll
+        if: github.event.action != 'closed'
+        run: touch ./out/.nojekyll
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./out
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
