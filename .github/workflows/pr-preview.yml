@@ -49,4 +49,4 @@ jobs:
           # 既定だと <org>.github.io/oskt.us/... がコメントされるが、そのURLでは
           # アセットの絶対パス（/_next/...）が解決できず見た目が崩れる。
           # カスタムドメイン側のURLを案内する。
-          custom-url: oskt.us
+          pages-base-url: oskt.us
