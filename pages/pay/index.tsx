@@ -277,7 +277,7 @@ export default function PayPage() {
                     </DiscordIcon>
                     サーバーに参加する
                   </InviteButton>
-                  <VisitNote>👀 見学だけしたい方もこちらから！</VisitNote>
+                  <VisitNote>見学だけしたい方もこちらから！</VisitNote>
                 </StepBody>
               </Step>
               <StepDivider />
