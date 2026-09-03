@@ -277,6 +277,10 @@ export default function PayPage() {
                     </DiscordIcon>
                     サーバーに参加する
                   </InviteButton>
+                  <VisitNote>
+                    👀 見学だけしたい方もこちらから参加してください！自動で「見学」ロールが付与されます。<br />
+                    神楽坂キャンパス2号館5階2507（部室）に直接来ていただいても大丈夫ですが、常に部室を使っているとは限らないので、来る前にDiscordかTwitterでご一報いただけると確実です。役員が部室にいて誰でも質問・雑談OKな「OSKhour」という時間帯もあります（開催日時は学期ごとに変わります）。
+                  </VisitNote>
                 </StepBody>
               </Step>
               <StepDivider />
@@ -490,6 +494,10 @@ const StepBody = styled.div`display: flex; flex-direction: column; gap: 6px; fle
 const StepLabel = styled.div`font-weight: bold;`
 const StepDesc = styled.div`font-size: 0.85rem; color: #888;`
 const StepDivider = styled.div`border-left: 2px dashed #ddd; height: 16px; margin-left: 13px;`
+const VisitNote = styled.p`
+  font-size: 0.82rem; color: #666; line-height: 1.6; margin-top: 4px;
+  background: #f7f7f9; border-radius: 6px; padding: 10px 12px;
+`
 const DiscordButton = styled.button`
   display: flex; align-items: center; gap: 10px;
   background: #5865F2; color: white; border: none;
