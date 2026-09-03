@@ -277,10 +277,7 @@ export default function PayPage() {
                     </DiscordIcon>
                     サーバーに参加する
                   </InviteButton>
-                  <VisitNote>
-                    👀 見学だけしたい方もこちらから参加してください！自動で「見学」ロールが付与されます。<br />
-                    神楽坂キャンパス2号館5階2507（部室）に直接来ていただいても大丈夫ですが、常に部室を使っているとは限らないので、来る前にDiscordかTwitterでご一報いただけると確実です。役員が部室にいて誰でも質問・雑談OKな「OSKhour」という時間帯もあります（開催日時は学期ごとに変わります）。
-                  </VisitNote>
+                  <VisitNote>👀 見学だけしたい方もこちらから！</VisitNote>
                 </StepBody>
               </Step>
               <StepDivider />
