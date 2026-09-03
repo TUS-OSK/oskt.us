@@ -1,0 +1,54 @@
+name: Close stale site-edit PRs
+
+# Discord上の秘書ちゃん経由で作られたコンテンツ編集PR（site-edit ラベル付き）が
+# レビューされないまま溜まり続けるのを防ぐため、放置されたものを自動でクローズする。
+#
+# 対象を site-edit ラベルの付いたPRだけに厳密に絞っている:
+#   - only-pr-labels: site-edit  … このラベルが付いたPRのみ処理する
+#   - days-before-issue-stale/close: -1 … issueには一切触れない
+# 通常の開発PR・issueには影響しない。
+
+on:
+  schedule:
+    # 毎日 03:00 UTC（= 12:00 JST）
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  issues: write # actions/stale がPRへのコメント投稿にissues APIを使うため必要
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # --- 対象の絞り込み（ここが緩むと通常のPR/issueまで閉じてしまう） ---
+          only-pr-labels: site-edit
+
+          # --- PR: 7日でstale、さらに7日でクローズ ---
+          days-before-pr-stale: 7
+          days-before-pr-close: 7
+          stale-pr-label: stale
+          stale-pr-message: >
+            このPRは7日間更新がないため stale としてマークしました。
+            まだ必要な場合はコメントするか更新してください。
+            さらに7日間動きがない場合は自動でクローズされます
+            （内容が失われるわけではないので、必要になったら再度依頼してください）。
+          close-pr-message: >
+            14日間動きがなかったため自動でクローズしました。
+            再度必要になった場合は、Discordで秘書ちゃんにもう一度依頼してください。
+
+          # --- issueには一切触れない（-1 で無効化） ---
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+
+          # 更新のたびにstaleラベルを外して数え直す
+          remove-stale-when-updated: true
+          # 下書き中のPRは対象外
+          exempt-draft-pr: true
+          # 1回の実行で処理する上限（安全弁）
+          operations-per-run: 60
