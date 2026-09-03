@@ -35,9 +35,8 @@ jobs:
           export NODE_OPTIONS=--openssl-legacy-provider
           yarn build
 
-      - name: Add nojekyll
-        if: github.event.action != 'closed'
-        run: touch ./out/.nojekyll
+        # 本番デプロイがgh-pagesのルートに .nojekyll を置いており、それがブランチ全体に
+        # 効くのでプレビュー側では作らない（作ると削除時に消し残ってPRごとに溜まる）
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
