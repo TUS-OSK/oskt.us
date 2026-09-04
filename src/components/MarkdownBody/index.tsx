@@ -37,8 +37,17 @@ function useTwitterWidgets() {
   }, [])
 }
 
+// PRプレビュー（/pr-preview/pr-<番号>/ 配下）ではbasePathが付くが、Next.js自身の
+// basePath機構はnext/link・next/image等にしか効かず、Markdown中の生HTML（絶対パスの
+// 画像src等）までは書き換えてくれない。そのため /uploads/... のような絶対パス画像が
+// プレビューでだけ404になっていた。ここで明示的にbasePathを前置する。
+// 本番（NEXT_PUBLIC_BASE_PATH未設定）では何もしない。
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const withBasePath = (htmlStr: string): string =>
+  BASE_PATH ? htmlStr.replace(/((?:src|href)=")\/(?!\/)/g, (_m, prefix) => `${prefix}${BASE_PATH}/`) : htmlStr
+
 export default function MarkdownBody({ editRequestUrl, centered = false, body }: Props) {
-  const __html = remark().use(html).processSync(body).contents
+  const __html = withBasePath(remark().use(html).processSync(body).contents as string)
   useTwitterWidgets()
 
   return (
