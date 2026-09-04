@@ -6,4 +6,10 @@ const basePath = process.env.PREVIEW_BASE_PATH || ''
 module.exports = {
   basePath,
   assetPrefix: basePath,
+  // Markdown中の生HTML（画像src等）にbasePathを反映するため、クライアント側にも
+  // 公開する（src/components/MarkdownBody/index.tsx 参照）。NEXT_PUBLIC_ 接頭辞は
+  // Next.jsがビルド時にクライアントバンドルへ静的に埋め込む対象という意味。
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 }
