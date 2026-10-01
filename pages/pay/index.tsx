@@ -260,7 +260,7 @@ export default function PayPage() {
       <MainLayout>
         <Container>
           <Title>{alreadyPaid ? '会員情報の更新' : '部費のお支払い'}</Title>
-          <Subtitle>{alreadyPaid ? '今学期分のお支払いは確認済みです。情報の更新のみ行えます。' : '¥1,000 / 半期（OB/OGの方は¥1,000以上の任意金額）'}</Subtitle>
+          <Subtitle>{alreadyPaid ? '今学期分のお支払いは確認済みです。情報の更新のみ行えます。' : '¥2,000 / 半期（OB/OGの方は¥2,000以上の任意金額）'}</Subtitle>
 
           {authLoading ? (
             <LoadingMsg>Discordアカウントを確認中...</LoadingMsg>
@@ -420,7 +420,7 @@ export default function PayPage() {
               </FieldGroup>
 
               {!alreadyPaid && profile.affiliation === 'tus_alumni' && (
-                <FieldNote>OB/OGの方は次の画面で¥1,000以上の任意の金額をご入力いただけます。</FieldNote>
+                <FieldNote>OB/OGの方は次の画面で¥2,000以上の任意の金額をご入力いただけます。</FieldNote>
               )}
 
               {profile.affiliation === 'tus_student' && (
