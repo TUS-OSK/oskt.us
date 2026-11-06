@@ -20,13 +20,3 @@ export const flip = keyframes`
     opacity: 1;
   }
 `
-
-export const pic = keyframes`
-  0% {
-    height: 80%;
-  }
-
-  100% {
-    height: 100%;
-  }
-`
