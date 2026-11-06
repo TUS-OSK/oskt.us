@@ -4,8 +4,13 @@ import { ContentType } from './api'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'
 import usePostLikeCount from './usePostLikeCount'
 import { css } from '@emotion/react'
-import Modal from 'react-modal'
+import ReactModal from 'react-modal'
+import type { ComponentType, ReactNode } from 'react'
 import FormrunForm from 'src/components/FormrunForm'
+
+// react-modal自身の型定義がReact 18+の「childrenは明示しないと使えない」変更に
+// 追従していないため、ここだけchildrenを許すComponentTypeとして扱う
+const Modal = ReactModal as unknown as ComponentType<ReactModal.Props & { children?: ReactNode }>
 
 interface Props {
   type: ContentType

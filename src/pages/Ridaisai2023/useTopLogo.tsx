@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, RefObject } from 'react'
 /**
  * ウィンドウ幅までスクロールしたら閉じるロゴを扱う
  */
-export default function useTopLogo(scrollerRef: RefObject<HTMLElement>) {
+export default function useTopLogo(scrollerRef: RefObject<HTMLElement | null>) {
   const scrollYCache = useRef<number | null>(null)
   const [openLogo, setOpenLogo] = useState(true)
 

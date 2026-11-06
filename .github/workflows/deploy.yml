@@ -13,13 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Next 11時代の古いwebpack4/5バンドルがNode17+のOpenSSL3と衝突していたため
+      # --openssl-legacy-providerが必要だった。Next 16へのアップグレードで不要になった
+      # (2026-11)。sanitize-htmlがNode>=22.12.0を要求するため明示的にNode 22へ固定する
+      # (指定しないとGitHub Actionsのランナーイメージの既定Nodeに依存してしまう)。
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Install packages
         run: yarn install
 
       - name: Build
-        run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
-          yarn build
+        run: yarn build
 
         # これがないとアンスコから始まるファイルが読み込まれない
       - name: Add nojekyll

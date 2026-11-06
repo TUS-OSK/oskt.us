@@ -37,3 +37,6 @@ package-lock.json
 
 # nvim
 .nvimlog
+
+# TypeScript incremental build cache (tsconfig.json incremental:true, Next 16以降が付与)
+*.tsbuildinfo
