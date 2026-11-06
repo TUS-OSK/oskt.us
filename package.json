@@ -29,6 +29,7 @@
     "recharts": "^2.10.1",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
+    "sanitize-html": "^2.18.1",
     "structured-clone": "^0.2.2"
   },
   "devDependencies": {
