@@ -16,11 +16,9 @@ export default function Thumbnail({ title, description, src, url }: Props) {
       <Image src={src}></Image>
       <Info>
         {url ? (
-          <Link href={url} passHref>
-            <ExternalLinkTitle target="_blank" rel="noopener">
-              {title}
-            </ExternalLinkTitle>
-          </Link>
+          <ExternalLinkTitle href={url} target="_blank" rel="noopener">
+            {title}
+          </ExternalLinkTitle>
         ) : (
           <Title>{title}</Title>
         )}
@@ -59,7 +57,7 @@ const Title = styled.div`
   ${titleCss}
 `
 
-const ExternalLinkTitle = styled.a`
+const ExternalLinkTitle = styled(Link)`
   ${titleCss}
 `
 

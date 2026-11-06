@@ -60,11 +60,9 @@ export default function Ridaisai2023() {
         </Body>
         <Footer></Footer>
         <Header>
-          <Link href="/" passHref>
-            <LogoWrapper open={openLogo}>
-              <Logo />
-            </LogoWrapper>
-          </Link>
+          <LogoWrapper href="/" open={openLogo}>
+            <Logo />
+          </LogoWrapper>
         </Header>
       </Scroller>
     </Container>
@@ -102,7 +100,7 @@ const Header = styled.div`
   }
 `
 
-const LogoWrapper = styled.a<{ open: boolean }>`
+const LogoWrapper = styled(Link)<{ open: boolean }>`
   display: flex;
   transition: all 0.2s;
   transform-origin: top center;

@@ -6,11 +6,9 @@ import { ContentType } from './api'
 export function useContentNavigation(type: 'top' | ContentType, Icon: FC) {
   const link = useMemo(
     () => (
-      <Link passHref href={`#${type}`}>
-        <NavigationIconWrapper>
-          <Icon />
-        </NavigationIconWrapper>
-      </Link>
+      <NavigationIconWrapper href={`#${type}`}>
+        <Icon />
+      </NavigationIconWrapper>
     ),
     [],
   )
@@ -20,7 +18,7 @@ export function useContentNavigation(type: 'top' | ContentType, Icon: FC) {
   return [link, anchor] as const
 }
 
-const NavigationIconWrapper = styled.a`
+const NavigationIconWrapper = styled(Link)`
   color: black;
   display: flex;
   text-decoration: none;

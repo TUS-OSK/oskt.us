@@ -14,9 +14,7 @@ export default function PayCancelPage() {
           <Message>
             お支払いはキャンセルされました。再度お支払いを行う場合は下のボタンからどうぞ。
           </Message>
-          <Link href="/pay" passHref>
-            <RetryLink>お支払いページへ戻る</RetryLink>
-          </Link>
+          <RetryLink href="/pay">お支払いページへ戻る</RetryLink>
         </Container>
       </MainLayout>
     </>
@@ -44,7 +42,7 @@ const Message = styled.p`
   line-height: 1.7;
   margin-bottom: 32px;
 `
-const RetryLink = styled.a`
+const RetryLink = styled(Link)`
   display: inline-block;
   padding: 12px 24px;
   background: #5865F2;
