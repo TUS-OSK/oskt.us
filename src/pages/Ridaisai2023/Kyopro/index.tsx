@@ -145,7 +145,11 @@ export default () => {
         </Flex>
       )
     case 'result':
-      const nextList = nextPermutation(list.Original)
+      // nextPermutationは入力が最後の順列(降順)の場合undefinedを返す。その場合は
+      // 辞書順で先頭（昇順）に巡回すると考え、ソート済み配列にフォールバックする
+      // （TS 5.9化で number[] | undefined が明示されるまで、この分岐は未処理で
+      // DisplayListがクラッシュしうる状態だった）
+      const nextList = nextPermutation(list.Original) ?? [...list.Original].sort((a, b) => a - b)
       if (JSON.stringify(nextList) === JSON.stringify(list.Current)) {
         return (
           <Flex>

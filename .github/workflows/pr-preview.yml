@@ -21,6 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # deploy.ymlと同じ理由でNode 22に固定（詳細はそちらのコメント参照）
+      - uses: actions/setup-node@v4
+        if: github.event.action != 'closed'
+        with:
+          node-version: 22
+
       - name: Install packages
         if: github.event.action != 'closed'
         run: yarn install
@@ -31,9 +37,7 @@ jobs:
           # サブディレクトリ配信になるので、アセットと内部リンクのパスを合わせる
           # （未設定だと /_next/... を見に行って本番のJS/CSSを拾い、表示が壊れる）
           PREVIEW_BASE_PATH: /pr-preview/pr-${{ github.event.number }}
-        run: |
-          export NODE_OPTIONS=--openssl-legacy-provider
-          yarn build
+        run: yarn build
 
         # 本番デプロイがgh-pagesのルートに .nojekyll を置いており、それがブランチ全体に
         # 効くのでプレビュー側では作らない（作ると削除時に消し残ってPRごとに溜まる）

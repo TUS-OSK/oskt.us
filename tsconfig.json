@@ -3,20 +3,29 @@
     "baseUrl": ".",
     "strict": true,
     "allowJs": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "target": "esnext",
-    "lib": ["dom", "ES2020"],
+    "lib": [
+      "dom",
+      "ES2020"
+    ],
     "noEmit": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "incremental": true
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

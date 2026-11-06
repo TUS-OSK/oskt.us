@@ -1,6 +1,7 @@
 import remark from 'remark'
 import styled from '@emotion/styled'
 import html from 'remark-html'
+import sanitizeHtml from 'sanitize-html'
 import { useEffect } from 'react'
 import { css } from '@emotion/react'
 
@@ -46,8 +47,34 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const withBasePath = (htmlStr: string): string =>
   BASE_PATH ? htmlStr.replace(/((?:src|href)=")\/(?!\/)/g, (_m, prefix) => `${prefix}${BASE_PATH}/`) : htmlStr
 
+// remark-html は生HTMLをそのまま通す（XSS, GHSA-9q5w-79cv-947m）。remark-html自身の
+// sanitizeオプションは生HTMLブロックを丸ごと削除してしまい、記事中で実際に使っている
+// Twitter埋め込み（blockquote+class）やGoogle Slides埋め込み（iframe）が壊れるため使えない。
+// そこで出力後のHTML文字列を sanitize-html で後処理し、<script>・on*属性・javascript:
+// スキーム等の危険な要素だけを落とす。許可リストは _pages/_articles の既存markdownを
+// 全文grepして実際に使われているタグ・属性・classから作成した（2026-11時点）。
+//
+// Twitter widgets.js は useTwitterWidgets() が動的に読み込むので、本文中の<script>を
+// 許可する必要はない（デフォルトで非許可のまま）。
+const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'iframe']),
+  allowedAttributes: {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    // class/lang/dir はTwitter埋め込み判定・fa-html5アイコン・lang-warning/lang-info
+    // ボックス・Twitter埋め込みの言語指定で実際に使われているため全タグで許可する
+    '*': ['class', 'lang', 'dir'],
+    blockquote: ['cite', 'data-lang'],
+    // iframeはGoogle Slides埋め込み専用（docs/articles内のmarkdown-guide.mdで案内している
+    // 手順）。ホスト名を絞ることで、許可リストに無いsrcは自動的に落とされる
+    iframe: ['src', 'width', 'height', 'frameborder', 'allow', 'allowfullscreen'],
+  },
+  allowedIframeHostnames: ['docs.google.com'],
+  allowedSchemes: ['http', 'https', 'mailto'],
+}
+
 export default function MarkdownBody({ editRequestUrl, centered = false, body }: Props) {
-  const __html = withBasePath(remark().use(html).processSync(body).contents as string)
+  const unsafeHtml = remark().use(html).processSync(body).contents as string
+  const __html = withBasePath(sanitizeHtml(unsafeHtml, SANITIZE_OPTIONS))
   useTwitterWidgets()
 
   return (

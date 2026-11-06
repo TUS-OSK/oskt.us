@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import BackgroundFluid from './BackgroundFluid'
 import { MEDIA_QUERY_MOBILE } from '../breakpoint/helper'

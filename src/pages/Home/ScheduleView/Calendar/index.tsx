@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from '@emotion/styled'
 import { EventCalendar } from 'src/pages/Home/ScheduleView'
 import MonthEventElement from './MonthEventElement'

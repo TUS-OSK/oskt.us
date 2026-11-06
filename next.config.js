@@ -4,6 +4,9 @@
 const basePath = process.env.PREVIEW_BASE_PATH || ''
 
 module.exports = {
+  // Next 14で`next export`コマンドが廃止され、`output: 'export'`での`next build`に
+  // 一本化された（2026-11、Next 11→16アップグレード時に追従）。
+  output: 'export',
   basePath,
   assetPrefix: basePath,
   // Markdown中の生HTML（画像src等）にbasePathを反映するため、クライアント側にも
