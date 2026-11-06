@@ -1,5 +1,6 @@
 import { PageHead } from 'src/components/Head'
 import AboutView, { AboutData } from './AboutView'
+import BansView from './BansView'
 import ContactView, { ContactData } from './ContactView'
 import HeroView from './HeroView'
 import NewsView from './NewsView'
@@ -20,6 +21,7 @@ export default function Home({ newsData, aboutData, scheduleData, contactData }:
       <PageHead />
       <HeroView></HeroView>
       <AboutView aboutData={aboutData}></AboutView>
+      <BansView></BansView>
       <ScheduleView scheduleData={scheduleData}></ScheduleView>
       <NewsView newsData={newsData}></NewsView>
       <ContactView contactData={contactData}></ContactView>

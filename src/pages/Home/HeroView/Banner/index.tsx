@@ -1,12 +1,15 @@
 import styled from '@emotion/styled'
-import { BOUNCE, CUBIC_OUT, SWIFT } from 'src/utils/animations'
-import { fade, flip, pic } from './animations'
+import { BOUNCE, SWIFT } from 'src/utils/animations'
+import { fade, flip } from './animations'
 import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
+import LifeGameBackground from './LifeGameBackground'
 
 export default function TopBanner() {
   return (
     <Banner>
-      <Image></Image>
+      <ImageWrapper>
+        <LifeGameBackground />
+      </ImageWrapper>
       <Names></Names>
     </Banner>
   )
@@ -19,17 +22,13 @@ const Banner = styled.div`
   height: 100%;
 `
 
-const Image = styled.div`
+// 写真(/images/bg.jpg)からライフゲーム背景に差し替え(2026-11、新歓向けリニューアル)。
+// 元のImageはCSSのbackground-imageだったが、canvas差し込み用にwrapperへ変更。
+// フェードインのアニメーションはそのまま踏襲する
+const ImageWrapper = styled.div`
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-image: url('/images/bg.jpg');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  animation:
-    ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running,
-    ${pic} ${T_PIC * 0.9}s ${CUBIC_OUT} ${T_AROUND}s 1 normal both running;
+  inset: 0;
+  animation: ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running;
 `
 
 function Names() {
