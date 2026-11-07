@@ -1,1 +1,0 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,44280,(o,t,i)=>{let n="/news";(window.__NEXT_P=window.__NEXT_P||[]).push([n,()=>o.r(71949)]),t.hot&&t.hot.dispose(function(){window.__NEXT_P.push([n])})}]);
