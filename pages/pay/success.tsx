@@ -15,9 +15,7 @@ export default function PaySuccessPage() {
             ご入金を確認しました。Discordのロールが自動的に付与されます。<br />
             数分経っても反映されない場合は部長または会計にお知らせください。
           </Message>
-          <Link href="/" passHref>
-            <BackLink>トップページへ戻る</BackLink>
-          </Link>
+          <BackLink href="/">トップページへ戻る</BackLink>
         </Container>
       </MainLayout>
     </>
@@ -45,7 +43,7 @@ const Message = styled.p`
   line-height: 1.7;
   margin-bottom: 32px;
 `
-const BackLink = styled.a`
+const BackLink = styled(Link)`
   display: inline-block;
   padding: 12px 24px;
   background: #5865F2;
