@@ -8,13 +8,21 @@ interface Ban {
   name: string
   caption: string
   motif: MotifType
+  // 班から実際の活動写真が届いたら、ここにパスを入れるとcanvasモチーフの代わりに
+  // その写真が使われる(photo優先)。届くまではcanvasモチーフがプレースホルダーになる
+  photo?: string
 }
 
 // _pages/markdowns/about.md の「班について」と同じ6班・同じ説明文を使う。
 // モチーフは暫定でNabitoが割り当てたもの(2026-11)。本人がこだわりたい班があれば
 // 差し替える前提で、まずは「テーマが伝わる」ことを優先した組み合わせにしている
 const BANS: Ban[] = [
-  { name: '機械学習班', caption: '機械学習・データサイエンスの手法を学び、実践します。', motif: 'ml' },
+  {
+    name: '機械学習班',
+    caption: '機械学習・データサイエンスの手法を学び、実践します。',
+    motif: 'ml',
+    photo: '/images/activity/ml-board.jpg',
+  },
   { name: '数理統計班', caption: '数学・統計学の理論と応用を探求します。', motif: 'stat' },
   { name: 'コンピュータサイエンス班', caption: '計算機科学の理論・低レイヤ技術などを学びます。', motif: 'cs' },
   { name: '競プロ班', caption: '競技プログラミングのコンテストに参加し、アルゴリズムの腕を磨きます。', motif: 'cp' },
@@ -30,7 +38,12 @@ export default function BansView() {
       <Grid>
         {BANS.map((ban) => (
           <Card key={ban.name} href={pageTo('about')}>
-            <Motif type={ban.motif} />
+            {ban.photo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <Photo src={ban.photo} alt={`${ban.name}の活動の様子`} loading="lazy" />
+            ) : (
+              <Motif type={ban.motif} />
+            )}
             <Meta>
               <Name>{ban.name}</Name>
               <Caption>{ban.caption}</Caption>
@@ -80,6 +93,14 @@ const Card = styled(StyledLink)`
   &:hover {
     transform: translateY(-3px);
   }
+`
+
+const Photo = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `
 
 const Meta = styled.div`
