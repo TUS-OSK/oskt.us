@@ -3,6 +3,7 @@ import { SWIFT } from 'src/utils/animations'
 import { StyledLink } from 'src/utils/next/elements'
 import { pageTo } from 'src/utils/urls'
 import styled from '@emotion/styled'
+import { css, Global } from '@emotion/react'
 import { rise, slideArrow, slideMenu, T_AROUND, T_SLIDE } from './animations'
 import Baloon from './Baloon'
 import Banner from './Banner'
@@ -10,6 +11,18 @@ import Banner from './Banner'
 export default function HeroView() {
   return (
     <Container>
+      {/* トップだけ黒地なので、上や左右に引っ張ったときに白地が覗かないようにする */}
+      <Global
+        styles={css`
+          html {
+            background: #0d0d12;
+            overscroll-behavior: none;
+          }
+          body {
+            background: #fff;
+          }
+        `}
+      />
       <Banner></Banner>
       <Top>
         <BaloonWrapper>
@@ -22,14 +35,14 @@ export default function HeroView() {
       <Copy>
         <University>東京理科大学</University>
         <Lead>
-          半世紀以上続く、
+          そうだ、
           <br />
-          応用数学の部活。
+          応用数学しよう。
         </Lead>
         <Teams>機械学習 / 数理統計 / コンピュータサイエンス / 競プロ / CG / Web・アプリ開発</Teams>
         <Actions>
-          <Primary href={pageTo('about')}>活動を見る</Primary>
-          <Secondary href={pageTo('contact')}>連絡する</Secondary>
+          <Primary href={pageTo('about')}>部の様子</Primary>
+          <Secondary href={pageTo('contact')}>ご連絡</Secondary>
         </Actions>
       </Copy>
       <Bottom>
@@ -103,6 +116,7 @@ const Lead = styled.p`
   font-size: clamp(24px, 3.2vw, 44px);
   line-height: 1.5;
   letter-spacing: 0.08em;
+  white-space: nowrap;
 `
 
 const Teams = styled.p`
