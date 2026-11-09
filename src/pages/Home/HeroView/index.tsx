@@ -10,25 +10,29 @@ import { rise, slideArrow, slideMenu, T_AROUND, T_SLIDE } from './animations'
 import Baloon from './Baloon'
 import Banner from './Banner'
 import GlitchWord from './GlitchWord'
-import { TEAM_INTERVAL_MS, TEAMS } from './teams'
+import { type BackgroundMode, EXTRA_MODES, TEAM_INTERVAL_MS, TEAMS } from './teams'
 
 // 背景モチーフの比較用。PRプレビューか ?bg= 付きのときだけ、巡回を止めて班を選べるUIを出す
-const pinnedFromUrl = (): number | null => {
+const pinnedFromUrl = (): { team: number; mode: BackgroundMode } | null => {
   const q = new URLSearchParams(window.location.search).get('bg')
   const i = TEAMS.findIndex((t) => t.mode === q)
-  return i >= 0 ? i : null
+  if (i >= 0) return { team: i, mode: TEAMS[i].mode }
+  const extra = EXTRA_MODES.find((m) => m.mode === q)
+  return extra ? { team: extra.team, mode: extra.mode } : null
 }
 
 export default function HeroView() {
   const [index, setIndex] = useState(0)
-  const [pinned, setPinned] = useState<number | null>(null)
+  const [pinned, setPinned] = useState<BackgroundMode | null>(null)
   const [ready, setReady] = useState(false)
   const [showPicker, setShowPicker] = useState(false)
 
   useEffect(() => {
     const p = pinnedFromUrl()
-    setPinned(p)
-    if (p !== null) setIndex(p)
+    if (p) {
+      setPinned(p.mode)
+      setIndex(p.team)
+    }
     setShowPicker(Boolean(BASE_PATH) || new URLSearchParams(window.location.search).has('bg'))
   }, [])
 
@@ -42,16 +46,16 @@ export default function HeroView() {
     return () => window.clearInterval(id)
   }, [ready, pinned])
 
-  const pin = (next: number | null) => {
-    setPinned(next)
-    if (next !== null) setIndex(next)
+  const pin = (team: number | null, mode: BackgroundMode | null) => {
+    setPinned(mode)
+    if (team !== null) setIndex(team)
     const url = new URL(window.location.href)
-    if (next === null) url.searchParams.set('bg', 'cycle')
-    else url.searchParams.set('bg', TEAMS[next].mode)
+    url.searchParams.set('bg', mode ?? 'cycle')
     window.history.replaceState(null, '', url)
   }
 
   const team = TEAMS[index]
+  const mode = pinned ?? team.mode
   return (
     <Container>
       {/* トップだけ黒地なので、上や左右に引っ張ったときに白地が覗かないようにする */}
@@ -66,7 +70,7 @@ export default function HeroView() {
           }
         `}
       />
-      <Banner mode={team.mode} onReady={() => setReady(true)}></Banner>
+      <Banner mode={mode} onReady={() => setReady(true)}></Banner>
       <Top>
         <BaloonWrapper>
           <Baloon></Baloon>
@@ -99,12 +103,17 @@ export default function HeroView() {
       </Copy>
       {showPicker && ready && (
         <Picker aria-label="背景の比較用">
-          <PickerButton type="button" aria-pressed={pinned === null} onClick={() => pin(null)}>
+          <PickerButton type="button" aria-pressed={pinned === null} onClick={() => pin(null, null)}>
             巡回
           </PickerButton>
           {TEAMS.map((t, i) => (
-            <PickerButton key={t.mode} type="button" aria-pressed={pinned === i} onClick={() => pin(i)}>
+            <PickerButton key={t.mode} type="button" aria-pressed={pinned === t.mode} onClick={() => pin(i, t.mode)}>
               {t.motif}
+            </PickerButton>
+          ))}
+          {EXTRA_MODES.map((m) => (
+            <PickerButton key={m.mode} type="button" aria-pressed={pinned === m.mode} onClick={() => pin(m.team, m.mode)}>
+              {m.motif}
             </PickerButton>
           ))}
         </Picker>

@@ -58,49 +58,53 @@ export function createLife() {
   }
 }
 
-/** 4状態のターマイト(規則 LLRR)。R: 状態の階調 G: アリの位置 */
+/**
+ * 128状態のターマイト(部員提供の規則)。1匹から正方形の領域が育ち、その中に
+ * 斜めのハイウェイと入り組んだ塊が現れる。R: 状態の階調 G: アリの位置
+ */
+export const ANT_GRID = 192
 export function createAnts() {
-  const RULE = [-1, -1, 1, 1] // 状態ごとに 左折(-1)/右折(+1)
-  const ANTS = 6
+  // 状態ごとに 左折(-1)/右折(+1)
+  // prettier-ignore
+  const RULE = [-1,1,1,1,1,1,-1,-1,-1,1,1,1,1,-1,1,-1,1,-1,1,-1,1,1,-1,1,-1,-1,1,1,-1,1,1,1,-1,-1,-1,-1,-1,-1,1,1,1,-1,1,-1,-1,1,1,-1,1,1,-1,-1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,1,1,1,1,-1,1,-1,-1,1,-1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,-1,1,1,1,-1,-1,1,1,1,-1,1,-1,1,1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,1,-1,-1]
+  const G = ANT_GRID, n = G * G
   const STEPS_PER_FRAME = 50 // 1描画あたりの歩数。模様が育つ速さ
-  const LIMIT = 36000 // この歩数(1匹あたり、約12秒分)で盤面をまっさらに戻す
-  const state = new Uint8Array(N)
-  const glow = new Float32Array(N)
-  const bytes = new Uint8Array(N * 2)
-  let ants: { x: number; y: number; d: number }[] = []
+  const LIMIT = 300000 // この歩数(約100秒分)で盤面をまっさらに戻す
+  const at = (x: number, y: number) => ((y + G) % G) * G + ((x + G) % G)
+  // 大半のマスは状態2前後で埋まる「地」になる。それより上の状態だけを明るくして模様を浮かせる
+  const tone = (v: number) => (v ? 0.1 + 0.9 * Math.min(1, Math.max(0, (v - 2) / 28)) : 0)
+  const state = new Uint8Array(n)
+  const glow = new Float32Array(n)
+  const bytes = new Uint8Array(n * 2)
+  const ant = { x: 0, y: 0, d: 0 }
   let walked = 0
   const reset = () => {
     state.fill(0)
     walked = 0
-    ants = Array.from({ length: ANTS }, () => ({
-      x: Math.floor(Math.random() * GRID),
-      y: Math.floor(Math.random() * GRID),
-      d: Math.floor(Math.random() * 4),
-    }))
+    // 盤面の(0,0)が画面中央付近に来る
+    Object.assign(ant, { x: 0, y: 0, d: 0 })
   }
   const step = () => {
-    for (const a of ants) {
-      const i = torus(a.x, a.y)
-      a.d = (a.d + RULE[state[i]] + 4) % 4
-      state[i] = (state[i] + 1) % RULE.length
-      a.x = (a.x + [0, 1, 0, -1][a.d] + GRID) % GRID
-      a.y = (a.y + [-1, 0, 1, 0][a.d] + GRID) % GRID
-    }
+    const i = at(ant.x, ant.y)
+    ant.d = (ant.d + RULE[state[i]] + 4) % 4
+    state[i] = (state[i] + 1) % RULE.length
+    ant.x = (ant.x + [0, 1, 0, -1][ant.d] + G) % G
+    ant.y = (ant.y + [-1, 0, 1, 0][ant.d] + G) % G
     if (++walked > LIMIT) reset()
   }
   reset()
-  for (let i = 0; i < 6000; i++) step() // 開いた瞬間から模様が見えるよう、少し歩かせておく
-  for (let i = 0; i < N; i++) glow[i] = state[i] / 3
+  for (let i = 0; i < 15000; i++) step() // 開いた瞬間から模様が見えるよう、少し歩かせておく
+  for (let i = 0; i < n; i++) glow[i] = tone(state[i])
   return {
     update(dt: number) {
       if (dt > 0) for (let s = 0; s < STEPS_PER_FRAME; s++) step()
       const k = 1 - Math.exp(-dt * 6)
-      for (let i = 0; i < N; i++) {
-        glow[i] += (state[i] / 3 - glow[i]) * k
+      for (let i = 0; i < n; i++) {
+        glow[i] += (tone(state[i]) - glow[i]) * k
         bytes[i * 2] = glow[i] * 255
         bytes[i * 2 + 1] = 0
       }
-      for (const a of ants) bytes[torus(a.x, a.y) * 2 + 1] = 255
+      bytes[at(ant.x, ant.y) * 2 + 1] = 255
       return bytes
     },
   }
@@ -166,12 +170,20 @@ export function createIsing() {
 
 /**
  * 周期的なパーリンノイズの曲面を、慣性付きの勾配降下法で光の粒が転がり落ちる。
- * height は曲面(シェーダで点描と等高線に使う)、update は軌跡のバッファを返す。
+ * height は曲面(シェーダで方眼と陰影に使う)。update は今フレームに描き足す線分を返し、
+ * 軌跡の残像はGPU側で decay を掛けて薄めていく。
+ *  step:   0.3秒ごとに大きく1歩進み、反復点に点を打つ(最適化の反復が見える)
+ *  smooth: 毎フレーム小さく進み、なめらかな軌跡を描く
  */
 export const GD_HEIGHT = 256
-export const GD_TRAIL = 512
+export type GdStyle = 'step' | 'smooth'
 
-export function createGradientDescent() {
+export interface GdFrame {
+  segments: number[] // [x0, y0, x1, y1, 太さ(テクスチャpx), 明るさ] の繰り返し。座標は曲面の周期単位
+  decay: number // 今フレームの残像の減衰率
+}
+
+export function createGradientDescent(style: GdStyle) {
   // 周期 period の格子でのパーリンノイズ
   const perlin = (period: number, seed: number) => {
     let s = seed
@@ -219,43 +231,48 @@ export function createGradientDescent() {
     (sample(u, v + E) - sample(u, v - E)) / (2 * E),
   ]
 
-  const T = GD_TRAIL
-  const trail = new Float32Array(T * T)
-  const bytes = new Uint8Array(T * T)
-  const spawn = () => ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, still: 0, age: 0 })
-  const balls = Array.from({ length: 18 }, spawn)
-  const splat = (x: number, y: number) => {
-    const px = Math.round((((x % 1) + 1) % 1) * T), py = Math.round((((y % 1) + 1) % 1) * T)
-    for (let dy = -1; dy <= 1; dy++)
-      for (let dx = -1; dx <= 1; dx++) {
-        const i = ((py + dy + T) % T) * T + ((px + dx + T) % T)
-        trail[i] = Math.max(trail[i], dx || dy ? 0.45 : 1)
-      }
-  }
+  const STEP_SECONDS = 0.3
+  const spawn = () => ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, still: 0, age: 0, clock: Math.random() * STEP_SECONDS })
+  const balls = Array.from({ length: style === 'step' ? 14 : 18 }, spawn)
   return {
     height,
-    update(dt: number) {
-      const frames = dt * 60
-      const decay = Math.pow(0.992, frames)
-      for (let i = 0; i < T * T; i++) trail[i] *= decay
+    update(dt: number): GdFrame {
+      const segments: number[] = []
+      if (style === 'smooth') {
+        const frames = dt * 60
+        for (let b = 0; b < balls.length; b++) {
+          const p = balls[b]
+          const [gx, gy] = grad(p.x, p.y)
+          // 慣性付き勾配降下(heavy-ball): v ← μv − η∇h
+          const mu = Math.pow(0.93, frames)
+          p.vx = p.vx * mu - 2.2e-5 * gx * frames
+          p.vy = p.vy * mu - 2.2e-5 * gy * frames
+          segments.push(p.x, p.y, p.x + p.vx, p.y + p.vy, 1.3, 1)
+          p.x += p.vx
+          p.y += p.vy
+          p.age += dt
+          p.still = Math.hypot(p.vx, p.vy) < 4e-5 ? p.still + dt : 0
+          if (p.still > 1.6 || p.age > 22) balls[b] = spawn() // 谷底に落ち着いたら別の場所から転がし直す
+        }
+        return { segments, decay: Math.pow(0.992, frames) }
+      }
       for (let b = 0; b < balls.length; b++) {
         const p = balls[b]
+        p.clock += dt
+        p.age += dt
+        if (p.clock < STEP_SECONDS) continue
+        p.clock -= STEP_SECONDS
         const [gx, gy] = grad(p.x, p.y)
-        // 慣性付き勾配降下(heavy-ball): v ← μv − η∇h
-        const mu = Math.pow(0.93, frames)
-        p.vx = p.vx * mu - 2.2e-5 * gx * frames
-        p.vy = p.vy * mu - 2.2e-5 * gy * frames
-        const steps = Math.max(1, Math.ceil(Math.hypot(p.vx, p.vy) * T))
-        for (let s = 1; s <= steps; s++) splat(p.x + (p.vx * s) / steps, p.y + (p.vy * s) / steps)
+        p.vx = p.vx * 0.55 - 0.0045 * gx
+        p.vy = p.vy * 0.55 - 0.0045 * gy
+        segments.push(p.x, p.y, p.x + p.vx, p.y + p.vy, 1.1, 0.8)
         p.x += p.vx
         p.y += p.vy
-        p.age += dt
-        p.still = Math.hypot(p.vx, p.vy) < 4e-5 ? p.still + dt : 0
-        // 谷底に落ち着いたら、別の場所から転がし直す
-        if (p.still > 1.6 || p.age > 22) balls[b] = spawn()
+        segments.push(p.x, p.y, p.x, p.y, 2.6, 1) // 反復点
+        p.still = Math.hypot(p.vx, p.vy) < 0.0025 ? p.still + 1 : 0
+        if (p.still > 4 || p.age > 30) balls[b] = spawn()
       }
-      for (let i = 0; i < T * T; i++) bytes[i] = Math.min(1, trail[i]) * 255
-      return bytes
+      return { segments, decay: Math.pow(0.996, dt * 60) }
     },
   }
 }

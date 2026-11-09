@@ -11,7 +11,7 @@
 // テクスチャの焼き込みは OSK-hisyochan/resources/workspace/ink_sim/{bake_web,bake_bg}.py
 
 import type { BackgroundMode } from '../teams'
-import { createAnts, createGradientDescent, createIsing, createLife, GD_HEIGHT, GD_TRAIL, GRID } from './simulations'
+import { ANT_GRID, createAnts, createGradientDescent, createIsing, createLife, GD_HEIGHT, type GdStyle, GRID } from './simulations'
 
 export interface InkTextures {
   inkA: string // RG: 平方根圧縮した法線xy / B: 字形マスク
@@ -37,6 +37,8 @@ export interface InkRenderer {
 const TRAIL_CYCLE = 22 // bake_bg.py の CYCLE と一致させる
 const FADE_SECONDS = 0.9
 const MODES: readonly BackgroundMode[] = ['gd', 'ant', 'ising', 'life', 'seigaiha', 'tropical']
+const shaderMode = (m: BackgroundMode) => (m === 'gd-smooth' ? 0 : MODES.indexOf(m))
+const TRAIL = 1024 // 勾配降下の軌跡を描くテクスチャの解像度(曲面1周期あたり)
 
 const VERTEX = `#version 300 es
 in vec2 a;
@@ -86,25 +88,29 @@ vec3 trailGlow = vec3(0.);
 
 // 0: 機械学習 / 勾配降下法
 vec3 gradientDescent(vec2 uv) {
-  float h = texture(uH, uv).r;
+  // 高さの分だけ画面上方へ持ち上がって見える。見えている曲面上の点を反復で逆算する(簡易な視差マッピング)
+  vec2 q = uv;
+  for (int i = 0; i < 6; i++) q = uv - vec2(0., (texture(uH, q).r - .5) * .06);
+  float h = texture(uH, q).r;
   vec2 e = vec2(1. / ${GD_HEIGHT}., 0.);
-  float hx = texture(uH, uv + e.xy).r - texture(uH, uv - e.xy).r;
-  float hy = texture(uH, uv + e.yx).r - texture(uH, uv - e.yx).r;
-  vec3 n = normalize(vec3(-hx * 26., -hy * 26., 1.));
+  float hx = texture(uH, q + e.xy).r - texture(uH, q - e.xy).r;
+  float hy = texture(uH, q + e.yx).r - texture(uH, q - e.yx).r;
+  vec3 n = normalize(vec3(-hx * 30., -hy * 30., 1.));
   float shade = clamp(dot(n, normalize(vec3(-.5, .55, .65))), 0., 1.);
-  vec2 g = uv * 70.;
-  float dotMark = 1. - smoothstep(.09, .09 + 1.5 * fwidth(g.x), length(fract(g) - .5));
-  float x = h * 14.;
-  float contour = hair(min(fract(x), 1. - fract(x)), .03);
-  float tr = texture(uGT, uv).r;
-  trailGlow = SPARK * (tr * tr * 1.8);
-  return LINE * (dotMark * (.10 + .75 * shade * shade) + contour * .16 * (.4 + h));
+  // 方眼。曲面に貼り付いているので、起伏に沿って曲がって見える
+  vec2 f = abs(fract(q * 48.) - .5);
+  float mesh = max(hair(.5 - f.x, .025), hair(.5 - f.y, .025));
+  float x = h * 12.;
+  float contour = hair(min(fract(x), 1. - fract(x)), .025);
+  trailGlow = SPARK * texture(uGT, q).r * 1.7;
+  return LINE * (mesh * (.05 + .8 * shade * shade) + contour * .10 * (.4 + h)) + vec3(.03, .07, .12) * shade * shade;
 }
 
 // 1: 競技プログラミング / ラングトンのアリ, 3: コンピュータサイエンス / ライフゲーム
 vec3 cells(vec2 uv, sampler2D grid, bool ant) {
-  vec2 g = uv * 40.;
-  vec2 v = texelFetch(grid, ivec2(mod(floor(g), GRID)), 0).rg;
+  // アリは正方形の領域が育つ様子を丸ごと見せたいので、マスを細かくする
+  vec2 g = uv * (ant ? 105. : 40.);
+  vec2 v = texelFetch(grid, ivec2(mod(floor(g), ant ? ${ANT_GRID}. : GRID)), 0).rg;
   vec2 f = abs(fract(g) - .5);
   float sq = 1. - smoothstep(.30, .30 + 1.5 * fwidth(g.x), max(f.x, f.y));
   float frame = hair(.5 - max(f.x, f.y), .02) * .10;
@@ -285,13 +291,6 @@ export function startInkRenderer({ canvas, frame, textures, mode: initialMode, o
   }
 
   // CPUで進めるモチーフ。初めて表示されたときに作り、以後は状態を保ったまま続きから動く
-  interface Sim {
-    unit: number
-    size: number
-    rg: boolean
-    update: (dt: number) => Uint8Array
-    allocated: boolean
-  }
   const blank = (unit: number, name: string, filter: number) => {
     texture(unit, name, filter, gl.REPEAT)
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, 1, 1, 0, gl.RED, gl.UNSIGNED_BYTE, new Uint8Array(1))
@@ -301,31 +300,155 @@ export function startInkRenderer({ canvas, frame, textures, mode: initialMode, o
   blank(7, 'uIs', gl.NEAREST)
   blank(8, 'uH', gl.LINEAR)
   blank(9, 'uGT', gl.LINEAR)
-  const factories: Partial<Record<BackgroundMode, () => Sim>> = {
-    life: () => ({ unit: 5, size: GRID, rg: true, allocated: false, ...createLife() }),
-    ant: () => ({ unit: 6, size: GRID, rg: true, allocated: false, ...createAnts() }),
-    ising: () => ({ unit: 7, size: GRID, rg: true, allocated: false, ...createIsing() }),
-    gd: () => {
-      const gd = createGradientDescent()
-      gl.activeTexture(gl.TEXTURE8)
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.R16F, GD_HEIGHT, GD_HEIGHT, 0, gl.RED, gl.FLOAT, gd.height)
-      return { unit: 9, size: GD_TRAIL, rg: false, allocated: false, update: gd.update }
-    },
+
+  const gridSim = (unit: number, update: (dt: number) => Uint8Array, size = GRID) => {
+    let allocated = false
+    return (dt: number) => {
+      const bytes = update(dt)
+      gl.activeTexture(gl.TEXTURE0 + unit)
+      if (allocated) gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, size, size, gl.RG, gl.UNSIGNED_BYTE, bytes)
+      else gl.texImage2D(gl.TEXTURE_2D, 0, gl.RG8, size, size, 0, gl.RG, gl.UNSIGNED_BYTE, bytes)
+      allocated = true
+    }
   }
-  const sims: Partial<Record<BackgroundMode, Sim>> = {}
+
+  // 勾配降下の軌跡はGPUで描く: 前フレームの残像を薄めて写し(decay)、今フレームの線分を
+  // アンチエイリアス付きで重ねる。2枚のテクスチャを交互に読み書きする
+  let trailPass: ((segments: number[], decay: number) => void) | null = null
+  const createTrailPass = () => {
+    const prog = (vs: string, fs: string) => {
+      const p = gl.createProgram() as WebGLProgram
+      gl.attachShader(p, compile(gl.VERTEX_SHADER, vs))
+      gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs))
+      gl.linkProgram(p)
+      return p
+    }
+    const decayProg = prog(
+      VERTEX,
+      `#version 300 es
+precision highp float;
+uniform sampler2D uPrev; uniform float uDecay; out vec4 o;
+void main() { o = texture(uPrev, gl_FragCoord.xy / ${TRAIL}.) * uDecay; }`,
+    )
+    const segProg = prog(
+      `#version 300 es
+in vec2 aPos; in vec4 aSeg; in vec2 aStyle;
+flat out vec4 vSeg; flat out vec2 vStyle; out vec2 vPx;
+void main() { vSeg = aSeg; vStyle = aStyle; vPx = aPos; gl_Position = vec4(aPos / ${TRAIL}. * 2. - 1., 0., 1.); }`,
+      `#version 300 es
+precision highp float;
+flat in vec4 vSeg; flat in vec2 vStyle; in vec2 vPx; out vec4 o;
+void main() {
+  vec2 pa = vPx - vSeg.xy, ba = vSeg.zw - vSeg.xy;
+  float d = length(pa - ba * clamp(dot(pa, ba) / max(dot(ba, ba), 1e-6), 0., 1.));
+  o = vec4(vStyle.y * (1. - smoothstep(vStyle.x - .75, vStyle.x + .75, d)));
+}`,
+    )
+    const textures = [0, 1].map(() => {
+      const t = gl.createTexture() as WebGLTexture
+      gl.activeTexture(gl.TEXTURE10)
+      gl.bindTexture(gl.TEXTURE_2D, t)
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, TRAIL, TRAIL, 0, gl.RGBA, gl.UNSIGNED_BYTE, null)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT)
+      return t
+    })
+    const framebuffers = textures.map((t) => {
+      const fb = gl.createFramebuffer()
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fb)
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0)
+      gl.clearColor(0, 0, 0, 0)
+      gl.clear(gl.COLOR_BUFFER_BIT)
+      return fb
+    })
+    const decayVao = gl.createVertexArray()
+    gl.bindVertexArray(decayVao)
+    const fullscreen = gl.createBuffer()
+    gl.bindBuffer(gl.ARRAY_BUFFER, fullscreen)
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
+    const aDecay = gl.getAttribLocation(decayProg, 'a')
+    gl.enableVertexAttribArray(aDecay)
+    gl.vertexAttribPointer(aDecay, 2, gl.FLOAT, false, 0, 0)
+    const segVao = gl.createVertexArray()
+    gl.bindVertexArray(segVao)
+    const segBuffer = gl.createBuffer()
+    gl.bindBuffer(gl.ARRAY_BUFFER, segBuffer)
+    for (const [name, size, offset] of [['aPos', 2, 0], ['aSeg', 4, 2], ['aStyle', 2, 6]] as const) {
+      const loc = gl.getAttribLocation(segProg, name)
+      gl.enableVertexAttribArray(loc)
+      gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 32, offset * 4)
+    }
+    gl.bindVertexArray(null)
+    let cur = 0
+    return (segments: number[], decay: number) => {
+      const next = 1 - cur
+      gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffers[next])
+      gl.viewport(0, 0, TRAIL, TRAIL)
+      gl.useProgram(decayProg)
+      gl.bindVertexArray(decayVao)
+      gl.activeTexture(gl.TEXTURE10)
+      gl.bindTexture(gl.TEXTURE_2D, textures[cur])
+      gl.uniform1i(gl.getUniformLocation(decayProg, 'uPrev'), 10)
+      gl.uniform1f(gl.getUniformLocation(decayProg, 'uDecay'), decay)
+      gl.drawArrays(gl.TRIANGLES, 0, 3)
+      // 線分ごとに太さ分ふくらませた四角形を、タイルの継ぎ目をまたぐ分も含めて描く
+      const verts: number[] = []
+      for (let i = 0; i < segments.length; i += 6) {
+        const [u0, v0, u1, v1, w, intensity] = segments.slice(i, i + 6)
+        const ox = Math.floor(u0), oy = Math.floor(v0)
+        const x0 = (u0 - ox) * TRAIL, y0 = (v0 - oy) * TRAIL, x1 = (u1 - ox) * TRAIL, y1 = (v1 - oy) * TRAIL
+        const pad = w + 2
+        for (const sx of [-TRAIL, 0, TRAIL])
+          for (const sy of [-TRAIL, 0, TRAIL]) {
+            const l = Math.min(x0, x1) + sx - pad, r = Math.max(x0, x1) + sx + pad
+            const b = Math.min(y0, y1) + sy - pad, t = Math.max(y0, y1) + sy + pad
+            if (r < 0 || l > TRAIL || t < 0 || b > TRAIL) continue
+            const seg = [x0 + sx, y0 + sy, x1 + sx, y1 + sy, w, intensity]
+            for (const [x, y] of [[l, b], [r, b], [l, t], [l, t], [r, b], [r, t]]) verts.push(x, y, ...seg)
+          }
+      }
+      if (verts.length) {
+        gl.useProgram(segProg)
+        gl.bindVertexArray(segVao)
+        gl.bindBuffer(gl.ARRAY_BUFFER, segBuffer)
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.DYNAMIC_DRAW)
+        gl.enable(gl.BLEND)
+        gl.blendEquation(gl.MAX)
+        gl.drawArrays(gl.TRIANGLES, 0, verts.length / 8)
+        gl.disable(gl.BLEND)
+      }
+      cur = next
+      gl.activeTexture(gl.TEXTURE9)
+      gl.bindTexture(gl.TEXTURE_2D, textures[cur])
+    }
+  }
+  const gdSim = (style: GdStyle) => {
+    const gd = createGradientDescent(style)
+    gl.activeTexture(gl.TEXTURE8)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.R16F, GD_HEIGHT, GD_HEIGHT, 0, gl.RED, gl.FLOAT, gd.height)
+    trailPass ??= createTrailPass()
+    return (dt: number) => {
+      const { segments, decay } = gd.update(dt)
+      trailPass?.(segments, decay)
+    }
+  }
+  const factories: Record<BackgroundMode, (() => (dt: number) => void) | null> = {
+    life: () => gridSim(5, createLife().update),
+    ant: () => gridSim(6, createAnts().update, ANT_GRID),
+    ising: () => gridSim(7, createIsing().update),
+    gd: () => gdSim('step'),
+    'gd-smooth': () => gdSim('smooth'),
+    seigaiha: null,
+    tropical: null,
+  }
+  const sims: Partial<Record<BackgroundMode, (dt: number) => void>> = {}
   const stepSim = (mode: BackgroundMode, dt: number) => {
     const factory = factories[mode]
     if (!factory) return
-    const sim = (sims[mode] ??= factory())
-    const bytes = sim.update(dt)
-    gl.activeTexture(gl.TEXTURE0 + sim.unit)
-    const format = sim.rg ? gl.RG : gl.RED
-    if (sim.allocated) {
-      gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, sim.size, sim.size, format, gl.UNSIGNED_BYTE, bytes)
-    } else {
-      gl.texImage2D(gl.TEXTURE_2D, 0, sim.rg ? gl.RG8 : gl.R8, sim.size, sim.size, 0, format, gl.UNSIGNED_BYTE, bytes)
-      sim.allocated = true
-    }
+    const step = (sims[mode] ??= factory())
+    step(dt)
   }
 
   const light = { x: -0.6, y: -0.7, tx: -0.6, ty: -0.7 }
@@ -343,6 +466,7 @@ export function startInkRenderer({ canvas, frame, textures, mode: initialMode, o
   }
 
   const resize = () => {
+    gl.useProgram(program)
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     const bounds = canvas.getBoundingClientRect()
     canvas.width = Math.max(1, Math.round(bounds.width * dpr))
@@ -367,11 +491,15 @@ export function startInkRenderer({ canvas, frame, textures, mode: initialMode, o
     return t * t * (3 - 2 * t)
   }
   const draw = (now: number) => {
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null)
+    gl.useProgram(program)
+    gl.bindVertexArray(null)
+    gl.viewport(0, 0, canvas.width, canvas.height)
     gl.uniform1f(uniform('uTime'), now / 1000)
     gl.uniform2f(uniform('uLight'), light.x, light.y)
     gl.uniform2f(uniform('uPar'), parallax.x, parallax.y)
-    gl.uniform1i(uniform('uMode0'), MODES.indexOf(previous))
-    gl.uniform1i(uniform('uMode1'), MODES.indexOf(current))
+    gl.uniform1i(uniform('uMode0'), shaderMode(previous))
+    gl.uniform1i(uniform('uMode1'), shaderMode(current))
     gl.uniform1f(uniform('uFade'), fadeAt(now))
     gl.drawArrays(gl.TRIANGLES, 0, 3)
   }
