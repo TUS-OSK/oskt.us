@@ -1,85 +1,81 @@
 import styled from '@emotion/styled'
-import { BOUNCE, SWIFT } from 'src/utils/animations'
-import { fade, flip } from './animations'
-import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
-import LifeGameBackground from './LifeGameBackground'
+import { useEffect, useRef, useState } from 'react'
+import { withBasePath } from 'src/utils/basePath'
+import { startInkRenderer } from './inkRenderer'
 
+const STATIC_INK = '/images/hero/ink_static.webp'
+
+// 静止画を先に出し、WebGLの準備ができたら立体描画へ切り替える。
+// WebGL2が使えない環境では静止画のまま表示される
 export default function TopBanner() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const frameRef = useRef<HTMLImageElement>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const frame = frameRef.current
+    if (!canvas || !frame) return
+    return startInkRenderer({
+      canvas,
+      frame,
+      textures: {
+        inkA: withBasePath('/images/hero/ink_a.webp'),
+        inkB: withBasePath('/images/hero/ink_b.webp'),
+        tropical: withBasePath('/images/hero/tropical.webp'),
+      },
+      onReady: () => setReady(true),
+    })
+  }, [])
+
   return (
-    <Banner>
-      <ImageWrapper>
-        <LifeGameBackground />
-      </ImageWrapper>
-      <Names></Names>
-    </Banner>
+    <>
+      <Canvas ref={canvasRef} data-ready={ready} aria-hidden="true" />
+      <Title>
+        <Ink ref={frameRef} src={withBasePath(STATIC_INK)} alt="応用数学研究部" data-ready={ready} />
+      </Title>
+    </>
   )
 }
 
-const Banner = styled.div`
-  position: relative;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-`
-
-// 写真(/images/bg.jpg)からライフゲーム背景に差し替え(2026-11、新歓向けリニューアル)。
-// 元のImageはCSSのbackground-imageだったが、canvas差し込み用にwrapperへ変更。
-// フェードインのアニメーションはそのまま踏襲する
-const ImageWrapper = styled.div`
+const Canvas = styled.canvas`
   position: absolute;
   inset: 0;
-  animation: ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  &[data-ready='true'] {
+    opacity: 1;
+  }
 `
 
-function Names() {
-  return (
-    <NamesContainer>
-      <First>応用</First>
-      <Second>数学</Second>
-      <Third>研究部</Third>
-      <Forth>東京理科大学</Forth>
-    </NamesContainer>
-  )
-}
+const Title = styled.h1`
+  margin: 0;
+  font-size: inherit;
+`
 
-const NamesContainer = styled.div`
+// 描画側はこの要素の矩形に墨を合わせるので、位置と大きさはCSSだけで調整できる
+const Ink = styled.img`
   position: absolute;
-  top: 50%;
+  z-index: 1;
+  display: block;
+  aspect-ratio: 1214 / 1843;
+  top: 92px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 30px;
-  line-height: 36px;
-  color: rgba(0, 0, 0, 0.7);
-  background-color: rgba(255, 255, 255, 0.9);
-  font-weight: bold;
-  letter-spacing: 5px;
-  perspective: 200px;
-  padding: 40px;
-  white-space: nowrap;
-`
+  transform: translateX(-50%);
+  height: min(calc(100svh - 340px), 132vw);
+  transition: opacity 1.2s ease;
+  &[data-ready='true'] {
+    opacity: 0;
+  }
 
-const Name = styled.div`
-  margin-bottom: 0;
-  transform-origin: 50% 0;
-`
-
-const First = styled(Name)`
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER}s 1 normal both running;
-`
-
-const Second = styled(Name)`
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 0.5}s 1 normal both running;
-`
-const Third = styled(Name)`
-  margin-bottom: 1px;
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP}s 1 normal both running;
-`
-
-const Forth = styled(Name)`
-  font-weight: normal;
-  font-size: 20px;
-  margin-bottom: 0;
-  color: rgba(0, 0, 0, 0.4);
-  letter-spacing: 3px;
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 1.5}s 1 normal both running;
+  @media (min-width: 860px) {
+    top: 50%;
+    left: auto;
+    right: max(3vw, calc(50% - 600px));
+    transform: translateY(-50%);
+    height: min(94vh, 1120px);
+  }
 `
