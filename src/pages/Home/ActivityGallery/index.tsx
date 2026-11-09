@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Section, SectionTitle } from 'src/components/MainLayout/elements'
+import { withBasePath } from 'src/utils/basePath'
 
 interface Photo {
   src: string
@@ -27,7 +28,7 @@ export default function ActivityGallery() {
         {PHOTOS.map((photo, i) => (
           <Card key={i}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={photo.src} alt={photo.alt} loading="lazy" />
+            <img src={withBasePath(photo.src)} alt={photo.alt} loading="lazy" />
             <Meta>
               <Band>{photo.band}</Band>
             </Meta>

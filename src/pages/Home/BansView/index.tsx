@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { Section, SectionTitle } from 'src/components/MainLayout/elements'
 import { pageTo } from 'src/utils/urls'
 import { StyledLink } from 'src/utils/next/elements'
+import { withBasePath } from 'src/utils/basePath'
 import Motif, { type MotifType } from './Motif'
 
 interface Ban {
@@ -40,7 +41,7 @@ export default function BansView() {
           <Card key={ban.name} href={pageTo('about')}>
             {ban.photo ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <Photo src={ban.photo} alt={`${ban.name}の活動の様子`} loading="lazy" />
+              <Photo src={withBasePath(ban.photo)} alt={`${ban.name}の活動の様子`} loading="lazy" />
             ) : (
               <Motif type={ban.motif} />
             )}
