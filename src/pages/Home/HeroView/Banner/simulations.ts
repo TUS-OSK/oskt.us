@@ -68,8 +68,12 @@ export function createAnts() {
   // prettier-ignore
   const RULE = [-1,1,1,1,1,1,-1,-1,-1,1,1,1,1,-1,1,-1,1,-1,1,-1,1,1,-1,1,-1,-1,1,1,-1,1,1,1,-1,-1,-1,-1,-1,-1,1,1,1,-1,1,-1,-1,1,1,-1,1,1,-1,-1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,1,1,1,1,-1,1,-1,-1,1,-1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,-1,1,1,1,-1,-1,1,1,1,-1,1,-1,1,1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,1,-1,-1]
   const G = ANT_GRID, n = G * G
-  const STEPS_PER_FRAME = 50 // 1描画あたりの歩数。模様が育つ速さ
-  const LIMIT = 300000 // この歩数(約100秒分)で盤面をまっさらに戻す
+  // 1描画あたりの歩数を c·n(n: 描き始めてからのフレーム数)で増やす。累計歩数は n² に比例し、
+  // 正方形の一辺 ∝ √歩数 が時間に比例して育つので、成長の速さが一定に見える。
+  // 約3.5秒(210フレーム)で盤面が埋まるよう c を決めている
+  const C = 10
+  const LIMIT = 230000 // 盤面がほぼ埋まる歩数。ここで少し見せてから最初からやり直す
+  const HOLD_SECONDS = 2.5
   const at = (x: number, y: number) => ((y + G) % G) * G + ((x + G) % G)
   // 大半のマスは状態2前後で埋まる「地」になる。それより上の状態だけを明るくして模様を浮かせる
   const tone = (v: number) => (v ? 0.1 + 0.9 * Math.min(1, Math.max(0, (v - 2) / 28)) : 0)
@@ -78,9 +82,13 @@ export function createAnts() {
   const bytes = new Uint8Array(n * 2)
   const ant = { x: 0, y: 0, d: 0 }
   let walked = 0
+  let frames = 0
+  let held = 0
   const reset = () => {
     state.fill(0)
     walked = 0
+    frames = 0
+    held = 0
     // 盤面の(0,0)が画面中央付近に来る
     Object.assign(ant, { x: 0, y: 0, d: 0 })
   }
@@ -90,15 +98,22 @@ export function createAnts() {
     state[i] = (state[i] + 1) % RULE.length
     ant.x = (ant.x + [0, 1, 0, -1][ant.d] + G) % G
     ant.y = (ant.y + [-1, 0, 1, 0][ant.d] + G) % G
-    if (++walked > LIMIT) reset()
+    walked++
   }
   reset()
-  for (let i = 0; i < 15000; i++) step() // 開いた瞬間から模様が見えるよう、少し歩かせておく
-  for (let i = 0; i < n; i++) glow[i] = tone(state[i])
   return {
     update(dt: number) {
-      if (dt > 0) for (let s = 0; s < STEPS_PER_FRAME; s++) step()
-      const k = 1 - Math.exp(-dt * 6)
+      if (dt > 0) {
+        if (walked < LIMIT) {
+          frames += dt * 60
+          const steps = Math.min(LIMIT - walked, Math.ceil(C * frames * dt * 60))
+          for (let s = 0; s < steps; s++) step()
+        } else if ((held += dt) > HOLD_SECONDS) reset()
+      } else {
+        // 動きを減らす設定の人には、育ちきった盤面を1枚だけ見せる
+        while (walked < LIMIT) step()
+      }
+      const k = dt > 0 ? 1 - Math.exp(-dt * 12) : 1
       for (let i = 0; i < n; i++) {
         glow[i] += (tone(state[i]) - glow[i]) * k
         bytes[i * 2] = glow[i] * 255
@@ -232,7 +247,16 @@ export function createGradientDescent(style: GdStyle) {
   ]
 
   const STEP_SECONDS = 0.3
-  const spawn = () => ({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, still: 0, age: 0, clock: Math.random() * STEP_SECONDS })
+  const spawn = () => ({
+    x: Math.random(),
+    y: Math.random(),
+    vx: 0,
+    vy: 0,
+    still: 0,
+    age: 0,
+    clock: 0,
+    target: null as null | { x0: number; y0: number; x1: number; y1: number },
+  })
   const balls = Array.from({ length: style === 'step' ? 14 : 18 }, spawn)
   return {
     height,
@@ -247,7 +271,7 @@ export function createGradientDescent(style: GdStyle) {
           const mu = Math.pow(0.93, frames)
           p.vx = p.vx * mu - 2.2e-5 * gx * frames
           p.vy = p.vy * mu - 2.2e-5 * gy * frames
-          segments.push(p.x, p.y, p.x + p.vx, p.y + p.vy, 1.3, 1)
+          segments.push(p.x, p.y, p.x + p.vx, p.y + p.vy, 0.6, 0.7)
           p.x += p.vx
           p.y += p.vy
           p.age += dt
@@ -256,23 +280,33 @@ export function createGradientDescent(style: GdStyle) {
         }
         return { segments, decay: Math.pow(0.992, frames) }
       }
+      // 0.3秒ごとに1歩。次の反復点までは先頭がイージングで滑り、着いたら点を打つ
       for (let b = 0; b < balls.length; b++) {
         const p = balls[b]
-        p.clock += dt
         p.age += dt
-        if (p.clock < STEP_SECONDS) continue
-        p.clock -= STEP_SECONDS
-        const [gx, gy] = grad(p.x, p.y)
-        p.vx = p.vx * 0.55 - 0.0045 * gx
-        p.vy = p.vy * 0.55 - 0.0045 * gy
-        segments.push(p.x, p.y, p.x + p.vx, p.y + p.vy, 1.1, 0.8)
-        p.x += p.vx
-        p.y += p.vy
-        segments.push(p.x, p.y, p.x, p.y, 2.6, 1) // 反復点
-        p.still = Math.hypot(p.vx, p.vy) < 0.0025 ? p.still + 1 : 0
-        if (p.still > 4 || p.age > 30) balls[b] = spawn()
+        if (!p.target) {
+          const [gx, gy] = grad(p.x, p.y)
+          p.vx = p.vx * 0.55 - 0.0045 * gx
+          p.vy = p.vy * 0.55 - 0.0045 * gy
+          p.target = { x0: p.x, y0: p.y, x1: p.x + p.vx, y1: p.y + p.vy }
+          p.clock = 0
+        }
+        const t = p.target
+        const ease = (u: number) => 1 - Math.pow(1 - Math.min(1, u), 3)
+        const a0 = ease(p.clock / STEP_SECONDS)
+        p.clock += dt
+        const a1 = ease(p.clock / STEP_SECONDS)
+        segments.push(t.x0 + (t.x1 - t.x0) * a0, t.y0 + (t.y1 - t.y0) * a0, t.x0 + (t.x1 - t.x0) * a1, t.y0 + (t.y1 - t.y0) * a1, 0.6, 0.55)
+        if (p.clock >= STEP_SECONDS) {
+          p.x = t.x1
+          p.y = t.y1
+          segments.push(p.x, p.y, p.x, p.y, 1.4, 0.8) // 反復点
+          p.target = null
+          p.still = Math.hypot(p.vx, p.vy) < 0.0025 ? p.still + 1 : 0
+          if (p.still > 4 || p.age > 30) balls[b] = spawn()
+        }
       }
-      return { segments, decay: Math.pow(0.996, dt * 60) }
+      return { segments, decay: Math.pow(0.985, dt * 60) }
     },
   }
 }

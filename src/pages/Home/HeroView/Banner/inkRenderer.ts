@@ -87,23 +87,30 @@ float seigaihaD(vec2 p) {
 vec3 trailGlow = vec3(0.);
 
 // 0: 機械学習 / 勾配降下法
+// 曲面は高さに比例して画面上方へ持ち上がって見える。画素ごとに、手前(画面下)側から
+// 奥へ向かって高さ場をレイマーチし、最初にぶつかった点を見えている点とする(手前の山が奥を隠す)
+const float RELIEF = .14;
 vec3 gradientDescent(vec2 uv) {
-  // 高さの分だけ画面上方へ持ち上がって見える。見えている曲面上の点を反復で逆算する(簡易な視差マッピング)
-  vec2 q = uv;
-  for (int i = 0; i < 6; i++) q = uv - vec2(0., (texture(uH, q).r - .5) * .06);
+  // 粗く進めて交差を見つけ、前後の区間を二分探索で詰める(段々の縞を消す)
+  float lo = 0., hi = 1.;
+  for (int i = 1; i <= 32; i++) {
+    float k = float(i) / 32.;
+    vec2 c = uv - vec2(0., RELIEF * (1. - k));
+    if (c.y + texture(uH, c).r * RELIEF >= uv.y) { hi = k; break; }
+    lo = k;
+  }
+  for (int i = 0; i < 6; i++) {
+    float k = .5 * (lo + hi);
+    vec2 c = uv - vec2(0., RELIEF * (1. - k));
+    if (c.y + texture(uH, c).r * RELIEF >= uv.y) hi = k; else lo = k;
+  }
+  vec2 q = uv - vec2(0., RELIEF * (1. - hi));
   float h = texture(uH, q).r;
-  vec2 e = vec2(1. / ${GD_HEIGHT}., 0.);
-  float hx = texture(uH, q + e.xy).r - texture(uH, q - e.xy).r;
-  float hy = texture(uH, q + e.yx).r - texture(uH, q - e.yx).r;
-  vec3 n = normalize(vec3(-hx * 30., -hy * 30., 1.));
-  float shade = clamp(dot(n, normalize(vec3(-.5, .55, .65))), 0., 1.);
-  // 方眼。曲面に貼り付いているので、起伏に沿って曲がって見える
-  vec2 f = abs(fract(q * 48.) - .5);
+  // 方眼が起伏に沿って曲がり、高いところほど明るい
+  vec2 f = abs(fract(q * 40.) - .5);
   float mesh = max(hair(.5 - f.x, .025), hair(.5 - f.y, .025));
-  float x = h * 12.;
-  float contour = hair(min(fract(x), 1. - fract(x)), .025);
-  trailGlow = SPARK * texture(uGT, q).r * 1.7;
-  return LINE * (mesh * (.05 + .8 * shade * shade) + contour * .10 * (.4 + h)) + vec3(.03, .07, .12) * shade * shade;
+  trailGlow = SPARK * texture(uGT, q).r * .9;
+  return LINE * mesh * (.04 + .9 * h * h);
 }
 
 // 1: 競技プログラミング / ラングトンのアリ, 3: コンピュータサイエンス / ライフゲーム
@@ -575,6 +582,8 @@ void main() {
   return {
     setMode(next) {
       if (next === current) return
+      // アリは出番が来るたびに更地から育てる
+      if (next === 'ant') delete sims.ant
       const now = performance.now()
       // フェード途中で次が来たら、いま濃い方を「前」として引き継ぐ
       if (fadeAt(now) >= 0.5) previous = current
