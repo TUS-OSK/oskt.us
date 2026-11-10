@@ -78,6 +78,8 @@ export default function PayPage() {
   // sessionStorage に置く
   useEffect(() => {
     try {
+      // 以前の版が localStorage に残した分は読まずに消す
+      localStorage.removeItem(PROFILE_STORAGE_KEY)
       const saved = sessionStorage.getItem(PROFILE_STORAGE_KEY)
       if (saved) setProfile(p => ({ ...p, ...JSON.parse(saved) }))
     } catch {}
