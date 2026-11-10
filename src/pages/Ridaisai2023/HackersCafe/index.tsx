@@ -11,13 +11,13 @@ export default function HackersCafe() {
         I部研究会応用数学研究部による２日間限定のカフェ。
         牛込神楽坂の焙煎店VOLCANオリジナルブレンドのボルカンブレンドを、一杯ずつハンドドリップで提供します。
       </Description>
-      <ImageRight src="/images/ridaisai/2023/coffeeCup.jpg" />
+      <ImageRight src="/images/ridaisai/2023/coffeeCup.jpg" alt="コーヒーカップ" loading="lazy" />
       <Title>ボルカンブレンド</Title>
       <Description>
         ボルカンアスールを中心に4種類の豆をブレンドしています。 苦味甘味のバランスが絶妙です。
         コーヒー好きの部員がおいしさを最大限引き出す挽き目を探りました。 アイスでもホットでも最高です。
       </Description>
-      <ImageLeft src="/images/ridaisai/2023/coffee.jpg" />
+      <ImageLeft src="/images/ridaisai/2023/coffee.jpg" alt="ハンドドリップで淹れるコーヒー" loading="lazy" />
       <Title>作品展示</Title>
       <Description>
         レイトレーシングのシェーダー、自作ゲーム、学生証による入退室システムなどの部員の制作物を展示しています。

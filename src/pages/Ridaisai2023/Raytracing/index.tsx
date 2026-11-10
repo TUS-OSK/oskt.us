@@ -18,10 +18,10 @@ export default function Raytracing() {
       </DescriptionBox>
 
       <RaytracingImages>
-        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray1.png" />
-        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray2.png" />
-        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray3.png" />
-        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray4.png" />
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray1.jpg" alt="レイトレーシング班の制作画像1" loading="lazy" />
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray2.jpg" alt="レイトレーシング班の制作画像2" loading="lazy" />
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray3.jpg" alt="レイトレーシング班の制作画像3" loading="lazy" />
+        <RaytracingImage src="/images/ridaisai/2023/Raytracing/ray4.jpg" alt="レイトレーシング班の制作画像4" loading="lazy" />
       </RaytracingImages>
     </div>
   )

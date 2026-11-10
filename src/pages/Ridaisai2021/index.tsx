@@ -76,7 +76,7 @@ export default function Ridaisai2021() {
                   <Thumbnail
                     title="Ray班の制作物1"
                     description="※デスクトップ版Chromeブラウザでの閲覧を推奨します"
-                    src="/images/ridaisai/2021/ray-1.png"
+                    src="/images/ridaisai/2021/ray-1.jpg"
                     url="https://kinakomoti-321.github.io/WebPathtracer/"
                   />
                 </SectionContentsAligner>
