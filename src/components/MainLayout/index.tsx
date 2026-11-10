@@ -38,6 +38,6 @@ const slideBody = keyframes`
   }
 `
 
-const Body = styled.div`
+const Body = styled.main`
   animation: ${slideBody} ${SWIFT} 0.2s 1 normal both running;
 `

@@ -6,6 +6,7 @@ interface StyledLinkProps {
   href: string
   children: ReactNode
   className?: string
+  'aria-label'?: string
 }
 
 // 旧実装は `<Link passHref><a>...</a></Link>` という、Next.js 12以前の
@@ -14,9 +15,9 @@ interface StyledLinkProps {
 // ネストしてしまい、ブラウザがそれを矯正した結果サーバー側の出力と食い違って
 // 全ページでハイドレーションエラーになっていた(2026-11、Next 16移行時の見落とし)。
 // Next.js純正のLinkにclassNameを直接渡す形に修正する。
-export function StyledLink({ href, children, className }: StyledLinkProps) {
+export function StyledLink({ href, children, className, 'aria-label': ariaLabel }: StyledLinkProps) {
   return (
-    <StyledLink_ href={href} className={className}>
+    <StyledLink_ href={href} className={className} aria-label={ariaLabel}>
       {children}
     </StyledLink_>
   )

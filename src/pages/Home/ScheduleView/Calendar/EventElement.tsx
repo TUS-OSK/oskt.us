@@ -13,12 +13,12 @@ export default function EventElement({ children }: Props) {
 export const EVENT_ELEMENT_HEIGHT = 54
 const Container = styled.div`
   box-sizing: border-box;
-  border: 2px solid #d24154;
+  border: 2px solid #a8364a;
   padding: 0 16px;
   display: flex;
   align-items: center;
   user-select: none;
   white-space: nowrap;
-  background-color: #da6272;
+  background-color: #c2414f;
   height: ${EVENT_ELEMENT_HEIGHT}px;
 `

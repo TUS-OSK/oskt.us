@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
+import MarkdownTitle from 'src/components/MarkdownTitle'
 import MarkdownBody from 'src/components/MarkdownBody'
 import { FixedSizeContents, Section } from 'src/components/MainLayout/elements'
 import { externalTo, mailTo, urlPageMdEdit } from 'src/utils/urls'
@@ -25,6 +26,7 @@ export default function Contact({ title, clubroom, twitterId, mail, body }: Prop
       <MainLayout>
         <Section>
           <FixedSizeContents size={440}>
+            {title && <MarkdownTitle title={title}></MarkdownTitle>}
             <ContactList>
               <ContactItem icon={<MarkerIcon />} label="Clubroom">
                 {clubroom}
@@ -38,7 +40,7 @@ export default function Contact({ title, clubroom, twitterId, mail, body }: Prop
                 <ExternalLink href={mailTo(mail)}>{mail}</ExternalLink>
               </ContactItem>
             </ContactList>
-            <MarkdownBody centered body={body} editRequestUrl={urlPageMdEdit('archive')}></MarkdownBody>
+            <MarkdownBody centered body={body} editRequestUrl={urlPageMdEdit('contact')}></MarkdownBody>
           </FixedSizeContents>
         </Section>
       </MainLayout>

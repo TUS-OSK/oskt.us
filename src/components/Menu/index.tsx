@@ -41,7 +41,8 @@ const MenuItem = styled.li`
   padding: 16px 16px 0;
 `
 
-const LINK_COLOR = 'rgba(0, 0, 0, 0.4)'
+// 白地で WCAG AA(4.5:1)を満たす濃さ。旧値 0.4 は 2.8:1 で読みにくかった
+const LINK_COLOR = 'rgba(0, 0, 0, 0.62)'
 
 const MenuLink = styled(StyledLink)`
   display: inline-flex;

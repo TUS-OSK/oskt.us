@@ -1,6 +1,7 @@
 import { compareDesc, format } from 'date-fns'
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
+import MarkdownTitle from 'src/components/MarkdownTitle'
 import MarkdownBody from 'src/components/MarkdownBody'
 import { FixedSizeContents, Section } from 'src/components/MainLayout/elements'
 import { StyledLink as StyledLink_ } from 'src/utils/next/elements'
@@ -21,8 +22,9 @@ export default function News({ title, body, metaList }: Props) {
       <MainLayout>
         <Section>
           <FixedSizeContents size={520}>
+            {title && <MarkdownTitle title={title}></MarkdownTitle>}
             <MetaList metaList={sortedMetaList}></MetaList>
-            <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('archive')}></MarkdownBody>
+            <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('news')}></MarkdownBody>
           </FixedSizeContents>
         </Section>
       </MainLayout>

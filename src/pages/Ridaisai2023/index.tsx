@@ -35,9 +35,7 @@ export default function Ridaisai2023() {
           <MainContents>
             <Tabs>
               <TabList>
-                <Tab>
-                  Hackers' Cafe
-                </Tab>
+                <Tab>Hackers' Cafe</Tab>
                 <Tab>アルゴリズムクイズ by 競プロ班</Tab>
                 <Tab>CG班</Tab>
                 <Tab>レイトレーシング班</Tab>
@@ -60,7 +58,7 @@ export default function Ridaisai2023() {
         </Body>
         <Footer></Footer>
         <Header>
-          <LogoWrapper href="/" open={openLogo}>
+          <LogoWrapper href="/" open={openLogo} aria-label="応用数学研究部 トップページ">
             <Logo />
           </LogoWrapper>
         </Header>
@@ -119,7 +117,6 @@ const LogoWrapper = styled(Link)<{ open: boolean }>`
         `}
 `
 
-
 const MainContents = styled.div`
   flex: 1;
   overflow: hidden;
@@ -129,7 +126,6 @@ const MainContents = styled.div`
     padding: 24px;
   }
 `
-
 
 const Body = styled.div`
   position: relative;

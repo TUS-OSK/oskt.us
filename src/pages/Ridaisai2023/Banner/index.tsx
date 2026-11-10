@@ -78,7 +78,7 @@ const Forth = styled(Name)`
   font-weight: normal;
   font-size: 20px;
   margin-bottom: 0;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.62);
   letter-spacing: 3px;
   animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 1.5}s 1 normal both running;
 `

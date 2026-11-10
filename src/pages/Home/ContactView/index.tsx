@@ -88,7 +88,7 @@ const Item = styled.div`
   justify-content: center;
   font-size: 16px;
   line-height: ${ITEM_HEIGHT}px;
-  color: #333;
+  color: #111;
   max-width: 240px;
   text-align: center;
   margin: 0 auto 16px;

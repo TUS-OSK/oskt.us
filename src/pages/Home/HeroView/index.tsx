@@ -22,7 +22,8 @@ const pinnedFromUrl = (): { team: number; mode: BackgroundMode } | null => {
 }
 
 export default function HeroView() {
-  const [index, setIndex] = useState(0)
+  // -1 は巡回前(「応用数学しよう」)。WebGLが使えない・動きを減らす設定のときはこのまま
+  const [index, setIndex] = useState(-1)
   const [pinned, setPinned] = useState<BackgroundMode | null>(null)
   const [ready, setReady] = useState(false)
   const [showPicker, setShowPicker] = useState(false)
@@ -54,8 +55,8 @@ export default function HeroView() {
     window.history.replaceState(null, '', url)
   }
 
-  const team = TEAMS[index]
-  const mode = pinned ?? team.mode
+  const team = index >= 0 ? TEAMS[index] : null
+  const mode = pinned ?? team?.mode ?? 'seigaiha'
   return (
     <Container>
       {/* トップだけ黒地なので、上や左右に引っ張ったときに白地が覗かないようにする */}
@@ -81,11 +82,13 @@ export default function HeroView() {
       </Top>
       <Copy>
         <University>東京理科大学</University>
-        <Lead aria-label="そうだ、応用数学しよう。">
+        <Lead>
+          {/* 読み上げでは巡回する文字を毎回読ませず、固定の一文として伝える */}
+          <VisuallyHidden>そうだ、応用数学しよう。</VisuallyHidden>
           <span aria-hidden="true">
             そうだ、
             <br />
-            <GlitchWord word={team.word} />
+            <GlitchWord word={team?.word ?? '応用数学'} />
             しよう。
           </span>
         </Lead>
@@ -194,6 +197,15 @@ const Lead = styled.p`
   font-size: clamp(22px, 2.8vw, 40px);
   line-height: 1.5;
   letter-spacing: 0.08em;
+  white-space: nowrap;
+`
+
+const VisuallyHidden = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
   white-space: nowrap;
 `
 
