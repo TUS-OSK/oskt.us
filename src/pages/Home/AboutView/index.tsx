@@ -17,8 +17,8 @@ const SECONDARY_COLOR = '#333'
 export default function AboutView({ aboutData: { caption } }: Props) {
   return (
     <Container>
-      <Text>OSK</Text>
       <Content>
+        <Lead>OSK</Lead>
         {caption}
         <ButtonWrapper>
           <Button color={{ primary: PRIMARY_COLOR, secondary: SECONDARY_COLOR }} href={pageTo('about')}>
@@ -30,12 +30,16 @@ export default function AboutView({ aboutData: { caption } }: Props) {
   )
 }
 
-const Text = styled.div`
-  font-size: 40vw;
-  color: #333;
-  margin-left: -30px;
-  height: 0.8em;
-  user-select: none;
+// 旧実装は画面幅いっぱいの巨大な"OSK"ロゴタイプ(font-size: 40vw)を上に乗せていたが、
+// 不気味という指摘を受けて撤去(2026-11)。代わりにこのセクションの直前(ヒーロー直後)に
+// ActivityGalleryを配置し、「開いてすぐ見える場所」には写真を置く方針にした。
+const Lead = styled.div`
+  font-family: 'novecentosans';
+  font-weight: bold;
+  font-size: 28px;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  color: #fff;
 `
 
 const Content = styled(Section)`

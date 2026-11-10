@@ -4,6 +4,7 @@ import html from 'remark-html'
 import sanitizeHtml from 'sanitize-html'
 import { useEffect } from 'react'
 import { css } from '@emotion/react'
+import { BASE_PATH } from 'src/utils/basePath'
 
 interface Props {
   editRequestUrl?: string
@@ -43,8 +44,9 @@ function useTwitterWidgets() {
 // 画像src等）までは書き換えてくれない。そのため /uploads/... のような絶対パス画像が
 // プレビューでだけ404になっていた。ここで明示的にbasePathを前置する。
 // 本番（NEXT_PUBLIC_BASE_PATH未設定）では何もしない。
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
-const withBasePath = (htmlStr: string): string =>
+// (単純な1パス用なら src/utils/basePath.ts の withBasePath を使うこと。
+// こちらはHTML文字列中の全src/href属性をまとめて書き換える専用版)
+const withBasePathInHtml = (htmlStr: string): string =>
   BASE_PATH ? htmlStr.replace(/((?:src|href)=")\/(?!\/)/g, (_m, prefix) => `${prefix}${BASE_PATH}/`) : htmlStr
 
 // remark-html は生HTMLをそのまま通す（XSS, GHSA-9q5w-79cv-947m）。remark-html自身の
@@ -74,7 +76,7 @@ const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
 
 export default function MarkdownBody({ editRequestUrl, centered = false, body }: Props) {
   const unsafeHtml = remark().use(html).processSync(body).contents as string
-  const __html = withBasePath(sanitizeHtml(unsafeHtml, SANITIZE_OPTIONS))
+  const __html = withBasePathInHtml(sanitizeHtml(unsafeHtml, SANITIZE_OPTIONS))
   useTwitterWidgets()
 
   return (
