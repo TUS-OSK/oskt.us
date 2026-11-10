@@ -22,7 +22,8 @@ const pinnedFromUrl = (): { team: number; mode: BackgroundMode } | null => {
 }
 
 export default function HeroView() {
-  const [index, setIndex] = useState(0)
+  // -1 は巡回前(「応用数学しよう」)。WebGLが使えない・動きを減らす設定のときはこのまま
+  const [index, setIndex] = useState(-1)
   const [pinned, setPinned] = useState<BackgroundMode | null>(null)
   const [ready, setReady] = useState(false)
   const [showPicker, setShowPicker] = useState(false)
@@ -54,8 +55,8 @@ export default function HeroView() {
     window.history.replaceState(null, '', url)
   }
 
-  const team = TEAMS[index]
-  const mode = pinned ?? team.mode
+  const team = index >= 0 ? TEAMS[index] : null
+  const mode = pinned ?? team?.mode ?? 'seigaiha'
   return (
     <Container>
       {/* トップだけ黒地なので、上や左右に引っ張ったときに白地が覗かないようにする */}
@@ -87,7 +88,7 @@ export default function HeroView() {
           <span aria-hidden="true">
             そうだ、
             <br />
-            <GlitchWord word={team.word} />
+            <GlitchWord word={team?.word ?? '応用数学'} />
             しよう。
           </span>
         </Lead>

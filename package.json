@@ -16,6 +16,7 @@
     "dev": "next dev",
     "dev127": "next dev --hostname 127.0.0.1",
     "build": "next build",
+    "postbuild": "node scripts/generate-sitemap.js",
     "start": "next start"
   },
   "prettier": {
