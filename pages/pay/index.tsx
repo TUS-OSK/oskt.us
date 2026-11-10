@@ -72,10 +72,13 @@ export default function PayPage() {
   const [alreadyPaid, setAlreadyPaid] = useState<boolean | null>(null)
   const [updateSuccess, setUpdateSuccess] = useState(false)
 
-  // localStorage から復元
+  // 入力途中の会員情報を復元する。Discordログインで同じタブのまま一度外部へ遷移するので
+  // その間だけ保持できればよい。localStorage だと入力を途中でやめた人の氏名・電話番号・
+  // 生年月日が端末に無期限で残る(大学の共用PCで問題になる)ため、タブを閉じれば消える
+  // sessionStorage に置く
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(PROFILE_STORAGE_KEY)
+      const saved = sessionStorage.getItem(PROFILE_STORAGE_KEY)
       if (saved) setProfile(p => ({ ...p, ...JSON.parse(saved) }))
     } catch {}
   }, [])
@@ -150,7 +153,7 @@ export default function PayPage() {
       .then(res => res.json())
       .then(data => {
         setAlreadyPaid(!!data.already_paid)
-        // DB側の登録済みプロフィールをSSOTとして反映する（localStorageは端末ローカルの
+        // DB側の登録済みプロフィールをSSOTとして反映する（sessionStorageはタブ内の
         // 一時キャッシュなので、値がある項目はDB側を優先して上書きする）
         if (data.profile) {
           setProfile(p => ({
@@ -166,7 +169,7 @@ export default function PayPage() {
     const v = e.target.value as never
     setProfile(p => {
       const next = { ...p, [key]: v }
-      try { localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(next)) } catch {}
+      try { sessionStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(next)) } catch {}
       return next
     })
   }
@@ -232,13 +235,13 @@ export default function PayPage() {
       })
       const data = await res.json()
       if (data.url) {
-        localStorage.removeItem(PROFILE_STORAGE_KEY)
+        sessionStorage.removeItem(PROFILE_STORAGE_KEY)
         window.location.href = data.url
       } else if (res.status === 409 && data.error === 'already_paid_this_semester') {
         if (alreadyPaid) {
           // 事前チェックの時点で払い済みと分かっていた＝最初から情報更新のみが目的だったケース。
           // 409はプロフィール保存が完了した後に返るエラーなので、ここでは失敗ではなく成功として扱う。
-          localStorage.removeItem(PROFILE_STORAGE_KEY)
+          sessionStorage.removeItem(PROFILE_STORAGE_KEY)
           setUpdateSuccess(true)
         } else {
           // 事前チェック後、別タブ等で支払いが完了した等のレースケース
