@@ -11,7 +11,17 @@
 // テクスチャの焼き込みは OSK-hisyochan/resources/workspace/ink_sim/{bake_web,bake_bg}.py
 
 import type { BackgroundMode } from '../teams'
-import { ANT_GRID, ANT_SCALE, createAnts, createGradientDescent, createIsing, createLife, GD_HEIGHT, type GdStyle, GRID } from './simulations'
+import {
+  ANT_GRID,
+  ANT_SCALE,
+  createAnts,
+  createGradientDescent,
+  createIsing,
+  createLife,
+  GD_HEIGHT,
+  type GdStyle,
+  GRID,
+} from './simulations'
 
 export interface InkTextures {
   inkA: string // RG: 平方根圧縮した法線xy / B: 字形マスク
@@ -384,7 +394,11 @@ void main() {
     gl.bindVertexArray(segVao)
     const segBuffer = gl.createBuffer()
     gl.bindBuffer(gl.ARRAY_BUFFER, segBuffer)
-    for (const [name, size, offset] of [['aPos', 2, 0], ['aSeg', 4, 2], ['aStyle', 2, 6]] as const) {
+    for (const [name, size, offset] of [
+      ['aPos', 2, 0],
+      ['aSeg', 4, 2],
+      ['aStyle', 2, 6],
+    ] as const) {
       const loc = gl.getAttribLocation(segProg, name)
       gl.enableVertexAttribArray(loc)
       gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 32, offset * 4)
@@ -406,16 +420,30 @@ void main() {
       const verts: number[] = []
       for (let i = 0; i < segments.length; i += 6) {
         const [u0, v0, u1, v1, w, intensity] = segments.slice(i, i + 6)
-        const ox = Math.floor(u0), oy = Math.floor(v0)
-        const x0 = (u0 - ox) * TRAIL, y0 = (v0 - oy) * TRAIL, x1 = (u1 - ox) * TRAIL, y1 = (v1 - oy) * TRAIL
+        const ox = Math.floor(u0),
+          oy = Math.floor(v0)
+        const x0 = (u0 - ox) * TRAIL,
+          y0 = (v0 - oy) * TRAIL,
+          x1 = (u1 - ox) * TRAIL,
+          y1 = (v1 - oy) * TRAIL
         const pad = w + 2
         for (const sx of [-TRAIL, 0, TRAIL])
           for (const sy of [-TRAIL, 0, TRAIL]) {
-            const l = Math.min(x0, x1) + sx - pad, r = Math.max(x0, x1) + sx + pad
-            const b = Math.min(y0, y1) + sy - pad, t = Math.max(y0, y1) + sy + pad
+            const l = Math.min(x0, x1) + sx - pad,
+              r = Math.max(x0, x1) + sx + pad
+            const b = Math.min(y0, y1) + sy - pad,
+              t = Math.max(y0, y1) + sy + pad
             if (r < 0 || l > TRAIL || t < 0 || b > TRAIL) continue
             const seg = [x0 + sx, y0 + sy, x1 + sx, y1 + sy, w, intensity]
-            for (const [x, y] of [[l, b], [r, b], [l, t], [l, t], [r, b], [r, t]]) verts.push(x, y, ...seg)
+            for (const [x, y] of [
+              [l, b],
+              [r, b],
+              [l, t],
+              [l, t],
+              [r, b],
+              [r, t],
+            ])
+              verts.push(x, y, ...seg)
           }
       }
       if (verts.length) {
@@ -478,6 +506,44 @@ void main() {
     parallax.tx = (event.clientX / window.innerWidth) * 2 - 1
     parallax.ty = (event.clientY / window.innerHeight) * 2 - 1
     pointerAt = performance.now()
+  }
+
+  // スマホでは端末の傾きで光と視差を動かす。最初に持った角度を基準にし、持ち方が変わっても
+  // 自然に見えるよう基準はゆっくり追従させる。画面の回転(横持ち)も補正する
+  const tiltBase = { x: 0, y: 0, ready: false }
+  const onOrientation = (event: DeviceOrientationEvent) => {
+    if (event.beta === null || event.gamma === null) return
+    const angle = (window.screen.orientation?.angle ?? 0) % 360
+    const [x, y] =
+      angle === 90
+        ? [event.beta, -event.gamma]
+        : angle === 270 || angle === -90
+          ? [-event.beta, event.gamma]
+          : [event.gamma, event.beta]
+    if (!tiltBase.ready) Object.assign(tiltBase, { x, y, ready: true })
+    tiltBase.x += (x - tiltBase.x) * 0.004
+    tiltBase.y += (y - tiltBase.y) * 0.004
+    const dx = x - tiltBase.x,
+      dy = y - tiltBase.y
+    const clamp = (v: number, m: number) => Math.max(-m, Math.min(m, v))
+    light.tx = clamp(-0.6 + dx / 22, 1.8)
+    light.ty = clamp(-0.7 + dy / 22, 1.8)
+    parallax.tx = clamp(dx / 30, 1)
+    parallax.ty = clamp(dy / 30, 1)
+    pointerAt = performance.now()
+  }
+  type OrientationPermission = { requestPermission?: () => Promise<'granted' | 'denied'> }
+  const orientationApi = (window as unknown as { DeviceOrientationEvent?: OrientationPermission })
+    .DeviceOrientationEvent
+  const listenOrientation = () => window.addEventListener('deviceorientation', onOrientation, { passive: true })
+  // iOSはユーザー操作の中でしか許可を求められないため、ページ内の最初のタップで求める
+  const askOrientation = () => {
+    document.removeEventListener('click', askOrientation, true)
+    document.removeEventListener('touchend', askOrientation, true)
+    orientationApi
+      ?.requestPermission?.()
+      .then((state) => state === 'granted' && listenOrientation())
+      .catch(() => undefined)
   }
 
   const resize = () => {
@@ -581,6 +647,12 @@ void main() {
       intersection.observe(canvas)
       window.addEventListener('pointermove', onPointerMove, { passive: true })
       document.addEventListener('visibilitychange', onVisibility)
+      if (orientationApi && !reduceMotion) {
+        if (typeof orientationApi.requestPermission === 'function') {
+          document.addEventListener('click', askOrientation, true)
+          document.addEventListener('touchend', askOrientation, true)
+        } else listenOrientation()
+      }
       render()
       resume()
       onReady()
@@ -605,6 +677,9 @@ void main() {
       observer.disconnect()
       intersection.disconnect()
       window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('deviceorientation', onOrientation)
+      document.removeEventListener('click', askOrientation, true)
+      document.removeEventListener('touchend', askOrientation, true)
       document.removeEventListener('visibilitychange', onVisibility)
       canvas.removeEventListener('webglcontextlost', onContextLost)
     },

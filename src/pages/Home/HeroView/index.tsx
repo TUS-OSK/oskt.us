@@ -112,7 +112,12 @@ export default function HeroView() {
             </PickerButton>
           ))}
           {EXTRA_MODES.map((m) => (
-            <PickerButton key={m.mode} type="button" aria-pressed={pinned === m.mode} onClick={() => pin(m.team, m.mode)}>
+            <PickerButton
+              key={m.mode}
+              type="button"
+              aria-pressed={pinned === m.mode}
+              onClick={() => pin(m.team, m.mode)}
+            >
               {m.motif}
             </PickerButton>
           ))}
@@ -266,7 +271,9 @@ const Secondary = styled(StyledLink)`
   letter-spacing: 0.1em;
   color: ${INK_WHITE};
   border: solid 1px rgba(255, 255, 255, 0.4);
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
   &:hover {
     color: #7fd6ff;
     border-color: #7fd6ff;

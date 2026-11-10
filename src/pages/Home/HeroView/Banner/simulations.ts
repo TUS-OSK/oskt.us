@@ -17,7 +17,8 @@ export function createLife() {
   for (let i = 0; i < N; i++) glow[i] = state[i] = Math.random() < 0.2 ? 1 : 0
 
   const stamp = (cells: number[][]) => {
-    const ox = Math.floor(Math.random() * GRID), oy = Math.floor(Math.random() * GRID)
+    const ox = Math.floor(Math.random() * GRID),
+      oy = Math.floor(Math.random() * GRID)
     for (const [x, y] of cells) state[torus(ox + x, oy + y)] = 1
   }
   const step = () => {
@@ -26,7 +27,8 @@ export function createLife() {
     for (let y = 0; y < GRID; y++)
       for (let x = 0; x < GRID; x++) {
         let k = 0
-        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) if (dx || dy) k += state[torus(x + dx, y + dy)]
+        for (let dy = -1; dy <= 1; dy++)
+          for (let dx = -1; dx <= 1; dx++) if (dx || dy) k += state[torus(x + dx, y + dy)]
         const i = y * GRID + x
         const v = k === 3 || (k === 2 && state[i]) ? 1 : 0
         if (v && !state[i]) flash[i] = 1
@@ -37,7 +39,23 @@ export function createLife() {
     generation++
     // 盤面が静まったら、グライダーやRペントミノを投げ込んで動きを絶やさない
     if (alive < N * 0.03 || generation % 45 === 0)
-      stamp(Math.random() < 0.5 ? [[1, 0], [2, 1], [0, 2], [1, 2], [2, 2]] : [[1, 0], [2, 0], [0, 1], [1, 1], [1, 2]])
+      stamp(
+        Math.random() < 0.5
+          ? [
+              [1, 0],
+              [2, 1],
+              [0, 2],
+              [1, 2],
+              [2, 2],
+            ]
+          : [
+              [1, 0],
+              [2, 0],
+              [0, 1],
+              [1, 1],
+              [1, 2],
+            ],
+      )
   }
   return {
     update(dt: number) {
@@ -46,7 +64,8 @@ export function createLife() {
         acc -= 0.9
         step()
       }
-      const k = 1 - Math.exp(-dt * 3), fk = Math.exp(-dt * 1.5)
+      const k = 1 - Math.exp(-dt * 3),
+        fk = Math.exp(-dt * 1.5)
       for (let i = 0; i < N; i++) {
         glow[i] += (state[i] - glow[i]) * k
         flash[i] *= fk
@@ -73,7 +92,8 @@ export function createAnts(start: [number, number] = [0, 0], delay = 0, still = 
   // 状態ごとに 左折(-1)/右折(+1)
   // prettier-ignore
   const RULE = [-1,1,1,1,1,1,-1,-1,-1,1,1,1,1,-1,1,-1,1,-1,1,-1,1,1,-1,1,-1,-1,1,1,-1,1,1,1,-1,-1,-1,-1,-1,-1,1,1,1,-1,1,-1,-1,1,1,-1,1,1,-1,-1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,1,1,1,1,-1,1,-1,-1,1,-1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,-1,1,1,1,-1,-1,1,1,1,-1,1,-1,1,1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,1,-1,-1]
-  const G = ANT_GRID, n = G * G
+  const G = ANT_GRID,
+    n = G * G
   // 1描画あたりの歩数を c·n(n: 描き始めてからのフレーム数)で増やす。累計歩数は n² に比例し、
   // 正方形の一辺 ∝ √歩数 が時間に比例して育つので、成長の速さが一定に見える。
   // 待ち時間のあと約2.8秒(170フレーム)で盤面が埋まるよう c を決めている
@@ -144,17 +164,22 @@ export function createAnts(start: [number, number] = [0, 0], delay = 0, still = 
 export function createIsing() {
   const T = 1.05 // 双対の蜂の巣格子の臨界温度(約1.52)より低く、秩序を保ちつつゆらぐ
   const FLIPS_PER_SECOND = 9000
-  const lo = new Int8Array(N), up = new Int8Array(N)
-  const glo = new Float32Array(N), gup = new Float32Array(N)
+  const lo = new Int8Array(N),
+    up = new Int8Array(N)
+  const glo = new Float32Array(N),
+    gup = new Float32Array(N)
   const bytes = new Uint8Array(N * 2)
   lo.fill(1)
   up.fill(-1)
   // 位相のずれた領域をいくつか作っておき、その境界が動く様子を見せる
   for (let d = 0; d < 7; d++) {
-    const cx = Math.random() * GRID, cy = Math.random() * GRID, r = 6 + Math.random() * 12
+    const cx = Math.random() * GRID,
+      cy = Math.random() * GRID,
+      r = 6 + Math.random() * 12
     for (let y = 0; y < GRID; y++)
       for (let x = 0; x < GRID; x++) {
-        const dx = Math.min(Math.abs(x - cx), GRID - Math.abs(x - cx)), dy = Math.min(Math.abs(y - cy), GRID - Math.abs(y - cy))
+        const dx = Math.min(Math.abs(x - cx), GRID - Math.abs(x - cx)),
+          dy = Math.min(Math.abs(y - cy), GRID - Math.abs(y - cy))
         if (dx * dx + dy * dy < r * r) {
           lo[y * GRID + x] = -1
           up[y * GRID + x] = 1
@@ -170,7 +195,9 @@ export function createIsing() {
     update(dt: number) {
       acc += dt * FLIPS_PER_SECOND
       for (; acc >= 1; acc--) {
-        const x = Math.floor(Math.random() * GRID), y = Math.floor(Math.random() * GRID), i = y * GRID + x
+        const x = Math.floor(Math.random() * GRID),
+          y = Math.floor(Math.random() * GRID),
+          i = y * GRID + x
         if (Math.random() < 0.5) {
           const sum = up[i] + up[torus(x, y - 1)] + up[torus(x - 1, y)]
           const dE = -2 * lo[i] * sum
@@ -219,12 +246,16 @@ export function createGradientDescent(style: GdStyle) {
     })
     const fade = (t: number) => t * t * t * (t * (t * 6 - 15) + 10)
     return (x: number, y: number) => {
-      const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi
+      const xi = Math.floor(x),
+        yi = Math.floor(y),
+        xf = x - xi,
+        yf = y - yi
       const g = (ix: number, iy: number, dx: number, dy: number) => {
         const v = grads[(((iy % period) + period) % period) * period + (((ix % period) + period) % period)]
         return v[0] * dx + v[1] * dy
       }
-      const u = fade(xf), v = fade(yf)
+      const u = fade(xf),
+        v = fade(yf)
       const a = g(xi, yi, xf, yf) + u * (g(xi + 1, yi, xf - 1, yf) - g(xi, yi, xf, yf))
       const b = g(xi, yi + 1, xf, yf - 1) + u * (g(xi + 1, yi + 1, xf - 1, yf - 1) - g(xi, yi + 1, xf, yf - 1))
       return a + v * (b - a)
@@ -233,10 +264,12 @@ export function createGradientDescent(style: GdStyle) {
   const S = GD_HEIGHT
   const octaves = [perlin(4, 11), perlin(8, 23), perlin(16, 37)]
   const height = new Float32Array(S * S)
-  let lo = Infinity, hi = -Infinity
+  let lo = Infinity,
+    hi = -Infinity
   for (let y = 0; y < S; y++)
     for (let x = 0; x < S; x++) {
-      const u = x / S, v = y / S
+      const u = x / S,
+        v = y / S
       const h = octaves[0](u * 4, v * 4) + 0.45 * octaves[1](u * 8, v * 8) + 0.15 * octaves[2](u * 16, v * 16)
       height[y * S + x] = h
       lo = Math.min(lo, h)
@@ -245,10 +278,17 @@ export function createGradientDescent(style: GdStyle) {
   for (let i = 0; i < S * S; i++) height[i] = (height[i] - lo) / (hi - lo)
 
   const sample = (u: number, v: number) => {
-    const x = (((u % 1) + 1) % 1) * S - 0.5, y = (((v % 1) + 1) % 1) * S - 0.5
-    const x0 = Math.floor(x), y0 = Math.floor(y), fx = x - x0, fy = y - y0
+    const x = (((u % 1) + 1) % 1) * S - 0.5,
+      y = (((v % 1) + 1) % 1) * S - 0.5
+    const x0 = Math.floor(x),
+      y0 = Math.floor(y),
+      fx = x - x0,
+      fy = y - y0
     const at = (i: number, j: number) => height[((j + S) % S) * S + ((i + S) % S)]
-    return (at(x0, y0) * (1 - fx) + at(x0 + 1, y0) * fx) * (1 - fy) + (at(x0, y0 + 1) * (1 - fx) + at(x0 + 1, y0 + 1) * fx) * fy
+    return (
+      (at(x0, y0) * (1 - fx) + at(x0 + 1, y0) * fx) * (1 - fy) +
+      (at(x0, y0 + 1) * (1 - fx) + at(x0 + 1, y0 + 1) * fx) * fy
+    )
   }
   const E = 1 / S
   const grad = (u: number, v: number) => [
@@ -306,7 +346,14 @@ export function createGradientDescent(style: GdStyle) {
         const a0 = ease(p.clock / STEP_SECONDS)
         p.clock += dt
         const a1 = ease(p.clock / STEP_SECONDS)
-        segments.push(t.x0 + (t.x1 - t.x0) * a0, t.y0 + (t.y1 - t.y0) * a0, t.x0 + (t.x1 - t.x0) * a1, t.y0 + (t.y1 - t.y0) * a1, 0.6, 0.55)
+        segments.push(
+          t.x0 + (t.x1 - t.x0) * a0,
+          t.y0 + (t.y1 - t.y0) * a0,
+          t.x0 + (t.x1 - t.x0) * a1,
+          t.y0 + (t.y1 - t.y0) * a1,
+          0.6,
+          0.55,
+        )
         if (p.clock >= STEP_SECONDS) {
           p.x = t.x1
           p.y = t.y1

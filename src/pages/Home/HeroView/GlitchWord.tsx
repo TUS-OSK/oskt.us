@@ -29,8 +29,7 @@ export default function GlitchWord({ word }: { word: string }) {
       const length = Math.round(prev.length + (word.length - prev.length) * Math.min(1, p * 1.6))
       const settled = Math.floor(Math.max(0, p * 1.25 - 0.25) * word.length)
       let next = ''
-      for (let i = 0; i < length; i++)
-        next += i < settled ? word[i] : NOISE[Math.floor(Math.random() * NOISE.length)]
+      for (let i = 0; i < length; i++) next += i < settled ? word[i] : NOISE[Math.floor(Math.random() * NOISE.length)]
       setText(p >= 1 ? word : next)
       if (p < 1) raf = requestAnimationFrame(frame)
       else setGlitching(false)
