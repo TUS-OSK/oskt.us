@@ -66,7 +66,7 @@ const baseStyle = `
 
 const StyledLink = styled(StyledLink_)`
   ${baseStyle}
-  background-color: #da6272;
+  background-color: #c2414f;
   color: #fff;
 `
 

@@ -6,7 +6,7 @@ import Menu from '../Menu'
 export default function Header() {
   return (
     <Container>
-      <StyledLink href="/">
+      <StyledLink href="/" aria-label="応用数学研究部 トップページ">
         <Logo></Logo>
       </StyledLink>
       <MenuWrapper>

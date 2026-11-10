@@ -131,7 +131,7 @@ export default function Ridaisai2021() {
         </Body>
         <Footer></Footer>
         <Header>
-          <LogoWrapper href="/" open={openLogo}>
+          <LogoWrapper href="/" open={openLogo} aria-label="応用数学研究部 トップページ">
             <Logo />
           </LogoWrapper>
           {currentMode === 'desktop' ? null : (

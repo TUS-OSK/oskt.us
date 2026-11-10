@@ -1,4 +1,4 @@
-import { PageHead } from 'src/components/Head'
+import { descriptionFromMarkdown, PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
 import MarkdownBody from 'src/components/MarkdownBody'
 import MarkdownTitle from 'src/components/MarkdownTitle'
@@ -15,7 +15,7 @@ interface Props {
 export default function Article({ title, year, slug, body }: Props) {
   return (
     <>
-      <PageHead title={title}></PageHead>
+      <PageHead title={title} description={descriptionFromMarkdown(body)} type="article"></PageHead>
       <MainLayout>
         <Section>
           {title && <MarkdownTitle title={title}></MarkdownTitle>}

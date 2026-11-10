@@ -479,7 +479,7 @@ const Container = styled.div`
 `
 const Title = styled.h1`font-size: 1.8rem; font-weight: bold; margin-bottom: 8px;`
 const Subtitle = styled.p`color: #666; margin-bottom: 40px;`
-const LoadingMsg = styled.p`color: #888;`
+const LoadingMsg = styled.p`color: #6b6b6b;`
 const LoginSection = styled.div`display: flex; flex-direction: column; gap: 24px; padding: 8px 0;`
 const Step = styled.div`display: flex; gap: 16px; align-items: flex-start;`
 const StepNum = styled.div`
@@ -489,7 +489,7 @@ const StepNum = styled.div`
 `
 const StepBody = styled.div`display: flex; flex-direction: column; gap: 6px; flex: 1;`
 const StepLabel = styled.div`font-weight: bold;`
-const StepDesc = styled.div`font-size: 0.85rem; color: #888;`
+const StepDesc = styled.div`font-size: 0.85rem; color: #6b6b6b;`
 const StepDivider = styled.div`border-left: 2px dashed #ddd; height: 16px; margin-left: 13px;`
 const VisitNote = styled.p`
   font-size: 0.82rem; color: #666; line-height: 1.6; margin-top: 4px;
@@ -536,11 +536,11 @@ const UserBadge = styled.div`
 const BadgeCheck = styled.span`color: #16a34a; font-weight: bold;`
 const BadgeName = styled.span`font-weight: bold; flex: 1;`
 const BadgeChange = styled.button`
-  background: none; border: none; color: #888; font-size: 0.85rem; cursor: pointer; text-decoration: underline;
+  background: none; border: none; color: #6b6b6b; font-size: 0.85rem; cursor: pointer; text-decoration: underline;
 `
 const Form = styled.form`display: flex; flex-direction: column; gap: 20px;`
 const SectionTitle = styled.h2`font-size: 1rem; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-top: 8px;`
-const FieldNote = styled.p`font-size: 0.82rem; color: #888; margin-top: -12px;`
+const FieldNote = styled.p`font-size: 0.82rem; color: #6b6b6b; margin-top: -12px;`
 const Row = styled.div`display: grid; grid-template-columns: 1fr 1fr; gap: 16px;`
 const FieldGroup = styled.div`display: flex; flex-direction: column; gap: 6px;`
 const Label = styled.label`font-size: 0.9rem; font-weight: bold;`

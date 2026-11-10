@@ -81,7 +81,9 @@ export default function HeroView() {
       </Top>
       <Copy>
         <University>東京理科大学</University>
-        <Lead aria-label="そうだ、応用数学しよう。">
+        <Lead>
+          {/* 読み上げでは巡回する文字を毎回読ませず、固定の一文として伝える */}
+          <VisuallyHidden>そうだ、応用数学しよう。</VisuallyHidden>
           <span aria-hidden="true">
             そうだ、
             <br />
@@ -194,6 +196,15 @@ const Lead = styled.p`
   font-size: clamp(22px, 2.8vw, 40px);
   line-height: 1.5;
   letter-spacing: 0.08em;
+  white-space: nowrap;
+`
+
+const VisuallyHidden = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
   white-space: nowrap;
 `
 

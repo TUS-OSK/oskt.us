@@ -42,7 +42,7 @@ export default function Schedule({ title, body, currentYearCalendar }: Props) {
               })}
             </MarkdownBodyContainer>
           </CurrentYearPlan>
-          <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('archive')}></MarkdownBody>
+          <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('schedule')}></MarkdownBody>
         </Section>
       </MainLayout>
     </>

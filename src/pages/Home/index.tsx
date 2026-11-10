@@ -20,13 +20,15 @@ export default function Home({ newsData, aboutData, scheduleData, contactData }:
   return (
     <>
       <PageHead />
-      <HeroView></HeroView>
-      <ActivityGallery></ActivityGallery>
-      <AboutView aboutData={aboutData}></AboutView>
-      <BansView></BansView>
-      <ScheduleView scheduleData={scheduleData}></ScheduleView>
-      <NewsView newsData={newsData}></NewsView>
-      <ContactView contactData={contactData}></ContactView>
+      <main>
+        <HeroView></HeroView>
+        <ActivityGallery></ActivityGallery>
+        <AboutView aboutData={aboutData}></AboutView>
+        <BansView></BansView>
+        <ScheduleView scheduleData={scheduleData}></ScheduleView>
+        <NewsView newsData={newsData}></NewsView>
+        <ContactView contactData={contactData}></ContactView>
+      </main>
       <Footer></Footer>
     </>
   )

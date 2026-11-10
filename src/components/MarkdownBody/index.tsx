@@ -101,7 +101,7 @@ const EditRequestContainer = styled.div`
 `
 
 const ExternalLink = styled.a`
-  color: #bbb;
+  color: #767676;
   font-size: 14px;
 `
 
@@ -129,12 +129,12 @@ export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
   }
 
   a[href$='?pretty'] {
-    border: solid 1px #da6272;
+    border: solid 1px #c2414f;
     display: inline-flex;
     align-items: center;
     padding: 5px 20px;
     text-decoration: none;
-    color: #da6272;
+    color: #c2414f;
     font-weight: bold;
     transition-property: background-color, color, opacity;
     transition-duration: 0.2s;
@@ -146,8 +146,8 @@ export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
       display: inline-flex;
       width: 5px;
       height: 5px;
-      border-top: 2px solid #da6272;
-      border-right: 2px solid #da6272;
+      border-top: 2px solid #c2414f;
+      border-right: 2px solid #c2414f;
       transform: translateX(-6px) rotate(45deg);
       transition-property: border-top, border-right;
       transition-duration: 0.2s;
@@ -155,7 +155,7 @@ export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
     }
 
     &:hover {
-      background-color: #da6272;
+      background-color: #c2414f;
       color: #fff;
       &::before {
         border-top: 2px solid #fff;
@@ -250,9 +250,9 @@ export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
     display: block;
     font-family: inherit;
     padding: 1em 1.5em;
-    color: #da6272;
-    border-left: 0.25em solid #da6272;
-    background-color: color(#da6272 alpha(10%));
+    color: #c2414f;
+    border-left: 0.25em solid #c2414f;
+    background-color: rgba(194, 65, 79, 0.08);
     word-wrap: break-word;
   }
 
@@ -262,7 +262,7 @@ export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
     padding: 1em 1.5em;
     color: #5d639e;
     border-left: 0.25em solid #5d639e;
-    background-color: color(#5d639e alpha(10%));
+    background-color: rgba(93, 99, 158, 0.08);
     word-wrap: break-word;
   }
 `
