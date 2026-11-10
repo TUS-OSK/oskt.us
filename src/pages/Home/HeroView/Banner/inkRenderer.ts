@@ -11,7 +11,7 @@
 // テクスチャの焼き込みは OSK-hisyochan/resources/workspace/ink_sim/{bake_web,bake_bg}.py
 
 import type { BackgroundMode } from '../teams'
-import { ANT_GRID, createAnts, createGradientDescent, createIsing, createLife, GD_HEIGHT, type GdStyle, GRID } from './simulations'
+import { ANT_GRID, ANT_SCALE, createAnts, createGradientDescent, createIsing, createLife, GD_HEIGHT, type GdStyle, GRID } from './simulations'
 
 export interface InkTextures {
   inkA: string // RG: 平方根圧縮した法線xy / B: 字形マスク
@@ -61,6 +61,7 @@ const float TILT = 1.05;           // 背景面の傾き tan(θ)。θ≈46°で�
 const float SOFT_PAD = .4;
 const float CYCLE = ${TRAIL_CYCLE}.;
 const float GRID = ${GRID}.;
+const float ANT_SCALE = ${ANT_SCALE}.;
 
 // 距離dの線を、画面上でほぼ1pxの太さになるようにアンチエイリアスする
 float hair(float d, float w) {
@@ -89,7 +90,7 @@ vec3 trailGlow = vec3(0.);
 // 0: 機械学習 / 勾配降下法
 // 曲面は高さに比例して画面上方へ持ち上がって見える。画素ごとに、手前(画面下)側から
 // 奥へ向かって高さ場をレイマーチし、最初にぶつかった点を見えている点とする(手前の山が奥を隠す)
-const float RELIEF = .14;
+const float RELIEF = .26;
 vec3 gradientDescent(vec2 uv) {
   // 粗く進めて交差を見つけ、前後の区間を二分探索で詰める(段々の縞を消す)
   float lo = 0., hi = 1.;
@@ -116,7 +117,7 @@ vec3 gradientDescent(vec2 uv) {
 // 1: 競技プログラミング / ラングトンのアリ, 3: コンピュータサイエンス / ライフゲーム
 vec3 cells(vec2 uv, sampler2D grid, bool ant) {
   // アリは正方形の領域が育つ様子を丸ごと見せたいので、マスを細かくする
-  vec2 g = uv * (ant ? 105. : 40.);
+  vec2 g = uv * (ant ? ANT_SCALE : 40.);
   vec2 v = texelFetch(grid, ivec2(mod(floor(g), ant ? ${ANT_GRID}. : GRID)), 0).rg;
   vec2 f = abs(fract(g) - .5);
   float sq = 1. - smoothstep(.30, .30 + 1.5 * fwidth(g.x), max(f.x, f.y));
@@ -335,7 +336,8 @@ export function startInkRenderer({ canvas, frame, textures, mode: initialMode, o
       `#version 300 es
 precision highp float;
 uniform sampler2D uPrev; uniform float uDecay; out vec4 o;
-void main() { o = texture(uPrev, gl_FragCoord.xy / ${TRAIL}.) * uDecay; }`,
+// 掛け算だけだと8bitの丸めで薄い跡が永久に残るので、毎フレーム一定量も引いて必ず消す
+void main() { o = max(texture(uPrev, gl_FragCoord.xy / ${TRAIL}.) * uDecay - 1.2 / 255., 0.); }`,
     )
     const segProg = prog(
       `#version 300 es
@@ -443,7 +445,13 @@ void main() {
   }
   const factories: Record<BackgroundMode, (() => (dt: number) => void) | null> = {
     life: () => gridSim(5, createLife().update),
-    ant: () => gridSim(6, createAnts().update, ANT_GRID),
+    ant: () => {
+      // 画面の左寄り中央(墨とコピーに隠れにくい所)に当たるマスから歩き始める。背景は時間でゆっくり流れるので、
+      // シェーダの uv = 平面座標*.75 + 時刻*(.0035, .0018) と同じ式で今の位置を求める
+      const t = performance.now() / 1000
+      const start: [number, number] = [(-0.19 + t * 0.0035) * ANT_SCALE, (0.06 + t * 0.0018) * ANT_SCALE]
+      return gridSim(6, createAnts(start, FADE_SECONDS, reduceMotion).update, ANT_GRID)
+    },
     ising: () => gridSim(7, createIsing().update),
     gd: () => gdSim('step'),
     'gd-smooth': () => gdSim('smooth'),

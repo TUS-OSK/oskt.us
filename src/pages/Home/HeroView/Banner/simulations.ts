@@ -63,15 +63,21 @@ export function createLife() {
  * 斜めのハイウェイと入り組んだ塊が現れる。R: 状態の階調 G: アリの位置
  */
 export const ANT_GRID = 192
-export function createAnts() {
+export const ANT_SCALE = 150 // 背景の平面1単位あたりのマス数
+
+/**
+ * start: 歩き始めるマス(盤面の外なら折り返す) / delay: 背景の切り替えが終わるまで待つ秒数
+ * still: 動きを減らす設定。育ちきった盤面を1枚だけ見せる
+ */
+export function createAnts(start: [number, number] = [0, 0], delay = 0, still = false) {
   // 状態ごとに 左折(-1)/右折(+1)
   // prettier-ignore
   const RULE = [-1,1,1,1,1,1,-1,-1,-1,1,1,1,1,-1,1,-1,1,-1,1,-1,1,1,-1,1,-1,-1,1,1,-1,1,1,1,-1,-1,-1,-1,-1,-1,1,1,1,-1,1,-1,-1,1,1,-1,1,1,-1,-1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,1,-1,1,-1,1,-1,1,-1,1,1,1,1,1,-1,1,-1,-1,1,-1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,-1,1,1,1,-1,-1,1,1,1,-1,1,-1,1,1,-1,-1,1,1,-1,1,-1,-1,-1,-1,1,1,-1,-1]
   const G = ANT_GRID, n = G * G
   // 1描画あたりの歩数を c·n(n: 描き始めてからのフレーム数)で増やす。累計歩数は n² に比例し、
   // 正方形の一辺 ∝ √歩数 が時間に比例して育つので、成長の速さが一定に見える。
-  // 約3.5秒(210フレーム)で盤面が埋まるよう c を決めている
-  const C = 10
+  // 待ち時間のあと約2.8秒(170フレーム)で盤面が埋まるよう c を決めている
+  const C = 16
   const LIMIT = 230000 // 盤面がほぼ埋まる歩数。ここで少し見せてから最初からやり直す
   const HOLD_SECONDS = 2.5
   const at = (x: number, y: number) => ((y + G) % G) * G + ((x + G) % G)
@@ -84,13 +90,14 @@ export function createAnts() {
   let walked = 0
   let frames = 0
   let held = 0
+  let waited = 0
   const reset = () => {
     state.fill(0)
     walked = 0
     frames = 0
     held = 0
-    // 盤面の(0,0)が画面中央付近に来る
-    Object.assign(ant, { x: 0, y: 0, d: 0 })
+    const wrap = (v: number) => ((Math.floor(v) % G) + G) % G
+    Object.assign(ant, { x: wrap(start[0]), y: wrap(start[1]), d: 0 })
   }
   const step = () => {
     const i = at(ant.x, ant.y)
@@ -104,13 +111,16 @@ export function createAnts() {
   return {
     update(dt: number) {
       if (dt > 0) {
-        if (walked < LIMIT) {
+        if ((waited += dt) < delay) {
+          // 背景のフェードが終わるまでは1歩も進めず、1マス目から見せる
+        } else if (walked < LIMIT) {
           frames += dt * 60
           const steps = Math.min(LIMIT - walked, Math.ceil(C * frames * dt * 60))
           for (let s = 0; s < steps; s++) step()
         } else if ((held += dt) > HOLD_SECONDS) reset()
-      } else {
+      } else if (still) {
         // 動きを減らす設定の人には、育ちきった盤面を1枚だけ見せる
+        // (dt=0 は切り替え直後の1枚描きでも来るので、そこで育ちきらせてはいけない)
         while (walked < LIMIT) step()
       }
       const k = dt > 0 ? 1 - Math.exp(-dt * 12) : 1
