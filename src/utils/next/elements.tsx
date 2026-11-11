@@ -1,12 +1,10 @@
 import Link from 'next/link'
-import { ReactNode } from 'react'
+import { AnchorHTMLAttributes, ReactNode } from 'react'
 import styled from '@emotion/styled'
 
-interface StyledLinkProps {
+type StyledLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
   href: string
   children: ReactNode
-  className?: string
-  'aria-label'?: string
 }
 
 // 旧実装は `<Link passHref><a>...</a></Link>` という、Next.js 12以前の
@@ -15,9 +13,10 @@ interface StyledLinkProps {
 // ネストしてしまい、ブラウザがそれを矯正した結果サーバー側の出力と食い違って
 // 全ページでハイドレーションエラーになっていた(2026-11、Next 16移行時の見落とし)。
 // Next.js純正のLinkにclassNameを直接渡す形に修正する。
-export function StyledLink({ href, children, className, 'aria-label': ariaLabel }: StyledLinkProps) {
+// aria-current などの属性もそのまま <a> に渡す
+export function StyledLink({ href, children, ...rest }: StyledLinkProps) {
   return (
-    <StyledLink_ href={href} className={className} aria-label={ariaLabel}>
+    <StyledLink_ href={href} {...rest}>
       {children}
     </StyledLink_>
   )

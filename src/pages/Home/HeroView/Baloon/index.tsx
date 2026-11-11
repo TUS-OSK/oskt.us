@@ -1,6 +1,7 @@
 import { StyledLink as StyledLink_ } from 'src/utils/next/elements'
 import styled from '@emotion/styled'
 import baloon from '_configs/baloon.json'
+import { color } from 'src/design/tokens'
 
 const { label: BALOON_LABEL, path: BALOON_PATH, enabled: BALOON_ENABLED = true } = baloon
 
@@ -58,7 +59,7 @@ const baseStyle = `
   display: inline-flex;
   align-items: center;
   vertical-align: top;
-  border-radius: 4px;
+  border-radius: 2px;
   height: ${BALOON_HEIGHT}px;
   max-width: 200px;
   padding: 0 16px;
@@ -66,13 +67,18 @@ const baseStyle = `
 
 const StyledLink = styled(StyledLink_)`
   ${baseStyle}
-  background-color: #c2414f;
-  color: #fff;
+  background-color: ${color.ink};
+  color: ${color.base};
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: ${color.accent};
+  }
 `
 
 const DisabledButton = styled.div`
   ${baseStyle}
-  background-color: #aaa;
-  color: #eee;
+  background-color: ${color.surfaceRaised};
+  color: ${color.inkSubtle};
   cursor: not-allowed;
 `

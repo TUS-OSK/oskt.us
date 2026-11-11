@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
-import { Section, SectionTitle } from 'src/components/MainLayout/elements'
+import { Section } from 'src/components/ui/layout'
+import { color, radius, size } from 'src/design/tokens'
 import { withBasePath } from 'src/utils/basePath'
 
 interface Photo {
@@ -22,8 +23,7 @@ const PHOTOS: Photo[] = [
 // 無限ループのカルーセルではなく、素直な横並びグリッドにしてある(写真が増えたら見直す)
 export default function ActivityGallery() {
   return (
-    <Section>
-      <SectionTitle>活動の様子</SectionTitle>
+    <Section id="photos" label="Scenes" title="活動の風景">
       <Grid>
         {PHOTOS.map((photo, i) => (
           <Card key={i}>
@@ -55,9 +55,9 @@ const Grid = styled.div`
 
 const Card = styled.div`
   position: relative;
-  border-radius: 10px;
+  border-radius: ${radius};
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  border: solid 1px ${color.line};
   aspect-ratio: 4 / 3;
 
   img {
@@ -74,11 +74,11 @@ const Meta = styled.div`
   right: 0;
   bottom: 0;
   padding: 10px 14px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  background: linear-gradient(to top, rgba(13, 13, 18, 0.85), rgba(13, 13, 18, 0));
 `
 
 const Band = styled.div`
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
+  color: ${color.ink};
+  font-size: ${size.xs};
+  letter-spacing: 0.06em;
 `

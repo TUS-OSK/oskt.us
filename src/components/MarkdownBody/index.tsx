@@ -5,6 +5,7 @@ import sanitizeHtml from 'sanitize-html'
 import { useEffect } from 'react'
 import { css } from '@emotion/react'
 import { BASE_PATH } from 'src/utils/basePath'
+import { color, ease, font, radius, size, space } from 'src/design/tokens'
 
 interface Props {
   editRequestUrl?: string
@@ -74,9 +75,18 @@ const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
   allowedSchemes: ['http', 'https', 'mailto'],
 }
 
+// ページの見出し(h1)は Markdown の外で出すので、本文中の「# 見出し」は h2 に下げる
+// (古い記事に残っている h1 で、1ページに h1 が2つになるのを防ぐ)。
+// コードブロックは横スクロールするので、キーボードでもスクロールできるよう tabindex を付ける
+const adjustHtml = (htmlStr: string): string =>
+  htmlStr
+    .replace(/<h1(\s|>)/g, '<h2$1')
+    .replace(/<\/h1>/g, '</h2>')
+    .replace(/<pre>/g, '<pre tabindex="0">')
+
 export default function MarkdownBody({ editRequestUrl, centered = false, body }: Props) {
   const unsafeHtml = remark().use(html).processSync(body).contents as string
-  const __html = withBasePathInHtml(sanitizeHtml(unsafeHtml, SANITIZE_OPTIONS))
+  const __html = adjustHtml(withBasePathInHtml(sanitizeHtml(unsafeHtml, SANITIZE_OPTIONS)))
   useTwitterWidgets()
 
   return (
@@ -97,74 +107,76 @@ export default function MarkdownBody({ editRequestUrl, centered = false, body }:
 }
 
 const EditRequestContainer = styled.div`
-  padding: 40px 0;
+  margin-top: ${space.xl};
+  padding-top: ${space.md};
+  border-top: solid 1px ${color.line};
 `
 
 const ExternalLink = styled.a`
-  color: #767676;
-  font-size: 14px;
+  color: ${color.inkSubtle};
+  font-size: ${size.xs};
+  &:hover {
+    color: ${color.accent};
+  }
 `
 
+// Markdown 本文の見た目。黒地の上で長文を読みやすくする(行間広め・見出しは明朝)
 export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
-  line-height: 1.8em;
+  color: ${color.ink};
+  line-height: 2;
+  word-break: normal;
+  overflow-wrap: anywhere;
 
-  &::before {
-    content: '';
-    display: table;
+  & > :first-child {
+    margin-top: 0;
   }
 
-  &::after {
-    content: '';
-    display: table;
+  p {
+    margin: 0 0 1.4em;
+    ${(p) =>
+      p.centered &&
+      css`
+        text-align: center;
+      `}
   }
 
   strong {
     font-weight: bold;
-    font-family: 'novecentosans', sans-serif;
+    color: ${color.ink};
   }
 
   a {
-    color: inherit;
+    color: ${color.accent};
     text-decoration: underline;
+    text-decoration-color: ${color.accentLine};
+    text-underline-offset: 3px;
+    &:hover {
+      text-decoration-color: ${color.accent};
+    }
   }
 
+  /* 「?pretty」付きのリンクはボタンとして出す(Markdown ガイド参照) */
   a[href$='?pretty'] {
-    border: solid 1px #c2414f;
     display: inline-flex;
     align-items: center;
-    padding: 5px 20px;
+    gap: 8px;
+    margin: 0.4em 0;
+    padding: 9px 22px;
+    font-size: ${size.sm};
+    letter-spacing: 0.08em;
+    color: ${color.ink};
     text-decoration: none;
-    color: #c2414f;
-    font-weight: bold;
-    transition-property: background-color, color, opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
-    font-size: 0.8em;
-
-    &::before {
-      content: '';
-      display: inline-flex;
-      width: 5px;
-      height: 5px;
-      border-top: 2px solid #c2414f;
-      border-right: 2px solid #c2414f;
-      transform: translateX(-6px) rotate(45deg);
-      transition-property: border-top, border-right;
-      transition-duration: 0.2s;
-      transition-timing-function: ease;
+    border: solid 1px ${color.lineStrong};
+    border-radius: 2px;
+    transition:
+      color 0.2s ${ease},
+      border-color 0.2s ${ease};
+    &::after {
+      content: '→';
     }
-
     &:hover {
-      background-color: #c2414f;
-      color: #fff;
-      &::before {
-        border-top: 2px solid #fff;
-        border-right: 2px solid #fff;
-      }
-    }
-
-    &:active {
-      opacity: 0.7;
+      color: ${color.accent};
+      border-color: ${color.accent};
     }
   }
 
@@ -174,95 +186,129 @@ export const MarkdownBodyContainer = styled.div<{ centered: boolean }>`
   h4,
   h5,
   h6 {
-    font-family: 'novecentosans', sans-serif;
+    font-family: ${font.serif};
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
   }
 
-  h1 {
-    font-size: 2.5em;
-    line-height: 1.3em;
-    text-align: center;
-
-    &::after {
-      content: '';
-      display: block;
-      width: 40px;
-      border-bottom: solid 2px #5d639e;
-      margin: 50px auto;
-    }
-  }
-
+  /* 本文中の h1(古い記事に残っている)は、ページの見出しと競合しないよう h2 と同じ大きさにする */
+  h1,
   h2 {
-    position: relative;
-    font-size: 1.6em;
-    margin-bottom: 1.4em;
-    margin-top: 1.2em;
-
-    &::after {
-      content: '';
-      display: block;
-      height: 0.1em;
-      width: 100%;
-      position: absolute;
-      bottom: -0.5em;
-      background-image: linear-gradient(
-        -45deg,
-        #fff 25%,
-        #5d649e 25%,
-        #5d649e 50%,
-        #fff 50%,
-        #fff 75%,
-        #5d649e 75%,
-        #5d649e
-      );
-      background-size: 8px 8px;
-    }
+    font-size: ${size.lg};
+    margin: 2.6em 0 1em;
+    padding-bottom: 0.6em;
+    border-bottom: solid 1px ${color.line};
   }
 
   h3 {
-    font-size: 1.3em;
-    margin-bottom: 0.6em;
-    margin-top: 1em;
+    font-size: ${size.md};
+    margin: 2em 0 0.6em;
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 1px;
+      margin-right: 10px;
+      vertical-align: middle;
+      background: ${color.accent};
+    }
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: ${size.md};
+    margin: 1.6em 0 0.4em;
+    color: ${color.inkMuted};
+  }
+
+  ul,
+  ol {
+    margin: 0 0 1.4em;
+    padding-left: 1.4em;
+  }
+  li {
+    margin: 0.3em 0;
+  }
+  li::marker {
+    color: ${color.inkSubtle};
   }
 
   blockquote {
-    color: #6a737d;
-    border-left: 0.25em solid #dfe2e5;
-    padding-left: 1em;
-    margin-left: 0;
-    word-wrap: break-word;
+    margin: 0 0 1.4em;
+    padding: 0.2em 0 0.2em 1.2em;
+    color: ${color.inkMuted};
+    border-left: solid 2px ${color.lineStrong};
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    padding: 0.1em 0.4em;
+    background: ${color.surfaceRaised};
+    border-radius: 3px;
+  }
+  pre {
+    overflow-x: auto;
+    padding: ${space.sm};
+    background: ${color.surface};
+    border: solid 1px ${color.line};
+    border-radius: ${radius};
+    line-height: 1.6;
+    code {
+      padding: 0;
+      background: none;
+    }
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 0 0 1.4em;
+    font-size: ${size.sm};
+  }
+  th,
+  td {
+    padding: 8px 14px;
+    border: solid 1px ${color.line};
+    text-align: left;
+  }
+  th {
+    background: ${color.surface};
+  }
+
+  hr {
+    border: none;
+    border-top: solid 1px ${color.line};
+    margin: 2.4em 0;
   }
 
   img {
-    width: 300px;
     max-width: 100%;
+    height: auto;
+    border-radius: ${radius};
   }
 
-  p {
-    margin-top: 0;
-    ${(p) =>
-      p.centered &&
-      css`
-        text-align: center;
-      `}
+  iframe {
+    max-width: 100%;
+    border: none;
   }
 
-  .lang-warning {
-    display: block;
-    font-family: inherit;
-    padding: 1em 1.5em;
-    color: #c2414f;
-    border-left: 0.25em solid #c2414f;
-    background-color: rgba(194, 65, 79, 0.08);
-    word-wrap: break-word;
-  }
-
+  .lang-warning,
   .lang-info {
     display: block;
     font-family: inherit;
-    padding: 1em 1.5em;
-    color: #5d639e;
-    border-left: 0.25em solid #5d639e;
-    background-color: rgba(93, 99, 158, 0.08);
-    word-wrap: break-word;
+    padding: 1em 1.4em;
+    border-left: solid 2px ${color.accent};
+    background-color: ${color.accentSoft};
+  }
+  .lang-warning {
+    border-left-color: ${color.ink};
+    background-color: rgba(255, 255, 255, 0.06);
   }
 `
