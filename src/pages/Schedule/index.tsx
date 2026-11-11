@@ -1,59 +1,33 @@
+import type { FlowItem } from 'api/club'
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
-import MarkdownBody, { MarkdownBodyContainer } from 'src/components/MarkdownBody'
-import MarkdownTitle from 'src/components/MarkdownTitle'
-import { Section } from 'src/components/MainLayout/elements'
+import MarkdownBody from 'src/components/MarkdownBody'
+import { YearFlow } from 'src/components/ui/blocks'
+import { PageHeader, Section } from 'src/components/ui/layout'
 import { urlPageMdEdit } from 'src/utils/urls'
-import styled from '@emotion/styled'
-import { EventCalendar } from '../Home/ScheduleView'
 
 interface Props {
   title?: string
   body: string
-  currentYearCalendar: EventCalendar
+  flow: FlowItem[]
 }
 
-export default function Schedule({ title, body, currentYearCalendar }: Props) {
+export default function Schedule({ title = '年間スケジュール', body, flow }: Props) {
   return (
     <>
-      <PageHead title={title}></PageHead>
+      <PageHead
+        title={title}
+        description="東京理科大学 応用数学研究部(OSK)の1年の流れ。4月の新歓、未経験者向けの新入生講義、ICPC国内予選、理大祭など。"
+      />
       <MainLayout>
-        <Section>
-          {title && <MarkdownTitle title={title}></MarkdownTitle>}
-          <CurrentYearPlan>
-            <MarkdownBodyContainer centered={false}>
-              <h2>今年度（予定）</h2>
-              {currentYearCalendar.months.map((m) => {
-                const events = currentYearCalendar.events[m]
-                if (events === undefined) {
-                  return null
-                }
-                return (
-                  <div key={`${m}月`}>
-                    <h3>{m}月</h3>
-                    {events.map((e, _) => (
-                      <div key={encodeURIComponent(e.name.ja)}>
-                        <EventTitle id={encodeURIComponent(e.name.ja)}>{e.name.ja}</EventTitle>
-                        <EventDetail>{e.detail}</EventDetail>
-                      </div>
-                    ))}
-                  </div>
-                )
-              })}
-            </MarkdownBodyContainer>
-          </CurrentYearPlan>
-          <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('schedule')}></MarkdownBody>
+        <PageHeader label="Schedule" title={title} narrow />
+        <Section id="flow" label="Every year" title="1年の流れ" narrow>
+          <YearFlow items={flow} />
+        </Section>
+        <Section id="history" label="History" title="これまでの活動" narrow>
+          <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('schedule')} />
         </Section>
       </MainLayout>
     </>
   )
 }
-
-const CurrentYearPlan = styled.div``
-
-const EventTitle = styled.div`
-  font-family: 'novecentosans', sans-serif;
-  font-weight: bold;
-  margin-top: 16px;
-`
-const EventDetail = styled.div``

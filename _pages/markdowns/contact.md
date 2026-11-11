@@ -1,16 +1,11 @@
 ---
-title: 'コンタクト'
-clubroom: '神楽坂キャンパス 2号館 5階 2507教室'
-twitterId: 'tus_osk'
-mail: 'kagu.tus.osk@gmail.com'
+title: 'ご連絡'
 ---
 
 <!--
-  clubroom: 部室の場所
-  twitterId: @以降のユーザーID
-  mail: 連絡先メールアドレス
+  部室の場所・X(旧Twitter)のID・メールアドレスは _configs/contact.json に移しました
+  (全ページのフッターにも出すため)。
+  ここに書いた本文は、連絡先の下に表示されます。
 -->
 
-<!-- 
-  トップに部室, TwitterId, メールアドレスの情報が続く...
--->
+入部や見学のご相談は、Discord サーバーに参加していただくのがいちばん早くお返事できます。取材・共同企画・OB/OG の方からのご連絡は、メールでお願いします。

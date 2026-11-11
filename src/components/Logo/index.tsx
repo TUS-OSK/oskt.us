@@ -4,7 +4,7 @@ export default function Logo() {
       width="100"
       height="32"
       viewBox="0 0 100 32"
-      fill="black"
+      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       focusable="false"

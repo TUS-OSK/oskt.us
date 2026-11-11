@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
+import { color, ease, font, mq, radius, size, space } from 'src/design/tokens'
 import styled from '@emotion/styled'
 
 const DISCORD_CLIENT_ID = '1090498074012553266'
@@ -261,11 +262,14 @@ export default function PayPage() {
 
   return (
     <>
-      <PageHead title={alreadyPaid ? '会員情報の更新' : '部費のお支払い'} />
+      <PageHead
+        title={alreadyPaid ? '会員情報の更新' : '入部・見学'}
+        description="東京理科大学 応用数学研究部(OSK)への入部・見学と部費のお支払い。見学は Discord サーバーに参加するだけでできます。"
+      />
       <MainLayout>
         <Container>
-          <Title>{alreadyPaid ? '会員情報の更新' : '部費のお支払い'}</Title>
-          <Subtitle>{alreadyPaid ? '今学期分のお支払いは確認済みです。情報の更新のみ行えます。' : '¥2,000 / 半期（OB/OGの方は¥2,000以上の任意金額）'}</Subtitle>
+          <Title>{alreadyPaid ? '会員情報の更新' : '入部・見学'}</Title>
+          <Subtitle>{alreadyPaid ? '今学期分のお支払いは確認済みです。情報の更新のみ行えます。' : '見学は Discord サーバーに参加するだけでできます。入部は部費のお支払いで完了します（¥2,000 / 半期、OB/OGの方は¥2,000以上の任意金額）。'}</Subtitle>
 
           {authLoading ? (
             <LoadingMsg>Discordアカウントを確認中...</LoadingMsg>
@@ -477,95 +481,160 @@ export default function PayPage() {
   )
 }
 
+// 見た目はサイト共通の3色(黒地・白・青)に揃える。Discord の操作ボタンだけは
+// 「Discord のボタン」と分かるよう白地にロゴを置く
 const Container = styled.div`
-  max-width: 520px;
-  margin: 60px auto;
-  padding: 0 24px 80px;
+  box-sizing: border-box;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: ${space.xxl} ${space.md} ${space.xl};
+  ${mq.sp} {
+    padding-top: ${space.xl};
+  }
 `
-const Title = styled.h1`font-size: 1.8rem; font-weight: bold; margin-bottom: 8px;`
-const Subtitle = styled.p`color: #666; margin-bottom: 40px;`
-const LoadingMsg = styled.p`color: #6b6b6b;`
-const LoginSection = styled.div`display: flex; flex-direction: column; gap: 24px; padding: 8px 0;`
-const Step = styled.div`display: flex; gap: 16px; align-items: flex-start;`
+const Title = styled.h1`
+  margin: 0 0 ${space.xs};
+  font-family: ${font.serif};
+  font-weight: 600;
+  font-size: ${size.xl};
+  letter-spacing: 0.06em;
+`
+const Subtitle = styled.p`
+  margin: 0 0 ${space.lg};
+  color: ${color.inkMuted};
+`
+const LoadingMsg = styled.p`color: ${color.inkMuted};`
+const LoginSection = styled.div`display: flex; flex-direction: column; gap: ${space.md};`
+const Step = styled.div`
+  display: flex;
+  gap: ${space.sm};
+  align-items: flex-start;
+  padding: ${space.md};
+  background: ${color.surface};
+  border: solid 1px ${color.line};
+  border-radius: ${radius};
+`
 const StepNum = styled.div`
-  width: 28px; height: 28px; border-radius: 50%; background: #5865F2;
-  color: white; font-weight: bold; font-size: 0.85rem;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  border: solid 1px ${color.accent};
+  border-radius: 50%;
+  color: ${color.accent};
+  font-family: ${font.label};
+  font-size: ${size.sm};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 const StepBody = styled.div`display: flex; flex-direction: column; gap: 6px; flex: 1;`
-const StepLabel = styled.div`font-weight: bold;`
-const StepDesc = styled.div`font-size: 0.85rem; color: #6b6b6b;`
-const StepDivider = styled.div`border-left: 2px dashed #ddd; height: 16px; margin-left: 13px;`
+const StepLabel = styled.div`font-family: ${font.serif}; font-weight: 600; font-size: ${size.md};`
+const StepDesc = styled.div`font-size: ${size.sm}; color: ${color.inkMuted}; margin-bottom: 8px;`
+const StepDivider = styled.div`display: none;`
 const VisitNote = styled.p`
-  font-size: 0.82rem; color: #666; line-height: 1.6; margin-top: 4px;
-  background: #f7f7f9; border-radius: 6px; padding: 10px 12px;
+  margin: 8px 0 0;
+  font-size: ${size.sm};
+  color: ${color.inkMuted};
+  line-height: 1.7;
 `
-const DiscordButton = styled.button`
-  display: flex; align-items: center; gap: 10px;
-  background: #5865F2; color: white; border: none;
-  padding: 14px 28px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer;
-  &:hover { background: #4752c4; }
+const buttonStyle = `
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  align-self: flex-start;
+  padding: 12px 24px;
+  border: none; border-radius: 2px;
+  background: ${color.ink}; color: ${color.base};
+  font-family: inherit; font-size: ${size.sm}; letter-spacing: 0.06em;
+  text-decoration: none; cursor: pointer;
+  transition: background-color 0.2s ${ease};
+  &:hover { background: ${color.accent}; }
 `
-const DiscordIcon = styled.svg`width: 22px; height: 22px; flex-shrink: 0;`
+const DiscordButton = styled.button`${buttonStyle}`
+const DiscordIcon = styled.svg`width: 20px; height: 20px; flex-shrink: 0;`
 const NotInGuild = styled.div`
   display: flex; flex-direction: column; align-items: center;
-  gap: 12px; padding: 32px 0; text-align: center;
+  gap: 12px; padding: ${space.lg} 0; text-align: center;
+  a { align-self: center; }
 `
-const NotInGuildIcon = styled.div`font-size: 2.4rem;`
-const NotInGuildTitle = styled.h2`font-size: 1.2rem; font-weight: bold;`
-const NotInGuildDesc = styled.p`color: #555; line-height: 1.7;`
+const NotInGuildIcon = styled.div`font-size: 2rem;`
+const NotInGuildTitle = styled.h2`margin: 0; font-family: ${font.serif}; font-weight: 600; font-size: ${size.lg};`
+const NotInGuildDesc = styled.p`color: ${color.inkMuted}; line-height: 1.8;`
 const SuccessSection = styled.div`
   display: flex; flex-direction: column; align-items: center;
-  gap: 12px; padding: 48px 0; text-align: center;
+  gap: 12px; padding: ${space.xl} 0; text-align: center;
 `
 const SuccessIcon = styled.div`
-  width: 48px; height: 48px; border-radius: 50%; background: #16a34a;
-  color: white; font-size: 1.6rem; font-weight: bold;
+  width: 48px; height: 48px; border-radius: 50%;
+  border: solid 1px ${color.accent}; color: ${color.accent};
+  font-size: 1.4rem;
   display: flex; align-items: center; justify-content: center;
 `
-const SuccessTitle = styled.h2`font-size: 1.2rem; font-weight: bold;`
-const SuccessDesc = styled.p`color: #555; line-height: 1.7;`
-const InviteButton = styled.a`
-  display: flex; align-items: center; gap: 10px;
-  background: #5865F2; color: white; padding: 14px 24px;
-  border-radius: 8px; font-size: 1rem; font-weight: bold; text-decoration: none;
-  &:hover { background: #4752c4; }
-`
+const SuccessTitle = styled.h2`margin: 0; font-family: ${font.serif}; font-weight: 600; font-size: ${size.lg};`
+const SuccessDesc = styled.p`color: ${color.inkMuted}; line-height: 1.8;`
+const InviteButton = styled.a`${buttonStyle}`
 const RetryLink = styled.button`
-  background: none; border: none; color: #5865F2; font-size: 0.9rem; cursor: pointer; text-decoration: underline;
+  background: none; border: none; color: ${color.accent};
+  font-family: inherit; font-size: ${size.sm}; cursor: pointer; text-decoration: underline;
 `
 const UserBadge = styled.div`
   display: flex; align-items: center; gap: 8px; padding: 12px 16px;
-  background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px;
+  background: ${color.accentSoft}; border: solid 1px ${color.accentLine}; border-radius: ${radius};
 `
-const BadgeCheck = styled.span`color: #16a34a; font-weight: bold;`
+const BadgeCheck = styled.span`color: ${color.accent};`
 const BadgeName = styled.span`font-weight: bold; flex: 1;`
 const BadgeChange = styled.button`
-  background: none; border: none; color: #6b6b6b; font-size: 0.85rem; cursor: pointer; text-decoration: underline;
+  background: none; border: none; color: ${color.inkMuted};
+  font-family: inherit; font-size: ${size.sm}; cursor: pointer; text-decoration: underline;
 `
 const Form = styled.form`display: flex; flex-direction: column; gap: 20px;`
-const SectionTitle = styled.h2`font-size: 1rem; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-top: 8px;`
-const FieldNote = styled.p`font-size: 0.82rem; color: #6b6b6b; margin-top: -12px;`
-const Row = styled.div`display: grid; grid-template-columns: 1fr 1fr; gap: 16px;`
+const SectionTitle = styled.h2`
+  margin: ${space.sm} 0 0;
+  padding-bottom: 8px;
+  border-bottom: solid 1px ${color.line};
+  font-family: ${font.serif};
+  font-weight: 600;
+  font-size: ${size.md};
+`
+const FieldNote = styled.p`margin: -10px 0 0; font-size: ${size.sm}; color: ${color.inkMuted}; line-height: 1.7;`
+const Row = styled.div`
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  ${mq.sp} { grid-template-columns: 1fr; }
+`
 const FieldGroup = styled.div`display: flex; flex-direction: column; gap: 6px;`
-const Label = styled.label`font-size: 0.9rem; font-weight: bold;`
-const Req = styled.span`color: #e53e3e; margin-left: 2px;`
-const Input = styled.input`
-  border: 1px solid #ddd; border-radius: 6px; padding: 10px 12px;
-  font-size: 0.95rem; width: 100%; box-sizing: border-box;
-  &:focus { outline: none; border-color: #5865F2; box-shadow: 0 0 0 2px #5865f230; }
+const Label = styled.label`font-size: ${size.sm}; font-weight: bold;`
+const Req = styled.span`color: ${color.accent}; margin-left: 2px;`
+const fieldStyle = `
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  font-family: inherit;
+  font-size: ${size.md};
+  color: ${color.ink};
+  background: ${color.surface};
+  border: solid 1px ${color.lineStrong};
+  border-radius: ${radius};
+  &::placeholder { color: ${color.inkSubtle}; }
+  &:focus { outline: none; border-color: ${color.accent}; box-shadow: 0 0 0 2px ${color.accentSoft}; }
 `
-const Select = styled.select`
-  border: 1px solid #ddd; border-radius: 6px; padding: 10px 12px;
-  font-size: 0.95rem; width: 100%; box-sizing: border-box; background: white;
-  &:focus { outline: none; border-color: #5865F2; box-shadow: 0 0 0 2px #5865f230; }
-`
+const Input = styled.input`${fieldStyle}`
+const Select = styled.select`${fieldStyle}`
 const RadioGroup = styled.div`display: flex; flex-direction: column; gap: 10px;`
-const RadioLabel = styled.label`display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95rem;`
-const ErrorMsg = styled.p`color: #e53e3e; font-size: 0.9rem;`
+const RadioLabel = styled.label`
+  display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: ${size.md};
+  input { accent-color: ${color.accent}; width: 16px; height: 16px; }
+`
+const ErrorMsg = styled.p`
+  margin: 0;
+  padding: 10px 14px;
+  border-left: solid 2px ${color.ink};
+  background: rgba(255, 255, 255, 0.06);
+  font-size: ${size.sm};
+`
 const SubmitButton = styled.button`
-  background: #5865F2; color: white; border: none;
-  padding: 14px 24px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer;
-  &:disabled { opacity: 0.6; cursor: not-allowed; }
-  &:hover:not(:disabled) { background: #4752c4; }
+  ${buttonStyle}
+  align-self: stretch;
+  padding: 14px 24px;
+  font-size: ${size.md};
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+  &:hover:not(:disabled) { background: ${color.accent}; }
 `

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { MouseEventHandler } from 'react'
-import { baseCss, colorCss } from '../Button'
+import { baseCss, colorCss } from './Button'
 
 type Props = {
   children: string

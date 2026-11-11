@@ -1,3 +1,4 @@
+// 理大祭2021の過去ページ専用の旧ボタン(当時のデザインのまま残す)
 import { StyledLink } from 'src/utils/next/elements'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'

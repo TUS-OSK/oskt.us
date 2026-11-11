@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import Footer from 'src/components/Footer'
+import Footer from 'src/components/ui/SiteFooter'
 import Logo from 'src/components/Logo'
 import styled from '@emotion/styled'
 import { MEDIA_QUERY_MOBILE } from './breakpoint/helper'

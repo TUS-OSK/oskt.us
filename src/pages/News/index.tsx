@@ -1,79 +1,31 @@
-import { compareDesc, format } from 'date-fns'
+import { compareDesc } from 'date-fns'
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
-import MarkdownTitle from 'src/components/MarkdownTitle'
 import MarkdownBody from 'src/components/MarkdownBody'
-import { FixedSizeContents, Section } from 'src/components/MainLayout/elements'
-import { StyledLink as StyledLink_ } from 'src/utils/next/elements'
-import styled from '@emotion/styled'
-import { articleTo, urlPageMdEdit } from 'src/utils/urls'
+import { NewsList, type NewsItem } from 'src/components/ui/blocks'
+import { PageHeader, Section } from 'src/components/ui/layout'
+import { urlPageMdEdit } from 'src/utils/urls'
 
 interface Props {
   title?: string
   body: string
-  metaList: MetaItemProps[]
+  metaList: NewsItem[]
 }
 
-export default function News({ title, body, metaList }: Props) {
-  const sortedMetaList = metaList.sort((a, b) => compareDesc(a.date, b.date))
+export type MetaItemProps = NewsItem
+
+export default function News({ title = 'ニュース', body, metaList }: Props) {
+  const sorted = [...metaList].sort((a, b) => compareDesc(a.date, b.date))
   return (
     <>
-      <PageHead title={title}></PageHead>
+      <PageHead title={title} description="東京理科大学 応用数学研究部(OSK)のお知らせと活動記録。新歓、班の活動、理大祭、大会への参加など。" />
       <MainLayout>
-        <Section>
-          <FixedSizeContents size={520}>
-            {title && <MarkdownTitle title={title}></MarkdownTitle>}
-            <MetaList metaList={sortedMetaList}></MetaList>
-            <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('news')}></MarkdownBody>
-          </FixedSizeContents>
+        <PageHeader label="News" title={title} lead="お知らせと活動の記録です。" narrow />
+        <Section narrow>
+          <NewsList items={sorted} />
+          <MarkdownBody body={body} editRequestUrl={urlPageMdEdit('news')} />
         </Section>
       </MainLayout>
     </>
   )
 }
-
-export interface MetaItemProps {
-  year: string
-  slug: string
-  date: Date
-  caption: string
-}
-
-interface MetaListProps {
-  metaList: MetaItemProps[]
-}
-
-export function MetaList({ metaList }: MetaListProps) {
-  return (
-    <MetaListContainer>
-      {metaList.map(({ year, slug, date, caption }) => (
-        <MetaItem key={articleTo(year, slug)}>
-          <Hiduke>{format(date, 'yyyy/MM/dd')}</Hiduke>
-          <StyledLink href={articleTo(year, slug)}>{caption}</StyledLink>
-        </MetaItem>
-      ))}
-    </MetaListContainer>
-  )
-}
-
-const MetaListContainer = styled.ul`
-  padding: 0;
-  margin: 0;
-`
-
-const MetaItem = styled.li`
-  list-style: none;
-  margin-bottom: 24px;
-`
-
-const Hiduke = styled.time`
-  color: #333;
-  font-weight: bold;
-  font-family: 'novecentosans', sans-serif;
-  margin-right: 8px;
-`
-
-const StyledLink = styled(StyledLink_)`
-  color: #333;
-  text-decoration: underline;
-`

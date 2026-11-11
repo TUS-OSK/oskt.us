@@ -1,11 +1,9 @@
-import Menu from 'src/components/Menu'
 import { SWIFT } from 'src/utils/animations'
 import { StyledLink } from 'src/utils/next/elements'
 import { pageTo } from 'src/utils/urls'
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { BASE_PATH } from 'src/utils/basePath'
-import { css, Global } from '@emotion/react'
 import { rise, slideArrow, slideMenu, T_AROUND, T_SLIDE } from './animations'
 import Baloon from './Baloon'
 import Banner from './Banner'
@@ -59,32 +57,17 @@ export default function HeroView() {
   const mode = pinned ?? team?.mode ?? 'seigaiha'
   return (
     <Container>
-      {/* トップだけ黒地なので、上や左右に引っ張ったときに白地が覗かないようにする */}
-      <Global
-        styles={css`
-          html {
-            background: #0d0d12;
-            overscroll-behavior: none;
-          }
-          body {
-            background: #fff;
-          }
-        `}
-      />
       <Banner mode={mode} onReady={() => setReady(true)}></Banner>
-      <Top>
-        <BaloonWrapper>
-          <Baloon></Baloon>
-        </BaloonWrapper>
-        <MenuWrapper>
-          <Menu></Menu>
-        </MenuWrapper>
-      </Top>
+      <BaloonWrapper>
+        <Baloon></Baloon>
+      </BaloonWrapper>
       <Copy>
         <University>東京理科大学</University>
         <Lead>
           {/* 読み上げでは巡回する文字を毎回読ませず、固定の一文として伝える */}
-          <VisuallyHidden>そうだ、応用数学しよう。</VisuallyHidden>
+          <VisuallyHidden>
+            そうだ、応用数学しよう。東京理科大学 応用数学研究部(応数研・OSK)は、数学・プログラミング・データサイエンス・統計・AIに取り組む部活(サークル)です。
+          </VisuallyHidden>
           <span aria-hidden="true">
             そうだ、
             <br />
@@ -133,38 +116,16 @@ export default function HeroView() {
   )
 }
 
-const BALOON_MARGIN = 40
 const INK_WHITE = 'rgba(255, 255, 255, 0.92)'
 
-const Top = styled.div`
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-  display: flex;
-  flex-flow: column;
-  padding: ${BALOON_MARGIN}px 24px 0;
-  box-sizing: border-box;
-
-  @media (max-width: 859px) {
-    padding-top: 8px;
-  }
-
-  a {
-    color: rgba(255, 255, 255, 0.72);
-    border-bottom-color: rgba(255, 255, 255, 0.4);
-  }
-`
-
+// 告知のバルーン(_configs/baloon.json)。ヘッダーに常に「入部・見学」があるので、
+// 画面に固定せずヒーローの右下に置き、スクロールすれば本文に重ならないようにする
 const BaloonWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   bottom: 24px;
   right: 24px;
-  z-index: 100;
+  z-index: 3;
   animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND + 0.2}s 1 normal both running;
-`
-
-const MenuWrapper = styled.div`
-  animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
 `
 
 const Copy = styled.div`
@@ -210,6 +171,8 @@ const VisuallyHidden = styled.span`
 `
 
 const Teams = styled.p`
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 0 24px;
   font-size: 13px;
   line-height: 1.9;
@@ -226,7 +189,8 @@ const TeamName = styled.span`
   white-space: nowrap;
   transition: color 0.4s ease;
   &:not(:last-child)::after {
-    content: ' / ';
+    content: '/';
+    margin: 0 0.5em;
     color: rgba(255, 255, 255, 0.3);
   }
   &[data-active='true'] {
