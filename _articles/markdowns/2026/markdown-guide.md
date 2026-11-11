@@ -33,9 +33,9 @@ private: true
 
 ## 注意書きボックス
 
-生のHTMLタグに`lang-warning`・`lang-info`というクラスを付けると、色付きの注意書きになります。
+生のHTMLタグに`lang-warning`・`lang-info`というクラスを付けると、枠付きの注意書きになります。
 
-<p class="lang-warning">警告用（赤系）：締切や注意事項など</p>
+<p class="lang-warning">警告用（白い線）：締切や注意事項など</p>
 
 <p class="lang-info">案内用（青系）：補足情報など</p>
 
