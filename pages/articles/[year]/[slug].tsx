@@ -16,8 +16,8 @@ interface Props {
   body: string
 }
 
-export default function ArticlePage({ meta: { title }, year, slug, body }: Props) {
-  return <Article title={title} year={year} slug={slug} body={body} />
+export default function ArticlePage({ meta: { title, date }, year, slug, body }: Props) {
+  return <Article title={title} date={date ?? null} year={year} slug={slug} body={body} />
 }
 
 type Paths = {

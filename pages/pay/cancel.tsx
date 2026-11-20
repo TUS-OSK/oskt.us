@@ -2,6 +2,7 @@ import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { color, ease, font, size, space } from 'src/design/tokens'
 
 export default function PayCancelPage() {
   return (
@@ -22,33 +23,43 @@ export default function PayCancelPage() {
 }
 
 const Container = styled.div`
-  max-width: 480px;
-  margin: 80px auto;
-  padding: 0 24px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: ${space.xxl} ${space.md} ${space.xl};
   text-align: center;
 `
 const Icon = styled.div`
-  font-size: 3rem;
-  color: #e53e3e;
-  margin-bottom: 16px;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto ${space.md};
+  border: solid 1px ${color.accent};
+  border-radius: 50%;
+  color: ${color.accent};
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 const Title = styled.h1`
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 16px;
+  margin: 0 0 ${space.sm};
+  font-family: ${font.serif};
+  font-weight: 600;
+  font-size: ${size.xl};
+  letter-spacing: 0.06em;
 `
 const Message = styled.p`
-  color: #555;
-  line-height: 1.7;
-  margin-bottom: 32px;
+  margin: 0 0 ${space.lg};
+  color: ${color.inkMuted};
+  line-height: 1.9;
 `
 const RetryLink = styled(Link)`
   display: inline-block;
-  padding: 12px 24px;
-  background: #5865F2;
-  color: white;
-  border-radius: 8px;
+  padding: 12px 28px;
+  background: ${color.ink};
+  color: ${color.base};
+  border-radius: 2px;
   text-decoration: none;
-  font-weight: bold;
-  &:hover { background: #4752c4; }
+  letter-spacing: 0.06em;
+  transition: background-color 0.2s ${ease};
+  &:hover { background: ${color.accent}; }
 `

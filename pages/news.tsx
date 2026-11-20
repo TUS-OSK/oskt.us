@@ -1,51 +1,40 @@
 import { isValid } from 'date-fns'
 import News from 'src/pages/News'
-import { getPageMarkdown, getArticlesAll, MarkdownMeta, ArticleMarkdownData } from 'api/markdowns'
+import { getPageMarkdown, getArticlesAll, ArticleMarkdownData, MarkdownBaseMeta } from 'api/markdowns'
 import { GetStaticProps } from 'next'
-import { notUndefined } from 'src/utils/api'
+import type { NewsItem } from 'src/components/ui/blocks'
+
+/** 一覧に出す記事の見出しだけ(本文は含めない。ページのデータを軽くするため) */
+export interface NewsMeta {
+  year: string
+  slug: string
+  date: string
+  caption: string
+}
+
+/** 日付とキャプションがあり、private でない記事だけを一覧に出す */
+export function listNewsMeta(articles: ArticleMarkdownData<MarkdownBaseMeta>[]): NewsMeta[] {
+  return articles.flatMap(({ year, slug, meta }) => {
+    const { date, caption } = meta
+    if (caption === undefined || date === undefined || meta.private) return []
+    const d = new Date(date)
+    return isValid(d) ? [{ year, slug, date: d.toISOString(), caption }] : []
+  })
+}
+
+export const toNewsItems = (metas: NewsMeta[]): NewsItem[] => metas.map((m) => ({ ...m, date: new Date(m.date) }))
 
 interface Props {
-  meta: MarkdownMeta
+  title: string
   body: string
-  articlesStr: string
+  news: NewsMeta[]
 }
 
-export function createfilterdArticleMetaList(articles: ArticleMarkdownData[]) {
-  return articles
-    .map(({ year, slug, meta }) => {
-      const { date, caption } = meta
-      // NOTE: 表示するのに必要なdataとcaptionがあるものだけfilterする
-      if (caption !== undefined && date !== undefined && isValid(new Date(date))) {
-        // NOTE: privateがfalseな記事のみNewsで公開する
-        return !meta.private
-          ? {
-              year,
-              slug,
-              date: new Date(date),
-              caption,
-            }
-          : undefined
-      }
-    })
-    .filter(notUndefined)
-}
-
-export default function NewsPage({ meta: { title }, body, articlesStr }: Props) {
-  const articles: ArticleMarkdownData[] = JSON.parse(articlesStr)
-  const filterdArticleMetaList = createfilterdArticleMetaList(articles)
-
-  return <News title={title} body={body} metaList={filterdArticleMetaList}></News>
+export default function NewsPage({ title, body, news }: Props) {
+  return <News title={title} body={body} metaList={toNewsItems(news)} />
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const articles = getArticlesAll()
   const { meta, body } = getPageMarkdown('news')
-
-  return {
-    props: {
-      meta,
-      body,
-      articlesStr: JSON.stringify(articles),
-    },
-  }
+  return { props: { title: meta.title ?? 'ニュース', body, news: listNewsMeta(getArticlesAll()) } }
 }

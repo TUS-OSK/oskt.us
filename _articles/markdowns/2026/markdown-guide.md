@@ -25,15 +25,17 @@ private: true
 
 リンクの末尾に`?pretty`を付けると、ボタン風の見た目になります。
 
-[年間スケジュールへ?pretty](../schedule?pretty)
+[年間スケジュールへ?pretty](/schedule?pretty)
 
 書き方: `[表示テキスト](リンク先?pretty)`
 
+サイト内へのリンクは `/schedule` のように `/` から始めて書いてください。`../schedule` のような相対パスは、記事のある階層によってリンク先がずれて切れてしまいます。
+
 ## 注意書きボックス
 
-生のHTMLタグに`lang-warning`・`lang-info`というクラスを付けると、色付きの注意書きになります。
+生のHTMLタグに`lang-warning`・`lang-info`というクラスを付けると、枠付きの注意書きになります。
 
-<p class="lang-warning">警告用（赤系）：締切や注意事項など</p>
+<p class="lang-warning">警告用（白い線）：締切や注意事項など</p>
 
 <p class="lang-info">案内用（青系）：補足情報など</p>
 

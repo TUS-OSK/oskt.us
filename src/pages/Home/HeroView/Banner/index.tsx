@@ -1,86 +1,104 @@
 import styled from '@emotion/styled'
-import { BOUNCE, CUBIC_OUT, SWIFT } from 'src/utils/animations'
-import { fade, flip, pic } from './animations'
-import { T_AROUND, T_COVER, T_FLIP, T_PIC } from '../animations'
+import { useEffect, useRef, useState } from 'react'
+import { withBasePath } from 'src/utils/basePath'
+import type { BackgroundMode } from '../teams'
+import { type InkRenderer, startInkRenderer } from './inkRenderer'
 
-export default function TopBanner() {
+const STATIC_INK = '/images/hero/ink_static.webp'
+
+interface Props {
+  mode: BackgroundMode
+  onReady?: () => void
+}
+
+// 静止画を先に出し、WebGLの準備ができたら立体描画へ切り替える。
+// WebGL2が使えない環境では静止画のまま表示される
+export default function TopBanner({ mode, onReady }: Props) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const frameRef = useRef<HTMLImageElement>(null)
+  const rendererRef = useRef<InkRenderer | null>(null)
+  const modeRef = useRef(mode)
+  const onReadyRef = useRef(onReady)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const frame = frameRef.current
+    if (!canvas || !frame) return
+    const renderer = startInkRenderer({
+      canvas,
+      frame,
+      mode: modeRef.current,
+      textures: {
+        inkA: withBasePath('/images/hero/ink_a.webp'),
+        inkB: withBasePath('/images/hero/ink_b.webp'),
+        soft: withBasePath('/images/hero/ink_soft.webp'),
+        tropical: withBasePath('/images/hero/tropical.webp'),
+        trails: withBasePath('/images/hero/trails.webp'),
+      },
+      onReady: () => {
+        setReady(true)
+        onReadyRef.current?.()
+      },
+    })
+    rendererRef.current = renderer
+    return () => renderer.destroy()
+  }, [])
+
+  useEffect(() => {
+    modeRef.current = mode
+    rendererRef.current?.setMode(mode)
+  }, [mode])
+
   return (
-    <Banner>
-      <Image></Image>
-      <Names></Names>
-    </Banner>
+    <>
+      <Canvas ref={canvasRef} data-ready={ready} aria-hidden="true" />
+      <Title>
+        <Ink ref={frameRef} src={withBasePath(STATIC_INK)} alt="応用数学研究部" data-ready={ready} />
+      </Title>
+    </>
   )
 }
 
-const Banner = styled.div`
-  position: relative;
-  z-index: 0;
+const Canvas = styled.canvas`
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  &[data-ready='true'] {
+    opacity: 1;
+  }
 `
 
-const Image = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-image: url('/images/bg.jpg');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  animation:
-    ${fade} ${T_PIC}s ${SWIFT} ${T_AROUND}s 1 normal both running,
-    ${pic} ${T_PIC * 0.9}s ${CUBIC_OUT} ${T_AROUND}s 1 normal both running;
+const Title = styled.h1`
+  margin: 0;
+  font-size: inherit;
 `
 
-function Names() {
-  return (
-    <NamesContainer>
-      <First>応用</First>
-      <Second>数学</Second>
-      <Third>研究部</Third>
-      <Forth>東京理科大学</Forth>
-    </NamesContainer>
-  )
-}
-
-const NamesContainer = styled.div`
+// 描画側はこの要素の矩形に墨を合わせるので、位置と大きさはCSSだけで調整できる
+const Ink = styled.img`
   position: absolute;
-  top: 50%;
+  z-index: 1;
+  display: block;
+  aspect-ratio: 1214 / 1843;
+  top: 92px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 30px;
-  line-height: 36px;
-  color: rgba(0, 0, 0, 0.7);
-  background-color: rgba(255, 255, 255, 0.9);
-  font-weight: bold;
-  letter-spacing: 5px;
-  perspective: 200px;
-  padding: 40px;
-  white-space: nowrap;
-`
+  transform: translateX(-50%);
+  height: min(calc(100svh - 340px), 132vw);
+  transition: opacity 1.2s ease;
+  &[data-ready='true'] {
+    opacity: 0;
+  }
 
-const Name = styled.div`
-  margin-bottom: 0;
-  transform-origin: 50% 0;
-`
-
-const First = styled(Name)`
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER}s 1 normal both running;
-`
-
-const Second = styled(Name)`
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 0.5}s 1 normal both running;
-`
-const Third = styled(Name)`
-  margin-bottom: 1px;
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP}s 1 normal both running;
-`
-
-const Forth = styled(Name)`
-  font-weight: normal;
-  font-size: 20px;
-  margin-bottom: 0;
-  color: rgba(0, 0, 0, 0.4);
-  letter-spacing: 3px;
-  animation: ${flip} ${T_FLIP}s ${BOUNCE} ${T_COVER + T_FLIP * 1.5}s 1 normal both running;
+  @media (min-width: 860px) {
+    top: 50%;
+    left: auto;
+    right: max(3vw, calc(50% - 600px));
+    transform: translateY(-50%);
+    /* 75vw: 画面が狭いときに左のコピーと重ならないようにする */
+    height: min(94vh, 1120px, 75vw);
+  }
 `

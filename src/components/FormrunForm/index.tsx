@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useEffect, useRef, useState } from 'react'
-import Button from '../Button'
+import Button from './Button'
 import FormrunSubmitButton from './FormrunSubmitButton'
 
 const CANCEL_PRIMARY_COLOR = '#555'

@@ -13,7 +13,7 @@ interface Props {
 export default function Thumbnail({ title, description, src, url }: Props) {
   return (
     <Container>
-      <Image src={src}></Image>
+      <Image src={src} alt=""></Image>
       <Info>
         {url ? (
           <ExternalLinkTitle href={url} target="_blank" rel="noopener">

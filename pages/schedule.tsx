@@ -1,40 +1,19 @@
-import Schedule from 'src/pages/Schedule'
-import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
+import { getYearFlow, type FlowItem } from 'api/club'
+import { getPageMarkdown } from 'api/markdowns'
 import { GetStaticProps } from 'next'
-import { EventCalendar, Month } from 'src/pages/Home/ScheduleView'
-
-export interface EventDataMD {
-  name: {
-    ja: string
-    en: string
-  }
-  detail: string
-  top: boolean
-}
-
-export type EventCalendarMD = { [m in Month]?: EventDataMD[] }
-
-export interface ScheduleMeta {
-  startMonth: number
-  eventCalendar: EventCalendarMD
-}
+import Schedule from 'src/pages/Schedule'
 
 interface Props {
-  meta: MarkdownMeta<ScheduleMeta>
+  title: string
   body: string
+  flow: FlowItem[]
 }
 
-export default function SchedulePage({ meta: { title, startMonth, eventCalendar }, body }: Props) {
-  return <Schedule title={title} body={body} currentYearCalendar={new EventCalendar(startMonth, eventCalendar)} />
+export default function SchedulePage({ title, body, flow }: Props) {
+  return <Schedule title={title} body={body} flow={flow} />
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { meta, body } = getPageMarkdown<ScheduleMeta>('schedule')
-
-  return {
-    props: {
-      meta,
-      body,
-    },
-  }
+  const { meta, body } = getPageMarkdown('schedule')
+  return { props: { title: meta.title ?? '年間スケジュール', body, flow: getYearFlow() } }
 }

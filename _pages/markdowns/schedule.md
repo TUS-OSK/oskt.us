@@ -2,45 +2,43 @@
 title: '年間スケジュール'
 # 年度が何月から始まるのか
 startMonth: 4
+# 「1年の流れ」(トップと年間スケジュールに出る)。毎年の行事を書く
 # 月:
 #   - name:
 #       ja(文字列): 日本語のイベント名前
-#       en(文字列): 英語のイベントの名前(必須ではないがあった方がアニメーションがきれい)
+#       en(文字列): 英語のイベントの名前
 #     detail(文字列): そのイベントの詳細文
-#     top(true または false): そのイベントをoskt.usトップのカレンダーに表示させるかどうか
+#     top(true または false): トップの「1年の流れ」に表示させるかどうか
 eventCalendar:
   4:
     - name:
-        ja: '新入部員募集'
-        en: 'Recruiting'
+        ja: '新歓'
+        en: 'Welcome'
+      detail: '班紹介や部室でのボードゲーム会など。見学は Discord からいつでもできます。'
       top: true
   5:
     - name:
-        ja: '2023年度班活動スタート'
-        en: 'Start of Lectures'
-      detail: '今年度活動予定の班はLT班/Web班/CG班/Kyopro班/CTF班/Python班です。'
-  6:
-    - name:
-        ja: '成果発表会（LT会）'
-        en: 'First LT'
+        ja: '新入生講義・班の活動開始'
+        en: 'Lectures'
+      detail: 'プログラミング未経験の新入生向けに、C++ で AtCoder の問題を解けるところまでを全3〜4回で教えます。'
       top: true
-  8:
+  7:
     - name:
-        ja: 'ハッカソン夏合宿'
-        en: 'Summer Camp (Hackathon)'
-      detail: '対面での合宿の代わりにハッカソン等のイベントを予定しております。'
+        ja: 'ICPC 国内予選'
+        en: 'ICPC'
+      detail: '国際大学対抗プログラミングコンテスト。3人1組のチームで出場します(2026年度は6チーム)。'
       top: true
-
   11:
     - name:
         ja: '理大祭'
         en: 'Ridaisai'
+      detail: 'コーヒーを出すカフェ「Hackers'' Cafe」と、各班の作品展示を行います。'
       top: true
-
   3:
     - name:
-        ja: '追いコン'
-        en: 'Farewell Party'
+        ja: '春季合宿(予定)'
+        en: 'Spring Camp'
+      detail: '班を越えて集まり、勉強会や企画を行います。'
       top: true
 ---
 

@@ -1,71 +1,23 @@
-import { getArticlesAll, getPageMarkdown } from 'api/markdowns'
+import { getClubInfo, getYearFlow, type ClubInfo, type FlowItem } from 'api/club'
+import { getArticlesAll } from 'api/markdowns'
 import { GetStaticProps } from 'next'
 import Home from 'src/pages/Home'
-import { EventCalendar } from 'src/pages/Home/ScheduleView'
-import { AboutMeta } from './about'
-import { ContactMeta } from './contact'
-import { createfilterdArticleMetaList } from './news'
-import { ScheduleMeta } from './schedule'
+import { listNewsMeta, type NewsMeta, toNewsItems } from './news'
 
 interface Props {
-  aboutData: {
-    meta: AboutMeta
-  }
-  scheduleData: {
-    meta: ScheduleMeta
-  }
-  newsData: {
-    articlesStr: string
-  }
-  contactData: {
-    meta: ContactMeta
-  }
+  club: ClubInfo
+  flow: FlowItem[]
+  news: NewsMeta[]
 }
 
-export default function IndexPage({
-  aboutData: _aboutData,
-  scheduleData: _scheduleData,
-  newsData: _newsData,
-  contactData: _contactData,
-}: Props) {
-  const { caption } = _aboutData.meta
-
-  const eventCalendar = new EventCalendar(_scheduleData.meta.startMonth, _scheduleData.meta.eventCalendar, true)
-
-  const articles = JSON.parse(_newsData.articlesStr)
-
-  const { clubroom, twitterId, mail } = _contactData.meta
-
-  return (
-    <Home
-      aboutData={{ caption }}
-      scheduleData={{ eventCalendar }}
-      newsData={{ metaList: createfilterdArticleMetaList(articles) }}
-      contactData={{ clubroom, twitterId, mail }}
-    />
-  )
+export default function IndexPage({ club, flow, news }: Props) {
+  return <Home club={club} flow={flow} news={toNewsItems(news)} />
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { meta: aboutMeta } = getPageMarkdown<AboutMeta>('about')
-  const { meta: scheduleMeta } = getPageMarkdown<ScheduleMeta>('schedule')
-  const { meta: contactMeta } = getPageMarkdown<ContactMeta>('contact')
-  const articles = getArticlesAll()
-
-  return {
-    props: {
-      aboutData: {
-        meta: aboutMeta,
-      },
-      scheduleData: {
-        meta: scheduleMeta,
-      },
-      contactData: {
-        meta: contactMeta,
-      },
-      newsData: {
-        articlesStr: JSON.stringify(articles),
-      },
-    },
-  }
-}
+export const getStaticProps: GetStaticProps<Props> = async () => ({
+  props: {
+    club: getClubInfo(),
+    flow: getYearFlow(true),
+    news: listNewsMeta(getArticlesAll()),
+  },
+})

@@ -1,27 +1,19 @@
-import About from 'src/pages/About'
-import { getPageMarkdown, MarkdownMeta } from 'api/markdowns'
+import { getClubInfo, type ClubInfo } from 'api/club'
+import { getPageMarkdown } from 'api/markdowns'
 import { GetStaticProps } from 'next'
-
-export interface AboutMeta {
-  caption: string
-}
+import About from 'src/pages/About'
 
 interface Props {
-  meta: MarkdownMeta<AboutMeta>
+  title: string
+  club: ClubInfo
   body: string
 }
 
-export default function AboutPage({ meta: { title, caption }, body }: Props) {
-  return <About title={title} caption={caption} body={body} />
+export default function AboutPage({ title, club, body }: Props) {
+  return <About title={title} club={club} body={body} />
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { meta, body } = getPageMarkdown<AboutMeta>('about')
-
-  return {
-    props: {
-      meta,
-      body,
-    },
-  }
+  const { meta, body } = getPageMarkdown('about')
+  return { props: { title: meta.title ?? '応数研とは', club: getClubInfo(), body } }
 }
