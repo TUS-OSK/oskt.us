@@ -1,0 +1,5 @@
+User-agent: *
+# PRプレビュー(本番と同じ内容の下書き)は検索結果に載せない
+Disallow: /pr-preview/
+
+Sitemap: https://oskt.us/sitemap.xml
