@@ -28,7 +28,11 @@ function useTwitterWidgets() {
     // もしwidgets-jsが読み込まれてたらそのままウィジェットを生成する
     if (twttr) {
       const twitterWidgets = twttr.widgets as TwitterWidgets
-      return twitterWidgets.load()
+      // load() は Promise を返す。effect からそのまま返すと、React がページを離れるときに
+      // 後片付けの関数として呼ぼうとして落ちる(2回目以降の Markdown ページで
+      // 「Application error」になっていた)。呼ぶだけにして何も返さない
+      twitterWidgets.load()
+      return
     }
 
     // widgets-jsが読み込まれてなかったらheadへscriptを投げる
