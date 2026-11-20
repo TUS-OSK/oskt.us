@@ -7,7 +7,8 @@ import { BASE_PATH } from 'src/utils/basePath'
 import { rise, slideArrow, T_AROUND, T_SLIDE } from './animations'
 import Banner from './Banner'
 import GlitchWord from './GlitchWord'
-import { type BackgroundMode, EXTRA_MODES, TEAM_INTERVAL_MS, TEAMS } from './teams'
+import { teamPath, TEAMS as ALL_TEAMS } from 'src/data/teams'
+import { type BackgroundMode, EXTRA_MODES, INTRO, TEAM_INTERVAL_MS, TEAMS } from './teams'
 
 // 背景モチーフの比較用。PRプレビューか ?bg= 付きのときだけ、巡回を止めて班を選べるUIを出す
 const pinnedFromUrl = (): { team: number; mode: BackgroundMode } | null => {
@@ -54,32 +55,38 @@ export default function HeroView() {
 
   const team = index >= 0 ? TEAMS[index] : null
   const mode = pinned ?? team?.mode ?? 'seigaiha'
+  // 日本科学未来館のゾーン紹介のように「名前・短い言葉・問いかけ・詳しくみる」の順で見せる
+  const shown = team ?? INTRO
+  const more = team
+    ? { href: teamPath(ALL_TEAMS[index]), subject: team.name }
+    : { href: pageTo('about'), subject: '応数研' }
   return (
     <Container>
       <Banner mode={mode} onReady={() => setReady(true)}></Banner>
       <Copy>
-        <University>東京理科大学</University>
-        <Lead>
-          {/* 読み上げでは巡回する文字を毎回読ませず、固定の一文として伝える */}
-          <VisuallyHidden>
-            そうだ、応用数学しよう。東京理科大学 応用数学研究部(応数研・OSK)は、数学・プログラミング・データサイエンス・統計・AIに取り組む部活(サークル)です。
-          </VisuallyHidden>
-          <span aria-hidden="true">
-            そうだ、
-            <br />
-            <GlitchWord word={team?.word ?? '応用数学'} />
-            しよう。
-          </span>
-        </Lead>
-        <Teams>
-          {TEAMS.map((t, i) => (
-            <TeamName key={t.mode} data-active={i === index}>
-              {t.word}
-            </TeamName>
-          ))}
-        </Teams>
+        {/* 読み上げでは巡回する文字を毎回読ませず、固定の一文として伝える */}
+        <VisuallyHidden as="p">
+          東京理科大学 応用数学研究部(応数研・OSK)は、数学・プログラミング・データサイエンス・統計・AIに取り組む部活(サークル)です。
+        </VisuallyHidden>
+        <div aria-hidden="true">
+          <University>{shown.name}</University>
+          <Lead>
+            <GlitchWord word={shown.phrase} />
+          </Lead>
+          <Question key={shown.question}>{shown.question}</Question>
+          <Teams>
+            {TEAMS.map((t, i) => (
+              <TeamName key={t.mode} data-active={i === index}>
+                {t.name.replace(/班$/, '')}
+              </TeamName>
+            ))}
+          </Teams>
+        </div>
         <Actions>
-          <Primary href={pageTo('about')}>部の様子</Primary>
+          <Primary href={more.href}>
+            {/* スマホでは折り返して右下のボタンと重なるので「詳しくみる」だけにする */}
+            <span className="pc">{more.subject}について</span>詳しくみる
+          </Primary>
           <Secondary href={pageTo('contact')}>ご連絡</Secondary>
         </Actions>
       </Copy>
@@ -119,7 +126,8 @@ const Copy = styled.div`
   z-index: 2;
   left: 24px;
   right: 24px;
-  bottom: 24px;
+  /* スマホでは右下に「入部はこちらから！」が固定で出るので、その上に置く */
+  bottom: 88px;
   color: ${INK_WHITE};
   animation: ${rise} ${T_SLIDE}s ${SWIFT} ${T_AROUND}s 1 normal both running;
 
@@ -127,24 +135,42 @@ const Copy = styled.div`
     left: max(6vw, calc(50% - 600px));
     right: auto;
     bottom: 16vh;
-    max-width: 440px;
+    max-width: 560px;
   }
 `
 
+// 未来館の「5階」にあたる、いま見せている班の名前
 const University = styled.p`
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-size: 14px;
-  letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.2em;
+  color: #7fd6ff;
 `
 
 const Lead = styled.p`
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', serif;
-  font-size: clamp(22px, 2.8vw, 40px);
+  font-size: clamp(26px, 3.4vw, 48px);
   line-height: 1.5;
   letter-spacing: 0.08em;
   white-space: nowrap;
+`
+
+// 班が変わるたびに、問いかけを下からふわっと出す
+const Question = styled.p`
+  margin: 0 0 20px;
+  min-height: 3.6em;
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+  animation: ${rise} 0.6s ${SWIFT} both;
+
+  @media (max-width: 859px) {
+    font-size: 14px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `
 
 const VisuallyHidden = styled.span`
@@ -164,9 +190,9 @@ const Teams = styled.p`
   line-height: 1.9;
   color: rgba(255, 255, 255, 0.5);
 
+  /* スマホでは見出しの上の班名と同じことになるので出さない */
   @media (max-width: 859px) {
-    margin-bottom: 16px;
-    font-size: 12px;
+    display: none;
   }
 `
 
@@ -212,10 +238,20 @@ const PickerButton = styled.button`
 
 const Actions = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+  a {
+    white-space: nowrap;
+  }
 `
 
 const Primary = styled(StyledLink)`
+  white-space: nowrap;
+  @media (max-width: 859px) {
+    .pc {
+      display: none;
+    }
+  }
   padding: 10px 28px;
   font-size: 14px;
   letter-spacing: 0.1em;

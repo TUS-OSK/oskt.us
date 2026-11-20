@@ -36,7 +36,8 @@ for (const file of readdirSync(DIR).filter((f) => f.endsWith('.md') && f !== 'RE
     }
   }
   need('name', '班の名前')
-  need('word', '「そうだ、〇〇しよう。」の〇〇')
+  need('phrase', 'トップの見出しに出る短い言葉')
+  need('question', 'トップの見出しの下に出る問いかけ')
   need('tagline', '一行の紹介')
   need('beginner', '「未経験でも？」の答え')
   needList('topics', 'やっていること')
@@ -65,7 +66,8 @@ for (const file of readdirSync(DIR).filter((f) => f.endsWith('.md') && f !== 'RE
 
   teams[id] = {
     name: d.name,
-    word: d.word,
+    phrase: d.phrase,
+    question: d.question,
     tagline: d.tagline,
     about,
     topics: d.topics,
