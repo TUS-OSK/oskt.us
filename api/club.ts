@@ -9,12 +9,6 @@ export interface Fact {
   text: string
 }
 
-export interface Stat {
-  value: string
-  unit?: string
-  label: string
-}
-
 export interface FlowItem {
   month: number
   name: string
@@ -24,13 +18,11 @@ export interface FlowItem {
 export interface ClubInfo {
   caption: string
   facts: Fact[]
-  stats: Stat[]
 }
 
 interface AboutYaml {
   caption?: string
   facts?: Fact[]
-  stats?: Stat[]
 }
 
 interface ScheduleYaml {
@@ -43,7 +35,6 @@ export function getClubInfo(): ClubInfo {
   return {
     caption: meta.caption ?? '',
     facts: meta.facts ?? [],
-    stats: (meta.stats ?? []).map((s) => ({ ...s, value: String(s.value) })),
   }
 }
 

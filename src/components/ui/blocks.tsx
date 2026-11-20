@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import { format } from 'date-fns'
 import Motif, { type MotifType } from 'src/components/Motif'
-import { type Team, teamPath } from 'src/data/teams'
+import { ReactNode } from 'react'
+import { type Team, TEAMS, WEEKDAYS, scheduleText, teamPath } from 'src/data/teams'
 import { color, ease, font, mq, radius, size, space } from 'src/design/tokens'
 import { StyledLink } from 'src/utils/next/elements'
 import { articleTo } from 'src/utils/urls'
@@ -13,18 +14,164 @@ export interface Fact {
   text: string
 }
 
-export function FactList({ facts }: { facts: Fact[] }) {
+/** extra: 項目名ごとに、文の下へ足す要素(「活動日」の週の表など) */
+export function FactList({ facts, extra = {} }: { facts: Fact[]; extra?: Record<string, ReactNode> }) {
   return (
     <Facts>
       {facts.map((f) => (
         <FactRow key={f.label}>
           <dt>{f.label}</dt>
           <dd>{f.text}</dd>
+          {extra[f.label] && <dd className="extra">{extra[f.label]}</dd>}
         </FactRow>
       ))}
     </Facts>
   )
 }
+
+// ───────── 1週間の活動(班の定例を曜日ごとに) ─────────
+
+export function WeekTable() {
+  const byDay = WEEKDAYS.map((_, day) =>
+    TEAMS.filter((t) => t.meeting?.day === day).sort((a, b) => a.meeting!.start.localeCompare(b.meeting!.start)),
+  )
+  return (
+    <Week
+      aria-label="1週間の班の集まり"
+      style={{ gridTemplateColumns: byDay.map((d) => (d.length ? '1.4fr' : '0.6fr')).join(' ') }}
+    >
+      {WEEKDAYS.map((label, day) => (
+        <Day key={label} data-empty={byDay[day].length === 0} data-weekend={day >= 5}>
+          <DayName>{label}</DayName>
+          <DayBody>
+            {byDay[day].length === 0 ? (
+              <Empty>—</Empty>
+            ) : (
+              byDay[day].map((t) => (
+                <Slot key={t.id} href={teamPath(t)}>
+                  <time>{t.meeting!.start}〜</time>
+                  <span>{t.name}</span>
+                  {t.meeting!.place && <small>{t.meeting!.place}</small>}
+                </Slot>
+              ))
+            )}
+          </DayBody>
+        </Day>
+      ))}
+    </Week>
+  )
+}
+
+const Week = styled.ol`
+  margin: ${space.sm} 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  border: solid 1px ${color.line};
+  border-radius: ${radius};
+  overflow: hidden;
+
+  ${mq.tab} {
+    /* 曜日を縦に並べる(列幅は style で付けているので上書きする) */
+    grid-template-columns: 1fr !important;
+  }
+`
+
+const Day = styled.li`
+  display: flex;
+  flex-direction: column;
+  min-height: 116px;
+  border-left: solid 1px ${color.line};
+  &:first-of-type {
+    border-left: none;
+  }
+
+  ${mq.tab} {
+    flex-direction: row;
+    min-height: 0;
+    border-left: none;
+    border-top: solid 1px ${color.line};
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+`
+
+const DayName = styled.span`
+  padding: 6px 0;
+  text-align: center;
+  font-family: ${font.serif};
+  font-size: ${size.sm};
+  color: ${color.ink};
+  border-bottom: solid 1px ${color.line};
+  background: rgba(255, 255, 255, 0.03);
+
+  [data-empty='true'] > & {
+    color: ${color.inkSubtle};
+  }
+
+  ${mq.tab} {
+    flex: 0 0 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: none;
+    border-right: solid 1px ${color.line};
+  }
+`
+
+const DayBody = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+`
+
+const Empty = styled.span`
+  margin: auto;
+  color: ${color.inkSubtle};
+  ${mq.tab} {
+    margin: 0;
+  }
+`
+
+const Slot = styled(StyledLink)`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  border-radius: ${radius};
+  background: rgba(127, 214, 255, 0.08);
+  border: solid 1px rgba(127, 214, 255, 0.22);
+  color: ${color.ink};
+  line-height: 1.4;
+  transition: border-color 0.2s ${ease};
+
+  time {
+    font-family: ${font.label};
+    font-size: ${size.sm};
+    color: ${color.accent};
+    letter-spacing: 0.04em;
+  }
+  span {
+    font-size: ${size.xs};
+  }
+  small {
+    font-size: ${size.xs};
+    color: ${color.inkMuted};
+  }
+  &:hover {
+    border-color: ${color.accent};
+  }
+
+  ${mq.tab} {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 10px;
+  }
+`
 
 const Facts = styled.dl`
   margin: 0;
@@ -48,78 +195,16 @@ const FactRow = styled.div`
     color: ${color.inkMuted};
     line-height: 1.9;
   }
+  /* 表などは項目名の列もまたいで、行の幅いっぱいに出す */
+  dd.extra {
+    grid-column: 1 / -1;
+  }
 
   ${mq.sp} {
     grid-template-columns: 1fr;
     gap: 4px;
     padding: ${space.sm} 0;
   }
-`
-
-// ───────── 数字で見る応数研 ─────────
-
-export interface Stat {
-  value: string
-  unit?: string
-  label: string
-}
-
-export function StatTiles({ stats }: { stats: Stat[] }) {
-  return (
-    <Stats>
-      {stats.map((s) => (
-        <StatItem key={s.label}>
-          <StatValue>
-            {s.value}
-            {s.unit && <small>{s.unit}</small>}
-          </StatValue>
-          <StatLabel>{s.label}</StatLabel>
-        </StatItem>
-      ))}
-    </Stats>
-  )
-}
-
-const Stats = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-left: solid 1px ${color.line};
-
-  ${mq.tab} {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`
-
-const StatItem = styled.li`
-  padding: ${space.md} ${space.md} ${space.sm};
-  border-right: solid 1px ${color.line};
-  border-bottom: solid 1px ${color.line};
-  border-top: solid 1px ${color.line};
-`
-
-const StatValue = styled.p`
-  margin: 0;
-  font-family: ${font.label};
-  font-size: ${size.xxl};
-  line-height: 1.1;
-  color: ${color.ink};
-
-  small {
-    margin-left: 4px;
-    font-family: ${font.sans};
-    font-size: ${size.sm};
-    color: ${color.inkMuted};
-  }
-`
-
-const StatLabel = styled.p`
-  margin: ${space.xs} 0 0;
-  font-size: ${size.sm};
-  line-height: 1.7;
-  color: ${color.inkMuted};
 `
 
 // ───────── 班カード ─────────
@@ -145,7 +230,7 @@ export function TeamGrid({ teams }: { teams: Team[] }) {
             <TeamBody>
               <TeamName>{team.name}</TeamName>
               <TeamTagline>{team.tagline}</TeamTagline>
-              <TeamSchedule>{team.schedule ?? 'プロジェクト型で活動'}</TeamSchedule>
+              <TeamSchedule>{scheduleText(team) ?? 'プロジェクト型で活動'}</TeamSchedule>
             </TeamBody>
           </TeamCard>
         </li>

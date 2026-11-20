@@ -151,4 +151,9 @@ const Bottom = styled.div`
   padding: ${space.md};
   text-align: center;
   color: ${color.inkSubtle};
+
+  /* 右下に「入部はこちらから！」が固定で出るので、一番下の行が隠れないよう空ける */
+  ${mq.tab} {
+    padding-bottom: calc(${space.md} + 64px);
+  }
 `

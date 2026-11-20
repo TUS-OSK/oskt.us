@@ -4,8 +4,7 @@ import { pageTo } from 'src/utils/urls'
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { BASE_PATH } from 'src/utils/basePath'
-import { rise, slideArrow, slideMenu, T_AROUND, T_SLIDE } from './animations'
-import Baloon from './Baloon'
+import { rise, slideArrow, T_AROUND, T_SLIDE } from './animations'
 import Banner from './Banner'
 import GlitchWord from './GlitchWord'
 import { type BackgroundMode, EXTRA_MODES, TEAM_INTERVAL_MS, TEAMS } from './teams'
@@ -58,9 +57,6 @@ export default function HeroView() {
   return (
     <Container>
       <Banner mode={mode} onReady={() => setReady(true)}></Banner>
-      <BaloonWrapper>
-        <Baloon></Baloon>
-      </BaloonWrapper>
       <Copy>
         <University>東京理科大学</University>
         <Lead>
@@ -117,16 +113,6 @@ export default function HeroView() {
 }
 
 const INK_WHITE = 'rgba(255, 255, 255, 0.92)'
-
-// 告知のバルーン(_configs/baloon.json)。ヘッダーに常に「入部・見学」があるので、
-// 画面に固定せずヒーローの右下に置き、スクロールすれば本文に重ならないようにする
-const BaloonWrapper = styled.div`
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  z-index: 3;
-  animation: ${slideMenu} ${T_SLIDE}s ${SWIFT} ${T_AROUND + 0.2}s 1 normal both running;
-`
 
 const Copy = styled.div`
   position: absolute;
@@ -255,7 +241,7 @@ const Secondary = styled(StyledLink)`
     border-color: #7fd6ff;
   }
 
-  /* スマホでは右下の入会ボタンと重なるので、そちらに任せる */
+  /* スマホでは右下の「入部はこちらから！」と重なるので、そちらに任せる */
   @media (max-width: 859px) {
     display: none;
   }

@@ -2,7 +2,7 @@ import type { ClubInfo } from 'api/club'
 import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
 import MarkdownBody from 'src/components/MarkdownBody'
-import { FactList, StatTiles, TeamGrid } from 'src/components/ui/blocks'
+import { FactList, WeekTable, TeamGrid } from 'src/components/ui/blocks'
 import { PageHeader, Section } from 'src/components/ui/layout'
 import LinkButton, { ButtonRow } from 'src/components/ui/LinkButton'
 import { TEAMS } from 'src/data/teams'
@@ -21,7 +21,7 @@ export default function About({ title, club, body }: Props) {
       <MainLayout>
         <PageHeader label="About" title={title} lead={club.caption} />
         <Section id="facts" label="Basics" title="はじめての方へ" narrow>
-          <FactList facts={club.facts} />
+          <FactList facts={club.facts} extra={{ 活動日: <WeekTable /> }} />
           <ButtonRow style={{ marginTop: 32 }}>
             <LinkButton href="/pay">入部・見学</LinkButton>
             <LinkButton href="/faq" variant="secondary">
@@ -29,14 +29,11 @@ export default function About({ title, club, body }: Props) {
             </LinkButton>
           </ButtonRow>
         </Section>
-        <Section id="numbers" label="In numbers" title="数字で見る応数研">
-          <StatTiles stats={club.stats} />
-        </Section>
         <Section
           id="teams"
           label="Teams"
           title="班とプロジェクト"
-          lead="入部したら、興味に合わせて班を選びます。いくつ掛け持ちしても構いません。"
+          lead="入部したら、気になる班に顔を出してみてくださいね。いくつ掛け持ちしても大丈夫です！"
         >
           <TeamGrid teams={TEAMS} />
         </Section>

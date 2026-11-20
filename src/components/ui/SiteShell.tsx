@@ -1,7 +1,9 @@
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
-import { color, font, size } from 'src/design/tokens'
+import JoinBalloon from 'src/components/JoinBalloon'
+import { color, ease, font, size } from 'src/design/tokens'
 import SiteFooter from './SiteFooter'
 import SiteHeader from './SiteHeader'
 
@@ -14,6 +16,8 @@ interface Props {
 // サイト共通の外枠(黒地・ヘッダー・フッター)。理大祭の過去ページは当時のデザインのまま
 // 残すため、黒地の指定は body 全体ではなくこの外枠を使うページにだけかける
 export default function SiteShell({ children, overlayHeader = false }: Props) {
+  // 入部ページ自身では出さない
+  const onJoinPage = useRouter().pathname.startsWith('/pay')
   return (
     <>
       <Global styles={globalStyles} />
@@ -21,6 +25,11 @@ export default function SiteShell({ children, overlayHeader = false }: Props) {
       <SiteHeader overlay={overlayHeader} />
       <Main id="main">{children}</Main>
       <SiteFooter />
+      {!onJoinPage && (
+        <Floating>
+          <JoinBalloon />
+        </Floating>
+      )}
     </>
   )
 }
@@ -50,6 +59,26 @@ const globalStyles = css`
   }
   img {
     max-width: 100%;
+  }
+`
+
+// 「入部はこちらから！」(_configs/baloon.json)。入部への入口はこれ1つにして、どのページでも
+// スクロールに関係なく画面の右下に出しておく(ヘッダーには入部のボタンを置かない)
+const Floating = styled.div`
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 40;
+  animation: balloon-in 0.6s ${ease} 0.8s both;
+
+  @keyframes balloon-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
   }
 `
 

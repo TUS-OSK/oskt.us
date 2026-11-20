@@ -4,7 +4,9 @@ import { PageHead } from 'src/components/Head'
 import MainLayout from 'src/components/MainLayout'
 import { Container, Label } from 'src/components/ui/layout'
 import LinkButton, { ButtonRow } from 'src/components/ui/LinkButton'
-import { TEAMS, teamPath } from 'src/data/teams'
+import PhotoStrip from 'src/components/PhotoStrip'
+import { photosOf } from 'src/data/photos'
+import { TEAMS, scheduleText, teamPath } from 'src/data/teams'
 import { color, font, mq, radius, size, space } from 'src/design/tokens'
 import { StyledLink } from 'src/utils/next/elements'
 
@@ -31,15 +33,23 @@ export default function TeamDetail({ id }: { id: string }) {
             <Tagline>{team.tagline}</Tagline>
             <When>
               <Label as="span">When</Label>
-              <span>{team.schedule ?? 'プロジェクト型で活動しています。日時は参加者で決めます'}</span>
+              <span>{scheduleText(team) ?? 'プロジェクト型で活動しています。日時は集まったメンバーで決めます'}</span>
             </When>
           </Container>
         </Hero>
         <Container narrow>
           <Block>
             <BlockTitle>どんな班？</BlockTitle>
-            <p>{team.about}</p>
+            {team.about.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </Block>
+          {photosOf(team.id).length > 0 && (
+            <Block>
+              <BlockTitle>活動の様子</BlockTitle>
+              <PhotoStrip photos={photosOf(team.id)} label={`${team.name}の活動の様子`} />
+            </Block>
+          )}
           <Block>
             <BlockTitle>やっていること</BlockTitle>
             <List>
@@ -63,8 +73,8 @@ export default function TeamDetail({ id }: { id: string }) {
           <Block>
             <BlockTitle>参加するには</BlockTitle>
             <p>
-              見学は Discord サーバーへの参加で、いつでもできます。班の勉強会は Discord
-              に記録が残るので、時間が合わなくても追いつけます。
+              見学は Discord サーバーに入るだけなので、いつでも気軽にどうぞ！班の勉強会は Discord
+              に記録が残るので、時間が合わなくても追いつけますよ。
             </p>
             <ButtonRow>
               <LinkButton href="/pay">入部・見学</LinkButton>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Logo from 'src/components/Logo'
 import { color, ease, font, mq, size, space, width } from 'src/design/tokens'
 import { StyledLink } from 'src/utils/next/elements'
-import { JOIN_ITEM, NAV_ITEMS } from './nav'
+import { NAV_ITEMS } from './nav'
 
 interface Props {
   /** トップのヒーローの上に重ねる(背景を透明にし、スクロールで地を付ける) */
@@ -56,7 +56,6 @@ export default function SiteHeader({ overlay = false }: Props) {
               )
             })}
           </NavList>
-          <Join href={JOIN_ITEM.href}>{JOIN_ITEM.label}</Join>
         </Nav>
       </Inner>
     </Bar>
@@ -215,27 +214,6 @@ const NavLink = styled(StyledLink)`
     &[aria-current='page'] {
       color: ${color.accent};
     }
-  }
-`
-
-const Join = styled(StyledLink)`
-  padding: 8px 18px;
-  font-size: ${size.sm};
-  letter-spacing: 0.08em;
-  color: ${color.base};
-  background: ${color.ink};
-  border-radius: 2px;
-  white-space: nowrap;
-  transition: background-color 0.2s ${ease};
-
-  &:hover {
-    background: ${color.accent};
-  }
-
-  ${mq.tab} {
-    text-align: center;
-    padding: 14px;
-    font-size: ${size.md};
   }
 `
 

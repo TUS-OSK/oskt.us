@@ -25,7 +25,7 @@ const DiscordIcon = () => (
   </Icon>
 )
 
-export default function Baloon() {
+export default function JoinBalloon() {
   if (!BALOON_ENABLED) {
     return (
       <DisabledButton>

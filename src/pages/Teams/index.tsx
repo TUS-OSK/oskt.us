@@ -16,7 +16,7 @@ export default function TeamsIndex() {
         <PageHeader
           label="Teams"
           title="班とプロジェクト"
-          lead="入部したら、興味に合わせて班を選びます。いくつ掛け持ちしても構いません。班の時間に合わなくても、勉強会の記録は Discord に残るので、自分のペースで参加できます。"
+          lead="入部したら、気になる班に顔を出してみてくださいね。いくつ掛け持ちしても大丈夫です。班の時間に合わなくても、勉強会の記録は Discord に残るので、自分のペースで参加できますよ。"
         />
         <Section id="list" label="All teams" title="班の一覧">
           <TeamGrid teams={TEAMS} />
@@ -25,7 +25,7 @@ export default function TeamsIndex() {
           id="new"
           label="Start your own"
           title="やりたいことが班になければ"
-          lead="部員を集めて、新しい勉強会やプロジェクトを自由に立ち上げられます。これまでに、学外ハッカソンへの出場、スーパーコンピュータの学生大会への挑戦、部内SNSの開発、過去の部誌のデジタル化などが、部員の発案で生まれました。"
+          lead="仲間を集めて、新しい勉強会やプロジェクトを始められます。学外ハッカソンへの出場、スーパーコンピュータの学生大会への挑戦、部内SNSの開発、昔の部誌のデジタル化。どれも部員の「やってみたい」から始まったんです。"
           narrow
         >
           <ButtonRow>

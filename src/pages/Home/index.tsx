@@ -2,13 +2,14 @@ import styled from '@emotion/styled'
 import type { ClubInfo, FlowItem } from 'api/club'
 import { compareDesc } from 'date-fns'
 import { PageHead } from 'src/components/Head'
-import { FactList, NewsList, type NewsItem, StatTiles, TeamGrid, YearFlow } from 'src/components/ui/blocks'
+import { FactList, WeekTable, NewsList, type NewsItem, TeamGrid, YearFlow } from 'src/components/ui/blocks'
 import { Container, Label, Section } from 'src/components/ui/layout'
 import LinkButton, { ButtonRow } from 'src/components/ui/LinkButton'
 import SiteShell from 'src/components/ui/SiteShell'
+import PhotoStrip from 'src/components/PhotoStrip'
+import { PHOTOS } from 'src/data/photos'
 import { TEAMS } from 'src/data/teams'
 import { color, font, mq, size, space } from 'src/design/tokens'
-import ActivityGallery from './ActivityGallery'
 import HeroView from './HeroView'
 import OrganizationJsonLd from './OrganizationJsonLd'
 
@@ -26,14 +27,15 @@ export default function Home({ club, flow, news }: Props) {
       <OrganizationJsonLd />
       <SiteShell overlayHeader>
         <HeroView />
+        <PhotoStrip photos={PHOTOS} label="活動の様子" flow />
 
         <Intro aria-labelledby="intro-title">
           <Container>
             <Label>Applied Mathematics Club, Tokyo University of Science</Label>
             <IntroTitle id="intro-title">
-              数学を、
+              数学とコードを、
               <br />
-              使う側へ。
+              いっしょに楽しもう。
             </IntroTitle>
             <IntroText>{club.caption}</IntroText>
             <ButtonRow>
@@ -46,22 +48,16 @@ export default function Home({ club, flow, news }: Props) {
         </Intro>
 
         <Section id="facts" label="Basics" title="はじめての方へ" tone="surface">
-          <FactList facts={club.facts} />
+          <FactList facts={club.facts} extra={{ 活動日: <WeekTable /> }} />
         </Section>
 
         <Section
           id="teams"
           label="Teams"
           title="班とプロジェクト"
-          lead="興味に合わせて班を選びます。いくつ掛け持ちしても、新しく立ち上げても構いません。"
+          lead="気になる班から、のぞいてみてくださいね。いくつ掛け持ちしても、新しく始めても大丈夫です！"
         >
           <TeamGrid teams={TEAMS} />
-        </Section>
-
-        <ActivityGallery />
-
-        <Section id="numbers" label="In numbers" title="数字で見る応数研">
-          <StatTiles stats={club.stats} />
         </Section>
 
         <Section id="flow" label="Every year" title="1年の流れ" narrow>
@@ -85,9 +81,13 @@ export default function Home({ club, flow, news }: Props) {
         <Join aria-labelledby="join-title">
           <Container narrow>
             <Label>Join us</Label>
-            <JoinTitle id="join-title">まずは、Discord で見学から。</JoinTitle>
+            <JoinTitle id="join-title">
+              見学は、
+              <br />
+              いつでも気軽にどうぞ。
+            </JoinTitle>
             <JoinText>
-              見学は Discord サーバーに参加するだけ。班の勉強会の様子をのぞいたり、質問したりできます。
+              Discord サーバーに入るだけで見学できます。勉強会の様子を見たり、気になることを部員に聞いたりできますよ。入部するかどうかは、そのあとゆっくり決めてくださいね。
             </JoinText>
             <ButtonRow>
               <LinkButton href="/pay">入部・見学</LinkButton>
